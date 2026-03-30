@@ -2,23 +2,32 @@ export default {
   name: 'profile',
   title: 'Sobre Mí / Biografía',
   type: 'document',
+  groups: [
+    { name: 'content', title: '✍️ Contenido / Bio' },
+    { name: 'visuals', title: '🖼️ Visuales y Fotos' },
+    { name: 'actions', title: '🔘 Botones de Acción' },
+    { name: 'contact', title: '📧 Contacto' },
+  ],
   fields: [
     {
       name: 'name',
       title: 'Nombre',
       type: 'string',
+      group: 'content',
       validation: (Rule) => Rule.required(),
     },
     {
       name: 'headline',
       title: 'Titular / Breve Descripción',
       type: 'string',
+      group: 'content',
       description: 'Ej: Filmmaker & Montador Audiovisual',
     },
     {
       name: 'heroImage',
       title: 'Imagen de Fondo Portada (Hero)',
       type: 'image',
+      group: 'visuals',
       options: { hotspot: true },
       description: 'Esta imagen aparecerá de fondo en el inicio de la web.',
     },
@@ -26,6 +35,7 @@ export default {
       name: 'heroButtons',
       title: 'Botones de Portada (Acciones)',
       type: 'object',
+      group: 'actions',
       fields: [
         { name: 'primaryText', title: 'Texto Botón Proyectos', type: 'string', initialValue: 'Ver Proyectos' },
         { name: 'primaryUrl', title: 'Enlace Botón Proyectos', type: 'string', initialValue: '/portfolio' },
@@ -37,29 +47,34 @@ export default {
       name: 'bio',
       title: 'Trayectoria / Evolución',
       type: 'text',
+      group: 'content',
       rows: 10,
     },
     {
       name: 'profileImage',
       title: 'Foto de Perfil Principal',
       type: 'image',
+      group: 'visuals',
       options: { hotspot: true },
     },
     {
       name: 'actionPhotos',
       title: 'Fotos en Acción (Rodajes, etc.)',
       type: 'array',
+      group: 'visuals',
       of: [{ type: 'image' }],
     },
     {
       name: 'email',
       title: 'Email Profesional',
       type: 'string',
+      group: 'contact',
     },
     {
       name: 'socialLinks',
       title: 'Redes Sociales',
       type: 'array',
+      group: 'contact',
       of: [
         {
           type: 'object',

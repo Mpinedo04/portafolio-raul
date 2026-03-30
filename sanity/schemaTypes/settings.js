@@ -1,33 +1,44 @@
 export default {
   name: 'settings',
-  title: 'Configuración Global y Contacto',
+  title: 'Configuraciones Generales',
   type: 'document',
+  groups: [
+    { name: 'brand', title: '🏷️ Identidad / Marca' },
+    { name: 'design', title: '🎨 Universo Visual (Wix)' },
+    { name: 'contact', title: '📞 Datos de Contacto' },
+    { name: 'social', title: '🌐 Redes Sociales' },
+  ],
   fields: [
     {
       name: 'brandName',
       title: 'Nombre de la Marca (Logo)',
       type: 'string',
+      group: 'brand',
       initialValue: 'RAÚL GARCÍA',
     },
     {
       name: 'contactEmail',
       title: 'Email de Contacto (Público)',
       type: 'string',
+      group: 'contact',
     },
     {
       name: 'contactPhone',
       title: 'Teléfono / WhatsApp',
       type: 'string',
+      group: 'contact',
     },
     {
       name: 'contactLocation',
       title: 'Ubicación (Ciudad/País)',
       type: 'string',
+      group: 'contact',
     },
     {
       title: 'Diseño y Colores (Modo Wix)',
       name: 'theme',
       type: 'object',
+      group: 'design',
       fields: [
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'string', initialValue: '#0A0A0A' },
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'string', initialValue: '#1FB3B3' },
@@ -53,6 +64,7 @@ export default {
       name: 'headerIcons',
       title: 'Iconos de Cabecera y Redes Sociales',
       type: 'array',
+      group: 'social',
       of: [
         {
           type: 'object',

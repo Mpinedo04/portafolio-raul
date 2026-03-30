@@ -1,7 +1,8 @@
 export default {
   name: 'equipment',
-  title: 'Catálogo de Equipo Técnico',
+  title: 'Inventario de Equipo (Cámaras/Hardware)',
   type: 'document',
+  icon: () => '🎥',
   fields: [
     {
       name: 'category',

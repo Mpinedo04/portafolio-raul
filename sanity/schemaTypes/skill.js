@@ -1,7 +1,8 @@
 export default {
   name: 'skill',
-  title: 'Habilidades y Formación',
+  title: 'Habilidades (Software/Estudios)',
   type: 'document',
+  icon: () => '🎓',
   fields: [
     {
       name: 'category',

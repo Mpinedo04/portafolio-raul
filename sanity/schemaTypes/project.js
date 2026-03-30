@@ -1,7 +1,9 @@
 export default {
   name: 'project',
-  title: 'Proyecto',
+  title: 'Catálogo de Proyectos',
   type: 'document',
+  // Icono visual en el panel
+  icon: () => '🎬',
   fields: [
     {
       name: 'title',
