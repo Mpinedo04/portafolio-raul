@@ -46,7 +46,7 @@ export default async function Home() {
           <div className={styles.introContent}>
             <div className={styles.introText}>
               <h2>ACERCA DE MÍ</h2>
-              {profile.bio.split('\n').map((paragraph, i) => (
+              {(profile?.bio || "").split('\n').map((paragraph, i) => (
                 paragraph.trim() && <p key={i}>{paragraph}</p>
               ))}
               <Link href="/sobre-mi" className={styles.link}>
@@ -87,7 +87,7 @@ export default async function Home() {
                   </div>
                   <div className={styles.projectInfo}>
                     <h3 className="uppercase">{project.title}</h3>
-                    <p>{project.description && project.description.substring(0, 100)}...</p>
+                    <p>{(project.description || "").substring(0, 100)}...</p>
                     <span className={styles.role}>Rol: {project.role}</span>
                   </div>
                 </div>

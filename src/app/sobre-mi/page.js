@@ -36,7 +36,7 @@ export default async function AboutPage() {
             </div>
             <div className={styles.textCol}>
               <h2>CÓMO LLEGUÉ AQUÍ</h2>
-              <p style={{ whiteSpace: 'pre-line' }}>{profile.bio}</p>
+              <p style={{ whiteSpace: 'pre-line' }}>{profile?.bio || ""}</p>
             </div>
           </div>
         </div>
