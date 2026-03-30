@@ -12,7 +12,8 @@ export default async function Home() {
   // Fetch data dynamically, rendering placeholders if Sanity is empty
   const profile = await client.fetch(`*[_type == "profile"][0]{
     name, 
-    headline, 
+    headline,
+    bio,
     heroImage,
     heroButtons
   }`) || {
