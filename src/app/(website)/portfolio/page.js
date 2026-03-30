@@ -1,6 +1,6 @@
 import styles from './Portfolio.module.css';
-import { client } from '../../../sanity/lib/client';
-import { urlFor } from '../../../sanity/lib/image';
+import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
 export const revalidate = 10;

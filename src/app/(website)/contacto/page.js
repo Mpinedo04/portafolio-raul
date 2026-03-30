@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
 import styles from './Contact.module.css';
-import { client } from '../../../sanity/lib/client';
+import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 
 export const revalidate = 10;

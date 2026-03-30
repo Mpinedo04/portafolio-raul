@@ -1,7 +1,7 @@
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { client } from '../../sanity/lib/client';
+import { client } from '@/sanity/lib/client';
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 

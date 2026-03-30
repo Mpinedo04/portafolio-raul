@@ -2,8 +2,8 @@ import Hero from '@/components/Hero';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
-import { client } from '../../sanity/lib/client';
-import { urlFor } from '../../sanity/lib/image';
+import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
 export const revalidate = 10; // Revalidate every 10 seconds for CMS updates
