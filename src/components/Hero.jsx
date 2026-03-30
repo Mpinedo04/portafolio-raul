@@ -1,8 +1,14 @@
 import styles from './Hero.module.css';
 
-export default function Hero({ name = "RAÚL GARCÍA", headline = "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario." }) {
+export default function Hero({ 
+  name = "RAÚL GARCÍA", 
+  headline = "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
+  backgroundImage = null 
+}) {
+  const heroStyle = backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : {};
+
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} style={heroStyle}>
       <div className={styles.overlay}></div>
       <div className={`${styles.content} container`}>
         <h2 className="fade-in">CREANDO HISTORIAS A TRAVÉS DEL VISOR</h2>

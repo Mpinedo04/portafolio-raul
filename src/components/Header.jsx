@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Aperture, Play, Mail } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import styles from './Header.module.css';
 
-export default function Header() {
+export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -16,11 +16,20 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Procesa los iconos predeterminados si no hay en Sanity
+  const defaultIcons = [
+    { icon: 'Play', url: 'https://www.youtube.com/@Raaulinhoo' },
+    { icon: 'Aperture', url: 'https://instagram.com' },
+    { icon: 'Mail', url: 'mailto:social@raulgarcia.com' }
+  ];
+
+  const iconsToRender = headerIcons.length > 0 ? headerIcons : defaultIcons;
+
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
         <Link href="/" className={styles.logo}>
-          RAÚL<span>GARCÍA</span>
+          {brandName.toUpperCase()}
         </Link>
 
         {/* Desktop Nav */}
@@ -33,15 +42,14 @@ export default function Header() {
 
         {/* Social Icons Desktop */}
         <div className={styles.socials}>
-          <a href="https://www.youtube.com/@Raaulinhoo" target="_blank" rel="noopener noreferrer">
-            <Play size={20} />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <Aperture size={20} />
-          </a>
-          <a href="mailto:social@raulgarcia.com">
-            <Mail size={20} />
-          </a>
+          {iconsToRender.map((item, index) => {
+            const IconComponent = Icons[item.icon] || Icons.Link;
+            return (
+              <a key={index} href={item.url} target="_blank" rel="noopener noreferrer">
+                <IconComponent size={20} />
+              </a>
+            );
+          })}
         </div>
 
         {/* Mobile Toggle */}

@@ -16,6 +16,13 @@ export default {
       description: 'Ej: Filmmaker & Montador Audiovisual',
     },
     {
+      name: 'heroImage',
+      title: 'Imagen de Fondo Portada (Hero)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Esta imagen aparecerá de fondo en el inicio de la web.',
+    },
+    {
       name: 'bio',
       title: 'Trayectoria / Evolución',
       type: 'text',

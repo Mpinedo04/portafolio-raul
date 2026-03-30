@@ -21,7 +21,11 @@ export default async function Home() {
 
   return (
     <div>
-      <Hero name={profile.name} headline={profile.headline} />
+      <Hero 
+        name={profile.name} 
+        headline={profile.headline} 
+        backgroundImage={profile.heroImage ? urlFor(profile.heroImage).url() : null}
+      />
         
       {/* Breve descripción sobre mí */}
       <section className={styles.intro}>
