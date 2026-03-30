@@ -54,7 +54,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
         </button>
 
         {/* Mobile Menu Overlay */}
