@@ -1,6 +1,6 @@
 import { Camera, Layers, Lightbulb, Mic, Monitor, Wrench, Box } from 'lucide-react';
 import styles from './Equipment.module.css';
-import { client } from '@/sanity/lib/client';
+import { client } from '../../../sanity/lib/client';
 
 export const revalidate = 10;
 
