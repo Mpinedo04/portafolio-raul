@@ -1,58 +1,64 @@
-# 🎬 Manual de Usuario: Tu Portfolio Audiovisual
+# 🎬 Manual de Usuario: Panel de Control del Portfolio (Sanity CMS)
 
-¡Hola! Esta web ha sido diseñada para que puedas gestionar todo tu portfolio **sin necesidad de programar ni instalar ninguna aplicación.** Todo se hace desde el navegador web (Chrome, Safari, Edge, etc.).
-
-## 🌐 1. ¿Cómo acceder al panel de administración?
-
-1. Abre tu navegador web.
-2. Ve a la dirección de tu página web y añade `/admin` al final. 
-   *(Ejemplo: `https://tu-portfolio.vercel.app/admin`)*
-3. Inicia sesión con la cuenta de Google o GitHub que te haya configurado el desarrollador.
-4. ¡Listo! Ya estás dentro del Panel de Control (Sanity Studio).
+¡Bienvenido al panel de control de tu nuevo portfolio audiovisual! 
+Esta web está construida con la última tecnología: **Next.js** para el diseño rapidísimo y **Sanity Studio** para que puedas cambiar tus vídeos y fotos sin ser programador.
 
 ---
 
-## ✏️ 2. ¿Cómo editar tu información personal (Sobre Mí)?
+## 🛑 1. CONCEPTOS MUY IMPORTANTES: ¿Qué puedo cambiar y qué no?
 
-1. En el menú de la izquierda, haz clic en **"Configuración y Bio"** (o "Profile").
-2. Verás campos para tu Nombre, Cargo/Especialidad y Biografía.
-3. Modifica el texto como quieras.
-4. Arriba a la derecha, verás un botón verde que dice **"Publish"** (Publicar). Haz clic en él y los cambios aparecerán inmediatamente en tu web.
+Sanity es un gestor de **CONTENIDOS**, no un constructor visual (no es Wix ni Wordpress tradicional).
 
----
+- **❌ LO QUE NO PUEDES CAMBIAR DESDE AQUÍ (El Diseño):**
+  No puedes cambiar el fondo oscuro, no puedes hacer la letra más grande ni cambiar la posición de los botones. Eso está programado a medida en el *código puro* (`CSS` y `React`) para que la web sea cien veces más rápiday profesional que una plantilla normal. Solo un programador modificando el código fuente puede alterar el diseño o los colores.
 
-## 🎥 3. ¿Cómo añadir un nuevo Proyecto al Portfolio?
-
-1. En el menú izquierdo, haz clic en **"Proyectos"** (Projects).
-2. Haz clic en el botón azul arriba a la derecha que dice un símbolo de suma **"+"** (o "Create new Project").
-3. Rellena los datos de tu proyecto:
-   * **Título:** El nombre del corto, anuncio, etc.
-   * **Categoría:** Ficción, Documental, Videoclip...
-   * **Tu Rol:** Director, Montador, DOP...
-   * **Descripción:** Un resumen del proyecto.
-   * **Enlace de Video:** Si tienes el vídeo en YouTube o Vimeo, puedes pegar el enlace aquí.
-   * **Imagen de Portada:** Sube una imagen atractiva que represente el proyecto (haz clic en `Select -> Upload file`).
-4. Haz clic en **"Publish"** para que el proyecto aparezca en tu web.
-
-> 💡 **Consejo:** Si quieres ocultar un proyecto temporalmente sin borrarlo, haz clic en la flechita al lado de "Publish" y selecciona **"Unpublish"**.
+- **✅ LO QUE SÍ PUEDES CAMBIAR (El Contenido):**
+  Puedes cambiar absolutamente todos los textos, títulos, todas las fotos de perfil, los propios vídeos y portadas de tus cortos, subir o borrar los elementos de tu equipo (cámaras, micros), cambiar tus habilidades y el email donde quieres recibir los contactos. 
 
 ---
 
-## 🛠️ 4. ¿Cómo actualizar tu Equipo Técnico (Hardware/Software)?
+## 🔑 2. ¿Cómo Acceder y Empezar a Editar?
 
-**Para añadir equipo (Cámaras, Lentes, Workstation):**
-1. Ve a **"Equipo Técnico"** en el menú.
-2. Añade un nuevo elemento (ej: "Sony FX3" o "DaVinci Resolve Studio").
-3. Ponle una categoría y descríbelo si quieres.
-4. Pulsa **"Publish"**.
+1. Ve a tu web oficial y añádele la coletilla `/admin` al final. 
+   *(Ejemplo: `https://portafolio-raul.vercel.app/admin`)*
+2. Inicia sesión con la cuenta de Google autorizada.
+3. Te encontrarás con una interfaz oscura dividida en 3 grandes columnas.
+
+### El Funcionamiento Básico de las Columnas:
+- **Columna Izquierda (Secciones):** Elige qué parte de la web quieres tocar (Proyectos, Equipo, Biografía...).
+- **Columna Central (Lista):** Verás la lista de las cosas que has creado dentro de esa categoría. Para crear algo nuevo **desde cero**, haz clic en el diminuto icono del **`+`** (crear documento) arriba de esta barra.
+- **Columna Derecha (Editor):** Es tu mesa de trabajo. Aquí rellenas los formularios, subes las fotos y escribes la información.
 
 ---
 
-## ❓ Preguntas Frecuentes
+## 📝 3. Las Secciones Principales
 
-*   **¿Tengo que descargar algún programa para editar la web?**
-    *   **No.** Todo se hace online desde la dirección acabada en `/admin`.
-*   **He publicado algo pero me he equivocado, ¿puedo cambiarlo?**
-    *   **Sí.** Simplemente vuelve al proyecto, cámbialo y vuelve a darle a "Publish". El cambio es casi instantáneo.
-*   **¿Puedo usarlo desde el móvil?**
-    *   **Sí,** el panel de administración es accesible desde el móvil, pero para subir imágenes y escribir textos largos, será más cómodo desde un ordenador o tablet.
+### 📸 Proyectos (Tus Cortos o Trabajos)
+Para añadir un nuevo proyecto a la página principal:
+1. Haz clic en **"Proyecto"** (izquierda) -> **Icono `+`** (centro).
+2. Rellena el **Título** (ej: *"Catarsis - Cortometraje"*).
+3. Introduce el enlace al vídeo en Youtube/Vimeo si lo tienes.
+4. Sube una foto de portada potente en "Imagen Principal" (esta será la que vea todo el mundo en la galería).
+5. **MUY IMPORTANTE:** Arriba a la derecha del todo del editor, debes de pulsar siempre el botón verde de **"Publish"** (Publicar) para que los cambios se suban a la web pública.
+
+### 🎥 Equipo Técnico (Tus Cámaras, Luces y Sets)
+Para fardar de arsenal técnico:
+1. Pestaña **"Equipo Técnico"** -> **Icono `+`**.
+2. Dale un título al bloque (ej: "Mis Cámaras Gafas").
+3. Para poner un pequeño icono bonito al lado en la web, en el campo **Lucide Icon Name** tienes que usar nombres en inglés de esta inmensa librería: [lucide.dev/icons](https://lucide.dev/icons).
+   *Ejemplos que funcionan perfectos para ti (recuerda la mayúscula inicial): `Camera`, `Video`, `Film`, `Mic`, `Monitor`, `Aperture`, `Play`, `Headphones`, `Settings`.*
+
+### 🛠️ Configuración Global (Tu Contacto)
+Aquí abajo del todo podrás establecer:
+- El correo electrónico donde quieres recibir los mensajes.
+- Tus links de Instagram, Linkedin, etc.
+
+---
+
+## 🚀 4. "He dado a Publish pero la web aún no se actualiza"
+
+La tecnología moderna funciona con **Cachés (Memoria ultra rápida)**. 
+Cuando das a *Publish*, Sanity guarda los datos al instante, pero **Vercel** (donde está alojada tu web) puede tardar un poco en darse cuenta de que la base de datos ha recibido fotos nuevas porque sirve la página desde la memoria para que cargue en 0.05 segundos a los visitantes. 
+*A veces tarda un par de minutos, o requiere que fuerces a refrescar la memoria del navegador de forma profunda (`Ctrl + Shift + R`).*
+
+¡Empieza rellenando lo básico de "Sobre Mí" y añadiendo tu primera gran película a "Proyectos"!
