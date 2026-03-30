@@ -10,6 +10,8 @@ export const resolve = {
           { title: 'Portfolio', href: '/portfolio' },
           { title: 'Sobre Mí', href: '/sobre-mi' },
           { title: 'Equipo', href: '/equipo' },
+          { title: 'Habilidades', href: '/habilidades' },
+          { title: 'Contacto', href: '/contacto' },
         ],
       }),
     }),
@@ -19,6 +21,9 @@ export const resolve = {
         locations: [
           { title: `Home (${doc?.name || 'Bio'})`, href: '/' },
           { title: 'Sobre Mí', href: '/sobre-mi' },
+          { title: 'Portfolio (Footer)', href: '/portfolio' },
+          { title: 'Equipo (Footer)', href: '/equipo' },
+          { title: 'Contacto (Footer)', href: '/contacto' },
         ],
       }),
     }),

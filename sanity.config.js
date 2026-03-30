@@ -8,7 +8,7 @@ import { myStructure } from './src/sanity/lib/structure';
 
 // Definimos qué documentos son ÚNICOS (Singletons)
 const singletonTypes = new Set(['settings', 'profile']);
-const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
+const singletonActions = new Set(['publish', 'discardChanges', 'restore', 'create']);
 
 export default defineConfig({
   name: 'default',
