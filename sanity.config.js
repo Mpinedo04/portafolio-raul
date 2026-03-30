@@ -1,5 +1,7 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+import { presentationTool } from 'sanity/presentation';
+import { schemaTypes } from './sanity/schemaTypes';
 import { resolve } from './src/sanity/presentation/resolve';
 
 export default defineConfig({
