@@ -54,10 +54,10 @@ export default {
       type: 'object',
       group: 'design',
       fields: [
-        { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'string', initialValue: '#0A0A0A' },
-        { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'string', initialValue: '#1FB3B3' },
-        { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'string', initialValue: '#D48C45' },
-        { name: 'textColor', title: 'Color de Texto Principal', type: 'string', initialValue: '#EDEDED' },
+        { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
+        { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
+        { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
+        { name: 'textColor', title: 'Color de Texto Principal', type: 'color' },
         {
           name: 'headingFont',
           title: 'Fuente de Títulos',

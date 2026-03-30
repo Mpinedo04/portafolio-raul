@@ -1,6 +1,7 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { presentationTool } from 'sanity/presentation';
+import { colorInput } from '@sanity/color-input';
 import { schemaTypes } from './src/sanity/schemaTypes';
 import { resolve } from './src/sanity/presentation/resolve';
 import { myStructure } from './src/sanity/lib/structure';
@@ -30,6 +31,7 @@ export default defineConfig({
       },
       resolve,
     }),
+    colorInput(),
   ],
 
   schema: {

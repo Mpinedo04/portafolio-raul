@@ -17,11 +17,17 @@ export default async function RootLayout({ children }) {
   const settings = await client.fetch(`*[_type == "settings"][0]`);
   const theme = settings?.theme || {};
 
+  // Helper to extract hex from color object or string
+  const getHex = (color) => {
+    if (typeof color === 'string') return color;
+    return color?.hex || null;
+  };
+
   const cssVars = {
-    '--background': theme.backgroundColor || '#0A0A0A',
-    '--foreground': theme.textColor || '#EDEDED',
-    '--accent-teal': theme.primaryColor || '#1FB3B3',
-    '--accent-orange': theme.secondaryColor || '#D48C45',
+    '--background': getHex(theme.backgroundColor) || '#0A0A0A',
+    '--foreground': getHex(theme.textColor) || '#EDEDED',
+    '--accent-teal': getHex(theme.primaryColor) || '#1FB3B3',
+    '--accent-orange': getHex(theme.secondaryColor) || '#D48C45',
     '--font-primary': theme.headingFont ? `'${theme.headingFont}', sans-serif` : "'Outfit', sans-serif",
   };
 
