@@ -1,5 +1,5 @@
-import { defineConfig } from 'sanity';
 import { deskTool } from 'sanity/desk';
+import { presentationTool } from 'sanity/presentation';
 import { schemaTypes } from './sanity/schemaTypes';
 
 export default defineConfig({
@@ -11,7 +11,16 @@ export default defineConfig({
 
   basePath: '/admin',
 
-  plugins: [deskTool()],
+  plugins: [
+    deskTool(),
+    presentationTool({
+      previewUrl: {
+        draftMode: {
+          enable: '/api/draft',
+        },
+      },
+    }),
+  ],
 
   schema: {
     types: schemaTypes,

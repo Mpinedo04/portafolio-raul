@@ -1,13 +1,17 @@
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
 
 export const metadata = {
   title: 'Raúl García | Filmmaker & Audiovisual Portfolio',
   description: 'Portfolio profesional de Raúl García, un creador audiovisual especializado en cortometrajes, documentales y edición de vídeo.',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const isDraftMode = (await draftMode()).isEnabled;
+
   return (
     <html lang="es">
       <head>
@@ -19,6 +23,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );
