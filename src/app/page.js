@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 import { client } from '../../sanity/lib/client';
 import { urlFor } from '../../sanity/lib/image';
+import VideoEmbed from '@/components/VideoEmbed';
 
 export const revalidate = 10; // Revalidate every 10 seconds for CMS updates
 
@@ -15,7 +16,8 @@ export default async function Home() {
     bio: "Hola, soy Raúl. Mi pasión es la creación audiovisual desde los cimientos: desde la idea inicial hasta el montaje final.\nMe especializo en capturar la esencia de cada momento, ya sea en un set de rodaje profesional o en proyectos documentales independientes."
   };
 
-  const projects = await client.fetch(`*[_type == "project"][0...2] | order(_createdAt desc)`) || [];
+  const projects = await client.fetch(`*[_type == "project" && featured == true] | order(_createdAt desc)`) || [];
+  const displayProjects = projects.length > 0 ? projects : [];
 
   return (
     <div>
@@ -49,14 +51,22 @@ export default async function Home() {
           </div>
             
           <div className={styles.grid}>
-            {projects.length > 0 ? (
-              projects.map((project) => (
+            {displayProjects.length > 0 ? (
+              displayProjects.map((project) => (
                 <div key={project._id} className={styles.projectCard}>
                   <div className={styles.imageWrapper}>
-                    <img 
-                      src={project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"} 
-                      alt={project.title} 
-                    />
+                    {project.videoUrl ? (
+                      <VideoEmbed 
+                        url={project.videoUrl} 
+                        title={project.title} 
+                        thumbnail={project.mainImage ? urlFor(project.mainImage).url() : ""} 
+                      />
+                    ) : (
+                      <img 
+                        src={project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"} 
+                        alt={project.title} 
+                      />
+                    )}
                   </div>
                   <div className={styles.projectInfo}>
                     <h3>{project.title.toUpperCase()}</h3>
@@ -66,7 +76,7 @@ export default async function Home() {
                 </div>
               ))
             ) : (
-              // Fallback cards if no projects exist in Sanity
+              // Fallback cards if no featured projects exist in Sanity
               <>
                 <div className={styles.projectCard}>
                   <div className={styles.imageWrapper}>

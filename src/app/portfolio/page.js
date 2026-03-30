@@ -1,14 +1,15 @@
 import styles from './Portfolio.module.css';
 import { client } from '../../../sanity/lib/client';
 import { urlFor } from '../../../sanity/lib/image';
+import VideoEmbed from '@/components/VideoEmbed';
 
 export const revalidate = 10;
 
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
 
-  let ownProjectsRaw = allProjects.filter(p => p.type === 'Personal');
-  let externalProjectsRaw = allProjects.filter(p => p.type === 'Cliente');
+  let ownProjectsRaw = allProjects.filter(p => p.category === 'propio');
+  let externalProjectsRaw = allProjects.filter(p => p.category === 'externo');
 
   // Fallbacks in case Sanity is still empty
   const ownProjects = ownProjectsRaw.length > 0 ? ownProjectsRaw : [
@@ -24,18 +25,23 @@ export default async function PortfolioPage() {
   const ProjectItem = ({ project }) => (
     <div className={styles.projectItem}>
       <div className={styles.mediaSide}>
-        <a href={project.videoUrl || project.link || '#'} target="_blank" rel="noopener noreferrer" className={styles.videoPlaceholder}>
-           <img 
-             src={!project.placeholder && project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
-             alt={project.title} 
-           />
-           <div className={styles.playOverlay}>
-              <span>VER VÍDEO</span>
-           </div>
-        </a>
+        {project.videoUrl ? (
+          <VideoEmbed 
+            url={project.videoUrl} 
+            title={project.title} 
+            thumbnail={!project.placeholder && project.mainImage ? urlFor(project.mainImage).url() : ""} 
+          />
+        ) : (
+          <div className={styles.videoPlaceholder}>
+            <img 
+              src={!project.placeholder && project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
+              alt={project.title} 
+            />
+          </div>
+        )}
       </div>
       <div className={styles.textSide}>
-        <span className={styles.category}>{project.category || 'Proyecto'}</span>
+        <span className={styles.category}>{project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}</span>
         <h3>{project.title.toUpperCase()}</h3>
         <p className={styles.description}>{project.description}</p>
         <div className={styles.roleBlock}>
