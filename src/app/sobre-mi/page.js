@@ -2,6 +2,8 @@ import styles from './About.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
+export const revalidate = 10;
+
 export default async function AboutPage() {
   const profile = await client.fetch(`*[_type == "profile"][0]`) || {
     bio: "Mi vocación por el sector audiovisual no fue algo repentino, sino una evolución natural. Desde pequeño me fascinaba cómo una cámara podía capturar no solo imágenes, sino sentimientos.\nEstudié Imagen y Sonido, donde asenté las bases técnicas de lo que hoy es mi profesión. A lo largo de los años, he pasado por diversas etapas: desde la experimentación con cortometrajes caseros hasta la dirección de fotografía en proyectos de mayor envergadura.\nPara mí, cada rodaje es una oportunidad de aprender algo nuevo y de perfeccionar mi estilo cinematográfico. Me gusta involucrarme en todas las fases del proceso, aportando mi visión creativa y técnica para que el resultado final supere las expectativas.",

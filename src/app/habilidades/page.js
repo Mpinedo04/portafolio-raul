@@ -1,6 +1,8 @@
 import SkillsClient from './SkillsClient';
 import { client } from '@/sanity/lib/client';
 
+export const revalidate = 10;
+
 export default async function SkillsPage() {
   const allSkills = await client.fetch(`*[_type == "skill"]`) || [];
 

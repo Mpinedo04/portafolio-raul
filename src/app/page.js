@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
+export const revalidate = 10; // Revalidate every 10 seconds for CMS updates
+
 export default async function Home() {
   // Fetch data dynamically, rendering placeholders if Sanity is empty
   const profile = await client.fetch(`*[_type == "profile"][0]`) || {

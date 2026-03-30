@@ -2,6 +2,8 @@ import styles from './Portfolio.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
+export const revalidate = 10;
+
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
 
