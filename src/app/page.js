@@ -73,7 +73,7 @@ export default async function Home() {
                     )}
                   </div>
                   <div className={styles.projectInfo}>
-                    <h3>{project.title.toUpperCase()}</h3>
+                    <h3 className="uppercase">{project.title}</h3>
                     <p>{project.description && project.description.substring(0, 100)}...</p>
                     <span className={styles.role}>Rol: {project.role}</span>
                   </div>

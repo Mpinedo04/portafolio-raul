@@ -23,13 +23,13 @@ export default async function EquipmentPage() {
   // Helper to get category title
   const getCategoryTitle = (categoryValue) => {
     switch (categoryValue) {
-      case 'camaras': return 'CÁMARAS';
-      case 'objetivos': return 'OBJETIVOS';
-      case 'audio': return 'AUDIO';
-      case 'iluminacion': return 'ILUMINACIÓN';
-      case 'accesorios': return 'ACCESORIOS';
-      case 'hardware': return 'HARDWARE';
-      default: return categoryValue ? categoryValue.toUpperCase() : 'OTROS';
+      case 'camaras': return 'Cámaras';
+      case 'objetivos': return 'Objetivos';
+      case 'audio': return 'Audio';
+      case 'iluminacion': return 'Iluminación';
+      case 'accesorios': return 'Accesorios';
+      case 'hardware': return 'Hardware';
+      default: return categoryValue || 'Otros';
     }
   };
 
@@ -108,7 +108,7 @@ export default async function EquipmentPage() {
               <div key={idx} className={styles.card}>
                 <div className={styles.cardHeader}>
                   {cat.icon}
-                  <h2>{cat.title}</h2>
+                  <h2 className="uppercase">{cat.title}</h2>
                 </div>
                 <div className={styles.items}>
                   {cat.items.map((item, i) => (

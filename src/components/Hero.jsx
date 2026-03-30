@@ -12,7 +12,7 @@ export default function Hero({
       <div className={styles.overlay}></div>
       <div className={`${styles.content} container`}>
         <h2 className="fade-in">CREANDO HISTORIAS A TRAVÉS DEL VISOR</h2>
-        <h1 className="fade-in">{name.toUpperCase()}</h1>
+        <h1 className={`${styles.title} fade-in uppercase`}>{name}</h1>
         <p className="fade-in">{headline}</p>
         <div className={styles.actions}>
           <a href="/portfolio" className={styles.primaryBtn}>Ver Proyectos</a>

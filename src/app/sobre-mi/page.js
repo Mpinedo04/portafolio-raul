@@ -36,9 +36,7 @@ export default async function AboutPage() {
             </div>
             <div className={styles.textCol}>
               <h2>CÓMO LLEGUÉ AQUÍ</h2>
-              {profile.bio.split('\n').map((paragraph, i) => (
-                paragraph.trim() && <p key={i}>{paragraph}</p>
-              ))}
+              <p style={{ whiteSpace: 'pre-line' }}>{profile.bio}</p>
             </div>
           </div>
         </div>

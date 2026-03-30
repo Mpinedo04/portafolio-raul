@@ -28,8 +28,8 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
-        <Link href="/" className={styles.logo}>
-          {brandName.toUpperCase()}
+        <Link href="/" className={`${styles.logo} uppercase`}>
+          {brandName}
         </Link>
 
         {/* Desktop Nav */}

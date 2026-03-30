@@ -42,7 +42,7 @@ export default async function PortfolioPage() {
       </div>
       <div className={styles.textSide}>
         <span className={styles.category}>{project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}</span>
-        <h3>{project.title.toUpperCase()}</h3>
+        <h3 className="uppercase">{project.title}</h3>
         <p className={styles.description}>{project.description}</p>
         <div className={styles.roleBlock}>
           <strong>MI ROL:</strong>

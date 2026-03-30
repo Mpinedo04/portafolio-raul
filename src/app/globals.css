@@ -60,3 +60,7 @@ section {
 .fade-in {
   animation: fadeIn 0.8s ease forwards;
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
