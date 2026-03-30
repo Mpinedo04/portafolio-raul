@@ -1,0 +1,142 @@
+.portfolio {
+  padding-top: 100px;
+}
+
+.headerSection {
+  background: var(--dark-gray);
+  padding: 80px 0;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 60px;
+}
+
+.headerSection h1 {
+  font-size: 3rem;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.headerSection p {
+  font-size: 1.1rem;
+  opacity: 0.6;
+  max-width: 600px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  color: var(--accent-orange);
+  margin-bottom: 50px;
+  border-bottom: 2px solid var(--medium-gray);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.projectItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.mediaSide {
+  width: 100%;
+}
+
+.videoPlaceholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.videoPlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.playOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.playOverlay span {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+}
+
+.videoPlaceholder:hover .playOverlay {
+  opacity: 1;
+}
+
+.videoPlaceholder:hover img {
+  transform: scale(1.05);
+}
+
+.textSide h3 {
+  font-size: 2.2rem;
+  margin: 10px 0 20px;
+}
+
+.category {
+  font-size: 0.8rem;
+  color: var(--accent-teal);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.roleBlock {
+  border-left: 3px solid var(--accent-orange);
+  padding-left: 20px;
+}
+
+.roleBlock strong {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+
+.roleBlock p {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .projectItem {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

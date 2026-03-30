@@ -1,66 +1,66 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Hero from '@/components/Hero';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      <Hero />
+      
+      {/* Breve descripción sobre mí */}
+      <section className={styles.intro}>
+        <div className="container">
+          <div className={styles.introContent}>
+            <div className={styles.introText}>
+              <h2>ACERCA DE MÍ</h2>
+              <p>Hola, soy Raúl. Mi pasión es la creación audiovisual desde los cimientos: desde la idea inicial hasta el montaje final.</p>
+              <p>Me especializo en capturar la esencia de cada momento, ya sea en un set de rodaje profesional o en proyectos documentales independientes.</p>
+              <Link href="/sobre-mi" className={styles.link}>
+                Conoce mi historia <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Proyectos destacados */}
+      <section className={styles.featured}>
+        <div className="container">
+          <div className={styles.header}>
+            <h2>TRABAJOS DESTACADOS</h2>
+            <Link href="/portfolio" className={styles.viewAll}>
+              Ver Portfolio Completo
+            </Link>
+          </div>
+          
+          <div className={styles.grid}>
+            {/* Project Card Placeholder 1 */}
+            <div className={styles.projectCard}>
+              <div className={styles.imageWrapper}>
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop" alt="Proyecto destacato" />
+              </div>
+              <div className={styles.projectInfo}>
+                <h3>CATARSIS</h3>
+                <p>Cortometraje de ficción. Drama psicológico.</p>
+                <span className={styles.role}>Rol: Director & Montador</span>
+              </div>
+            </div>
+
+            {/* Project Card Placeholder 2 */}
+            <div className={styles.projectCard}>
+              <div className={styles.imageWrapper}>
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop" alt="Proyecto destacato" />
+              </div>
+              <div className={styles.projectInfo}>
+                <h3>IMÁGENES OCULTAS</h3>
+                <p>Documental experimental sobre la vida urbana.</p>
+                <span className={styles.role}>Rol: Director de Fotografía</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

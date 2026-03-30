@@ -1,0 +1,164 @@
+.skills {
+  padding-top: 100px;
+}
+
+.header {
+  background: var(--dark-gray);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  letter-spacing: -2px;
+  color: #fff;
+}
+
+.header p {
+  font-size: 1rem;
+  opacity: 0.5;
+  letter-spacing: 2px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 100px;
+}
+
+.softwareCol h2, .areasCol h2 {
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  color: var(--accent-orange);
+}
+
+.softwareList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.skillRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skillHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.barOuter {
+  width: 100%;
+  height: 6px;
+  background: var(--medium-gray);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.barInner {
+  height: 100%;
+  background: var(--accent-teal);
+  border-radius: 10px;
+  transition: width 1s ease-in-out;
+}
+
+.areaList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.areaList li {
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.areaList li::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--accent-teal);
+  border-radius: 50%;
+}
+
+/* Timeline */
+.eduSection {
+  background: var(--dark-gray);
+  padding: 100px 0;
+}
+
+.eduSection h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 60px;
+  letter-spacing: 4px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 800px;
+  margin: 0 auto;
+  border-left: 1px solid var(--medium-gray);
+  padding-left: 40px;
+}
+
+.eduItem {
+  position: relative;
+}
+
+.eduItem::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -46px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+}
+
+.date {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.eduItem h3 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.institution {
+  font-weight: 700;
+  color: var(--accent-teal);
+  margin-bottom: 15px;
+}
+
+.eduDesc {
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
