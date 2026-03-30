@@ -3,31 +3,31 @@ export default {
   title: 'Sobre Mí / Biografía',
   type: 'document',
   groups: [
-    { name: 'content', title: '✍️ Contenido / Bio' },
-    { name: 'visuals', title: '🖼️ Visuales y Fotos' },
-    { name: 'actions', title: '🔘 Botones de Acción' },
-    { name: 'contact', title: '📧 Contacto' },
+    { name: 'hero', title: 'PÁGINA DE INICIO' },
+    { name: 'bio', title: 'SOBRE MÍ / BIO' },
+    { name: 'visuals', title: 'FOTOS Y VIDEOS' },
+    { name: 'contact', title: 'ACCIONES' },
   ],
   fields: [
     {
       name: 'name',
-      title: 'Nombre',
+      title: 'Nombre de la Marca (Logo)',
       type: 'string',
-      group: 'content',
+      group: 'hero',
       validation: (Rule) => Rule.required(),
     },
     {
       name: 'headline',
       title: 'Titular / Breve Descripción',
       type: 'string',
-      group: 'content',
+      group: 'hero',
       description: 'Ej: Filmmaker & Montador Audiovisual',
     },
     {
       name: 'heroImage',
       title: 'Imagen de Fondo Portada (Hero)',
       type: 'image',
-      group: 'visuals',
+      group: 'hero',
       options: { hotspot: true },
       description: 'Esta imagen aparecerá de fondo en el inicio de la web.',
     },
@@ -35,7 +35,7 @@ export default {
       name: 'heroButtons',
       title: 'Botones de Portada (Acciones)',
       type: 'object',
-      group: 'actions',
+      group: 'contact',
       fields: [
         { name: 'primaryText', title: 'Texto Botón Proyectos', type: 'string', initialValue: 'Ver Proyectos' },
         { name: 'primaryUrl', title: 'Enlace Botón Proyectos', type: 'string', initialValue: '/portfolio' },
@@ -47,7 +47,7 @@ export default {
       name: 'bio',
       title: 'Trayectoria / Evolución',
       type: 'text',
-      group: 'content',
+      group: 'bio',
       rows: 10,
     },
     {
@@ -63,28 +63,6 @@ export default {
       type: 'array',
       group: 'visuals',
       of: [{ type: 'image' }],
-    },
-    {
-      name: 'email',
-      title: 'Email Profesional',
-      type: 'string',
-      group: 'contact',
-    },
-    {
-      name: 'socialLinks',
-      title: 'Redes Sociales',
-      type: 'array',
-      group: 'contact',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'platform', title: 'Plataforma', type: 'string' },
-            { name: 'url', title: 'URL', type: 'url' },
-            { name: 'icon', title: 'Icono (Lucide name)', type: 'string' },
-          ],
-        },
-      ],
     },
   ],
 };

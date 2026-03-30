@@ -3,36 +3,50 @@ export default {
   title: 'Configuraciones Generales',
   type: 'document',
   groups: [
-    { name: 'brand', title: '🏷️ Identidad / Marca' },
-    { name: 'design', title: '🎨 Universo Visual (Wix)' },
-    { name: 'contact', title: '📞 Datos de Contacto' },
-    { name: 'social', title: '🌐 Redes Sociales' },
+    { name: 'header', title: 'CABECERA (HEADER)' },
+    { name: 'footer', title: 'PIE DE PÁGINA (FOOTER)' },
+    { name: 'design', title: 'UNIVERSO VISUAL (DISEÑO)' },
   ],
   fields: [
     {
       name: 'brandName',
       title: 'Nombre de la Marca (Logo)',
       type: 'string',
-      group: 'brand',
+      group: 'header',
       initialValue: 'RAÚL GARCÍA',
+    },
+    {
+      name: 'headerIcons',
+      title: 'Iconos de Cabecera y Redes Sociales',
+      type: 'array',
+      group: 'header',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'icon', title: 'Icono (Ej: Play, Youtube, Instagram, Mail)', type: 'string' },
+            { name: 'url', title: 'Enlace Completo', type: 'url' },
+          ],
+        },
+      ],
     },
     {
       name: 'contactEmail',
       title: 'Email de Contacto (Público)',
       type: 'string',
-      group: 'contact',
+      group: 'footer',
     },
     {
       name: 'contactPhone',
       title: 'Teléfono / WhatsApp',
       type: 'string',
-      group: 'contact',
+      group: 'footer',
     },
     {
       name: 'contactLocation',
       title: 'Ubicación (Ciudad/País)',
       type: 'string',
-      group: 'contact',
+      group: 'footer',
     },
     {
       title: 'Diseño y Colores (Modo Wix)',
@@ -57,21 +71,6 @@ export default {
             ],
           },
           initialValue: 'Outfit',
-        },
-      ],
-    },
-    {
-      name: 'headerIcons',
-      title: 'Iconos de Cabecera y Redes Sociales',
-      type: 'array',
-      group: 'social',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'icon', title: 'Icono (Ej: Play, Youtube, Instagram, Mail)', type: 'string' },
-            { name: 'url', title: 'Enlace Completo', type: 'url' },
-          ],
         },
       ],
     },
