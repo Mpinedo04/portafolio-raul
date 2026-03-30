@@ -29,12 +29,12 @@ export default async function PortfolioPage() {
           <VideoEmbed 
             url={project.videoUrl} 
             title={project.title} 
-            thumbnail={!project.placeholder && project.mainImage ? urlFor(project.mainImage).url() : ""} 
+            thumbnail={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : ""} 
           />
         ) : (
           <div className={styles.videoPlaceholder}>
             <img 
-              src={!project.placeholder && project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
+              src={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
               alt={project.title} 
             />
           </div>

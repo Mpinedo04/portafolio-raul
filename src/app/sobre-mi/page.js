@@ -28,7 +28,7 @@ export default async function AboutPage() {
             <div className={styles.imageCol}>
               <div className={styles.profileBox}>
                  <img 
-                   src={profile.profileImage ? urlFor(profile.profileImage).url() : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"} 
+                   src={(profile.profileImage && profile.profileImage.asset) ? urlFor(profile.profileImage).url() : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"} 
                    alt={profile.name || "Raúl García"} 
                  />
                  <div className={styles.boxDecor}></div>
@@ -47,9 +47,11 @@ export default async function AboutPage() {
           <h2>EN ACCIÓN</h2>
           <div className={styles.photoGrid}>
             {hasActionPhotos ? (
-              profile.actionPhotos.map((photo, i) => (
-                <img key={i} src={urlFor(photo).url()} alt={`Rodaje ${i+1}`} />
-              ))
+              profile.actionPhotos
+                .filter(photo => photo && photo.asset)
+                .map((photo, i) => (
+                  <img key={i} src={urlFor(photo).url()} alt={`Rodaje ${i+1}`} />
+                ))
             ) : (
               // Fallback demo photos
               <>

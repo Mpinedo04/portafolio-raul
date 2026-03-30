@@ -36,7 +36,7 @@ export default async function Home() {
       <Hero 
         name={profile.name} 
         headline={profile.headline} 
-        backgroundImage={profile.heroImage ? urlFor(profile.heroImage).url() : null}
+        backgroundImage={(profile.heroImage && profile.heroImage.asset) ? urlFor(profile.heroImage).url() : null}
         heroButtons={profile.heroButtons}
       />
         
@@ -76,11 +76,11 @@ export default async function Home() {
                       <VideoEmbed 
                         url={project.videoUrl} 
                         title={project.title} 
-                        thumbnail={project.mainImage ? urlFor(project.mainImage).url() : ""} 
+                        thumbnail={(project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : ""} 
                       />
                     ) : (
                       <img 
-                        src={project.mainImage ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"} 
+                        src={(project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"} 
                         alt={project.title} 
                       />
                     )}
