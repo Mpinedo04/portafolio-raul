@@ -14,7 +14,7 @@ export default function Footer({
         </div>
         <div className={styles.center}>
           <div className={styles.links}>
-            {headerIcons.length > 0 ? (
+            {(headerIcons || []).length > 0 ? (
               headerIcons.map((item, index) => (
                 <a key={index} href={item.url} target="_blank" rel="noopener noreferrer">
                   {item.icon}

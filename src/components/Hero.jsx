@@ -13,7 +13,7 @@ export default function Hero({
     primaryUrl = "/portfolio", 
     secondaryText = "Trabajemos Juntos", 
     secondaryUrl = "/contacto" 
-  } = heroButtons;
+  } = heroButtons || {};
 
   return (
     <section className={styles.hero} style={heroStyle}>
