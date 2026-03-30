@@ -37,24 +37,12 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
         </Link>
 
         {/* Desktop Nav */}
-        <nav className={styles.desktopNav}>
-          <Link href="/portfolio">Portfolio</Link>
-          <Link href="/sobre-mi">Sobre Mí</Link>
-          <Link href="/equipo">Equipo</Link>
-          <Link href="/contacto">Contacto</Link>
+        <nav className={styles.nav}>
+          <Link href="/portfolio">PORTFOLIO</Link>
+          <Link href="/sobre-mi">SOBRE MÍ</Link>
+          <Link href="/equipo">EQUIPO</Link>
+          <Link href="/contacto">CONTACTO</Link>
         </nav>
-
-        {/* Social Icons Desktop */}
-        <div className={styles.socials}>
-          {iconsToRender.map((item, index) => {
-            const IconComponent = Icons[item.icon] || Icons.Link;
-            return (
-              <a key={index} href={item.url} target="_blank" rel="noopener noreferrer">
-                <IconComponent size={20} />
-              </a>
-            );
-          })}
-        </div>
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
