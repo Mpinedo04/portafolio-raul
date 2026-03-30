@@ -5,9 +5,11 @@ import { client } from '@/sanity/lib/client';
 export const revalidate = 10;
 
 export default async function EquipmentPage() {
-  const allEquipment = await client.fetch(`*[_type == "equipment"]`) || [];
+  // 1. Fetch data from Sanity
+  const workstationDoc = await client.fetch(`*[_id == "workstation-specs"][0]`);
+  const allEquipment = await client.fetch(`*[_type == "equipment" && _id != "workstation-specs"]`) || [];
 
-  // Helper to get category icon
+  // 2. Helper to get category icons
   const getCategoryIcon = (categoryValue) => {
     switch (categoryValue) {
       case 'camaras': return <Camera size={24} />;
@@ -20,7 +22,7 @@ export default async function EquipmentPage() {
     }
   };
 
-  // Helper to get category title
+  // 3. Helper to get category titles
   const getCategoryTitle = (categoryValue) => {
     switch (categoryValue) {
       case 'camaras': return 'Cámaras';
@@ -33,9 +35,8 @@ export default async function EquipmentPage() {
     }
   };
 
-  // Separate the PC Specs from the grid categories
-  const pcSpecsDoc = allEquipment.find(doc => doc.category === 'hardware');
-  const pcSpecs = pcSpecsDoc?.items?.length > 0 ? pcSpecsDoc.items : [
+  // 4. PC Specs logic (focusing on the dedicated document workstation-specs)
+  const pcSpecs = workstationDoc?.items?.length > 0 ? workstationDoc.items : [
     { name: 'PROCESADOR', specs: 'AMD Ryzen 9 5950X (16 Núcleos)' },
     { name: 'GRÁFICA', specs: 'NVIDIA RTX 3080 10GB VRAM' },
     { name: 'RAM', specs: '64GB DDR4 3600MHz' },
@@ -43,55 +44,12 @@ export default async function EquipmentPage() {
     { name: 'MONITOR', specs: '2x ASUS ProArt 27" 4K (Calibración Rec.709)' }
   ];
 
-  const gridCategoriesDocs = allEquipment.filter(doc => doc.category !== 'hardware');
-  
-  // Fallback for grid
-  const initialCategories = [
-    {
-      title: 'CÁMARAS',
-      icon: <Camera size={24} />,
-      items: [
-        { name: 'Sony Alpha 7 IV', specs: 'Grabación 4K 60fps, 10-bit 4:2:2' },
-        { name: 'Blackmagic Pocket 6K Pro', specs: 'Raw recording, Filtros ND integrados' }
-      ]
-    },
-    {
-      title: 'OBJETIVOS',
-      icon: <Layers size={24} />,
-      items: [
-        { name: 'Sigma 24-70mm f/2.8 Art', specs: 'Zoom versátil de alta calidad' },
-        { name: 'Sony 50mm f/1.8 FE', specs: 'Óptica fija para retratos y bokeh' },
-        { name: 'Viltrox 35mm f/1.8', specs: 'Gran angular luminoso' }
-      ]
-    },
-    {
-      title: 'AUDIO',
-      icon: <Mic size={24} />,
-      items: [
-        { name: 'Rode NTG5', specs: 'Micrófono de cañón profesional' },
-        { name: 'Zoom H6 Black Edition', specs: 'Grabadora de 6 pistas' },
-        { name: 'Sennheiser G4 Lav', specs: 'Sistema inalámbrico de solapa' }
-      ]
-    },
-    {
-      title: 'ILUMINACIÓN',
-      icon: <Lightbulb size={24} />,
-      items: [
-        { name: 'Aputure 120D II + Dome', specs: 'Luz principal de alta potencia' },
-        { name: 'Godox SL60W', specs: 'Luz secundaria' },
-        { name: 'Tubos LED RGB Nanlite Pavotube', specs: 'Efectos de color y ambiente' }
-      ]
-    }
-  ];
-
-  const gridCategories = gridCategoriesDocs.length > 0 
-    ? gridCategoriesDocs.map(doc => ({
-        _id: doc._id,
-        title: getCategoryTitle(doc.category),
-        icon: getCategoryIcon(doc.category),
-        items: doc.items || []
-      }))
-    : initialCategories;
+  const gridCategories = allEquipment.map(doc => ({
+    _id: doc._id,
+    title: getCategoryTitle(doc.category),
+    icon: getCategoryIcon(doc.category),
+    items: doc.items || []
+  }));
 
   return (
     <div className={styles.equipment}>
@@ -131,7 +89,7 @@ export default async function EquipmentPage() {
 
       <section 
         className={styles.pcSection}
-        data-sanity={pcSpecsDoc?._id ? `${pcSpecsDoc._id}` : undefined}
+        data-sanity={workstationDoc?._id ? `${workstationDoc._id}` : undefined}
       >
         <div className="container">
           <div className={styles.pcHeader}>

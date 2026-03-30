@@ -51,8 +51,23 @@ export const myStructure = (S) =>
         .title('PÁGINA DE EQUIPO')
         .icon(Camera)
         .child(
-          S.documentTypeList('equipment')
-            .title('Cámaras y Hardware')
+          S.list()
+            .title('Gestión de Equipo')
+            .items([
+              S.listItem()
+                .title('Mi Inventario (Cámaras, Lentes...)')
+                .icon(Briefcase)
+                .child(S.documentTypeList('equipment').title('Inventario Completo')),
+              S.listItem()
+                .title('Tu PC / Workstation')
+                .icon(Monitor)
+                .child(
+                  S.document()
+                    .schemaType('equipment')
+                    .documentId('workstation-specs')
+                    .title('Especificaciones del PC')
+                ),
+            ])
         ),
 
       // 🎓 PÁGINA DE HABILIDADES
