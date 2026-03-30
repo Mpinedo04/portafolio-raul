@@ -23,6 +23,17 @@ export default {
       description: 'Esta imagen aparecerá de fondo en el inicio de la web.',
     },
     {
+      name: 'heroButtons',
+      title: 'Botones de Portada (Acciones)',
+      type: 'object',
+      fields: [
+        { name: 'primaryText', title: 'Texto Botón Proyectos', type: 'string', initialValue: 'Ver Proyectos' },
+        { name: 'primaryUrl', title: 'Enlace Botón Proyectos', type: 'string', initialValue: '/portfolio' },
+        { name: 'secondaryText', title: 'Texto Botón Secundario', type: 'string', initialValue: 'Trabajemos Juntos' },
+        { name: 'secondaryUrl', title: 'Enlace Botón Secundario', type: 'string', initialValue: '#contacto' },
+      ],
+    },
+    {
       name: 'bio',
       title: 'Trayectoria / Evolución',
       type: 'text',

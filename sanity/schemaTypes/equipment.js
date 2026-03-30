@@ -1,34 +1,33 @@
 export default {
   name: 'equipment',
-  title: 'Equipo Técnico',
+  title: 'Catálogo de Equipo Técnico',
   type: 'document',
   fields: [
     {
       name: 'category',
-      title: 'Categoría de Material',
+      title: 'Categoría',
       type: 'string',
       options: {
         list: [
-          { title: 'Cámaras', value: 'camaras' },
-          { title: 'Objetivos', value: 'objetivos' },
-          { title: 'Iluminación', value: 'iluminacion' },
-          { title: 'Audio', value: 'audio' },
-          { title: 'Accesorios', value: 'accesorios' },
-          { title: 'PC Specs / Hardware', value: 'hardware' },
+          { title: '🎥 Cámaras', value: 'camaras' },
+          { title: '🔦 Iluminación', value: 'iluminacion' },
+          { title: '🎤 Audio', value: 'audio' },
+          { title: '🔍 Objetivos', value: 'objetivos' },
+          { title: '🛠 Accesorios', value: 'accesorios' },
+          { title: '💻 Hardware / Workstation', value: 'hardware' },
         ],
       },
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'items',
-      title: 'Lista de Materiales',
+      title: 'Equipamiento de esta Categoría',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'name', title: 'Nombre / Modelo', type: 'string' },
-            { name: 'specs', title: 'Especificaciones', type: 'string' },
+            { name: 'name', title: 'Modelo / Componente', type: 'string' },
+            { name: 'specs', title: 'Especificaciones Clave', type: 'string' },
           ],
         },
       ],

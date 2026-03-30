@@ -1,6 +1,6 @@
 export default {
   name: 'settings',
-  title: 'Configuración de Marca y Diseño',
+  title: 'Configuración Global y Contacto',
   type: 'document',
   fields: [
     {
@@ -10,18 +10,28 @@ export default {
       initialValue: 'RAÚL GARCÍA',
     },
     {
-      name: 'email',
-      title: 'Email de Contacto (Destinatario)',
+      name: 'contactEmail',
+      title: 'Email de Contacto (Público)',
       type: 'string',
     },
     {
-      title: 'Diseño y Colores',
+      name: 'contactPhone',
+      title: 'Teléfono / WhatsApp',
+      type: 'string',
+    },
+    {
+      name: 'contactLocation',
+      title: 'Ubicación (Ciudad/País)',
+      type: 'string',
+    },
+    {
+      title: 'Diseño y Colores (Modo Wix)',
       name: 'theme',
       type: 'object',
       fields: [
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'string', initialValue: '#0A0A0A' },
-        { name: 'primaryColor', title: 'Color de Acento Principal (Teal)', type: 'string', initialValue: '#1FB3B3' },
-        { name: 'secondaryColor', title: 'Color de Acento Secundario (Naranja)', type: 'string', initialValue: '#D48C45' },
+        { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'string', initialValue: '#1FB3B3' },
+        { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'string', initialValue: '#D48C45' },
         { name: 'textColor', title: 'Color de Texto Principal', type: 'string', initialValue: '#EDEDED' },
         {
           name: 'headingFont',
@@ -41,14 +51,14 @@ export default {
     },
     {
       name: 'headerIcons',
-      title: 'Iconos de Cabecera (Arriba a la derecha)',
+      title: 'Iconos de Cabecera y Redes Sociales',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'icon', title: 'Icono (Nombre de Lucide)', type: 'string', description: 'Ej: Play, Camera, Mail, Youtube, Instagram' },
-            { name: 'url', title: 'Enlace', type: 'url' },
+            { name: 'icon', title: 'Icono (Ej: Play, Youtube, Instagram, Mail)', type: 'string' },
+            { name: 'url', title: 'Enlace Completo', type: 'url' },
           ],
         },
       ],

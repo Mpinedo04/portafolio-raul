@@ -35,12 +35,12 @@ export default async function EquipmentPage() {
 
   // Separate the PC Specs from the grid categories
   const pcSpecsDoc = allEquipment.find(doc => doc.category === 'hardware');
-  const pcSpecs = pcSpecsDoc?.items?.length > 0 ? pcSpecsDoc.items.map(item => ({ label: item.name, value: item.specs })) : [
-    { label: 'PROCESADOR', value: 'AMD Ryzen 9 5950X (16 Núcleos)' },
-    { label: 'GRÁFICA', value: 'NVIDIA RTX 3080 10GB VRAM' },
-    { label: 'RAM', value: '64GB DDR4 3600MHz' },
-    { label: 'ALMACENAMIENTO', value: '4TB NVMe Gen4 SSD + 12TB HDD RAID' },
-    { label: 'MONITOR', value: '2x ASUS ProArt 27" 4K (Calibración Rec.709)' }
+  const pcSpecs = pcSpecsDoc?.items?.length > 0 ? pcSpecsDoc.items : [
+    { name: 'PROCESADOR', specs: 'AMD Ryzen 9 5950X (16 Núcleos)' },
+    { name: 'GRÁFICA', specs: 'NVIDIA RTX 3080 10GB VRAM' },
+    { name: 'RAM', specs: '64GB DDR4 3600MHz' },
+    { name: 'ALMACENAMIENTO', specs: '4TB NVMe Gen4 SSD + 12TB HDD RAID' },
+    { name: 'MONITOR', specs: '2x ASUS ProArt 27" 4K (Calibración Rec.709)' }
   ];
 
   const gridCategoriesDocs = allEquipment.filter(doc => doc.category !== 'hardware');
@@ -133,8 +133,8 @@ export default async function EquipmentPage() {
           <div className={styles.pcGrid}>
             {pcSpecs.map((spec, idx) => (
               <div key={idx} className={styles.spec}>
-                <strong>{spec.label}</strong>
-                <span>{spec.value}</span>
+                <strong>{spec.name}</strong>
+                <span>{spec.specs}</span>
               </div>
             ))}
           </div>

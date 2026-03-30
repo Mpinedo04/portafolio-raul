@@ -28,7 +28,11 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
-        <Link href="/" className={`${styles.logo} uppercase`}>
+        <Link 
+          href="/" 
+          className={`${styles.logo} uppercase`}
+          data-sanity="settings.brandName"
+        >
           {brandName}
         </Link>
 

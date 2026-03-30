@@ -13,7 +13,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   
-  // Fetch settings for dynamic theme
+  // Fetch settings for dynamic theme and footer
   const settings = await client.fetch(`*[_type == "settings"][0]`);
   const theme = settings?.theme || {};
 
@@ -35,7 +35,7 @@ export default async function RootLayout({ children }) {
       <body style={cssVars}>
         <Header brandName={settings?.brandName} headerIcons={settings?.headerIcons} />
         <main>{children}</main>
-        <Footer />
+        <Footer brandName={settings?.brandName} contactEmail={settings?.contactEmail} headerIcons={settings?.headerIcons} />
         {isDraftMode && <VisualEditing />}
       </body>
     </html>

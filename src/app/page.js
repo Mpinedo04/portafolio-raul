@@ -10,10 +10,21 @@ export const revalidate = 10; // Revalidate every 10 seconds for CMS updates
 
 export default async function Home() {
   // Fetch data dynamically, rendering placeholders if Sanity is empty
-  const profile = await client.fetch(`*[_type == "profile"][0]`) || {
+  const profile = await client.fetch(`*[_type == "profile"][0]{
+    name, 
+    headline, 
+    heroImage,
+    heroButtons
+  }`) || {
     name: "RAÚL GARCÍA",
     headline: "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
-    bio: "Hola, soy Raúl. Mi pasión es la creación audiovisual desde los cimientos: desde la idea inicial hasta el montaje final.\nMe especializo en capturar la esencia de cada momento, ya sea en un set de rodaje profesional o en proyectos documentales independientes."
+    bio: "Hola, soy Raúl...",
+    heroButtons: {
+      primaryText: "Ver Proyectos",
+      primaryUrl: "/portfolio",
+      secondaryText: "Trabajemos Juntos",
+      secondaryUrl: "/contacto"
+    }
   };
 
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(_createdAt desc)`) || [];
@@ -25,6 +36,7 @@ export default async function Home() {
         name={profile.name} 
         headline={profile.headline} 
         backgroundImage={profile.heroImage ? urlFor(profile.heroImage).url() : null}
+        heroButtons={profile.heroButtons}
       />
         
       {/* Breve descripción sobre mí */}
