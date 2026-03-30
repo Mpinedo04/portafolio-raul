@@ -86,6 +86,7 @@ export default async function EquipmentPage() {
 
   const gridCategories = gridCategoriesDocs.length > 0 
     ? gridCategoriesDocs.map(doc => ({
+        _id: doc._id,
         title: getCategoryTitle(doc.category),
         icon: getCategoryIcon(doc.category),
         items: doc.items || []
@@ -105,7 +106,11 @@ export default async function EquipmentPage() {
         <div className="container">
           <div className={styles.categoryGrid}>
             {gridCategories.map((cat, idx) => (
-              <div key={idx} className={styles.card}>
+              <div 
+                key={idx} 
+                className={styles.card}
+                data-sanity={cat._id ? `${cat._id}` : undefined}
+              >
                 <div className={styles.cardHeader}>
                   {cat.icon}
                   <h2 className="uppercase">{cat.title}</h2>
@@ -124,7 +129,10 @@ export default async function EquipmentPage() {
         </div>
       </section>
 
-      <section className={styles.pcSection}>
+      <section 
+        className={styles.pcSection}
+        data-sanity={pcSpecsDoc?._id ? `${pcSpecsDoc._id}` : undefined}
+      >
         <div className="container">
           <div className={styles.pcHeader}>
             <Monitor size={40} color="var(--accent-teal)" />

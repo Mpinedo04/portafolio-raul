@@ -13,7 +13,7 @@ export default async function SkillsPage() {
 
   // Map to format that SkillsClient expects (with fallbacks if empty)
   const software = softwareRaw.length > 0 
-    ? softwareRaw.map(s => ({ name: s.name, level: s.level || 50 }))
+    ? softwareRaw.map(s => ({ _id: s._id, name: s.name, level: s.level || 50 }))
     : [
         { name: 'Adobe Premiere Pro', level: 95 },
         { name: 'After Effects', level: 80 },
@@ -21,15 +21,16 @@ export default async function SkillsPage() {
       ];
 
   const areas = areasRaw.length > 0
-    ? areasRaw.map(s => s.name)
+    ? areasRaw.map(s => ({ _id: s._id, name: s.name }))
     : [
-        'Dirección de Fotografía',
-        'Montaje Cinematográfico',
-        'Corrección de Color (Etalonaje)'
+        { name: 'Dirección de Fotografía' },
+        { name: 'Montaje Cinematográfico' },
+        { name: 'Corrección de Color (Etalonaje)' }
       ];
 
   const education = educationRaw.length > 0
     ? educationRaw.map(s => ({
+        _id: s._id,
         date: s.period || '',
         title: s.name,
         institution: s.institution || '',

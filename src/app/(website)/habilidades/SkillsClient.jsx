@@ -28,7 +28,11 @@ export default function SkillsClient({ software, areas, education }) {
               <h2>SOFTWARE DE EDICIÓN</h2>
               <div className={styles.softwareList}>
                 {software.map((s, i) => (
-                  <div key={i} className={styles.skillRow}>
+                  <div 
+                    key={i} 
+                    className={styles.skillRow}
+                    data-sanity={s._id ? `${s._id}` : undefined}
+                  >
                     <div className={styles.skillHead}>
                       <span>{s.name}</span>
                       <span>{s.level}%</span>
@@ -52,7 +56,12 @@ export default function SkillsClient({ software, areas, education }) {
               <h2>ÁREAS TÉCNICAS</h2>
               <ul className={styles.areaList}>
                 {areas.map((a, i) => (
-                  <li key={i}>{a}</li>
+                  <li 
+                    key={i}
+                    data-sanity={a._id ? `${a._id}` : undefined}
+                  >
+                    {a.name}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -65,7 +74,11 @@ export default function SkillsClient({ software, areas, education }) {
           <h2>EXPEDIENTE ACADÉMICO</h2>
           <div className={styles.timeline}>
              {education.map((e, i) => (
-               <div key={i} className={styles.eduItem}>
+               <div 
+                 key={i} 
+                 className={styles.eduItem}
+                 data-sanity={e._id ? `${e._id}` : undefined}
+               >
                  <span className={styles.date}>{e.date}</span>
                  <h3>{e.title}</h3>
                  <p className={styles.institution}>{e.institution}</p>
