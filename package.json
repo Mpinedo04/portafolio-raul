@@ -14,7 +14,6 @@
     "next-sanity": "^12.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "@sanity/presentation": "^3.0.0",
     "sanity": "^5.18.0",
     "styled-components": "^6.3.12"
   },
