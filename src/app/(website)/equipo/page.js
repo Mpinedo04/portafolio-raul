@@ -2,7 +2,7 @@ import { Camera, Layers, Lightbulb, Mic, Monitor, Wrench, Box } from 'lucide-rea
 import styles from './Equipment.module.css';
 import { client } from '@/sanity/lib/client';
 
-export const revalidate = 3600; // Refresco eficiente cada hora (ISR)
+export const revalidate = 10;
 
 export default async function EquipmentPage() {
   // 1. Fetch data from Sanity

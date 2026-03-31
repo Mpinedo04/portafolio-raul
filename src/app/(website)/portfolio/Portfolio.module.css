@@ -13,6 +13,7 @@
   font-size: 3rem;
   letter-spacing: -2px;
   margin-bottom: 20px;
+  color: var(--foreground);
 }
 
 .headerSection p {

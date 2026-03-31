@@ -4,7 +4,7 @@ import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 import { draftMode } from 'next/headers';
 
-export const revalidate = 3600; // Un flujo más eficiente (1 hora)
+export const revalidate = 10;
 
 export async function generateMetadata() {
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]{ seo }`);
