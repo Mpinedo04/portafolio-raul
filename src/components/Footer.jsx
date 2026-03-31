@@ -19,28 +19,7 @@ export default function Footer({
           <p>Filmmaker & Editor de Vídeo especializado en proyectos cinematográficos y documentales.</p>
         </div>
         <div className={styles.center}>
-          <div className={styles.links} data-sanity="settings.socialLinks">
-            {(socialLinks || []).length > 0 ? (
-              socialLinks.map((item, index) => (
-                <a key={index} href={item.url} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
-                  {renderIcon(item.platform)}
-                </a>
-              ))
-            ) : (
-              // Fallback icons if none in Sanity
-              <>
-                <a href="https://youtube.com/@Raaulinhoo" target="_blank" rel="noopener noreferrer">
-                  {(() => { const Icon = getIcon('Youtube'); return <Icon />; })()}
-                </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  {(() => { const Icon = getIcon('Instagram'); return <Icon />; })()}
-                </a>
-                <a href={`mailto:${contactEmail}`} data-sanity="settings.contactEmail">
-                  {(() => { const Icon = getIcon('Mail'); return <Icon />; })()}
-                </a>
-              </>
-            )}
-          </div>
+          {/* Social links removed to avoid redundancy with the Header */}
         </div>
         <div className={styles.right}>
           <p>© {new Date().getFullYear()} {brandName}. Todos los derechos reservados.</p>
