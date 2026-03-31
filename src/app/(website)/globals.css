@@ -3,8 +3,9 @@
   --foreground: #EDEDED;
   --accent-teal: #1FB3B3;
   --accent-orange: #D48C45;
-  --panel-bg: #0D0D0D; /* Default, overridden by Layout */
-  --card-bg: #1A1A1A; /* Default, overridden by Layout */
+  --panel-bg: #0D0D0D;
+  --card-bg: #1A1A1A;
+  --nav-bg: #0A0A0A;
   --dark-gray: var(--panel-bg, #1A1A1A);
   --medium-gray: #333333;
   --light-gray: #888888;

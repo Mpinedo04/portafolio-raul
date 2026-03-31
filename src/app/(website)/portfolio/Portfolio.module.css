@@ -46,6 +46,10 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  background: var(--card-bg, transparent);
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--medium-gray);
 }
 
 .mediaSide {
@@ -59,6 +63,7 @@
   overflow: hidden;
   border-radius: 4px;
   cursor: pointer;
+  background: var(--card-bg, #111);
 }
 
 .videoPlaceholder img {
