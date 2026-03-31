@@ -3,8 +3,10 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-// EQUILIBRIO TÉCNICO: 30 segundos de refresco para ahorrar peticiones a Sanity
-export const revalidate = 30;
+// CONFIGURACIÓN DEFINITIVA: CARGA DIRECTA DE SANITY (Sin Caché)
+// Garantiza visibilidad instantánea 100% fiable
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const ProjectItem = ({ project }) => {
   const imageUrl = (project.mainImage && project.mainImage.asset) 
@@ -40,7 +42,7 @@ const ProjectItem = ({ project }) => {
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
 
-  // Lógica robusta: Si no tiene categoría o es desconocida, va a "Propios" por seguridad
+  // Lógica robusta: Si no tiene categoría o es desconocida, va a "Propios"
   const ownProjects = allProjects.filter(p => !p.category || p.category === 'propio');
   const externalProjects = allProjects.filter(p => p.category === 'externo');
 
@@ -77,7 +79,7 @@ export default async function PortfolioPage() {
         </section>
       )}
 
-      {/* Fallback si Sanity está vacío */}
+      {/* Fallback por si Sanity devuelve error */}
       {allProjects.length === 0 && (
         <div style={{ textAlign: 'center', padding: '100px 0' }}>
           <h2>Cargando Catálogo...</h2>
