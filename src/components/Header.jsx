@@ -23,7 +23,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
   const iconsToRender = (socialLinks && socialLinks.length > 0) ? socialLinks : [
     { platform: 'Youtube', url: 'https://www.youtube.com/@Raaulinhoo' },
-    { platform: 'Instagram', url: 'https://instagram.com' },
+    { platform: 'Instagram', url: 'https://www.instagram.com/raaulinhoo_2004/' },
     { platform: 'Mail', url: 'mailto:social@raulgarcia.com' }
   ];
 
