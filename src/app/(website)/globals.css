@@ -3,7 +3,8 @@
   --foreground: #EDEDED;
   --accent-teal: #1FB3B3;
   --accent-orange: #D48C45;
-  --dark-gray: #1A1A1A;
+  --section-bg: #0D0D0D; /* Default, will be overridden by inline styles from Layout */
+  --dark-gray: var(--section-bg, #1A1A1A);
   --medium-gray: #333333;
   --light-gray: #888888;
   
