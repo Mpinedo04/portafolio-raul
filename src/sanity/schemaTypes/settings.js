@@ -88,6 +88,7 @@ export default {
         },
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
         { name: 'sectionBackgroundColor', title: 'Color de Fondo de Sección (Paneles)', type: 'color', description: 'Color para secciones como Habilidades o destacados.' },
+        { name: 'navBackgroundColor', title: 'Color de Fondo Navegación (Header / Footer)', type: 'color', description: 'Color independiente para la cabecera y el pie de página.' },
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
         { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
         { name: 'textColor', title: 'Color de Texto Principal', type: 'color' },

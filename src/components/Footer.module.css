@@ -1,5 +1,5 @@
 .footer {
-  background: #050505;
+  background: var(--nav-bg, #050505);
   color: #fff;
   padding: 80px 0 40px;
   border-top: 1px solid var(--dark-gray);
