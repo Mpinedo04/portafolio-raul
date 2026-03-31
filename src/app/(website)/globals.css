@@ -7,7 +7,8 @@
   --medium-gray: #333333;
   --light-gray: #888888;
   
-  --font-primary: 'Outfit', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-headings: var(--font-primary, 'Bebas Neue', sans-serif);
   --transition-speed: 0.3s;
 }
 
@@ -26,7 +27,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-primary);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,9 +37,10 @@ a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .uppercase {
+  font-family: var(--font-headings);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
 }
 
 .container {
