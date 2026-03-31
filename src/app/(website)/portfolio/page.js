@@ -3,12 +3,10 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-// DESACTIVAR CACHÉ TOTALMENTE PARA TESTEO PROFUNDO
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// EQUILIBRIO TÉCNICO: 30 segundos de refresco para ahorrar peticiones a Sanity
+export const revalidate = 30;
 
 const ProjectItem = ({ project }) => {
-  // Asegurar que tenemos una imagen o un fallback sólido
   const imageUrl = (project.mainImage && project.mainImage.asset) 
     ? urlFor(project.mainImage).url() 
     : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop";
@@ -17,11 +15,7 @@ const ProjectItem = ({ project }) => {
     <div className={styles.projectItem}>
       <div className={styles.mediaSide}>
         {project.videoUrl ? (
-          <VideoEmbed 
-            url={project.videoUrl} 
-            title={project.title} 
-            thumbnail={imageUrl} 
-          />
+          <VideoEmbed url={project.videoUrl} title={project.title} thumbnail={imageUrl} />
         ) : (
           <div className={styles.videoPlaceholder}>
             <img src={imageUrl} alt={project.title} />
@@ -44,8 +38,11 @@ const ProjectItem = ({ project }) => {
 };
 
 export default async function PortfolioPage() {
-  // Fetch crudo sin filtros para forzar la visibilidad
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
+
+  // Lógica robusta: Si no tiene categoría o es desconocida, va a "Propios" por seguridad
+  const ownProjects = allProjects.filter(p => !p.category || p.category === 'propio');
+  const externalProjects = allProjects.filter(p => p.category === 'externo');
 
   return (
     <div className={styles.portfolio}>
@@ -56,20 +53,37 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className="container">
-          <div className={styles.list}>
-            {allProjects.length > 0 ? (
-              allProjects.map(p => <ProjectItem key={p._id} project={p} />)
-            ) : (
-              <div style={{ textAlign: 'center', padding: '100px 0' }}>
-                <h2>CARGANDO PROYECTOS...</h2>
-                <p>Si esta página no cambia en unos segundos, revisa que tus proyectos estén PUBLICADOS en Sanity y tengan una Imagen Principal.</p>
-              </div>
-            )}
+      {/* Proyectos Propios */}
+      {ownProjects.length > 0 && (
+        <section className={styles.section}>
+          <div className="container">
+            <h2 className={styles.sectionTitle}>PROYECTOS PROPIOS</h2>
+            <div className={styles.list}>
+              {ownProjects.map(p => <ProjectItem key={p._id} project={p} />)}
+            </div>
           </div>
+        </section>
+      )}
+
+      {/* Proyectos Externos */}
+      {externalProjects.length > 0 && (
+        <section className={styles.section}>
+          <div className="container">
+            <h2 className={styles.sectionTitle}>PROYECTOS EXTERNOS</h2>
+            <div className={styles.list}>
+              {externalProjects.map(p => <ProjectItem key={p._id} project={p} />)}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Fallback si Sanity está vacío */}
+      {allProjects.length === 0 && (
+        <div style={{ textAlign: 'center', padding: '100px 0' }}>
+          <h2>Cargando Catálogo...</h2>
+          <p>Asegúrate de publicar proyectos en tu panel de Sanity.</p>
         </div>
-      </section>
+      )}
     </div>
   );
 }
