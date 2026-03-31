@@ -3,7 +3,7 @@ import { defineLocations } from 'sanity/presentation';
 export const resolve = {
   locations: {
     settings: defineLocations({
-      message: 'Configuración Global (Logo, Colores, Redes)',
+      message: 'Configuración Global (Cabecera, Pie de Página, Colores)',
       resolve: () => ({
         locations: [
           { title: 'Home', href: '/' },
@@ -15,24 +15,29 @@ export const resolve = {
         ],
       }),
     }),
-    profile: defineLocations({
-      select: { name: 'name' },
-      resolve: (doc) => ({
-        locations: [
-          { title: `Home (${doc?.name || 'Bio'})`, href: '/' },
-          { title: 'Sobre Mí', href: '/sobre-mi' },
-          { title: 'Portfolio (Footer)', href: '/portfolio' },
-          { title: 'Equipo (Footer)', href: '/equipo' },
-          { title: 'Contacto (Footer)', href: '/contacto' },
-        ],
+    home: defineLocations({
+      message: 'Esta es la Portada principal de la web.',
+      resolve: () => ({
+        locations: [{ title: 'Home', href: '/' }],
+      }),
+    }),
+    about: defineLocations({
+      message: 'Tu Biografía y Fotos de Rodaje.',
+      resolve: () => ({
+        locations: [{ title: 'Sobre Mí', href: '/sobre-mi' }],
+      }),
+    }),
+    contact: defineLocations({
+      message: 'Tus datos de comunicación y formulario.',
+      resolve: () => ({
+        locations: [{ title: 'Contacto', href: '/contacto' }],
       }),
     }),
     project: defineLocations({
       select: { title: 'title' },
       resolve: (doc) => ({
         locations: [
-          { title: doc?.title || 'Proyecto', href: '/portfolio' },
-          { title: 'Portfolio Index', href: '/portfolio' },
+          { title: `Proyecto: ${doc?.title || 'Sin Título'}`, href: '/portfolio' },
         ],
       }),
     }),
