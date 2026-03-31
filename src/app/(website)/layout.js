@@ -36,20 +36,26 @@ export default async function RootLayout({ children }) {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`) || {};
   const theme = settings?.theme || {};
 
-  // Helper to extract hex from color object or string
-  const getHex = (color) => {
+  // Traductor inteligente de colores (Soporta Hex y Transparencia RGBA)
+  const getColor = (color) => {
+    if (!color) return null;
     if (typeof color === 'string') return color;
-    return color?.hex || null;
+    // Si tiene transparencia y datos RGB, usamos RGBA
+    if (color.rgb) {
+      const { r, g, b, a } = color.rgb;
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+    return color.hex || null;
   };
 
   const cssVars = {
-    '--background': getHex(theme.backgroundColor) || '#0A0A0A',
-    '--panel-bg': getHex(theme.panelBackgroundColor) || '#0D0D0D',
-    '--card-bg': getHex(theme.cardBackgroundColor) || '#1A1A1A',
-    '--nav-bg': getHex(theme.navBackgroundColor) || '#0A0A0A',
-    '--foreground': getHex(theme.textColor) || '#EDEDED',
-    '--accent-teal': getHex(theme.primaryColor) || '#1FB3B3',
-    '--accent-orange': getHex(theme.secondaryColor) || '#D48C45',
+    '--background': getColor(theme.backgroundColor) || '#0A0A0A',
+    '--panel-bg': getColor(theme.panelBackgroundColor) || '#0D0D0D',
+    '--card-bg': getColor(theme.cardBackgroundColor) || '#1A1A1A',
+    '--nav-bg': getColor(theme.navBackgroundColor) || '#0A0A0A',
+    '--foreground': getColor(theme.textColor) || '#EDEDED',
+    '--accent-teal': getColor(theme.primaryColor) || '#1FB3B3',
+    '--accent-orange': getColor(theme.secondaryColor) || '#D48C45',
     '--font-primary': theme.titleFont || "'Bebas Neue', sans-serif",
   };
 
