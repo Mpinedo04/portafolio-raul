@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
+import { draftMode } from 'next/headers';
 
 export const revalidate = 3600; // Un flujo más eficiente (1 hora)
 
