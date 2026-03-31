@@ -42,6 +42,7 @@ export default async function Home() {
     }
   };
 
+  const about = await client.fetch(`*[_type == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(_createdAt desc)`) || [];
   const displayProjects = projects.length > 0 ? projects : [];
 
@@ -62,7 +63,7 @@ export default async function Home() {
           <div className={styles.introContent}>
             <div className={styles.introText}>
               <h2>ACERCA DE MÍ</h2>
-              {(profile?.bio || "").split('\n').map((paragraph, i) => (
+              {(about?.bio || "").split('\n').map((paragraph, i) => (
                 paragraph.trim() && <p key={i}>{paragraph}</p>
               ))}
               <Link href="/sobre-mi" className={styles.link}>
