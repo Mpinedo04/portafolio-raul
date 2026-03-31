@@ -38,7 +38,11 @@ const ProjectItem = ({ project }) => (
 );
 
 export default async function PortfolioPage() {
-  const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
+  const allProjects = await client.fetch(
+    `*[_type == "project"] | order(_createdAt desc)`,
+    {},
+    { next: { revalidate: 10 } }
+  ) || [];
 
   let ownProjectsRaw = allProjects.filter(p => p.category === 'propio');
   let externalProjectsRaw = allProjects.filter(p => p.category === 'externo');
