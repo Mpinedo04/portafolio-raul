@@ -10,6 +10,13 @@ export default {
   ],
   fields: [
     {
+      name: 'locale',
+      title: 'Idioma',
+      type: 'string',
+      initialValue: 'es',
+      hidden: true,
+    },
+    {
       name: 'seo',
       title: 'SEO Global y Metadatos',
       type: 'object',

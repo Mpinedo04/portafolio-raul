@@ -7,8 +7,17 @@ import { draftMode } from "next/headers";
 
 import { urlFor } from '@/sanity/lib/image';
 
+export async function getSettings() {
+  return await client.fetch(`*[_type == "settings" && _id == "settings"][0]{
+    brandName,
+    socialLinks,
+    contactEmail,
+    typography
+  }`);
+}
+
 export async function generateMetadata() {
-  const settings = await client.fetch(`*[_type == "settings"][0]`);
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`);
   const seo = settings?.seo || {};
   
   return {
@@ -24,7 +33,7 @@ export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   
   // Fetch settings for dynamic theme and footer
-  const settings = await client.fetch(`*[_type == "settings"][0]`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`) || {};
   const theme = settings?.theme || {};
 
   // Helper to extract hex from color object or string

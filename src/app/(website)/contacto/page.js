@@ -6,7 +6,7 @@ import ContactForm from './ContactForm';
 export const revalidate = 3600; // Un flujo más eficiente (1 hora)
 
 export async function generateMetadata() {
-  const contact = await client.fetch(`*[_type == "contact"][0]{ seo }`);
+  const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]{ seo }`);
   const seo = contact?.seo || {};
   
   if (!seo.metaTitle) return {}; 
@@ -18,7 +18,7 @@ export async function generateMetadata() {
 }
 
 export default async function ContactPage() {
-  const contact = await client.fetch(`*[_type == "contact"][0]`) || {
+  const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
     contactEmail: "contacto@raulgarcia.com",
     contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",

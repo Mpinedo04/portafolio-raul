@@ -5,7 +5,7 @@ import { urlFor } from '@/sanity/lib/image';
 export const revalidate = 3600; // Refresco eficiente cada hora (ISR)
 
 export async function generateMetadata() {
-  const about = await client.fetch(`*[_type == "about"][0]{ seo }`);
+  const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ seo }`);
   const seo = about?.seo || {};
   
   if (!seo.metaTitle) return {}; 
@@ -17,7 +17,7 @@ export async function generateMetadata() {
 }
 
 export default async function AboutPage() {
-  const about = await client.fetch(`*[_type == "about"][0]{
+  const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio,
     profileImage,
     actionPhotos,

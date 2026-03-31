@@ -4,6 +4,13 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'locale',
+      title: 'Idioma',
+      type: 'string',
+      initialValue: 'es',
+      hidden: true,
+    },
+    {
       name: 'seo',
       title: 'SEO de Sobre Mí',
       type: 'object',

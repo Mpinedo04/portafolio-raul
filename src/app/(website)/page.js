@@ -9,7 +9,7 @@ import VideoEmbed from '@/components/VideoEmbed';
 export const revalidate = 3600; // Revalidate every hour for performance
 
 export async function generateMetadata() {
-  const home = await client.fetch(`*[_type == "home"][0]{ seo }`);
+  const home = await client.fetch(`*[_type == "home" && _id == "home"][0]{ seo }`);
   const seo = home?.seo || {};
   
   if (!seo.metaTitle) return {}; 
@@ -22,7 +22,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   // Fetch from the new HOME schema
-  const home = await client.fetch(`*[_type == "home"][0]{
+  const home = await client.fetch(`*[_type == "home" && _id == "home"][0]{
     name, 
     subHeadline,
     headline,
@@ -42,7 +42,7 @@ export default async function Home() {
     }
   };
 
-  const about = await client.fetch(`*[_type == "about"][0]{ bio }`) || { bio: "" };
+  const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(_createdAt desc)`) || [];
   const displayProjects = projects.length > 0 ? projects : [];
 

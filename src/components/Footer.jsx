@@ -1,19 +1,5 @@
-import { 
-  Youtube, 
-  Instagram, 
-  Mail, 
-  Link as LinkIcon, 
-  Smile 
-} from 'lucide-react';
+import { getIcon } from '@/lib/icons';
 import styles from './Footer.module.css';
-
-// Mapeo estático seguro
-const IconMap = {
-  Youtube,
-  Instagram,
-  Mail,
-  Link: LinkIcon
-};
 
 export default function Footer({ 
   brandName = "RAÚL GARCÍA", 
@@ -21,7 +7,7 @@ export default function Footer({
   socialLinks = [] 
 }) {
   const renderIcon = (name) => {
-    const IconComponent = IconMap[name] || IconMap.Link || Smile;
+    const IconComponent = getIcon(name);
     return <IconComponent size={24} />;
   };
 
@@ -43,9 +29,15 @@ export default function Footer({
             ) : (
               // Fallback icons if none in Sanity
               <>
-                <a href="https://youtube.com/@Raaulinhoo" target="_blank" rel="noopener noreferrer"><Youtube /></a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><Instagram /></a>
-                <a href={`mailto:${contactEmail}`} data-sanity="settings.contactEmail"><Mail /></a>
+                <a href="https://youtube.com/@Raaulinhoo" target="_blank" rel="noopener noreferrer">
+                  {(() => { const Icon = getIcon('Youtube'); return <Icon />; })()}
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  {(() => { const Icon = getIcon('Instagram'); return <Icon />; })()}
+                </a>
+                <a href={`mailto:${contactEmail}`} data-sanity="settings.contactEmail">
+                  {(() => { const Icon = getIcon('Mail'); return <Icon />; })()}
+                </a>
               </>
             )}
           </div>

@@ -1,28 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { 
-  X, 
-  Menu, 
-  Youtube, 
-  Instagram, 
-  Mail, 
-  Link as LinkIcon, 
-  Play, 
-  Video as VideoIcon,
-  Smile
-} from 'lucide-react';
+import { getIcon, IconMap } from '@/lib/icons';
 import styles from './Header.module.css';
-
-// Mapeo estático seguro para evitar componentes undefined
-const IconMap = {
-  Youtube,
-  Instagram,
-  Mail,
-  Play,
-  Video: VideoIcon,
-  Link: LinkIcon
-};
 
 export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,11 +17,11 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
   }, []);
 
   const renderIcon = (name) => {
-    const IconComponent = IconMap[name] || IconMap.Link || Smile;
+    const IconComponent = getIcon(name);
     return <IconComponent size={20} />;
   };
 
-  const iconsToRender = socialLinks.length > 0 ? socialLinks : [
+  const iconsToRender = (socialLinks && socialLinks.length > 0) ? socialLinks : [
     { platform: 'Youtube', url: 'https://www.youtube.com/@Raaulinhoo' },
     { platform: 'Instagram', url: 'https://instagram.com' },
     { platform: 'Mail', url: 'mailto:social@raulgarcia.com' }
@@ -77,7 +57,10 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {(() => {
+            const Icon = getIcon(isOpen ? 'X' : 'Menu');
+            return <Icon size={24} />;
+          })()}
         </button>
 
         {/* Mobile Menu Overlay */}
