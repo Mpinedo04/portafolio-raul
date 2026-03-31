@@ -55,7 +55,7 @@
 }
 
 .formCol {
-  background: #111;
+  background: var(--section-bg, #111);
   padding: 60px;
   border-radius: 8px;
   border: 1px solid var(--medium-gray);
