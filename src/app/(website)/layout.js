@@ -69,7 +69,12 @@ export default async function RootLayout({ children }) {
       <body style={cssVars}>
         <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
         <main>{children}</main>
-        <Footer brandName={settings?.brandName} contactEmail={settings?.contactEmail} socialLinks={settings?.socialLinks} />
+        <Footer 
+          brandName={settings?.brandName} 
+          contactEmail={settings?.contactEmail} 
+          footerDescription={settings?.footerDescription}
+          socialLinks={settings?.socialLinks} 
+        />
         {isDraftMode && <VisualEditing />}
       </body>
     </html>

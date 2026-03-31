@@ -39,7 +39,16 @@ export default {
       title: 'Email Global (Footer / Contacto)',
       type: 'string',
       group: 'footer',
-      description: 'Este email aparecerá en el pie de página de toda la web.',
+      description: 'Este email aparecerá en el pie de página y en la página de contacto automáticamente.',
+    },
+    {
+      name: 'footerDescription',
+      title: 'Descripción Corta para el Pie de Página',
+      type: 'text',
+      rows: 2,
+      group: 'footer',
+      initialValue: 'Filmmaker & Editor de Vídeo especializado en proyectos cinematográficos y documentales.',
+      description: 'El párrafo que aparece debajo de tu nombre en el footer.',
     },
     {
       name: 'socialLinks',

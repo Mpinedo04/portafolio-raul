@@ -18,20 +18,26 @@ export async function generateMetadata() {
 }
 
 export default async function ContactPage() {
+  const isDraftMode = (await draftMode()).isEnabled;
+  
+  // 1. Fetch info from both settings (for global email) and contact (for titles)
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ contactEmail }`) || {};
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
-    contactEmail: "FCraulinho2004@gmail.com",
+    title: "TRABAJEMOS JUNTOS",
+    subtitle: "¿Tienes un proyecto en mente? Cuéntame los detalles y hagámoslo realidad.",
     contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",
     formspreeId: ""
   };
 
+  const finalEmail = settings.contactEmail || "FCraulinho2004@gmail.com";
 
   return (
     <div className={styles.contact}>
       <header className={styles.header}>
         <div className="container">
-          <h1>TRABAJEMOS JUNTOS</h1>
-          <p>¿Tienes un proyecto en mente? Cuéntame los detalles y hagámoslo realidad.</p>
+          <h1 data-sanity="contact.title">{contact.title}</h1>
+          <p data-sanity="contact.subtitle">{contact.subtitle}</p>
         </div>
       </header>
 
@@ -43,7 +49,7 @@ export default async function ContactPage() {
                 <Mail size={24} color="var(--accent-teal)" />
                 <div className={styles.infoText}>
                   <h3>EMAIL</h3>
-                  <p data-sanity="contact.contactEmail">{contact.contactEmail}</p>
+                  <p data-sanity="settings.contactEmail">{finalEmail}</p>
                 </div>
               </div>
               <div className={styles.infoBlock}>

@@ -19,6 +19,10 @@ export async function generateMetadata() {
 export default async function AboutPage() {
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio,
+    title,
+    subtitle,
+    storyTitle,
+    galleryTitle,
     profileImage,
     actionPhotos,
     seo
@@ -50,8 +54,8 @@ export default async function AboutPage() {
     <div className={styles.about}>
       <header className={styles.header}>
         <div className="container" data-sanity="about.seo">
-          <h1>BIO & TRAYECTORIA</h1>
-          <p>La evolución de un apasionado por el séptimo arte.</p>
+          <h1 data-sanity="about.title">{about.title || "BIO & TRAYECTORIA"}</h1>
+          <p data-sanity="about.subtitle">{about.subtitle || "La evolución de un apasionado por el séptimo arte."}</p>
         </div>
       </header>
 
@@ -69,7 +73,7 @@ export default async function AboutPage() {
               </div>
             </div>
             <div className={styles.textCol}>
-              <h2>CÓMO LLEGUÉ AQUÍ</h2>
+              <h2 data-sanity="about.storyTitle">{about.storyTitle || "CÓMO LLEGUÉ AQUÍ"}</h2>
               <p data-sanity="about.bio" style={{ whiteSpace: 'pre-line' }}>{about?.bio || ""}</p>
             </div>
           </div>
@@ -105,7 +109,7 @@ export default async function AboutPage() {
 
       <section className={styles.gallery}>
         <div className="container">
-          <h2>EN ACCIÓN</h2>
+          <h2 data-sanity="about.galleryTitle">{about.galleryTitle || "EN ACCIÓN"}</h2>
           <div className={styles.photoGrid}>
             {hasActionPhotos ? (
               about.actionPhotos

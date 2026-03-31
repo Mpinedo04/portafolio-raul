@@ -13,9 +13,16 @@ export default {
       ],
     },
     {
-      name: 'contactEmail',
-      title: 'Email Público (Muestra)',
+      name: 'title',
+      title: 'Título de la Página',
       type: 'string',
+      initialValue: 'TRABAJEMOS JUNTOS',
+    },
+    {
+      name: 'subtitle',
+      title: 'Subtítulo / Introducción',
+      type: 'string',
+      initialValue: '¿Tienes un proyecto en mente? Cuéntame los detalles y hagámoslo realidad.',
     },
     {
       name: 'contactPhone',
