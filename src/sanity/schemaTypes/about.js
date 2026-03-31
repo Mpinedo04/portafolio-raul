@@ -2,6 +2,10 @@ export default {
   name: 'about',
   title: 'Página Sobre Mí',
   type: 'document',
+  groups: [
+    { name: 'seo', title: '⚙️ SEO' },
+    { name: 'content', title: '📝 Contenido' },
+  ],
   fields: [
     {
       name: 'locale',
@@ -14,6 +18,7 @@ export default {
       name: 'seo',
       title: 'SEO de Sobre Mí',
       type: 'object',
+      group: 'seo',
       fields: [
         { name: 'metaTitle', title: 'Título SEO (Pestaña Navegador)', type: 'string' },
         { name: 'metaDescription', title: 'Descripción SEO (Google)', type: 'text', rows: 3 },

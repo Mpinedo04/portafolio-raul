@@ -89,10 +89,7 @@ export default {
           name: 'titleFont',
           title: 'Tipografía para Títulos',
           type: 'string',
-          description: 'Elige un estilo para todos los títulos (H1, H2, H3) de la web de Raúl.',
-          components: {
-             input: require('../components/FontSelector').FontSelector
-          },
+          description: 'Escribe el nombre de la fuente (Ej: Bebas Neue).',
           initialValue: "'Bebas Neue', sans-serif"
         },
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
