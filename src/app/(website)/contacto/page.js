@@ -19,7 +19,7 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
-    contactEmail: "contacto@raulgarcia.com",
+    contactEmail: "FCraulinho2004@gmail.com",
     contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",
     formspreeId: ""

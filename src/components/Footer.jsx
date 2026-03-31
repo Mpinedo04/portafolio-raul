@@ -3,7 +3,7 @@ import styles from './Footer.module.css';
 
 export default function Footer({ 
   brandName = "RAÚL GARCÍA", 
-  contactEmail = "contacto@raulgarcia.com",
+  contactEmail = "FCraulinho2004@gmail.com",
   socialLinks = [] 
 }) {
   const renderIcon = (name) => {
