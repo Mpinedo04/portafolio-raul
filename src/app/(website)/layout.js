@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   
   // Fetch settings for dynamic theme and footer
-  const settings = await client.fetch(`*[_type == "settings"][0]`);
+  const settings = await client.fetch(`*[_type == "settings"][0]`) || {};
   const theme = settings?.theme || {};
 
   // Helper to extract hex from color object or string

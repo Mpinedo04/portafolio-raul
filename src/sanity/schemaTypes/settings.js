@@ -21,13 +21,6 @@ export default {
       ],
     },
     {
-      name: 'formspreeId',
-      title: 'ID de Formspree (Formulario de Contacto)',
-      type: 'string',
-      group: 'footer',
-      description: 'El código de letras y números de tu formulario en Formspree.',
-    },
-    {
       name: 'brandName',
       title: 'Nombre de la Marca (Logo)',
       type: 'string',
@@ -49,24 +42,7 @@ export default {
         },
       ],
     },
-    {
-      name: 'contactEmail',
-      title: 'Email de Contacto (Público)',
-      type: 'string',
-      group: 'footer',
-    },
-    {
-      name: 'contactPhone',
-      title: 'Teléfono / WhatsApp',
-      type: 'string',
-      group: 'footer',
-    },
-    {
-      name: 'contactLocation',
-      title: 'Ubicación (Ciudad/País)',
-      type: 'string',
-      group: 'footer',
-    },
+
     {
       title: 'Diseño y Colores (Modo Wix)',
       name: 'theme',

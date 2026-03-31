@@ -9,10 +9,10 @@ import VideoEmbed from '@/components/VideoEmbed';
 export const revalidate = 3600; // Revalidate every hour for performance
 
 export async function generateMetadata() {
-  const profile = await client.fetch(`*[_type == "profile"][0]{ seo }`);
-  const seo = profile?.seo || {};
+  const home = await client.fetch(`*[_type == "home"][0]{ seo }`);
+  const seo = home?.seo || {};
   
-  if (!seo.metaTitle) return {}; // Fallback to layout metadata
+  if (!seo.metaTitle) return {}; 
 
   return {
     title: seo.metaTitle,
@@ -21,20 +21,19 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  // Fetch data dynamically, rendering placeholders if Sanity is empty
-  const profile = await client.fetch(`*[_type == "profile"][0]{
+  // Fetch from the new HOME schema
+  const home = await client.fetch(`*[_type == "home"][0]{
     name, 
     subHeadline,
     headline,
-    bio,
     heroImage,
     heroButtons,
     seo
   }`) || {
     name: "RAÚL GARCÍA",
     subHeadline: "CREANDO HISTORIAS A TRAVÉS DEL VISOR",
-    headline: "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
-    bio: "Hola, soy Raúl...",
+    headline: "Filmmaker & Editor de Vídeo",
+    heroImage: null,
     heroButtons: {
       primaryText: "Ver Proyectos",
       primaryUrl: "/portfolio",
@@ -49,12 +48,13 @@ export default async function Home() {
   return (
     <div>
       <Hero 
-        name={profile.name} 
-        subHeadline={profile.subHeadline}
-        headline={profile.headline} 
-        backgroundImage={(profile.heroImage && profile.heroImage.asset) ? urlFor(profile.heroImage).url() : null}
-        heroButtons={profile.heroButtons}
+        name={home.name} 
+        subHeadline={home.subHeadline}
+        headline={home.headline} 
+        backgroundImage={(home.heroImage && home.heroImage.asset) ? urlFor(home.heroImage).url() : null}
+        heroButtons={home.heroButtons}
       />
+
         
       {/* Breve descripción sobre mí */}
       <section className={styles.intro}>

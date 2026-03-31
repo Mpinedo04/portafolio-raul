@@ -1,7 +1,9 @@
 import project from './project';
-import profile from './profile';
+import home from './home';
+import about from './about';
+import contact from './contact';
 import equipment from './equipment';
 import skill from './skill';
 import settings from './settings';
 
-export const schemaTypes = [project, profile, equipment, skill, settings];
+export const schemaTypes = [project, home, about, contact, equipment, skill, settings];

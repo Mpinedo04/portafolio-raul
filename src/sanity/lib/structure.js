@@ -7,7 +7,8 @@ import {
   Layout, 
   PanelBottom, 
   Palette,
-  User
+  User,
+  Mail
 } from 'lucide-react';
 
 export const myStructure = (S) =>
@@ -16,40 +17,40 @@ export const myStructure = (S) =>
     .items([
       // 🏠 PÁGINA DE INICIO
       S.listItem()
-        .title('PÁGINA DE INICIO')
-        .icon(Home)
-        .child(
-          S.document()
-            .schemaType('profile')
-            .documentId('profile')
-            .title('Diseño de Portada')
-        ),
+      .title('1. INICIO')
+      .icon(Home)
+      .child(
+        S.document()
+          .schemaType('home')
+          .documentId('home')
+          .title('Configuración de Portada')
+      ),
 
-      // 👤 SOBRE MÍ / BIO
+      // 👤 SOBRE MÍ
       S.listItem()
-        .title('SOBRE MÍ / BIO')
+        .title('2. SOBRE MÍ')
         .icon(User)
         .child(
           S.document()
-            .schemaType('profile')
-            .documentId('profile')
-            .title('Tu Historia')
+            .schemaType('about')
+            .documentId('about')
+            .title('Biografía y Fotos Personal')
         ),
 
       S.divider(),
 
-      // 🎬 PÁGINA DE PORTFOLIO
+      // 🎬 PORTFOLIO
       S.listItem()
-        .title('PÁGINA DE PORTFOLIO')
+        .title('3. PORTFOLIO')
         .icon(Briefcase)
         .child(
           S.documentTypeList('project')
-            .title('Gestión de Proyectos')
+            .title('Todos tus trabajos')
         ),
 
-      // 🎥 PÁGINA DE EQUIPO
+      // 🎥 EQUIPO
       S.listItem()
-        .title('PÁGINA DE EQUIPO')
+        .title('4. MI EQUIPO')
         .icon(Camera)
         .child(
           S.list()
@@ -71,47 +72,36 @@ export const myStructure = (S) =>
             ])
         ),
 
-      // 🎓 PÁGINA DE HABILIDADES
+      // 🎓 HABILIDADES
       S.listItem()
-        .title('PÁGINA DE HABILIDADES')
+        .title('5. HABILIDADES')
         .icon(GraduationCap)
         .child(
           S.documentTypeList('skill')
-            .title('Formación y Software')
+            .title('Software y Formación')
+        ),
+
+      // 📞 CONTACTO
+      S.listItem()
+        .title('6. CONTACTO')
+        .icon(Mail) 
+        .child(
+          S.document()
+            .schemaType('contact')
+            .documentId('contact')
+            .title('Datos de Contacto y Formspree')
         ),
 
       S.divider(),
 
-      // 🏢 CABECERA (HEADER)
+      // 🏢 GLOBAL (HEADER, FOOTER, DISEÑO)
       S.listItem()
-        .title('CABECERA (HEADER)')
+        .title('7. GLOBAL (HEADER / FOOTER)')
         .icon(Layout)
         .child(
           S.document()
             .schemaType('settings')
             .documentId('settings')
-            .title('Ajustes de Cabecera')
-        ),
-
-      // ⚓ PIE DE PÁGINA (FOOTER)
-      S.listItem()
-        .title('PIE DE PÁGINA (FOOTER)')
-        .icon(PanelBottom)
-        .child(
-          S.document()
-            .schemaType('settings')
-            .documentId('settings')
-            .title('Ajustes de Pie de Página')
-        ),
-
-      // 🎨 UNIVERSO VISUAL
-      S.listItem()
-        .title('UNIVERSO VISUAL')
-        .icon(Palette)
-        .child(
-          S.document()
-            .schemaType('settings')
-            .documentId('settings')
-            .title('Colores y Tipografía')
+            .title('Ajustes Globales y Diseño')
         ),
     ]);

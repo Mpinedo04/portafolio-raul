@@ -41,12 +41,14 @@ export default async function PortfolioPage() {
         )}
       </div>
       <div className={styles.textSide}>
-        <span className={styles.category}>{project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}</span>
-        <h3 className="uppercase">{project.title}</h3>
-        <p className={styles.description}>{project.description}</p>
+        <span className={styles.category} data-sanity={`project:${project._id}.category`}>
+          {project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}
+        </span>
+        <h3 className="uppercase" data-sanity={`project:${project._id}.title`}>{project.title}</h3>
+        <p className={styles.description} data-sanity={`project:${project._id}.description`}>{project.description}</p>
         <div className={styles.roleBlock}>
           <strong>MI ROL:</strong>
-          <p>{project.role}</p>
+          <p data-sanity={`project:${project._id}.role`}>{project.role}</p>
         </div>
       </div>
     </div>
@@ -56,8 +58,8 @@ export default async function PortfolioPage() {
     <div className={styles.portfolio}>
       <section className={styles.headerSection}>
         <div className="container">
-          <h1>MI TRABAJO</h1>
-          <p>Una selección de mis proyectos más recientes, desde cortometrajes personales hasta trabajos comerciales para marcas.</p>
+          <h1 data-sanity="project.title">MI TRABAJO</h1>
+          <p>Una selección de mis proyectos más recientes...</p>
         </div>
       </section>
 

@@ -5,8 +5,20 @@ import ContactForm from './ContactForm';
 
 export const revalidate = 3600; // Un flujo más eficiente (1 hora)
 
+export async function generateMetadata() {
+  const contact = await client.fetch(`*[_type == "contact"][0]{ seo }`);
+  const seo = contact?.seo || {};
+  
+  if (!seo.metaTitle) return {}; 
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+  };
+}
+
 export default async function ContactPage() {
-  const settings = await client.fetch(`*[_type == "settings"][0]`) || {
+  const contact = await client.fetch(`*[_type == "contact"][0]`) || {
     contactEmail: "contacto@raulgarcia.com",
     contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",
@@ -31,27 +43,27 @@ export default async function ContactPage() {
                 <Mail size={24} color="var(--accent-teal)" />
                 <div className={styles.infoText}>
                   <h3>EMAIL</h3>
-                  <p data-sanity="settings.contactEmail">{settings.contactEmail}</p>
+                  <p data-sanity="contact.contactEmail">{contact.contactEmail}</p>
                 </div>
               </div>
               <div className={styles.infoBlock}>
                 <Phone size={24} color="var(--accent-teal)" />
                 <div className={styles.infoText}>
-                  <h3>TELÉFONO</h3>
-                  <p data-sanity="settings.contactPhone">{settings.contactPhone}</p>
+                   <h3>TELÉFONO</h3>
+                  <p data-sanity="contact.contactPhone">{contact.contactPhone}</p>
                 </div>
               </div>
               <div className={styles.infoBlock}>
                 <MapPin size={24} color="var(--accent-teal)" />
                 <div className={styles.infoText}>
                   <h3>DISPONIBILIDAD</h3>
-                  <p data-sanity="settings.contactLocation">{settings.contactLocation}</p>
+                  <p data-sanity="contact.contactLocation">{contact.contactLocation}</p>
                 </div>
               </div>
             </div>
 
             <div className={styles.formCol}>
-              <ContactForm formId={settings.formspreeId} />
+              <ContactForm formId={contact.formspreeId} />
             </div>
           </div>
         </div>

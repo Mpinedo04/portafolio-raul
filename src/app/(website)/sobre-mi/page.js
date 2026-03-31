@@ -4,14 +4,31 @@ import { urlFor } from '@/sanity/lib/image';
 
 export const revalidate = 3600; // Refresco eficiente cada hora (ISR)
 
+export async function generateMetadata() {
+  const about = await client.fetch(`*[_type == "about"][0]{ seo }`);
+  const seo = about?.seo || {};
+  
+  if (!seo.metaTitle) return {}; 
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+  };
+}
+
 export default async function AboutPage() {
-  const profile = await client.fetch(`*[_type == "profile"][0]`) || {
-    bio: "Mi vocación por el sector audiovisual no fue algo repentino, sino una evolución natural. Desde pequeño me fascinaba cómo una cámara podía capturar no solo imágenes, sino sentimientos.\nEstudié Imagen y Sonido, donde asenté las bases técnicas de lo que hoy es mi profesión. A lo largo de los años, he pasado por diversas etapas: desde la experimentación con cortometrajes caseros hasta la dirección de fotografía en proyectos de mayor envergadura.\nPara mí, cada rodaje es una oportunidad de aprender algo nuevo y de perfeccionar mi estilo cinematográfico. Me gusta involucrarme en todas las fases del proceso, aportando mi visión creativa y técnica para que el resultado final supere las expectativas.",
+  const about = await client.fetch(`*[_type == "about"][0]{
+    bio,
+    profileImage,
+    actionPhotos,
+    seo
+  }`) || {
+    bio: "Mi vocación por el sector audiovisual...",
     profileImage: null,
     actionPhotos: []
   };
 
-  const hasActionPhotos = profile.actionPhotos && profile.actionPhotos.length > 0;
+  const hasActionPhotos = about.actionPhotos && about.actionPhotos.length > 0;
 
   return (
     <div className={styles.about}>

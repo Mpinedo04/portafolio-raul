@@ -6,8 +6,8 @@ import { schemaTypes } from './src/sanity/schemaTypes';
 import { resolve } from './src/sanity/presentation/resolve';
 import { myStructure } from './src/sanity/lib/structure';
 
-// Definimos qué documentos son ÚNICOS (Singletons)
-const singletonTypes = new Set(['settings', 'profile']);
+// Definimos qué documentos son ÚNICOS (Singletons) para cada página
+const singletonTypes = new Set(['settings', 'home', 'about', 'contact']);
 const singletonActions = new Set(['publish', 'discardChanges', 'restore', 'create']);
 
 export default defineConfig({
