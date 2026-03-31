@@ -87,6 +87,7 @@ export default {
           initialValue: "'Bebas Neue', sans-serif"
         },
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
+        { name: 'sectionBackgroundColor', title: 'Color de Fondo de Sección (Paneles)', type: 'color', description: 'Color para secciones como Habilidades o destacados.' },
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
         { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
         { name: 'textColor', title: 'Color de Texto Principal', type: 'color' },

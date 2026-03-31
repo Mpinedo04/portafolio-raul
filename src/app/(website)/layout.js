@@ -44,6 +44,7 @@ export default async function RootLayout({ children }) {
 
   const cssVars = {
     '--background': getHex(theme.backgroundColor) || '#0A0A0A',
+    '--section-bg': getHex(theme.sectionBackgroundColor) || '#0d0d0d',
     '--foreground': getHex(theme.textColor) || '#EDEDED',
     '--accent-teal': getHex(theme.primaryColor) || '#1FB3B3',
     '--accent-orange': getHex(theme.secondaryColor) || '#D48C45',

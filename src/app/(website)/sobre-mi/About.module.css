@@ -111,7 +111,7 @@
 /* 🎓 HABILIDADES & FORMACIÓN */
 .skillsSection {
   padding: 100px 0;
-  background-color: #0d0d0d;
+  background-color: var(--section-bg, #0d0d0d);
 }
 
 .skillsSection h2 {
