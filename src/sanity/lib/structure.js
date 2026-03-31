@@ -39,29 +39,58 @@ export const myStructure = (S) =>
 
       S.divider(),
 
-      // 🎬 PORTFOLIO
+      // 🎬 2. PORTFOLIO
       S.listItem()
-        .title('3. PORTFOLIO')
+        .title('2. PORTFOLIO')
         .icon(Briefcase)
         .child(
           S.documentTypeList('project')
-            .title('Todos tus trabajos')
+            .title('Gestión de Portfolio')
         ),
 
-      // 🎥 EQUIPO
+      // 👤 3. SOBRE MÍ (Incluye Habilidades)
       S.listItem()
-        .title('4. MI EQUIPO')
+        .title('3. SOBRE MÍ')
+        .icon(User)
+        .child(
+          S.list()
+            .title('Sección Sobre Mí')
+            .items([
+              S.listItem()
+                .title('Biografía y Fotos Personal')
+                .icon(User)
+                .child(
+                  S.document()
+                    .schemaType('about')
+                    .documentId('about')
+                    .title('Bio / Trayectoria')
+                ),
+              S.listItem()
+                .title('Gestión de HABILIDADES')
+                .icon(GraduationCap)
+                .child(
+                  S.documentTypeList('skill')
+                    .title('Software, Estudios y Áreas Técnicas')
+                ),
+            ])
+        ),
+
+      S.divider(),
+
+      // 🎥 4. EQUIPO
+      S.listItem()
+        .title('4. EQUIPO')
         .icon(Camera)
         .child(
           S.list()
-            .title('Gestión de Equipo')
+            .title('Gestión de EQUIPO')
             .items([
               S.listItem()
-                .title('Mi Inventario (Cámaras, Lentes...)')
+                .title('Inventario (Cámaras, Lentes...)')
                 .icon(Briefcase)
                 .child(S.documentTypeList('equipment').title('Inventario Completo')),
               S.listItem()
-                .title('Tu PC / Workstation')
+                .title('Workstation (PC)')
                 .icon(Monitor)
                 .child(
                   S.document()
@@ -72,31 +101,22 @@ export const myStructure = (S) =>
             ])
         ),
 
-      // 🎓 HABILIDADES
+      // 📞 5. CONTACTO
       S.listItem()
-        .title('5. HABILIDADES')
-        .icon(GraduationCap)
-        .child(
-          S.documentTypeList('skill')
-            .title('Software y Formación')
-        ),
-
-      // 📞 CONTACTO
-      S.listItem()
-        .title('6. CONTACTO')
+        .title('5. CONTACTO')
         .icon(Mail) 
         .child(
           S.document()
             .schemaType('contact')
             .documentId('contact')
-            .title('Datos de Contacto y Formspree')
+            .title('Página de CONTACTO')
         ),
 
       S.divider(),
 
-      // 🏢 GLOBAL (HEADER, FOOTER, DISEÑO)
+      // 🏢 6. GLOBAL (HEADER, FOOTER, DISEÑO)
       S.listItem()
-        .title('7. GLOBAL (HEADER / FOOTER)')
+        .title('6. GLOBAL (HEADER / FOOTER / SEO)')
         .icon(Layout)
         .child(
           S.document()
