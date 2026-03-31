@@ -18,8 +18,8 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
   // Mapeo automático de iconos de Lucide
   const renderIcon = (name) => {
-    const IconComponent = Icons[name] || Icons.Link;
-    return <IconComponent size={20} />;
+    const IconComponent = Icons[name] || Icons.Smile;
+    return <IconComponent size={24} />;
   };
 
   const iconsToRender = socialLinks.length > 0 ? socialLinks : [

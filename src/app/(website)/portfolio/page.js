@@ -5,6 +5,38 @@ import VideoEmbed from '@/components/VideoEmbed';
 
 export const revalidate = 3600; // Refresco cada hora (más eficiente)
 
+const ProjectItem = ({ project }) => (
+  <div className={styles.projectItem}>
+    <div className={styles.mediaSide}>
+      {project.videoUrl ? (
+        <VideoEmbed 
+          url={project.videoUrl} 
+          title={project.title} 
+          thumbnail={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : ""} 
+        />
+      ) : (
+        <div className={styles.videoPlaceholder}>
+          <img 
+            src={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
+            alt={project.title} 
+          />
+        </div>
+      )}
+    </div>
+    <div className={styles.textSide}>
+      <span className={styles.category} data-sanity={`project:${project._id}.category`}>
+        {project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}
+      </span>
+      <h3 className="uppercase" data-sanity={`project:${project._id}.title`}>{project.title}</h3>
+      <p className={styles.description} data-sanity={`project:${project._id}.description`}>{project.description}</p>
+      <div className={styles.roleBlock}>
+        <strong>MI ROL:</strong>
+        <p data-sanity={`project:${project._id}.role`}>{project.role}</p>
+      </div>
+    </div>
+  </div>
+);
+
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
 
@@ -21,38 +53,6 @@ export default async function PortfolioPage() {
     { _id: '3', title: 'Campaña Marca X', category: 'Publicidad', role: 'Montador', description: 'Edición rítmica para el lanzamiento de la nueva colección de verano.', link: 'https://youtube.com', placeholder: true },
     { _id: '4', title: 'Video Clip - Artista Y', category: 'Musical', role: 'Operador de Cámara', description: 'Rodaje dinámico con iluminación de alto contraste.', link: 'https://youtube.com', placeholder: true }
   ];
-
-  const ProjectItem = ({ project }) => (
-    <div className={styles.projectItem}>
-      <div className={styles.mediaSide}>
-        {project.videoUrl ? (
-          <VideoEmbed 
-            url={project.videoUrl} 
-            title={project.title} 
-            thumbnail={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : ""} 
-          />
-        ) : (
-          <div className={styles.videoPlaceholder}>
-            <img 
-              src={(!project.placeholder && project.mainImage && project.mainImage.asset) ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?q=80&w=2070&auto=format&fit=crop"} 
-              alt={project.title} 
-            />
-          </div>
-        )}
-      </div>
-      <div className={styles.textSide}>
-        <span className={styles.category} data-sanity={`project:${project._id}.category`}>
-          {project.category === 'propio' ? 'Proyecto Propio' : 'Proyecto Externo'}
-        </span>
-        <h3 className="uppercase" data-sanity={`project:${project._id}.title`}>{project.title}</h3>
-        <p className={styles.description} data-sanity={`project:${project._id}.description`}>{project.description}</p>
-        <div className={styles.roleBlock}>
-          <strong>MI ROL:</strong>
-          <p data-sanity={`project:${project._id}.role`}>{project.role}</p>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className={styles.portfolio}>

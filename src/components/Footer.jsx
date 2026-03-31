@@ -8,7 +8,8 @@ export default function Footer({
 }) {
   // Mapeo automático de iconos de Lucide
   const renderIcon = (name) => {
-    const IconComponent = Icons[name] || Icons.Link;
+    // Si name es nulo o no existe en Icons, usamos Smile como fallback seguro
+    const IconComponent = (name && Icons[name]) ? Icons[name] : Icons.Smile;
     return <IconComponent size={24} />;
   };
 
