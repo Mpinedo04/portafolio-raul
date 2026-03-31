@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-export const revalidate = 3600; // Revalidate every hour for performance
+export const revalidate = 10; // Refresco rápido para edición
 
 export async function generateMetadata() {
   const home = await client.fetch(`*[_type == "home" && _id == "home"][0]{ seo }`);
