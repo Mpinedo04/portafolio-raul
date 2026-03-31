@@ -47,13 +47,14 @@ export default async function Home() {
   const displayProjects = projects.length > 0 ? projects : [];
 
   return (
-    <div>
+    <div className={styles.about}>
       <Hero 
         name={home.name} 
         subHeadline={home.subHeadline}
         headline={home.headline} 
         backgroundImage={(home.heroImage && home.heroImage.asset) ? urlFor(home.heroImage).url() : null}
         heroButtons={home.heroButtons}
+        data-sanity-group="home"
       />
 
         
@@ -61,12 +62,12 @@ export default async function Home() {
       <section className={styles.intro}>
         <div className="container">
           <div className={styles.introContent}>
-            <div className={styles.introText}>
+            <div className={styles.introText} data-sanity="about.bio">
               <h2>ACERCA DE MÍ</h2>
               {(about?.bio || "").split('\n').map((paragraph, i) => (
                 paragraph.trim() && <p key={i}>{paragraph}</p>
               ))}
-              <Link href="/sobre-mi" className={styles.link}>
+              <Link href="/sobre-mi" className={styles.link} data-sanity="about.seo">
                 Conoce mi historia <ArrowRight size={16} />
               </Link>
             </div>

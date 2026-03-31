@@ -49,9 +49,9 @@ export default async function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syncopate:wght@400;700&family=Syne:wght@400;700;800&family=Michroma&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body style={cssVars}>
-        <Header brandName={settings?.brandName} headerIcons={settings?.headerIcons} />
+        <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
         <main>{children}</main>
-        <Footer brandName={settings?.brandName} contactEmail={settings?.contactEmail} headerIcons={settings?.headerIcons} />
+        <Footer brandName={settings?.brandName} contactEmail={settings?.contactEmail} socialLinks={settings?.socialLinks} />
         {isDraftMode && <VisualEditing />}
       </body>
     </html>

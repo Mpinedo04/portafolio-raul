@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import * as Icons from 'lucide-react';
 import styles from './Header.module.css';
 
-export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }) {
+export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -16,14 +16,17 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Procesa los iconos predeterminados si no hay en Sanity
-  const defaultIcons = [
-    { icon: 'Play', url: 'https://www.youtube.com/@Raaulinhoo' },
-    { icon: 'Aperture', url: 'https://instagram.com' },
-    { icon: 'Mail', url: 'mailto:social@raulgarcia.com' }
-  ];
+  // Mapeo automático de iconos de Lucide
+  const renderIcon = (name) => {
+    const IconComponent = Icons[name] || Icons.Link;
+    return <IconComponent size={20} />;
+  };
 
-  const iconsToRender = headerIcons.length > 0 ? headerIcons : defaultIcons;
+  const iconsToRender = socialLinks.length > 0 ? socialLinks : [
+    { platform: 'Youtube', url: 'https://www.youtube.com/@Raaulinhoo' },
+    { platform: 'Instagram', url: 'https://instagram.com' },
+    { platform: 'Mail', url: 'mailto:social@raulgarcia.com' }
+  ];
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
@@ -43,6 +46,15 @@ export default function Header({ brandName = "RAÚL GARCÍA", headerIcons = [] }
           <Link href="/equipo">EQUIPO</Link>
           <Link href="/contacto">CONTACTO</Link>
         </nav>
+
+        {/* Social Icons */}
+        <div className={styles.socials} data-sanity="settings.socialLinks">
+          {iconsToRender.map((item, i) => (
+            <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+              {renderIcon(item.platform)}
+            </a>
+          ))}
+        </div>
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>

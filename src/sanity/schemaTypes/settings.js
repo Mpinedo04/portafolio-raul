@@ -28,16 +28,36 @@ export default {
       initialValue: 'RAÚL GARCÍA',
     },
     {
-      name: 'headerIcons',
-      title: 'Iconos de Cabecera y Redes Sociales',
+      name: 'contactEmail',
+      title: 'Email Global (Footer / Contacto)',
+      type: 'string',
+      group: 'footer',
+      description: 'Este email aparecerá en el pie de página de toda la web.',
+    },
+    {
+      name: 'socialLinks',
+      title: 'Redes Sociales Globales',
       type: 'array',
       group: 'header',
+      description: 'Se mostrarán tanto en la cabecera como en el pie de página.',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'icon', title: 'Icono (Ej: Play, Youtube, Instagram, Mail)', type: 'string' },
-            { name: 'url', title: 'Enlace Completo', type: 'url' },
+            { 
+              name: 'platform', 
+              title: 'Plataforma', 
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'YouTube', value: 'Youtube' },
+                  { title: 'Instagram', value: 'Instagram' },
+                  { title: 'Vimeo', value: 'Video' },
+                  { title: 'Gmail / Correo', value: 'Mail' },
+                ]
+              }
+            },
+            { name: 'url', title: 'URL Completa', type: 'url' },
           ],
         },
       ],
@@ -63,20 +83,6 @@ export default {
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
         { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
         { name: 'textColor', title: 'Color de Texto Principal', type: 'color' },
-        {
-          name: 'headingFont',
-          title: 'Fuente de Títulos',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'Modern Sans (Outfit)', value: 'Outfit' },
-              { title: 'Classic Serif (Playfair Display)', value: 'Playfair Display' },
-              { title: 'Technical (Roboto Mono)', value: 'Roboto Mono' },
-              { title: 'Elegant (Inter)', value: 'Inter' },
-            ],
-          },
-          initialValue: 'Outfit',
-        },
       ],
     },
   ],
