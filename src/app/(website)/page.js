@@ -64,9 +64,13 @@ export default async function Home() {
           <div className={styles.introContent}>
             <div className={styles.introText} data-sanity="about.bio">
               <h2>ACERCA DE MÍ</h2>
-              {(about?.bio || "").split('\n').map((paragraph, i) => (
-                paragraph.trim() && <p key={i}>{paragraph}</p>
-              ))}
+              {(() => {
+                const bio = about?.bio || "";
+                const truncatedBio = bio.length > 280 ? bio.substring(0, 280) + "..." : bio;
+                return truncatedBio.split('\n').map((paragraph, i) => (
+                  paragraph.trim() && <p key={i}>{paragraph}</p>
+                ));
+              })()}
               <Link href="/sobre-mi" className={styles.link} data-sanity="about.seo">
                 Conoce mi historia <ArrowRight size={16} />
               </Link>
