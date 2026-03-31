@@ -2,6 +2,7 @@ import {
   Home, 
   Briefcase, 
   Camera, 
+  Monitor,
   GraduationCap, 
   Layout, 
   PanelBottom, 
