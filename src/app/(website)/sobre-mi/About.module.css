@@ -157,17 +157,20 @@
 
 .progressBar {
   width: 100%;
-  height: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-  margin: 5px 0 10px;
+  height: 8px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  margin: 10px 0 15px;
   overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .progress {
   height: 100%;
-  background-color: var(--accent-teal);
-  transition: width 1s ease-out;
+  background: linear-gradient(90deg, var(--accent-teal), #3ed9d9);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(31, 179, 179, 0.4);
+  transition: width 1.2s cubic-bezier(0.1, 0.5, 0.1, 1);
 }
 
 .details {
