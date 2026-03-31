@@ -11,7 +11,6 @@
 .header h1 {
   font-size: 3.5rem;
   letter-spacing: -2px;
-  color: #fff;
 }
 
 .header p {
@@ -54,7 +53,6 @@
 .cardHeader h2 {
   font-size: 1.2rem;
   letter-spacing: 2px;
-  color: #fff;
 }
 
 .items {
@@ -66,7 +64,6 @@
 .item h3 {
   font-size: 1rem;
   margin-bottom: 5px;
-  color: #fff;
 }
 
 .item p {
