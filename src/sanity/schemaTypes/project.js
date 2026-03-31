@@ -73,9 +73,18 @@ export default {
     },
     {
       name: 'featured',
-      title: 'Destacado en Inicio',
+      title: '🎥 Destacar en Página de Inicio',
       type: 'boolean',
       initialValue: false,
+    },
+    {
+      name: 'seo',
+      title: 'SEO Personalizado para este Proyecto',
+      type: 'object',
+      fields: [
+        { name: 'metaTitle', title: 'Título SEO', type: 'string' },
+        { name: 'metaDescription', title: 'Descripción SEO', type: 'text', rows: 3 },
+      ],
     },
   ],
 };

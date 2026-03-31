@@ -2,7 +2,7 @@ import styles from './About.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 
-export const revalidate = 10;
+export const revalidate = 3600; // Refresco eficiente cada hora (ISR)
 
 export default async function AboutPage() {
   const profile = await client.fetch(`*[_type == "profile"][0]`) || {

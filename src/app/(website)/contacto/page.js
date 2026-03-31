@@ -3,14 +3,16 @@ import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 
-export const revalidate = 10;
+export const revalidate = 3600; // Un flujo más eficiente (1 hora)
 
 export default async function ContactPage() {
   const settings = await client.fetch(`*[_type == "settings"][0]`) || {
     contactEmail: "contacto@raulgarcia.com",
     contactPhone: "+34 600 000 000",
-    contactLocation: "Proyectos nacionales e internacionales."
+    contactLocation: "Proyectos nacionales e internacionales.",
+    formspreeId: ""
   };
+
 
   return (
     <div className={styles.contact}>
@@ -49,7 +51,7 @@ export default async function ContactPage() {
             </div>
 
             <div className={styles.formCol}>
-              <ContactForm />
+              <ContactForm formId={settings.formspreeId} />
             </div>
           </div>
         </div>

@@ -5,10 +5,20 @@ import { client } from '@/sanity/lib/client';
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 
-export const metadata = {
-  title: 'Raúl García | Filmmaker & Audiovisual Portfolio',
-  description: 'Portfolio profesional de Raúl García, un creador audiovisual especializado en cortometrajes, documentales y edición de vídeo.',
-};
+import { urlFor } from '@/sanity/lib/image';
+
+export async function generateMetadata() {
+  const settings = await client.fetch(`*[_type == "settings"][0]`);
+  const seo = settings?.seo || {};
+  
+  return {
+    title: seo.metaTitle || 'Raúl García | Filmmaker & Audiovisual Portfolio',
+    description: seo.metaDescription || 'Portfolio profesional de Raúl García, un creador audiovisual especializado en cortometrajes, documentales y edición de vídeo.',
+    openGraph: {
+      images: seo.ogImage ? [urlFor(seo.ogImage).width(1200).height(630).url()] : [],
+    },
+  };
+}
 
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;

@@ -1,10 +1,18 @@
 import SkillsClient from './SkillsClient';
 import { client } from '@/sanity/lib/client';
 
-export const revalidate = 10;
+export const revalidate = 3600;
+
+export async function generateMetadata() {
+  return {
+    title: 'Habilidades & Formación | Raúl García',
+    description: 'Conoce mi stack tecnológico y trayectoria académica en el sector audiovisual.'
+  };
+}
 
 export default async function SkillsPage() {
   const allSkills = await client.fetch(`*[_type == "skill"]`) || [];
+
 
   // Categorize elements
   const softwareRaw = allSkills.filter(s => s.category === 'video' || s.category === 'audio');

@@ -6,15 +6,34 @@ export default {
     { name: 'hero', title: 'PÁGINA DE INICIO' },
     { name: 'bio', title: 'SOBRE MÍ / BIO' },
     { name: 'visuals', title: 'FOTOS Y VIDEOS' },
+    { name: 'seo', title: 'SEO (GOOGLE)' },
     { name: 'contact', title: 'ACCIONES' },
   ],
   fields: [
+    {
+      name: 'seo',
+      title: 'SEO de la Página de Inicio',
+      type: 'object',
+      group: 'seo',
+      fields: [
+        { name: 'metaTitle', title: 'Título para Google (Personalizado)', type: 'string' },
+        { name: 'metaDescription', title: 'Descripción para Google (Personalizada)', type: 'text', rows: 3 },
+      ],
+    },
     {
       name: 'name',
       title: 'Nombre de la Marca (Logo)',
       type: 'string',
       group: 'hero',
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'subHeadline',
+      title: 'Antetítulo (Texto pequeño sobre el nombre)',
+      type: 'string',
+      group: 'hero',
+      description: 'Ej: CREANDO HISTORIAS A TRAVÉS DEL VISOR',
+      initialValue: 'CREANDO HISTORIAS A TRAVÉS DEL VISOR',
     },
     {
       name: 'headline',

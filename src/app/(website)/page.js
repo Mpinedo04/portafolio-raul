@@ -6,18 +6,33 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-export const revalidate = 10; // Revalidate every 10 seconds for CMS updates
+export const revalidate = 3600; // Revalidate every hour for performance
+
+export async function generateMetadata() {
+  const profile = await client.fetch(`*[_type == "profile"][0]{ seo }`);
+  const seo = profile?.seo || {};
+  
+  if (!seo.metaTitle) return {}; // Fallback to layout metadata
+
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+  };
+}
 
 export default async function Home() {
   // Fetch data dynamically, rendering placeholders if Sanity is empty
   const profile = await client.fetch(`*[_type == "profile"][0]{
     name, 
+    subHeadline,
     headline,
     bio,
     heroImage,
-    heroButtons
+    heroButtons,
+    seo
   }`) || {
     name: "RAÚL GARCÍA",
+    subHeadline: "CREANDO HISTORIAS A TRAVÉS DEL VISOR",
     headline: "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
     bio: "Hola, soy Raúl...",
     heroButtons: {
@@ -35,6 +50,7 @@ export default async function Home() {
     <div>
       <Hero 
         name={profile.name} 
+        subHeadline={profile.subHeadline}
         headline={profile.headline} 
         backgroundImage={(profile.heroImage && profile.heroImage.asset) ? urlFor(profile.heroImage).url() : null}
         heroButtons={profile.heroButtons}

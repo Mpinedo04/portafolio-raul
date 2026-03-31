@@ -3,7 +3,7 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-export const revalidate = 10;
+export const revalidate = 3600; // Refresco cada hora (más eficiente)
 
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];

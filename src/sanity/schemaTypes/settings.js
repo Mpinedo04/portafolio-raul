@@ -5,9 +5,28 @@ export default {
   groups: [
     { name: 'header', title: 'CABECERA (HEADER)' },
     { name: 'footer', title: 'PIE DE PÁGINA (FOOTER)' },
+    { name: 'seo', title: 'SEO (GOOGLE / SOCIAL)' },
     { name: 'design', title: 'UNIVERSO VISUAL (DISEÑO)' },
   ],
   fields: [
+    {
+      name: 'seo',
+      title: 'SEO Global y Metadatos',
+      type: 'object',
+      group: 'seo',
+      fields: [
+        { name: 'metaTitle', title: 'Título para Google', type: 'string', description: 'Ej: Raúl García | Filmmaker & Director' },
+        { name: 'metaDescription', title: 'Descripción para Google', type: 'text', rows: 3 },
+        { name: 'ogImage', title: 'Imagen para Compartir (WhatsApp/Social)', type: 'image' },
+      ],
+    },
+    {
+      name: 'formspreeId',
+      title: 'ID de Formspree (Formulario de Contacto)',
+      type: 'string',
+      group: 'footer',
+      description: 'El código de letras y números de tu formulario en Formspree.',
+    },
     {
       name: 'brandName',
       title: 'Nombre de la Marca (Logo)',

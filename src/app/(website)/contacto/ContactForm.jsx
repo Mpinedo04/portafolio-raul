@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import styles from './Contact.module.css';
 
-export default function ContactForm({ initialStatus = '' }) {
+export default function ContactForm({ initialStatus = '', formId: propFormId }) {
   const [status, setStatus] = useState(initialStatus);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('ENVIANDO...');
 
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+    const formId = propFormId || process.env.NEXT_PUBLIC_FORMSPREE_ID;
     
     if (!formId || formId === 'tu_id_aquí' || formId.includes('tu_id')) {
       setTimeout(() => {
