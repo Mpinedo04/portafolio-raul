@@ -1,5 +1,5 @@
 .intro {
-  background: var(--dark-gray);
+  background: var(--panel-bg, #111);
   color: #fff;
   padding: 120px 0;
   border-bottom: 1px solid var(--medium-gray);
@@ -75,7 +75,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--section-bg, #111);
+  background: var(--card-bg, #111);
   transition: transform 0.3s ease;
 }
 

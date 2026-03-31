@@ -87,7 +87,8 @@ export default {
           initialValue: "'Bebas Neue', sans-serif"
         },
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
-        { name: 'sectionBackgroundColor', title: 'Color de Fondo de Sección (Paneles)', type: 'color', description: 'Color para secciones como Habilidades o destacados.' },
+        { name: 'panelBackgroundColor', title: 'Color de Fondo Paneles (Grandes)', type: 'color', description: 'Color para las franjas anchas como Acerca de mí, Habilidades o Mi Trabajo.' },
+        { name: 'cardBackgroundColor', title: 'Color de Fondo Cajas (Tarjetas)', type: 'color', description: 'Color para elementos individuales como tarjetas de proyecto, equipos o formularios.' },
         { name: 'navBackgroundColor', title: 'Color de Fondo Navegación (Header / Footer)', type: 'color', description: 'Color independiente para la cabecera y el pie de página.' },
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
         { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
