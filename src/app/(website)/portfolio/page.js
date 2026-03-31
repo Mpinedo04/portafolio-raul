@@ -40,20 +40,21 @@ const ProjectItem = ({ project }) => (
 export default async function PortfolioPage() {
   const allProjects = await client.fetch(`*[_type == "project"] | order(_createdAt desc)`) || [];
 
-  const ownProjectsRaw = allProjects.filter(p => p.category === 'propio');
+  // Lógica robusta: Si no tiene categoría o es desconocida, va a "Propios"
+  const ownProjectsRaw = allProjects.filter(p => !p.category || p.category === 'propio');
   const externalProjectsRaw = allProjects.filter(p => p.category === 'externo');
 
   // Si hay cualquier proyecto en Sanity, no mostramos los fallbacks
   const hasRealProjects = allProjects.length > 0;
 
   const ownProjects = hasRealProjects ? ownProjectsRaw : [
-    { _id: '1', title: 'CATARSIS', category: 'Ficción', role: 'Director & Montador', description: 'Un viaje al subconsciente de un artista en crisis.', link: 'https://youtube.com', placeholder: true },
-    { _id: '2', title: 'IMÁGENES OCULTAS', category: 'Documental', role: 'Director de Fotografía', description: 'Explorando los rincones olvidados de la ciudad.', link: 'https://youtube.com', placeholder: true }
+    { _id: '1', title: 'CATARSIS', category: 'propio', role: 'Director & Montador', description: 'Un viaje al subconsciente de un artista en crisis.', link: 'https://youtube.com', placeholder: true },
+    { _id: '2', title: 'IMÁGENES OCULTAS', category: 'propio', role: 'Director de Fotografía', description: 'Explorando los rincones olvidados de la ciudad.', link: 'https://youtube.com', placeholder: true }
   ];
 
   const externalProjects = hasRealProjects ? externalProjectsRaw : [
-    { _id: '3', title: 'Campaña Marca X', category: 'Publicidad', role: 'Montador', description: 'Edición rítmica para el lanzamiento de la nueva colección de verano.', link: 'https://youtube.com', placeholder: true },
-    { _id: '4', title: 'Video Clip - Artista Y', category: 'Musical', role: 'Operador de Cámara', description: 'Rodaje dinámico con iluminación de alto contraste.', link: 'https://youtube.com', placeholder: true }
+    { _id: '3', title: 'Campaña Marca X', category: 'externo', role: 'Montador', description: 'Edición rítmica para el lanzamiento de la nueva colección de verano.', link: 'https://youtube.com', placeholder: true },
+    { _id: '4', title: 'Video Clip - Artista Y', category: 'externo', role: 'Operador de Cámara', description: 'Rodaje dinámico con iluminación de alto contraste.', link: 'https://youtube.com', placeholder: true }
   ];
 
   return (
