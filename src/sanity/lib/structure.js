@@ -26,19 +26,6 @@ export const myStructure = (S) =>
           .title('Configuración de Portada')
       ),
 
-      // 👤 SOBRE MÍ
-      S.listItem()
-        .title('2. SOBRE MÍ')
-        .icon(User)
-        .child(
-          S.document()
-            .schemaType('about')
-            .documentId('about')
-            .title('Biografía y Fotos Personal')
-        ),
-
-      S.divider(),
-
       // 🎬 2. PORTFOLIO
       S.listItem()
         .title('2. PORTFOLIO')
