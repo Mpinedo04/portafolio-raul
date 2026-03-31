@@ -28,6 +28,7 @@ export default async function AboutPage() {
     actionPhotos: []
   };
 
+  const hasActionPhotos = (about.actionPhotos || []).length > 0;
   const skills = await client.fetch(`*[_type == "skill"] | order(category asc, level desc)`) || [];
   
   // Agrupar habilidades por categoría para mayor orden
