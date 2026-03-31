@@ -6,6 +6,7 @@ import styles from './Header.module.css';
 
 export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -40,7 +41,20 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
         {/* Desktop Nav */}
         <nav className={styles.nav}>
-          <Link href="/portfolio">PORTFOLIO</Link>
+          <div 
+            className={styles.dropdown}
+            onMouseEnter={() => !isOpen && setIsOpenDropdown(true)}
+            onMouseLeave={() => setIsOpenDropdown(false)}
+          >
+            <Link href="/portfolio/propios" className={styles.navLink}>
+              PORTFOLIO
+            </Link>
+            <div className={`${styles.dropdownMenu} ${isOpenDropdown ? styles.show : ''}`}>
+              <Link href="/portfolio/propios" onClick={() => setIsOpenDropdown(false)}>Proyectos Propios</Link>
+              <hr />
+              <Link href="/portfolio/externos" onClick={() => setIsOpenDropdown(false)}>Trabajos Externos</Link>
+            </div>
+          </div>
           <Link href="/sobre-mi">SOBRE MÍ</Link>
           <Link href="/equipo">EQUIPO</Link>
           <Link href="/contacto">CONTACTO</Link>
@@ -66,7 +80,11 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
         {/* Mobile Menu Overlay */}
         {isOpen && (
           <div className={styles.mobileMenu}>
-            <Link href="/portfolio" onClick={() => setIsOpen(false)}>Portfolio</Link>
+            <div className={styles.mobileSection}>
+              <span>Portfolio</span>
+              <Link href="/portfolio/propios" onClick={() => setIsOpen(false)}>Proyectos Propios</Link>
+              <Link href="/portfolio/externos" onClick={() => setIsOpen(false)}>Trabajos Externos</Link>
+            </div>
             <Link href="/sobre-mi" onClick={() => setIsOpen(false)}>Sobre Mí</Link>
             <Link href="/equipo" onClick={() => setIsOpen(false)}>Equipo</Link>
             <Link href="/contacto" onClick={() => setIsOpen(false)}>Contacto</Link>

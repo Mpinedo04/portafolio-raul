@@ -26,13 +26,23 @@ export const myStructure = (S) =>
           .title('Configuración de Portada')
       ),
 
-      // 🎬 2. PORTFOLIO
+      // 🎬 2. PORTFOLIO SEGMENTADO
       S.listItem()
-        .title('2. PORTFOLIO')
+        .title('2. PORTFOLIO (Propios)')
         .icon(Briefcase)
         .child(
           S.documentTypeList('project')
-            .title('Gestión de Portfolio')
+            .title('Proyectos Propios (Individuales / Estudio)')
+            .filter('_type == "project" && category == "propio"')
+        ),
+
+      S.listItem()
+        .title('2. PORTFOLIO (Externos)')
+        .icon(Briefcase)
+        .child(
+          S.documentTypeList('project')
+            .title('Trabajos Externos (Clientes / Colaboraciones)')
+            .filter('_type == "project" && category == "externo"')
         ),
 
       // 👤 3. SOBRE MÍ (Incluye Habilidades)
