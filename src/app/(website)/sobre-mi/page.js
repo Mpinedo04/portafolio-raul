@@ -45,15 +45,15 @@ export default async function AboutPage() {
             <div className={styles.imageCol}>
               <div className={styles.profileBox}>
                  <img 
-                   src={(profile.profileImage && profile.profileImage.asset) ? urlFor(profile.profileImage).url() : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"} 
-                   alt={profile.name || "Raúl García"} 
+                   src={(about.profileImage && about.profileImage.asset) ? urlFor(about.profileImage).url() : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"} 
+                   alt="Raúl García" 
                  />
                  <div className={styles.boxDecor}></div>
               </div>
             </div>
             <div className={styles.textCol}>
               <h2>CÓMO LLEGUÉ AQUÍ</h2>
-              <p style={{ whiteSpace: 'pre-line' }}>{profile?.bio || ""}</p>
+              <p style={{ whiteSpace: 'pre-line' }}>{about?.bio || ""}</p>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default async function AboutPage() {
           <h2>EN ACCIÓN</h2>
           <div className={styles.photoGrid}>
             {hasActionPhotos ? (
-              profile.actionPhotos
+              about.actionPhotos
                 .filter(photo => photo && photo.asset)
                 .map((photo, i) => (
                   <img key={i} src={urlFor(photo).url()} alt={`Rodaje ${i+1}`} />
