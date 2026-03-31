@@ -3,7 +3,7 @@ import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 
-export const revalidate = 3600; // Refresco cada hora (más eficiente)
+export const revalidate = 10; // Refresco casi instantáneo para edición rápida
 
 const ProjectItem = ({ project }) => (
   <div className={styles.projectItem}>
