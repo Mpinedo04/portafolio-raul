@@ -107,3 +107,72 @@
     gap: 60px;
   }
 }
+
+/* 🎓 HABILIDADES & FORMACIÓN */
+.skillsSection {
+  padding: 100px 0;
+  background-color: #0d0d0d;
+}
+
+.skillsSection h2 {
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.skillCategory h3 {
+  font-size: 0.8rem;
+  color: var(--accent-teal);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.skillCategory ul {
+  list-style: none;
+  padding: 0;
+}
+
+.skillCategory li {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.skillName {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: #efefef;
+  display: block;
+}
+
+.progressBar {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin: 5px 0 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--accent-teal);
+  transition: width 1s ease-out;
+}
+
+.details {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  display: block;
+}
