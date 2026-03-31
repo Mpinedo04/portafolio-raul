@@ -1,4 +1,5 @@
 import './globals.css';
+export const revalidate = 10; // Sincronía universal de ajustes globales (10s)
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { client } from '@/sanity/lib/client';
