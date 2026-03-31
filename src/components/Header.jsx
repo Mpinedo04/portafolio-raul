@@ -1,8 +1,28 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import * as Icons from 'lucide-react';
+import { 
+  X, 
+  Menu, 
+  Youtube, 
+  Instagram, 
+  Mail, 
+  Link as LinkIcon, 
+  Play, 
+  Video as VideoIcon,
+  Smile
+} from 'lucide-react';
 import styles from './Header.module.css';
+
+// Mapeo estático seguro para evitar componentes undefined
+const IconMap = {
+  Youtube,
+  Instagram,
+  Mail,
+  Play,
+  Video: VideoIcon,
+  Link: LinkIcon
+};
 
 export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +36,9 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Mapeo automático de iconos de Lucide
   const renderIcon = (name) => {
-    const IconComponent = Icons[name] || Icons.Smile;
-    return <IconComponent size={24} />;
+    const IconComponent = IconMap[name] || IconMap.Link || Smile;
+    return <IconComponent size={20} />;
   };
 
   const iconsToRender = socialLinks.length > 0 ? socialLinks : [
@@ -58,7 +77,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Mobile Menu Overlay */}
