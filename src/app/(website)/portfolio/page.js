@@ -9,9 +9,10 @@ export const revalidate = 10;
 
 export default async function PortfolioHub() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const portfolioData = await client.fetch(`*[_type == "portfolioPage" && title == "Portfolio Hub"][0]{ localTheme }`) || {};
   
   return (
-    <SectionTheme theme={{}}>
+    <SectionTheme theme={portfolioData.localTheme}>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.portfolio}>
         <section className={styles.headerSection}>

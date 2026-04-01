@@ -10,6 +10,8 @@ export const revalidate = 0;
 
 export default async function PropiosPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const portfolioData = await client.fetch(`*[_type == "portfolioPage" && title == "Propios"][0]{ localTheme }`) || {};
+  
   const query = `*[_type == "project" && category == "propio"] | order(_createdAt desc) {
     _id,
     title,
@@ -23,13 +25,13 @@ export default async function PropiosPage() {
   const allProjects = await client.fetch(query) || [];
 
   return (
-    <SectionTheme theme={{}}>
+    <SectionTheme theme={portfolioData.localTheme}>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.portfolio}>
       <section className={styles.headerSection}>
         <div className="container">
           <h1 className="uppercase">PROYECTOS PROPIOS</h1>
-          <p>Explora mis cortometrajes, proyectos de estudio y pof producciones personales.</p>
+          <p>Explora mis cortometrajes, proyectos de estudio y producciones personales satisfactoriamente.</p>
         </div>
       </section>
 

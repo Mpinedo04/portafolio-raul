@@ -10,6 +10,8 @@ export const revalidate = 0;
 
 export default async function ExternosPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const portfolioData = await client.fetch(`*[_type == "portfolioPage" && title == "Externos"][0]{ localTheme }`) || {};
+  
   const query = `*[_type == "project" && category == "externo"] | order(_createdAt desc) {
     _id,
     title,
@@ -23,7 +25,7 @@ export default async function ExternosPage() {
   const allProjects = await client.fetch(query) || [];
 
   return (
-    <SectionTheme theme={{}}>
+    <SectionTheme theme={portfolioData.localTheme}>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.portfolio}>
         <section className={styles.headerSection}>
