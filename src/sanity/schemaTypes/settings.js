@@ -87,9 +87,20 @@ export default {
       fields: [
         {
           name: 'titleFont',
-          title: 'Tipografía para Títulos',
+          title: 'Tipografía Principal (Títulos)',
           type: 'string',
-          description: 'Escribe el nombre de la fuente (Ej: Bebas Neue).',
+          description: 'Selecciona el estilo de fuente para tus títulos satisfactoriamente.',
+          options: {
+            list: [
+              { title: 'Bebas Neue (Impacto / Cine)', value: "'Bebas Neue', sans-serif" },
+              { title: 'Syncopate (Elegancia / Futuro)', value: "'Syncopate', sans-serif" },
+              { title: 'Syne (Vanguardia / Arte)', value: "'Syne', sans-serif" },
+              { title: 'Michroma (Audiovisual / Tech)', value: "'Michroma', sans-serif" },
+              { title: 'Outfit (Moderno / Limpio)', value: "'Outfit', sans-serif" },
+              { title: 'Playfair (Clásico / Documental)', value: "'Playfair Display', serif" },
+              { title: 'Inter (Legibilidad Total)', value: "'Inter', sans-serif" },
+            ]
+          },
           initialValue: "'Bebas Neue', sans-serif"
         },
         { name: 'backgroundColor', title: 'Color de Fondo Global', type: 'color' },
