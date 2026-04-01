@@ -25,7 +25,6 @@ export default function Footer({
         </div>
         <div className={styles.right}>
           <p>© {new Date().getFullYear()} {brandName}. Todos los derechos reservados.</p>
-          <p className={styles.credits}>Designed with passion by Antigravity</p>
         </div>
       </div>
     </footer>
