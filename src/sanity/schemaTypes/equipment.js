@@ -3,11 +3,15 @@ export default {
   title: 'Inventario de Equipo (Cámaras/Hardware)',
   type: 'document',
   icon: () => '🎥',
+  groups: [
+    { name: 'design', title: '🎨 Diseño' },
+  ],
   fields: [
     {
       name: 'localTheme',
       title: 'Diseño Personalizado de la Sección',
       type: 'pageTheme',
+      group: 'design',
       description: 'Configura los colores exclusivos para esta página satisfactoriamente.'
     },
     {

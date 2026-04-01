@@ -5,6 +5,7 @@ export default {
   groups: [
     { name: 'seo', title: '⚙️ SEO' },
     { name: 'content', title: '📝 Contenido' },
+    { name: 'design', title: '🎨 Diseño' },
   ],
   fields: [
     {

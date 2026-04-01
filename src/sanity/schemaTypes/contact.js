@@ -2,11 +2,15 @@ export default {
   name: 'contact',
   title: 'Página de Contacto',
   type: 'document',
+  groups: [
+    { name: 'design', title: '🎨 Diseño' },
+  ],
   fields: [
     {
       name: 'localTheme',
       title: 'Diseño Personalizado de la Sección',
       type: 'pageTheme',
+      group: 'design',
       description: 'Configura los colores exclusivos para esta página satisfactoriamente.'
     },
     {
