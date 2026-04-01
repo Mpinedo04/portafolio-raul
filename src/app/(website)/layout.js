@@ -65,7 +65,7 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syncopate:wght@400;700&family=Syne:wght@400;700;800&family=Michroma&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Cinzel:wght@400;700&family=Heebo:wght@400;700&family=Inter:wght@400;700;900&family=Josefin+Sans:wght@400;700&family=Kanit:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700&family=Michroma&family=Montserrat:wght@400;700;900&family=Nunito:wght@400;700&family=Outfit:wght@300;400;700;900&family=Oswald:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;700;900&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Rubik:wght@400;700&family=Space+Grotesk:wght@400;700&family=Syncopate:wght@400;700&family=Syne:wght@400;700;800&family=Ubuntu:wght@400;700&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body style={cssVars}>
         <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
