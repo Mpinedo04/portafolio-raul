@@ -163,24 +163,34 @@
 }
 
 .hubCard {
-  height: 450px;
-  background: var(--panel-bg);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 30px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
+  backdrop-filter: blur(5px);
+}
+
+/* Diferenciación visual de cada caja */
+.hubCard:first-child:hover {
+  background: rgba(20, 184, 166, 0.05); /* Propios: Turquesa */
+  border-color: var(--accent-teal);
+}
+
+.hubCard:last-child:hover {
+  background: rgba(255, 255, 255, 0.08); /* Externos: Blanco Puro */
+  border-color: #fff;
 }
 
 .hubCard:hover {
-  transform: translateY(-10px);
-  border-color: var(--accent-teal);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.02);
+  transform: scale(1.02);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
 }
 
 .hubOverlay {

@@ -46,7 +46,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
             onMouseEnter={() => !isOpen && setIsOpenDropdown(true)}
             onMouseLeave={() => setIsOpenDropdown(false)}
           >
-            <Link href="/portfolio/propios" className={styles.navLink}>
+            <Link href="/portfolio" className={styles.navLink}>
               PORTFOLIO
             </Link>
             <div className={`${styles.dropdownMenu} ${isOpenDropdown ? styles.show : ''}`}>
