@@ -5,5 +5,6 @@ import contact from './contact';
 import equipment from './equipment';
 import skill from './skill';
 import settings from './settings';
+import pageTheme from './pageTheme';
 
-export const schemaTypes = [project, home, about, contact, equipment, skill, settings];
+export const schemaTypes = [project, home, about, contact, equipment, skill, settings, pageTheme];

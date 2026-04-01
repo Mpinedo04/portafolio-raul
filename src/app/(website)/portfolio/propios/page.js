@@ -1,11 +1,15 @@
 import styles from '../Portfolio.module.css';
 import { client } from '@/sanity/lib/client';
 import VideoEmbed from '@/components/VideoEmbed';
+import SectionTheme from '@/components/SectionTheme';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function PropiosPage() {
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const query = `*[_type == "project" && category == "propio"] | order(_createdAt desc) {
     _id,
     title,
@@ -19,7 +23,9 @@ export default async function PropiosPage() {
   const allProjects = await client.fetch(query) || [];
 
   return (
-    <div className={styles.portfolio}>
+    <SectionTheme theme={{}}>
+      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
+      <div className={styles.portfolio}>
       <section className={styles.headerSection}>
         <div className="container">
           <h1 className="uppercase">PROYECTOS PROPIOS</h1>
@@ -63,5 +69,12 @@ export default async function PropiosPage() {
         </div>
       </section>
     </div>
+    <Footer 
+      brandName={settings?.brandName} 
+      contactEmail={settings?.contactEmail} 
+      footerDescription={settings?.footerDescription}
+      socialLinks={settings?.socialLinks} 
+    />
+    </SectionTheme>
   );
 }

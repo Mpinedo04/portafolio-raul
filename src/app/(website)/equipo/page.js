@@ -1,13 +1,21 @@
 import { Camera, Layers, Lightbulb, Mic, Monitor, Wrench, Box } from 'lucide-react';
 import styles from './Equipment.module.css';
 import { client } from '@/sanity/lib/client';
+import SectionTheme from '@/components/SectionTheme';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const revalidate = 10;
 
 export default async function EquipmentPage() {
-  // 1. Fetch data from Sanity
+  // 1. Fetch data from Sanity including localTheme and settings for Header/Footer
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const workstationDoc = await client.fetch(`*[_id == "workstation-specs"][0]`);
   const allEquipment = await client.fetch(`*[_type == "equipment" && _id != "workstation-specs"]`) || [];
+  
+  // Usamos el diseño del primer documento de equipo como tema para toda la página
+  const firstDoc = await client.fetch(`*[_type == "equipment"][0]{ localTheme }`);
+  const localTheme = firstDoc?.localTheme || {};
 
   // 2. Helper to get category icons
   const getCategoryIcon = (categoryValue) => {
@@ -52,60 +60,69 @@ export default async function EquipmentPage() {
   }));
 
   return (
-    <div className={styles.equipment}>
-      <header className={styles.header}>
-        <div className="container">
-          <h1>EQUIPO TÉCNICO</h1>
-          <p>Herramientas de alta gama para resultados cinematográficos.</p>
-        </div>
-      </header>
+    <SectionTheme theme={localTheme}>
+      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
+      <div className={styles.equipment}>
+        <header className={styles.header}>
+          <div className="container">
+            <h1>EQUIPO TÉCNICO</h1>
+            <p>Herramientas de alta gama para resultados cinematográficos.</p>
+          </div>
+        </header>
 
-      <section className={styles.gridSection}>
-        <div className="container">
-          <div className={styles.categoryGrid}>
-            {gridCategories.map((cat, idx) => (
-              <div 
-                key={idx} 
-                className={styles.card}
-                data-sanity={cat._id ? `${cat._id}` : undefined}
-              >
-                <div className={styles.cardHeader}>
-                  {cat.icon}
-                  <h2 className="uppercase">{cat.title}</h2>
+        <section className={styles.gridSection}>
+          <div className="container">
+            <div className={styles.categoryGrid}>
+              {gridCategories.map((cat, idx) => (
+                <div 
+                  key={idx} 
+                  className={styles.card}
+                  data-sanity={cat._id ? `${cat._id}` : undefined}
+                >
+                  <div className={styles.cardHeader}>
+                    {cat.icon}
+                    <h2 className="uppercase">{cat.title}</h2>
+                  </div>
+                  <div className={styles.items}>
+                    {cat.items.map((item, i) => (
+                      <div key={i} className={styles.item}>
+                        <h3>{item.name}</h3>
+                        <p>{item.specs}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.items}>
-                  {cat.items.map((item, i) => (
-                    <div key={i} className={styles.item}>
-                      <h3>{item.name}</h3>
-                      <p>{item.specs}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section 
-        className={styles.pcSection}
-        data-sanity={workstationDoc?._id ? `${workstationDoc._id}` : undefined}
-      >
-        <div className="container">
-          <div className={styles.pcHeader}>
-            <Monitor size={40} color="var(--accent-teal)" />
-            <h2>WORKSTATION & POSTPRODUCCIÓN</h2>
+        <section 
+          className={styles.pcSection}
+          data-sanity={workstationDoc?._id ? `${workstationDoc._id}` : undefined}
+        >
+          <div className="container">
+            <div className={styles.pcHeader}>
+              <Monitor size={40} color="var(--accent-teal)" />
+              <h2>WORKSTATION & POSTPRODUCCIÓN</h2>
+            </div>
+            <div className={styles.pcGrid}>
+              {pcSpecs.map((spec, idx) => (
+                <div key={idx} className={styles.spec}>
+                  <strong>{spec.name}</strong>
+                  <span>{spec.specs}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.pcGrid}>
-            {pcSpecs.map((spec, idx) => (
-              <div key={idx} className={styles.spec}>
-                <strong>{spec.name}</strong>
-                <span>{spec.specs}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+      <Footer 
+        brandName={settings?.brandName} 
+        contactEmail={settings?.contactEmail} 
+        footerDescription={settings?.footerDescription}
+        socialLinks={settings?.socialLinks} 
+      />
+    </SectionTheme>
   );
 }

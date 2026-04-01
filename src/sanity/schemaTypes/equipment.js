@@ -5,6 +5,12 @@ export default {
   icon: () => '🎥',
   fields: [
     {
+      name: 'localTheme',
+      title: 'Diseño Personalizado de la Sección',
+      type: 'pageTheme',
+      description: 'Configura los colores exclusivos para esta página satisfactoriamente.'
+    },
+    {
       name: 'category',
       title: 'Categoría',
       type: 'string',

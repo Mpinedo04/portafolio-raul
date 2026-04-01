@@ -49,19 +49,9 @@ export default async function RootLayout({ children }) {
   const cssVars = {
     '--background': getColor(theme.backgroundColor, '#0A0A0A'),
     '--background-rgb': getRGB(theme.backgroundColor, '10, 10, 10'),
-    '--panel-bg': getColor(theme.panelBackgroundColor, '#0D0D0D'),
-    '--card-bg': getColor(theme.cardBackgroundColor, '#1A1A1A'),
-    '--nav-bg': getColor(theme.navBackgroundColor, '#0A0A0A'),
-    '--foreground': getColor(theme.textColor, '#EDEDED'),
-    '--foreground-rgb': getRGB(theme.textColor, '237, 237, 237'),
-    '--accent-teal': getColor(theme.primaryColor, '#1FB3B3'),
-    '--accent-teal-rgb': getRGB(theme.primaryColor, '31, 179, 179'),
-    '--accent-orange': getColor(theme.secondaryColor, '#D48C45'),
-    '--accent-orange-rgb': getRGB(theme.secondaryColor, '212, 140, 107'),
-    '--text-secondary': getColor(theme.secondaryTextColor, 'rgba(var(--foreground-rgb), 0.6)'),
-    '--border-color': getColor(theme.borderColor, 'rgba(var(--foreground-rgb), 0.1)'),
-    '--btn-text': getColor(theme.buttonTextColor, 'var(--background)'),
-    '--hero-overlay-rgb': getRGB(theme.heroOverlayColor, '0, 0, 0'),
+    '--foreground': '#FFFFFF', // Blanco por defecto para UI global
+    '--foreground-rgb': '255, 255, 255',
+    '--nav-bg': getColor(theme.navBackgroundColor, 'rgba(var(--background-rgb), 0.8)'),
     '--glass-blur': `${theme.glassBlur || 20}px`,
     '--font-primary': theme.titleFont || "'Bebas Neue', sans-serif",
   };
@@ -72,14 +62,7 @@ export default async function RootLayout({ children }) {
         <DynamicFont fontName={theme.titleFont} />
       </head>
       <body style={cssVars}>
-        <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
         <main>{children}</main>
-        <Footer 
-          brandName={settings?.brandName} 
-          contactEmail={settings?.contactEmail} 
-          footerDescription={settings?.footerDescription}
-          socialLinks={settings?.socialLinks} 
-        />
         {isDraftMode && <VisualEditing />}
       </body>
     </html>

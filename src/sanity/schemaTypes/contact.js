@@ -4,6 +4,12 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'localTheme',
+      title: 'Diseño Personalizado de la Sección',
+      type: 'pageTheme',
+      description: 'Configura los colores exclusivos para esta página satisfactoriamente.'
+    },
+    {
       name: 'seo',
       title: 'SEO de Contacto',
       type: 'object',

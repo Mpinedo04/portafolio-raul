@@ -1,6 +1,6 @@
 import { 
-  Youtube, 
-  Instagram, 
+  Video as Youtube, 
+  Camera as Instagram, 
   Mail, 
   Link as LinkIcon, 
   Smile,
