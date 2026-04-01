@@ -61,46 +61,60 @@
 
 .dropdown {
   position: relative;
+  padding: 10px 0; /* Puente invisible para que no se cierre solo */
 }
 
 .dropdownMenu {
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--panel-bg, rgba(20, 20, 20, 0.95));
-  backdrop-filter: blur(15px);
-  min-width: 200px;
-  padding: 15px 0;
-  border-radius: 8px;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  min-width: 220px;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
 }
 
 .dropdownMenu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(5px);
+  pointer-events: auto;
 }
 
 .dropdownMenu a {
-  padding: 10px 25px;
-  font-size: 0.8rem;
+  padding: 12px 20px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
   text-align: center;
   width: 100%;
   display: block;
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dropdownMenu a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent-teal);
+  transform: scale(1.02);
 }
 
 .dropdownMenu hr {
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  margin: 5px 0;
+  margin: 2px 0;
 }
 
 .socials {
