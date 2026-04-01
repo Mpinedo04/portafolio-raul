@@ -57,10 +57,11 @@ export default async function RootLayout({ children }) {
     '--accent-teal': getColor(theme.primaryColor, '#1FB3B3'),
     '--accent-teal-rgb': getRGB(theme.primaryColor, '31, 179, 179'),
     '--accent-orange': getColor(theme.secondaryColor, '#D48C45'),
-    '--accent-orange-rgb': getRGB(theme.secondaryColor, '212, 140, 69'),
+    '--accent-orange-rgb': getRGB(theme.secondaryColor, '212, 140, 107'),
     '--text-secondary': getColor(theme.secondaryTextColor, 'rgba(var(--foreground-rgb), 0.6)'),
     '--border-color': getColor(theme.borderColor, 'rgba(var(--foreground-rgb), 0.1)'),
     '--btn-text': getColor(theme.buttonTextColor, 'var(--background)'),
+    '--hero-overlay-rgb': getRGB(theme.heroOverlayColor, '0, 0, 0'),
     '--glass-blur': `${theme.glassBlur || 20}px`,
     '--font-primary': theme.titleFont || "'Bebas Neue', sans-serif",
   };

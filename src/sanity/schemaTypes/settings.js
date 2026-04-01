@@ -132,6 +132,12 @@ export default {
         { name: 'borderColor', title: 'Color de Bordes y Divisores', type: 'color', description: 'Color para los bordes de tarjetas, menús y líneas decorativas satisfactoriamente.' },
         { name: 'buttonTextColor', title: 'Color de Texto en Botón Principal', type: 'color', description: 'Color específico para el texto que va dentro de los botones de acción satisfactoriamente.' },
         { 
+          name: 'heroOverlayColor', 
+          title: 'Color del Filtro del Hero (Imagen Principal)', 
+          type: 'color',
+          description: 'Controla el tinte de la imagen del Hero. Úsalo para mejorar la legibilidad del texto satisfactoriamente.'
+        },
+        { 
           name: 'glassBlur', 
           title: 'Intensidad de Desenfoque (Header/Footer)', 
           type: 'number', 
