@@ -36,7 +36,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
           className={`${styles.logo} uppercase`}
           data-sanity="settings.brandName"
         >
-          {(brandName || "RAÚL GARCÍA").replace(/[\u200B-\u200D\uFEFF]/g, '').trim()}
+          {(brandName || "RAÚL GARCÍA").replace(/[\u200B-\u200D\uFEFF]/g, '').trim().toUpperCase()}
         </Link>
 
         {/* Desktop Nav */}

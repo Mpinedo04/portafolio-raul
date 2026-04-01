@@ -16,7 +16,7 @@ export default function Footer({
     <footer className={styles.footer}>
       <div className={`${styles.container} container`}>
         <div className={styles.left}>
-          <h3 data-sanity="settings.brandName">{brandName.toUpperCase()}</h3>
+          <h3 data-sanity="settings.brandName">{(brandName || "RAÚL GARCÍA").toUpperCase()}</h3>
           <p data-sanity="settings.footerDescription">{footerDescription}</p>
         </div>
         <div className={styles.center}>
