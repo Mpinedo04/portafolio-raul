@@ -11,7 +11,8 @@
   --light-gray: #888888;
   
   --font-body: 'Outfit', sans-serif;
-  --font-headings: var(--font-primary, 'Bebas Neue', sans-serif);
+  --font-primary: 'Bebas Neue', sans-serif; /* Valor por defecto */
+  --font-headings: var(--font-primary);
   --transition-speed: 0.3s;
 }
 
