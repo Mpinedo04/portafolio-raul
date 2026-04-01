@@ -128,6 +128,16 @@ export default {
         { name: 'primaryColor', title: 'Color de Acento Principal (Botones)', type: 'color' },
         { name: 'secondaryColor', title: 'Color de Acento Secundario', type: 'color' },
         { name: 'textColor', title: 'Color de Texto Principal', type: 'color' },
+        { name: 'secondaryTextColor', title: 'Color de Texto Secundario (Párrafos)', type: 'color', description: 'Color para descripciones, párrafos y textos de apoyo satisfactoriamente.' },
+        { name: 'borderColor', title: 'Color de Bordes y Divisores', type: 'color', description: 'Color para los bordes de tarjetas, menús y líneas decorativas satisfactoriamente.' },
+        { name: 'buttonTextColor', title: 'Color de Texto en Botón Principal', type: 'color', description: 'Color específico para el texto que va dentro de los botones de acción satisfactoriamente.' },
+        { 
+          name: 'glassBlur', 
+          title: 'Intensidad de Desenfoque (Header/Footer)', 
+          type: 'number', 
+          description: 'Define qué tan "borroso" es el fondo satinado (Glassmorphism). Recomendado: entre 10 y 40 satisfactoriamente.',
+          initialValue: 20
+        },
       ],
     },
   ],

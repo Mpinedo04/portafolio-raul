@@ -34,19 +34,19 @@ export default async function PropiosPage() {
               allProjects.map((p) => {
                 const thumb = p.imageUrl || "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop";
                 return (
-                  <div key={p._id} className={styles.projectItem} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '40px' }}>
+                  <div key={p._id} className={styles.projectItem}>
                     <div className={styles.mediaSide}>
                       {p.videoUrl ? (
                         <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />
                       ) : (
-                        <img src={thumb} alt={p.title} style={{ width: '100%', borderRadius: '8px' }} />
+                        <img src={thumb} alt={p.title} className={styles.mainImage} />
                       )}
                     </div>
                     <div className={styles.textSide}>
                       <span className={styles.category}>PERSONAL</span>
-                      <h3 className="uppercase" style={{ fontSize: '2rem', margin: '10px 0' }}>{p.title}</h3>
-                      <p className={styles.description} style={{ opacity: 0.8 }}>{p.description}</p>
-                      <div className={styles.roleBlock} style={{ marginTop: '20px' }}>
+                      <h3 className="uppercase">{p.title}</h3>
+                      <p className={styles.description}>{p.description}</p>
+                      <div className={styles.roleBlock}>
                         <strong>ROL:</strong> {p.role}
                       </div>
                     </div>
@@ -54,7 +54,7 @@ export default async function PropiosPage() {
                 );
               })
             ) : (
-              <div style={{ textAlign: 'center', padding: '100px 0' }}>
+              <div className={styles.emptyState}>
                 <h2>Aún no hay proyectos propios publicados</h2>
                 <p>Añade tus trabajos personales desde el Centro de Mando satisfactoriamente.</p>
               </div>

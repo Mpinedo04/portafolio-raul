@@ -11,12 +11,12 @@
 .header h1 {
   font-size: 3.5rem;
   letter-spacing: -2px;
-  color: #fff;
+  color: var(--foreground);
 }
 
 .header p {
   font-size: 1rem;
-  opacity: 0.5;
+  color: var(--text-secondary);
   letter-spacing: 2px;
 }
 
@@ -45,20 +45,21 @@
 .infoText h3 {
   font-size: 0.75rem;
   letter-spacing: 2px;
-  opacity: 0.5;
+  color: var(--text-secondary);
   margin-bottom: 5px;
 }
 
 .infoText p {
   font-size: 1.1rem;
   font-weight: 700;
+  color: var(--foreground);
 }
 
 .formCol {
   background: var(--card-bg, #111);
   padding: 60px;
   border-radius: 8px;
-  border: 1px solid var(--medium-gray);
+  border: 1px solid var(--border-color);
 }
 
 .form {
@@ -83,15 +84,15 @@
   font-size: 0.75rem;
   letter-spacing: 1px;
   font-weight: 700;
-  color: #fff; /* Forzamos blanco */
+  color: var(--foreground);
   opacity: 0.9;
 }
 
 .field input, .field textarea {
-  background: rgba(255, 255, 255, 0.05); /* Fondo sutilmente más claro */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde visible */
+  background: rgba(var(--foreground-rgb, 255, 255, 255), 0.05); /* Fondo sutilmente más claro */
+  border: 1px solid var(--border-color); /* Borde dinámico */
   padding: 15px;
-  color: #fff;
+  color: var(--foreground);
   border-radius: 4px;
   font-family: inherit;
   transition: border-color 0.3s ease;
@@ -104,7 +105,7 @@
 
 .submitBtn {
   background: var(--accent-teal);
-  color: #000;
+  color: var(--btn-text);
   border: none;
   padding: 18px;
   font-weight: 800;
@@ -120,7 +121,7 @@
 
 .submitBtn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(31, 179, 179, 0.4);
+  box-shadow: 0 10px 30px rgba(var(--background-rgb, 0, 0, 0), 0.4);
 }
 
 @media (max-width: 992px) {

@@ -4,7 +4,7 @@
   padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   height: 0;
   overflow: hidden;
-  background: #000;
+  background: var(--background);
 }
 
 .iframe {
@@ -43,7 +43,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
+  color: var(--background);
   font-size: 1.5rem;
   opacity: 0.8;
   transition: all 0.3s ease;

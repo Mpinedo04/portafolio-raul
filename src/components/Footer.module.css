@@ -1,9 +1,9 @@
 .footer {
-  background: rgba(8, 8, 8, 0.7);
-  backdrop-filter: blur(30px) saturate(180%);
-  color: #fff;
+  background: rgba(var(--background-rgb, 8, 8, 8), 0.7);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  color: var(--foreground);
   padding: 100px 0 60px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
 }
 
 .container {
@@ -21,12 +21,12 @@
   font-weight: 950;
   letter-spacing: 4px;
   margin-bottom: 20px;
-  color: #fff;
+  color: var(--foreground);
 }
 
 .left p {
   font-size: 0.8rem;
-  opacity: 0.4;
+  color: var(--text-secondary);
   line-height: 1.8;
   max-width: 350px;
 }
@@ -35,7 +35,7 @@
   font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 3px;
-  opacity: 0.3;
+  color: var(--text-secondary);
   margin-bottom: 15px;
 }
 
@@ -70,7 +70,7 @@
 
 .right p {
   font-size: 0.7rem;
-  opacity: 0.3;
+  color: var(--text-secondary);
   letter-spacing: 1px;
 }
 

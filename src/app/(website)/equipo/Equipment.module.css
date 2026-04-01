@@ -15,7 +15,7 @@
 
 .header p {
   font-size: 1rem;
-  opacity: 0.5;
+  color: var(--text-secondary);
   letter-spacing: 2px;
 }
 
@@ -33,7 +33,7 @@
   background: var(--card-bg, #111);
   padding: 40px;
   border-radius: 8px;
-  border: 1px solid var(--medium-gray);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
 }
 
@@ -68,14 +68,14 @@
 
 .item p {
   font-size: 0.85rem;
-  opacity: 0.5;
+  color: var(--text-secondary);
 }
 
 /* PC Section */
 .pcSection {
   background: var(--panel-bg, #111);
   padding: 100px 0;
-  border-top: 1px solid var(--medium-gray);
+  border-top: 1px solid var(--border-color);
 }
 
 .pcHeader {
@@ -100,7 +100,7 @@
 }
 
 .spec {
-  background: var(--card-bg, #000);
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 4px;
   display: flex;
@@ -111,7 +111,7 @@
 
 .spec strong {
   font-size: 0.75rem;
-  opacity: 0.5;
+  color: var(--text-secondary);
   letter-spacing: 1px;
 }
 

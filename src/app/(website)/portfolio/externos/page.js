@@ -34,19 +34,19 @@ export default async function ExternosPage() {
               allProjects.map((p) => {
                 const thumb = p.imageUrl || "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop";
                 return (
-                  <div key={p._id} className={styles.projectItem} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '40px' }}>
+                  <div key={p._id} className={styles.projectItem}>
                     <div className={styles.mediaSide}>
                       {p.videoUrl ? (
                         <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />
                       ) : (
-                        <img src={thumb} alt={p.title} style={{ width: '100%', borderRadius: '8px' }} />
+                        <img src={thumb} alt={p.title} className={styles.mainImage} />
                       )}
                     </div>
                     <div className={styles.textSide}>
                       <span className={styles.category}>PROFESIONAL</span>
-                      <h3 className="uppercase" style={{ fontSize: '2rem', margin: '10px 0' }}>{p.title}</h3>
-                      <p className={styles.description} style={{ opacity: 0.8 }}>{p.description}</p>
-                      <div className={styles.roleBlock} style={{ marginTop: '20px' }}>
+                      <h3 className="uppercase">{p.title}</h3>
+                      <p className={styles.description}>{p.description}</p>
+                      <div className={styles.roleBlock}>
                         <strong>ROL:</strong> {p.role}
                       </div>
                     </div>
@@ -54,7 +54,7 @@ export default async function ExternosPage() {
                 );
               })
             ) : (
-              <div style={{ textAlign: 'center', padding: '100px 0' }}>
+              <div className={styles.emptyState}>
                 <h2>Aún no hay trabajos externos publicados</h2>
                 <p>Gestiona tus colaboraciones profesionales desde el Centro de Mando satisfactoriamente.</p>
               </div>

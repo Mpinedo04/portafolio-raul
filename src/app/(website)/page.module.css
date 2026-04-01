@@ -1,8 +1,8 @@
 .intro {
   background: var(--panel-bg, #111);
-  color: #fff;
+  color: var(--foreground);
   padding: 120px 0;
-  border-bottom: 1px solid var(--medium-gray);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .introText h2 {
@@ -23,7 +23,7 @@
 .introContent p:last-of-type {
   font-size: 1.1rem;
   font-weight: 400;
-  opacity: 0.6;
+  color: var(--text-secondary);
   max-width: 600px;
 }
 
@@ -110,7 +110,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(var(--background-rgb, 0, 0, 0), 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,7 +132,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #000;
+  color: var(--background);
   margin-bottom: 10px;
   transform: scale(0.8);
   transition: transform 0.3s ease;
@@ -146,7 +146,7 @@
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 0.8rem;
-  color: #fff;
+  color: var(--foreground);
 }
 
 .projectInfo {
@@ -156,12 +156,12 @@
 .projectInfo h3 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #fff;
+  color: var(--foreground);
 }
 
 .projectInfo p {
   font-size: 0.9rem;
-  opacity: 0.6;
+  color: var(--text-secondary);
   margin-bottom: 15px;
 }
 

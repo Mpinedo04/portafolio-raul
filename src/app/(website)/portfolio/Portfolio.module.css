@@ -5,7 +5,7 @@
 .headerSection {
   background: var(--panel-bg, #111);
   padding: 80px 0;
-  border-bottom: 1px solid var(--medium-gray);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 60px;
 }
 
@@ -31,7 +31,7 @@
   letter-spacing: 4px;
   color: var(--accent-orange);
   margin-bottom: 50px;
-  border-bottom: 2px solid var(--medium-gray);
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 10px;
   display: inline-block;
 }
@@ -50,7 +50,7 @@
   background: var(--card-bg, transparent);
   padding: 40px;
   border-radius: 8px;
-  border: 1px solid var(--medium-gray);
+  border: 1px solid var(--border-color);
 }
 
 .mediaSide {
@@ -62,9 +62,17 @@
   width: 100%;
   aspect-ratio: 16/9;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   background: var(--card-bg, #111);
+}
+
+.videoPlaceholder img, .mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  border-radius: 8px;
 }
 
 .videoPlaceholder img {
@@ -80,7 +88,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(var(--background-rgb, 0, 0, 0), 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +100,7 @@
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 2px;
-  border: 1px solid #fff;
+  border: 1px solid var(--border-color);
   padding: 10px 20px;
 }
 
@@ -120,7 +128,7 @@
 .description {
   font-size: 1.1rem;
   line-height: 1.6;
-  opacity: 0.9;
+  color: var(--text-secondary);
   margin-bottom: 30px;
 }
 
@@ -132,12 +140,21 @@
 .roleBlock strong {
   font-size: 0.8rem;
   letter-spacing: 1px;
-  opacity: 0.5;
+  color: var(--text-secondary);
 }
 
 .roleBlock p {
   font-size: 1.1rem;
   font-weight: 700;
+  margin-top: 5px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 100px 0;
+  width: 100%;
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
 }
 
 @media (max-width: 992px) {
@@ -164,8 +181,8 @@
 
 .hubCard {
   height: 400px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(var(--foreground-rgb, 255, 255, 255), 0.03);
+  border: 1px solid var(--border-color);
   border-radius: 30px;
   position: relative;
   overflow: hidden;
@@ -179,18 +196,18 @@
 
 /* Diferenciación visual de cada caja */
 .hubCard:first-child:hover {
-  background: rgba(20, 184, 166, 0.05); /* Propios: Turquesa */
+  background: rgba(var(--accent-teal-rgb, 31, 179, 179), 0.05); /* Propios: Dinámico */
   border-color: var(--accent-teal);
 }
 
 .hubCard:last-child:hover {
-  background: rgba(255, 255, 255, 0.08); /* Externos: Blanco Puro */
-  border-color: #fff;
+  background: rgba(var(--foreground-rgb, 255, 255, 255), 0.08); /* Externos: Blanco Puro */
+  border-color: var(--foreground);
 }
 
 .hubCard:hover {
   transform: scale(1.02);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 40px 80px rgba(var(--background-rgb, 0, 0, 0), 0.6);
 }
 
 .hubOverlay {
@@ -208,10 +225,9 @@
 
 .hubOverlay p {
   font-size: 1.1rem;
-  opacity: 0.6;
+  color: var(--text-secondary);
   max-width: 300px;
   margin: 0 auto;
-  color: var(--foreground);
 }
 
 @media (max-width: 768px) {

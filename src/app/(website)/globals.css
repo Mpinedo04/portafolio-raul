@@ -6,9 +6,9 @@
   --panel-bg: #0D0D0D;
   --card-bg: #1A1A1A;
   --nav-bg: #0A0A0A;
-  --dark-gray: var(--panel-bg, #1A1A1A);
-  --medium-gray: #333333;
-  --light-gray: #888888;
+  --dark-gray: var(--panel-bg, #0D0D0D);
+  --medium-gray: rgba(var(--foreground-rgb, 237, 237, 237), 0.15);
+  --light-gray: rgba(var(--foreground-rgb, 237, 237, 237), 0.5);
   
   --font-body: 'Outfit', sans-serif;
   --font-primary: 'Bebas Neue', sans-serif; /* Valor por defecto */
