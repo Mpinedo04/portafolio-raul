@@ -1,21 +1,47 @@
+/* ===== SISTEMA DE DISEÑO FIJO — PORTFOLIO RAÚL ===== */
+
 :root {
-  --background: #0A0A0A;
-  --foreground: #EDEDED;
-  --accent-teal: #1FB3B3;
-  --accent-orange: #D48C45;
-  --panel-bg: #0D0D0D;
-  --card-bg: #1A1A1A;
-  --nav-bg: #0A0A0A;
-  --dark-gray: var(--panel-bg, #0D0D0D);
-  --medium-gray: rgba(var(--foreground-rgb, 237, 237, 237), 0.15);
-  --light-gray: rgba(var(--foreground-rgb, 237, 237, 237), 0.5);
-  
-  --font-body: 'Outfit', sans-serif;
-  --font-primary: 'Bebas Neue', sans-serif; /* Valor por defecto */
-  --font-headings: var(--font-primary);
-  --transition-speed: 0.3s;
+  /* Escala de grises */
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #141414;
+  --color-bg-card: #1c1c1c;
+  --color-bg-elevated: #222222;
+
+  /* Textos */
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #606060;
+
+  /* Azul (único color de acento) */
+  --color-accent: #2563eb;
+  --color-accent-light: #60a5fa;
+  --color-accent-dark: #1d4ed8;
+
+  /* Gradientes */
+  --gradient-bg: linear-gradient(180deg, #0a0a0a 0%, #111827 50%, #0a0a0a 100%);
+  --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --gradient-card: linear-gradient(145deg, #1c1c1c 0%, #141414 100%);
+
+  /* Bordes */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(37, 99, 235, 0.4);
+
+  /* Tipografía */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  /* Espaciado */
+  --section-padding: 6rem 2rem;
+  --container-max: 1200px;
+
+  /* Efectos */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-blue: 0 0 24px rgba(37, 99, 235, 0.2);
+  --border-radius: 12px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -29,11 +55,26 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
   font-family: var(--font-body);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mouse gradient effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(37, 99, 235, 0.07),
+    transparent 80%
+  );
 }
 
 a {
@@ -42,26 +83,43 @@ a {
 }
 
 h1, h2, h3, h4, .uppercase {
-  font-family: var(--font-headings);
+  font-family: var(--font-heading);
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   color: inherit;
 }
 
 .container {
   width: 90%;
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
 }
 
 section {
-  padding: 80px 0;
+  padding: var(--section-padding);
+  position: relative;
+  z-index: 1;
 }
 
-/* Animations */
+/* Texto largo justificado */
+.text-justified {
+  text-align: justify;
+}
+
+/* ===== ANIMACIONES ===== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .fade-in {

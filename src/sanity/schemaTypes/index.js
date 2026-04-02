@@ -3,9 +3,6 @@ import home from './home';
 import about from './about';
 import contact from './contact';
 import equipment from './equipment';
-import skill from './skill';
 import settings from './settings';
-import pageTheme from './pageTheme';
-import portfolioPage from './portfolioPage';
 
-export const schemaTypes = [project, home, about, contact, equipment, skill, settings, pageTheme, portfolioPage];
+export const schemaTypes = [project, home, about, contact, equipment, settings];

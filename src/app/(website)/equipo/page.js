@@ -1,23 +1,16 @@
 import { Camera, Layers, Lightbulb, Mic, Monitor, Wrench, Box } from 'lucide-react';
 import styles from './Equipment.module.css';
 import { client } from '@/sanity/lib/client';
-import SectionTheme from '@/components/SectionTheme';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const revalidate = 10;
 
 export default async function EquipmentPage() {
-  // 1. Fetch data from Sanity including localTheme and settings for Header/Footer
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const workstationDoc = await client.fetch(`*[_id == "workstation-specs"][0]`);
   const allEquipment = await client.fetch(`*[_type == "equipment" && _id != "workstation-specs"]`) || [];
-  
-  // Usamos el diseño del primer documento de equipo como tema para toda la página
-  const firstDoc = await client.fetch(`*[_type == "equipment"][0]{ localTheme }`);
-  const localTheme = firstDoc?.localTheme || {};
 
-  // 2. Helper to get category icons
   const getCategoryIcon = (categoryValue) => {
     switch (categoryValue) {
       case 'camaras': return <Camera size={24} />;
@@ -30,7 +23,6 @@ export default async function EquipmentPage() {
     }
   };
 
-  // 3. Helper to get category titles
   const getCategoryTitle = (categoryValue) => {
     switch (categoryValue) {
       case 'camaras': return 'Cámaras';
@@ -43,7 +35,6 @@ export default async function EquipmentPage() {
     }
   };
 
-  // 4. PC Specs logic (focusing on the dedicated document workstation-specs)
   const pcSpecs = workstationDoc?.items?.length > 0 ? workstationDoc.items : [
     { name: 'PROCESADOR', specs: 'AMD Ryzen 9 5950X (16 Núcleos)' },
     { name: 'GRÁFICA', specs: 'NVIDIA RTX 3080 10GB VRAM' },
@@ -60,7 +51,7 @@ export default async function EquipmentPage() {
   }));
 
   return (
-    <SectionTheme theme={localTheme}>
+    <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.equipment}>
         <header className={styles.header}>
@@ -74,11 +65,7 @@ export default async function EquipmentPage() {
           <div className="container">
             <div className={styles.categoryGrid}>
               {gridCategories.map((cat, idx) => (
-                <div 
-                  key={idx} 
-                  className={styles.card}
-                  data-sanity={cat._id ? `${cat._id}` : undefined}
-                >
+                <div key={idx} className={styles.card}>
                   <div className={styles.cardHeader}>
                     {cat.icon}
                     <h2 className="uppercase">{cat.title}</h2>
@@ -97,13 +84,10 @@ export default async function EquipmentPage() {
           </div>
         </section>
 
-        <section 
-          className={styles.pcSection}
-          data-sanity={workstationDoc?._id ? `${workstationDoc._id}` : undefined}
-        >
+        <section className={styles.pcSection}>
           <div className="container">
             <div className={styles.pcHeader}>
-              <Monitor size={40} color="var(--accent-teal)" />
+              <Monitor size={40} color="var(--color-accent)" />
               <h2>WORKSTATION & POSTPRODUCCIÓN</h2>
             </div>
             <div className={styles.pcGrid}>
@@ -123,6 +107,6 @@ export default async function EquipmentPage() {
         footerDescription={settings?.footerDescription}
         socialLinks={settings?.socialLinks} 
       />
-    </SectionTheme>
+    </>
   );
 }

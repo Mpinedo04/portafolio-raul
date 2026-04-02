@@ -1,65 +1,36 @@
 import './globals.css';
-export const revalidate = 10; // Sincronía universal de ajustes globales (10s)
 import { client } from '@/sanity/lib/client';
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
+import MouseEffect from '@/components/MouseEffect';
 
-import DynamicFont from '@/components/DynamicFont';
-import { getColor } from '@/lib/getColor';
-
-export async function getSettings() {
-  return await client.fetch(`*[_type == "settings" && _id == "settings"][0]{
-    brandName,
-    socialLinks,
-    contactEmail,
-    footerDescription,
-    theme
-  }`, {}, { next: { tags: ['settings'] } });
-}
+export const revalidate = 10;
 
 export async function generateMetadata() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`, {}, { next: { tags: ['settings'] } });
   const seo = settings?.seo || {};
-  
+
   return {
     title: seo.metaTitle || 'Raúl García | Filmmaker & Audiovisual Portfolio',
     description: seo.metaDescription || 'Portfolio profesional de Raúl García, un creador audiovisual especializado en cortometrajes, documentales y edición de vídeo.',
-    openGraph: {
-      images: seo.ogImage ? [urlFor(seo.ogImage).width(1200).height(630).url()] : [],
-    },
   };
 }
 
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
-  
-  // Fetch settings for dynamic theme and footer
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`, {}, { next: { tags: ['settings'] } }) || {};
-  const theme = settings?.theme || {};
-
-  // Helper para generar el string RGB (sin rgba())
-  const getRGB = (color, fallback = '255, 255, 255') => {
-    if (!color) return fallback;
-    if (color.rgb) return `${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}`;
-    return fallback;
-  };
-
-  const cssVars = {
-    '--background': getColor(theme.backgroundColor, '#0A0A0A'),
-    '--background-rgb': getRGB(theme.backgroundColor, '10, 10, 10'),
-    '--foreground': '#FFFFFF', // Blanco por defecto para UI global
-    '--foreground-rgb': '255, 255, 255',
-    '--nav-bg': getColor(theme.navBackgroundColor, 'rgba(var(--background-rgb), 0.8)'),
-    '--glass-blur': `${theme.glassBlur || 20}px`,
-    '--font-primary': theme.titleFont || "'Bebas Neue', sans-serif",
-  };
 
   return (
     <html lang="es">
       <head>
-        <DynamicFont fontName={theme.titleFont} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Montserrat:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body style={cssVars}>
+      <body>
+        <MouseEffect />
         <main>{children}</main>
         {isDraftMode && <VisualEditing />}
       </body>

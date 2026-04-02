@@ -3,7 +3,6 @@ import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 import { draftMode } from 'next/headers';
-import SectionTheme from '@/components/SectionTheme';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -12,9 +11,7 @@ export const revalidate = 10;
 export async function generateMetadata() {
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]{ seo }`);
   const seo = contact?.seo || {};
-  
-  if (!seo.metaTitle) return {}; 
-
+  if (!seo.metaTitle) return {};
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
@@ -24,7 +21,6 @@ export async function generateMetadata() {
 export default async function ContactPage() {
   const isDraftMode = (await draftMode()).isEnabled;
   
-  // 1. Fetch info from both settings (for global email) and contact (for titles)
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
     title: "TRABAJEMOS JUNTOS",
@@ -32,19 +28,18 @@ export default async function ContactPage() {
     contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",
     formspreeId: "",
-    localTheme: {}
   };
 
   const finalEmail = settings.contactEmail || "FCraulinho2004@gmail.com";
 
   return (
-    <SectionTheme theme={contact.localTheme}>
+    <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.contact}>
         <header className={styles.header}>
           <div className="container">
-            <h1 data-sanity="contact.title">{contact.title}</h1>
-            <p data-sanity="contact.subtitle">{contact.subtitle}</p>
+            <h1>{contact.title}</h1>
+            <p>{contact.subtitle}</p>
           </div>
         </header>
 
@@ -53,24 +48,24 @@ export default async function ContactPage() {
             <div className={styles.grid}>
               <div className={styles.infoCol}>
                 <div className={styles.infoBlock}>
-                  <Mail size={24} color="var(--accent-teal)" />
+                  <Mail size={24} color="var(--color-accent)" />
                   <div className={styles.infoText}>
                     <h3>EMAIL</h3>
-                    <p data-sanity="settings.contactEmail">{finalEmail}</p>
+                    <p>{finalEmail}</p>
                   </div>
                 </div>
                 <div className={styles.infoBlock}>
-                  <Phone size={24} color="var(--accent-teal)" />
+                  <Phone size={24} color="var(--color-accent)" />
                   <div className={styles.infoText}>
                      <h3>TELÉFONO</h3>
-                    <p data-sanity="contact.contactPhone">{contact.contactPhone}</p>
+                    <p>{contact.contactPhone}</p>
                   </div>
                 </div>
                 <div className={styles.infoBlock}>
-                  <MapPin size={24} color="var(--accent-teal)" />
+                  <MapPin size={24} color="var(--color-accent)" />
                   <div className={styles.infoText}>
                     <h3>DISPONIBILIDAD</h3>
-                    <p data-sanity="contact.contactLocation">{contact.contactLocation}</p>
+                    <p>{contact.contactLocation}</p>
                   </div>
                 </div>
               </div>
@@ -88,6 +83,6 @@ export default async function ContactPage() {
         footerDescription={settings?.footerDescription}
         socialLinks={settings?.socialLinks} 
       />
-    </SectionTheme>
+    </>
   );
 }

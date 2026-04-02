@@ -3,7 +3,7 @@
 }
 
 .header {
-  background: var(--panel-bg, #111);
+  background: var(--color-bg-secondary);
   padding: 80px 0;
   text-align: center;
 }
@@ -15,7 +15,7 @@
 
 .header p {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   letter-spacing: 2px;
 }
 
@@ -30,16 +30,17 @@
 }
 
 .card {
-  background: var(--card-bg, #111);
+  background: var(--gradient-card);
   padding: 40px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition);
 }
 
 .card:hover {
-  border-color: var(--accent-teal);
+  border-color: var(--color-accent);
   transform: translateY(-5px);
+  box-shadow: var(--shadow-blue);
 }
 
 .cardHeader {
@@ -47,7 +48,7 @@
   align-items: center;
   gap: 15px;
   margin-bottom: 30px;
-  color: var(--accent-teal);
+  color: var(--color-accent);
 }
 
 .cardHeader h2 {
@@ -68,14 +69,14 @@
 
 .item p {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 /* PC Section */
 .pcSection {
-  background: var(--panel-bg, #111);
+  background: var(--color-bg-secondary);
   padding: 100px 0;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border);
 }
 
 .pcHeader {
@@ -100,18 +101,18 @@
 }
 
 .spec {
-  background: var(--card-bg);
+  background: var(--color-bg-card);
   padding: 20px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
   gap: 5px;
-  border-left: 3px solid var(--accent-orange);
+  border-left: 3px solid var(--color-accent);
 }
 
 .spec strong {
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   letter-spacing: 1px;
 }
 

@@ -7,16 +7,16 @@
   display: flex;
   align-items: center;
   z-index: 1000;
-  transition: all 0.3s ease;
+  transition: all var(--transition);
   background: transparent;
 }
 
 .scrolled {
-  background: rgba(var(--background-rgb, 10, 10, 10), 0.7);
-  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(160%);
   height: 65px;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 4px 30px rgba(var(--background-rgb, 0, 0, 0), 0.1);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -24,7 +24,7 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
 }
 
@@ -32,7 +32,7 @@
   font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 3px;
-  color: var(--foreground);
+  color: var(--color-text-primary);
   transition: all 0.5s ease;
   cursor: pointer;
 }
@@ -42,15 +42,10 @@
   opacity: 0.8;
 }
 
-.logo span {
-  color: var(--accent-teal);
-  font-weight: 300;
-}
-
 .nav {
   display: flex;
   gap: 30px;
-  align-items: center; /* Alineación perfecta de todos los ítems */
+  align-items: center;
 }
 
 .nav a, .navLink {
@@ -58,14 +53,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--text-secondary);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--color-text-secondary);
+  transition: all var(--transition);
   cursor: pointer;
 }
 
 .nav a:hover, .navLink:hover {
   opacity: 1;
-  color: var(--accent-teal);
+  color: var(--color-accent);
   transform: translateY(-1px);
 }
 
@@ -73,27 +68,27 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 100%; /* Ocupa el mismo alto que los demás */
+  height: 100%;
 }
 
 .dropdownMenu {
   position: absolute;
-  top: calc(100% - 5px); /* Se pega al borde para no perder el ratón */
+  top: calc(100% - 5px);
   left: 50%;
   transform: translateX(-50%) translateY(10px);
-  background: rgba(var(--background-rgb, 10, 10, 10), 0.85);
-  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  background: rgba(28, 28, 28, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
   min-width: 220px;
   padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 8px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 20px 40px rgba(var(--background-rgb, 0, 0, 0), 0.8);
+  box-shadow: var(--shadow-card);
   pointer-events: none;
 }
 
@@ -113,19 +108,19 @@
   display: block;
   border-radius: 8px;
   background: transparent;
-  transition: all 0.3s ease;
-  color: rgba(var(--foreground-rgb, 255, 255, 255), 0.7);
+  transition: all var(--transition);
+  color: rgba(240, 240, 240, 0.7);
 }
 
 .dropdownMenu a:hover {
-  background: rgba(var(--foreground-rgb, 255, 255, 255), 0.05);
-  color: var(--accent-teal);
+  background: rgba(240, 240, 240, 0.05);
+  color: var(--color-accent);
   transform: scale(1.02);
 }
 
 .dropdownMenu hr {
   border: 0;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border);
   margin: 2px 0;
 }
 
@@ -136,13 +131,13 @@
 }
 
 .socials a {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .socials a:hover {
   opacity: 1;
-  color: var(--accent-teal);
+  color: var(--color-accent);
   transform: scale(1.2) translateY(-2px);
 }
 
@@ -150,7 +145,7 @@
   display: none;
   background: none;
   border: none;
-  color: var(--foreground);
+  color: var(--color-text-primary);
   cursor: pointer;
 }
 
@@ -169,7 +164,7 @@
     left: 0;
     width: 100%;
     height: calc(100vh - 80px);
-    background: var(--nav-bg, var(--background));
+    background: var(--color-bg-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,14 +185,14 @@
     align-items: center;
     gap: 15px;
     padding: 20px;
-    border: 1px solid rgba(var(--foreground-rgb, 255, 255, 255), 0.05);
+    border: 1px solid rgba(240, 240, 240, 0.05);
     border-radius: 15px;
     width: 80%;
   }
 
   .mobileSection span {
     font-size: 0.8rem;
-    color: var(--accent-teal);
+    color: var(--color-accent);
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 800;

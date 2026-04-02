@@ -3,7 +3,7 @@
 }
 
 .header {
-  background: var(--panel-bg, #111);
+  background: var(--color-bg-secondary);
   padding: 80px 0;
   text-align: center;
 }
@@ -11,12 +11,12 @@
 .header h1 {
   font-size: 3.5rem;
   letter-spacing: -2px;
-  color: var(--foreground);
+  color: var(--color-text-primary);
 }
 
 .header p {
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   letter-spacing: 2px;
 }
 
@@ -45,21 +45,21 @@
 .infoText h3 {
   font-size: 0.75rem;
   letter-spacing: 2px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-bottom: 5px;
 }
 
 .infoText p {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--foreground);
+  color: var(--color-text-primary);
 }
 
 .formCol {
-  background: var(--card-bg, #111);
+  background: var(--color-bg-card);
   padding: 60px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
 }
 
 .form {
@@ -84,44 +84,44 @@
   font-size: 0.75rem;
   letter-spacing: 1px;
   font-weight: 700;
-  color: var(--foreground);
+  color: var(--color-text-primary);
   opacity: 0.9;
 }
 
 .field input, .field textarea {
-  background: rgba(var(--foreground-rgb, 255, 255, 255), 0.05); /* Fondo sutilmente más claro */
-  border: 1px solid var(--border-color); /* Borde dinámico */
+  background: rgba(240, 240, 240, 0.05);
+  border: 1px solid var(--color-border);
   padding: 15px;
-  color: var(--foreground);
-  border-radius: 4px;
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius);
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transition);
 }
 
 .field input:focus, .field textarea:focus {
   outline: none;
-  border-color: var(--accent-teal);
+  border-color: var(--color-accent);
 }
 
 .submitBtn {
-  background: var(--accent-teal);
-  color: var(--btn-text);
+  background: var(--gradient-blue);
+  color: #ffffff;
   border: none;
   padding: 18px;
   font-weight: 800;
   letter-spacing: 1px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 15px;
-  transition: all 0.3s ease;
+  transition: all var(--transition);
 }
 
 .submitBtn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(var(--background-rgb, 0, 0, 0), 0.4);
+  box-shadow: var(--shadow-blue);
 }
 
 @media (max-width: 992px) {
