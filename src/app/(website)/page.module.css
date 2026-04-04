@@ -12,19 +12,11 @@
   margin-bottom: 30px;
 }
 
-.introContent p {
-  font-size: 2.5rem;
-  line-height: 1.2;
-  font-weight: 700;
-  max-width: 900px;
-  margin-bottom: 40px;
-}
-
-.introContent p:last-of-type {
+.introText p {
   font-size: 1.1rem;
-  font-weight: 400;
+  line-height: 1.8;
   color: var(--color-text-secondary);
-  max-width: 600px;
+  text-align: justify;
 }
 
 .link {
