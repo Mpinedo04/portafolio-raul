@@ -1,6 +1,7 @@
 import styles from '../Portfolio.module.css';
 import { client } from '@/sanity/lib/client';
 import VideoEmbed from '@/components/VideoEmbed';
+import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -19,14 +20,13 @@ export default async function PropiosPage() {
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      <div className={styles.portfolio}>
-        <section className={styles.headerSection}>
-          <div className="container">
-            <h1 className="uppercase">PROYECTOS PROPIOS</h1>
-            <p>Explora mis cortometrajes, proyectos de estudio y producciones personales.</p>
-          </div>
-        </section>
 
+      <PageBanner
+        title="PROYECTOS PROPIOS"
+        subtitle="Explora mis cortometrajes, proyectos de estudio y producciones personales."
+      />
+
+      <div className={styles.portfolio}>
         <section className={styles.section}>
           <div className="container">
             <div className={styles.list}>

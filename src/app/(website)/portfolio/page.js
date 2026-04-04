@@ -1,6 +1,7 @@
 import styles from './Portfolio.module.css';
 import Link from 'next/link';
 import { client } from '@/sanity/lib/client';
+import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -12,14 +13,13 @@ export default async function PortfolioHub() {
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      <div className={styles.portfolio}>
-        <section className={styles.headerSection}>
-          <div className="container">
-            <h1 className="uppercase">PROYECTOS</h1>
-            <p>Selecciona una categoría para explorar mi trayectoria creativa.</p>
-          </div>
-        </section>
 
+      <PageBanner
+        title="PROYECTOS"
+        subtitle="Selecciona una categoría para explorar mi trayectoria creativa."
+      />
+
+      <div className={styles.portfolio}>
         <section className={styles.hubSection}>
           <div className="container">
             <div className={styles.hubGrid}>

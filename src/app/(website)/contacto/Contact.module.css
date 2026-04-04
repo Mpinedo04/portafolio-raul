@@ -1,27 +1,9 @@
-.contact {
-  padding-top: 100px;
-}
-
-.header {
-  background: var(--color-bg-secondary);
-  padding: 80px 0;
-  text-align: center;
-}
-
-.header h1 {
-  font-size: 3.5rem;
-  letter-spacing: -2px;
-  color: var(--color-text-primary);
-}
-
-.header p {
-  font-size: 1rem;
-  color: var(--color-text-secondary);
-  letter-spacing: 2px;
+.page {
+  padding-bottom: 60px;
 }
 
 .section {
-  padding: 100px 0;
+  padding: 80px 0;
 }
 
 .grid {

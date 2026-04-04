@@ -1,6 +1,7 @@
 import styles from '../Portfolio.module.css';
 import { client } from '@/sanity/lib/client';
 import VideoEmbed from '@/components/VideoEmbed';
+import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -19,14 +20,13 @@ export default async function ExternosPage() {
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      <div className={styles.portfolio}>
-        <section className={styles.headerSection}>
-          <div className="container">
-            <h1 className="uppercase">TRABAJOS EXTERNOS</h1>
-            <p>Explora mis trabajos profesionales para clientes, marcas y empresas.</p>
-          </div>
-        </section>
 
+      <PageBanner
+        title="TRABAJOS EXTERNOS"
+        subtitle="Explora mis trabajos profesionales para clientes, marcas y empresas."
+      />
+
+      <div className={styles.portfolio}>
         <section className={styles.section}>
           <div className="container">
             <div className={styles.list}>

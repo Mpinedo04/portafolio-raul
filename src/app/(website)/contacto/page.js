@@ -3,6 +3,7 @@ import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 import { draftMode } from 'next/headers';
+import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -35,14 +36,13 @@ export default async function ContactPage() {
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      <div className={styles.contact}>
-        <header className={styles.header}>
-          <div className="container">
-            <h1>{contact.title}</h1>
-            <p>{contact.subtitle}</p>
-          </div>
-        </header>
 
+      <PageBanner
+        title={contact.title}
+        subtitle={contact.subtitle}
+      />
+
+      <div className={styles.page}>
         <section className={styles.section}>
           <div className="container">
             <div className={styles.grid}>
