@@ -3,32 +3,32 @@ import { defineLocations } from 'sanity/presentation';
 export const resolve = {
   locations: {
     settings: defineLocations({
-      message: 'Configuración Global (Cabecera, Pie de Página, Colores)',
+      message: 'Configuración Global (Cabecera, Pie de Página)',
       resolve: () => ({
         locations: [
           { title: 'Home', href: '/' },
-          { title: 'Portfolio', href: '/portfolio' },
+          { title: 'Proyectos', href: '/portfolio' },
           { title: 'Sobre Mí', href: '/sobre-mi' },
           { title: 'Equipo', href: '/equipo' },
-          { title: 'Habilidades', href: '/habilidades' },
+          { title: 'Estudios', href: '/estudios' },
           { title: 'Contacto', href: '/contacto' },
         ],
       }),
     }),
     home: defineLocations({
-      message: 'Esta es la Portada principal de la web.',
+      message: 'Portada principal de la web.',
       resolve: () => ({
         locations: [{ title: 'Home', href: '/' }],
       }),
     }),
     about: defineLocations({
-      message: 'Tu Biografía y Fotos de Rodaje.',
+      message: 'Biografía, Timeline y Fotos.',
       resolve: () => ({
         locations: [{ title: 'Sobre Mí', href: '/sobre-mi' }],
       }),
     }),
     contact: defineLocations({
-      message: 'Tus datos de comunicación y formulario.',
+      message: 'Datos de contacto y formulario.',
       resolve: () => ({
         locations: [{ title: 'Contacto', href: '/contacto' }],
       }),
@@ -46,9 +46,14 @@ export const resolve = {
         locations: [{ title: 'Equipo Técnico', href: '/equipo' }],
       }),
     }),
-    skill: defineLocations({
+    studies: defineLocations({
       resolve: () => ({
-        locations: [{ title: 'Habilidades', href: '/habilidades' }],
+        locations: [{ title: 'Estudios y Conocimientos', href: '/estudios' }],
+      }),
+    }),
+    workstation: defineLocations({
+      resolve: () => ({
+        locations: [{ title: 'Estación de Edición', href: '/equipo' }],
       }),
     }),
   },

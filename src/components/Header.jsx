@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { getIcon, IconMap } from '@/lib/icons';
+import { getIcon } from '@/lib/icons';
 import styles from './Header.module.css';
 
 export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
@@ -31,11 +31,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={`${styles.container} container`}>
-        <Link 
-          href="/" 
-          className={`${styles.logo} uppercase`}
-          data-sanity="settings.brandName"
-        >
+        <Link href="/" className={`${styles.logo} uppercase`}>
           {(brandName || "RAÚL GARCÍA").replace(/[\u200B-\u200D\uFEFF]/g, '').trim().toUpperCase()}
         </Link>
 
@@ -47,7 +43,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
             onMouseLeave={() => setIsOpenDropdown(false)}
           >
             <Link href="/portfolio" className={styles.navLink}>
-              PORTFOLIO
+              PROYECTOS
             </Link>
             <div className={`${styles.dropdownMenu} ${isOpenDropdown ? styles.show : ''}`}>
               <Link href="/portfolio/propios" onClick={() => setIsOpenDropdown(false)}>Proyectos Propios</Link>
@@ -57,11 +53,12 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
           </div>
           <Link href="/sobre-mi">SOBRE MÍ</Link>
           <Link href="/equipo">EQUIPO</Link>
+          <Link href="/estudios">ESTUDIOS</Link>
           <Link href="/contacto">CONTACTO</Link>
         </nav>
 
         {/* Social Icons */}
-        <div className={styles.socials} data-sanity="settings.socialLinks">
+        <div className={styles.socials}>
           {iconsToRender.map((item, i) => (
             <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
               {renderIcon(item.platform)}
@@ -81,12 +78,13 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
         {isOpen && (
           <div className={styles.mobileMenu}>
             <div className={styles.mobileSection}>
-              <span>Portfolio</span>
+              <span>Proyectos</span>
               <Link href="/portfolio/propios" onClick={() => setIsOpen(false)}>Proyectos Propios</Link>
               <Link href="/portfolio/externos" onClick={() => setIsOpen(false)}>Trabajos Externos</Link>
             </div>
             <Link href="/sobre-mi" onClick={() => setIsOpen(false)}>Sobre Mí</Link>
             <Link href="/equipo" onClick={() => setIsOpen(false)}>Equipo</Link>
+            <Link href="/estudios" onClick={() => setIsOpen(false)}>Estudios</Link>
             <Link href="/contacto" onClick={() => setIsOpen(false)}>Contacto</Link>
           </div>
         )}
