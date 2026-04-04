@@ -1,13 +1,11 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { presentationTool } from 'sanity/presentation';
-import { colorInput } from '@sanity/color-input';
 import { schemaTypes } from './src/sanity/schemaTypes';
 import { resolve } from './src/sanity/presentation/resolve';
 import { myStructure } from './src/sanity/lib/structure';
 
-// Definimos qué documentos son ÚNICOS (Singletons) para cada página
-const singletonTypes = new Set(['settings', 'home', 'about', 'contact']);
+const singletonTypes = new Set(['settings', 'home', 'about', 'contact', 'studies', 'workstation']);
 const singletonActions = new Set(['publish', 'discardChanges', 'restore', 'create']);
 
 export default defineConfig({
@@ -31,18 +29,15 @@ export default defineConfig({
       },
       resolve,
     }),
-    colorInput(),
   ],
 
   schema: {
     types: schemaTypes,
-    // Ocultamos los singletons del menú "Crear nuevo" (botón +)
     templates: (templates) =>
       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
 
   document: {
-    // Filtramos las acciones para que no se puedan borrar ni duplicar los singletons
     actions: (input, context) =>
       singletonTypes.has(context.schemaType)
         ? input.filter(({ action }) => action && singletonActions.has(action))

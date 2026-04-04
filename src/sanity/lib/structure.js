@@ -5,8 +5,6 @@ import {
   Monitor,
   GraduationCap, 
   Layout, 
-  PanelBottom, 
-  Palette,
   User,
   Mail
 } from 'lucide-react';
@@ -15,7 +13,7 @@ export const myStructure = (S) =>
   S.list()
     .title('CENTRO DE MANDO 🎬')
     .items([
-      // 🏠 PÁGINA DE INICIO
+      // 1. INICIO
       S.listItem()
       .title('1. INICIO')
       .icon(Home)
@@ -26,55 +24,37 @@ export const myStructure = (S) =>
           .title('Configuración de Portada')
       ),
 
-      // 🎬 2. PORTFOLIO SEGMENTADO
+      // 2. PROYECTOS
       S.listItem()
-        .title('2. PORTFOLIO (Propios)')
+        .title('2. PROYECTOS (Propios)')
         .icon(Briefcase)
         .child(
           S.documentTypeList('project')
-            .title('Proyectos Propios (Individuales / Estudio)')
+            .title('Proyectos Propios')
             .filter('_type == "project" && category == "propio"')
         ),
 
       S.listItem()
-        .title('2. PORTFOLIO (Externos)')
+        .title('2. PROYECTOS (Externos)')
         .icon(Briefcase)
         .child(
           S.documentTypeList('project')
-            .title('Trabajos Externos (Clientes / Colaboraciones)')
+            .title('Trabajos Externos')
             .filter('_type == "project" && category == "externo"')
         ),
 
-      // 👤 3. SOBRE MÍ (Incluye Habilidades)
+      // 3. SOBRE MÍ
       S.listItem()
         .title('3. SOBRE MÍ')
         .icon(User)
         .child(
-          S.list()
-            .title('Sección Sobre Mí')
-            .items([
-              S.listItem()
-                .title('Biografía y Fotos Personal')
-                .icon(User)
-                .child(
-                  S.document()
-                    .schemaType('about')
-                    .documentId('about')
-                    .title('Bio / Trayectoria')
-                ),
-              S.listItem()
-                .title('Gestión de HABILIDADES')
-                .icon(GraduationCap)
-                .child(
-                  S.documentTypeList('skill')
-                    .title('Software, Estudios y Áreas Técnicas')
-                ),
-            ])
+          S.document()
+            .schemaType('about')
+            .documentId('about')
+            .title('Bio / Trayectoria / Timeline')
         ),
 
-      S.divider(),
-
-      // 🎥 4. EQUIPO
+      // 4. EQUIPO
       S.listItem()
         .title('4. EQUIPO')
         .icon(Camera)
@@ -83,24 +63,35 @@ export const myStructure = (S) =>
             .title('Gestión de EQUIPO')
             .items([
               S.listItem()
-                .title('Inventario (Cámaras, Lentes...)')
+                .title('Inventario Completo')
                 .icon(Briefcase)
-                .child(S.documentTypeList('equipment').title('Inventario Completo')),
+                .child(S.documentTypeList('equipment').title('Todos los Equipos')),
               S.listItem()
-                .title('Workstation (PC)')
+                .title('Estación de Edición (PC)')
                 .icon(Monitor)
                 .child(
                   S.document()
-                    .schemaType('equipment')
-                    .documentId('workstation-specs')
+                    .schemaType('workstation')
+                    .documentId('workstation')
                     .title('Especificaciones del PC')
                 ),
             ])
         ),
 
-      // 📞 5. CONTACTO
+      // 5. ESTUDIOS
       S.listItem()
-        .title('5. CONTACTO')
+        .title('5. ESTUDIOS Y CONOCIMIENTOS')
+        .icon(GraduationCap)
+        .child(
+          S.document()
+            .schemaType('studies')
+            .documentId('studies')
+            .title('Formación, Cursos y Software')
+        ),
+
+      // 6. CONTACTO
+      S.listItem()
+        .title('6. CONTACTO')
         .icon(Mail) 
         .child(
           S.document()
@@ -111,14 +102,14 @@ export const myStructure = (S) =>
 
       S.divider(),
 
-      // 🏢 6. GLOBAL (HEADER, FOOTER, DISEÑO)
+      // 7. GLOBAL
       S.listItem()
-        .title('6. GLOBAL (HEADER / FOOTER / SEO)')
+        .title('7. GLOBAL (HEADER / FOOTER / SEO)')
         .icon(Layout)
         .child(
           S.document()
             .schemaType('settings')
             .documentId('settings')
-            .title('Ajustes Globales y Diseño')
+            .title('Ajustes Globales')
         ),
     ]);

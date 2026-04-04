@@ -4,5 +4,7 @@ import about from './about';
 import contact from './contact';
 import equipment from './equipment';
 import settings from './settings';
+import studies from './studies';
+import workstation from './workstation';
 
-export const schemaTypes = [project, home, about, contact, equipment, settings];
+export const schemaTypes = [project, home, about, contact, equipment, settings, studies, workstation];

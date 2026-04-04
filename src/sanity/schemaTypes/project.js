@@ -72,6 +72,18 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'year',
+      title: 'Año de Producción',
+      type: 'number',
+    },
+    {
+      name: 'tags',
+      title: 'Etiquetas',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    },
+    {
       name: 'featured',
       title: '🎥 Destacar en Página de Inicio',
       type: 'boolean',
