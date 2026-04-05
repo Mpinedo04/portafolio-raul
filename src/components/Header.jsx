@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { getIcon } from '@/lib/icons';
 import styles from './Header.module.css';
@@ -8,6 +9,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,19 +44,19 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
             onMouseEnter={() => !isOpen && setIsOpenDropdown(true)}
             onMouseLeave={() => setIsOpenDropdown(false)}
           >
-            <Link href="/portfolio" className={styles.navLink}>
+            <Link href="/portfolio" className={`${styles.navLink} ${pathname?.startsWith('/portfolio') ? styles.active : ''}`}>
               PROYECTOS
             </Link>
             <div className={`${styles.dropdownMenu} ${isOpenDropdown ? styles.show : ''}`}>
-              <Link href="/portfolio/propios" onClick={() => setIsOpenDropdown(false)}>Proyectos Propios</Link>
+              <Link href="/portfolio/propios" className={pathname === '/portfolio/propios' ? styles.active : ''} onClick={() => setIsOpenDropdown(false)}>Proyectos Propios</Link>
               <hr />
-              <Link href="/portfolio/externos" onClick={() => setIsOpenDropdown(false)}>Trabajos Externos</Link>
+              <Link href="/portfolio/externos" className={pathname === '/portfolio/externos' ? styles.active : ''} onClick={() => setIsOpenDropdown(false)}>Trabajos Externos</Link>
             </div>
           </div>
-          <Link href="/sobre-mi">SOBRE MÍ</Link>
-          <Link href="/equipo">EQUIPO</Link>
-          <Link href="/estudios">ESTUDIOS</Link>
-          <Link href="/contacto">CONTACTO</Link>
+          <Link href="/sobre-mi" className={pathname === '/sobre-mi' ? styles.active : ''}>SOBRE MÍ</Link>
+          <Link href="/equipo" className={pathname === '/equipo' ? styles.active : ''}>EQUIPO</Link>
+          <Link href="/estudios" className={pathname === '/estudios' ? styles.active : ''}>ESTUDIOS</Link>
+          <Link href="/contacto" className={pathname === '/contacto' ? styles.active : ''}>CONTACTO</Link>
         </nav>
 
         {/* Social Icons */}
@@ -86,13 +88,13 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
           <div className={styles.mobileMenu}>
             <div className={styles.mobileSection}>
               <span>Proyectos</span>
-              <Link href="/portfolio/propios" onClick={() => setIsOpen(false)}>Proyectos Propios</Link>
-              <Link href="/portfolio/externos" onClick={() => setIsOpen(false)}>Trabajos Externos</Link>
+              <Link href="/portfolio/propios" className={pathname === '/portfolio/propios' ? styles.active : ''} onClick={() => setIsOpen(false)}>Proyectos Propios</Link>
+              <Link href="/portfolio/externos" className={pathname === '/portfolio/externos' ? styles.active : ''} onClick={() => setIsOpen(false)}>Trabajos Externos</Link>
             </div>
-            <Link href="/sobre-mi" onClick={() => setIsOpen(false)}>Sobre Mí</Link>
-            <Link href="/equipo" onClick={() => setIsOpen(false)}>Equipo</Link>
-            <Link href="/estudios" onClick={() => setIsOpen(false)}>Estudios</Link>
-            <Link href="/contacto" onClick={() => setIsOpen(false)}>Contacto</Link>
+            <Link href="/sobre-mi" className={pathname === '/sobre-mi' ? styles.active : ''} onClick={() => setIsOpen(false)}>Sobre Mí</Link>
+            <Link href="/equipo" className={pathname === '/equipo' ? styles.active : ''} onClick={() => setIsOpen(false)}>Equipo</Link>
+            <Link href="/estudios" className={pathname === '/estudios' ? styles.active : ''} onClick={() => setIsOpen(false)}>Estudios</Link>
+            <Link href="/contacto" className={pathname === '/contacto' ? styles.active : ''} onClick={() => setIsOpen(false)}>Contacto</Link>
           </div>
         )}
       </div>
