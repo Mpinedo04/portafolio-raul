@@ -60,7 +60,14 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
         {/* Social Icons */}
         <div className={styles.socials}>
           {iconsToRender.map((item, i) => (
-            <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+            <a 
+              key={i} 
+              href={item.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.iconLink}
+              data-platform={item.platform.toLowerCase()}
+            >
               {renderIcon(item.platform)}
             </a>
           ))}

@@ -137,8 +137,19 @@
 
 .socials a:hover {
   opacity: 1;
-  color: var(--color-accent);
   transform: scale(1.2) translateY(-2px);
+}
+
+.socials a[data-platform="youtube"]:hover {
+  color: #FF0000;
+}
+
+.socials a[data-platform="instagram"]:hover {
+  color: #E1306C;
+}
+
+.socials a[data-platform="mail"]:hover {
+  color: #EA4335;
 }
 
 .mobileToggle {
