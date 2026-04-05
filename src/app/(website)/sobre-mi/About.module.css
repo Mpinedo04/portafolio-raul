@@ -60,14 +60,48 @@
 .timelineList {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 120px;
+  position: relative;
+}
+
+.timelineList::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, var(--color-border-accent) 15%, var(--color-border-accent) 85%, transparent 100%);
+  transform: translateX(-50%);
+  z-index: 1;
 }
 
 .timelineItem {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 120px;
   align-items: center;
+  position: relative;
+}
+
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px var(--color-accent);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:hover::before {
+  transform: translate(-50%, -50%) scale(1.5);
+  box-shadow: 0 0 25px var(--color-accent-light);
 }
 
 .timelineItem.reverse {
@@ -149,6 +183,12 @@
   .timelineItem.reverse {
     grid-template-columns: 1fr;
     direction: ltr;
+    gap: 40px;
+  }
+
+  .timelineItem::before,
+  .timelineList::before {
+    display: none;
   }
 }
 
