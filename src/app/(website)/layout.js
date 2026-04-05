@@ -39,22 +39,19 @@ export default async function RootLayout({ children }) {
     fontUrl = null;
   }
 
-  const fontStyles = `
-    :root {
-      --font-heading: '${headingFont.replace('+', ' ')}', sans-serif;
-      --font-body: '${bodyFont.replace('+', ' ')}', sans-serif;
-    }
-  `;
-
   return (
     <html lang="es">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {fontUrl && <link href={fontUrl} rel="stylesheet" />}
-        <style dangerouslySetInnerHTML={{ __html: fontStyles }} />
       </head>
-      <body>
+      <body 
+        style={{
+          '--font-heading': `'${headingFont.replace('+', ' ')}', sans-serif`,
+          '--font-body': `'${bodyFont.replace('+', ' ')}', sans-serif`
+        }}
+      >
         <MouseEffect />
         <main>{children}</main>
         {isDraftMode && <VisualEditing />}
