@@ -6,7 +6,8 @@ import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const CATEGORY_CONFIG = {
   video_camaras:        { label: 'Cámaras',               icon: Camera,     group: 'video' },
