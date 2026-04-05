@@ -37,7 +37,9 @@ export default async function EquipmentPage() {
   // Group equipment by their top-level group
   const grouped = {};
   allEquipment.forEach(eq => {
-    const config = CATEGORY_CONFIG[eq.category] || { label: eq.category, icon: Box, group: 'extras' };
+    const rawCategory = eq.category || '';
+    const safeCategory = rawCategory.toLowerCase().trim();
+    const config = CATEGORY_CONFIG[safeCategory] || { label: rawCategory || 'Otros', icon: Box, group: 'extras' };
     const groupKey = config.group;
     if (!grouped[groupKey]) grouped[groupKey] = [];
     grouped[groupKey].push({ ...eq, config });
