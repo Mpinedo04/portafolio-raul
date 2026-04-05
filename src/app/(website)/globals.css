@@ -17,10 +17,10 @@
   --color-accent-light: #60a5fa;
   --color-accent-dark: #1d4ed8;
 
-  /* Gradientes */
-  --gradient-bg: linear-gradient(180deg, #0a0a0a 0%, #111827 50%, #0a0a0a 100%);
-  --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  --gradient-card: linear-gradient(145deg, #1c1c1c 0%, #141414 100%);
+  /* Gradientes más marcados */
+  --gradient-bg: linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
+  --gradient-blue: linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%);
+  --gradient-card: linear-gradient(145deg, #1c1c1c 0%, #101010 100%);
 
   /* Bordes */
   --color-border: rgba(255, 255, 255, 0.08);
@@ -56,7 +56,8 @@ body {
 
 body {
   color: var(--color-text-primary);
-  background: var(--color-bg-primary);
+  background: var(--gradient-bg); /* Cambiado de color sólido a degradado */
+  background-attachment: fixed; /* Esto hace que el degradado cubra toda la pantalla mientras haces scroll */
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -71,9 +72,9 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(37, 99, 235, 0.07),
-    transparent 80%
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(37, 99, 235, 0.12),
+    transparent 70%
   );
 }
 
