@@ -38,14 +38,17 @@ export default async function EquipmentPage() {
   const grouped = {};
   allEquipment.forEach(eq => {
     const rawCategory = typeof eq.category === 'string' ? eq.category : JSON.stringify(eq.category);
-    const safeCategory = (rawCategory || '').toLowerCase().trim();
+    // Strip zero-width spaces, BOM, and other invisible characters that corrupt exact-string matching
+    const safeCategory = (rawCategory || '')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      .toLowerCase()
+      .trim();
     
     // Explicitly check the object directly
     let config = CATEGORY_CONFIG[safeCategory];
     
-    // Fallback: If for ANY possible reason it doesn't match, show the exact string on screen so we know.
     if (!config) {
-      config = { label: `DEBUG_v3: [${safeCategory}]`, icon: Box, group: 'extras' };
+      config = { label: `DEBUG_v4: [${safeCategory}]`, icon: Box, group: 'extras' };
     }
     
     const groupKey = config.group;
