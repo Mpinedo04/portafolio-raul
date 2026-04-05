@@ -1,6 +1,7 @@
 import styles from './Portfolio.module.css';
 import Link from 'next/link';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -8,8 +9,10 @@ import Footer from '@/components/Footer';
 export const revalidate = 10;
 
 export default async function PortfolioHub() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner }`) || {};
   
+  const bannerImg = settings.portfolioBanner?.asset ? urlFor(settings.portfolioBanner).url() : null;
+
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
@@ -17,6 +20,7 @@ export default async function PortfolioHub() {
       <PageBanner
         title="PROYECTOS"
         subtitle="Selecciona una categoría para explorar mi trayectoria creativa."
+        backgroundImage={bannerImg}
       />
 
       <div className={styles.portfolio}>

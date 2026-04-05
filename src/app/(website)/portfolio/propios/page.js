@@ -1,5 +1,6 @@
 import styles from '../Portfolio.module.css';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
@@ -9,13 +10,15 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function PropiosPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, propiosBanner }`) || {};
   
   const query = `*[_type == "project" && category == "propio"] | order(_createdAt desc) {
     _id, title, description, role, category, videoUrl,
     "imageUrl": mainImage.asset->url
   }`;
   const allProjects = await client.fetch(query) || [];
+
+  const bannerImg = settings.propiosBanner?.asset ? urlFor(settings.propiosBanner).url() : null;
 
   return (
     <>
@@ -24,6 +27,7 @@ export default async function PropiosPage() {
       <PageBanner
         title="PROYECTOS PROPIOS"
         subtitle="Explora mis cortometrajes, proyectos de estudio y producciones personales."
+        backgroundImage={bannerImg}
       />
 
       <div className={styles.portfolio}>

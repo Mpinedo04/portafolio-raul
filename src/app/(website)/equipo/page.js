@@ -50,6 +50,8 @@ export default async function EquipmentPage() {
     { componentName: 'MONITOR', value: 'ASUS ProArt 27"', specs: '4K Calibración Rec.709' },
   ];
 
+  const bannerImg = workstation.bannerImage?.asset ? urlFor(workstation.bannerImage).url() : null;
+
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
@@ -57,6 +59,7 @@ export default async function EquipmentPage() {
       <PageBanner
         title="EQUIPO TÉCNICO"
         subtitle="Herramientas de alta gama para resultados cinematográficos."
+        backgroundImage={bannerImg}
       />
 
       <div className={styles.page}>

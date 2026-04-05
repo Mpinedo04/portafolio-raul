@@ -6,9 +6,10 @@ export default {
   fields: [
     {
       name: 'bannerImage',
-      title: 'Imagen de Fondo',
+      title: 'Imagen de Fondo Cabecera (Página Equipo)',
       type: 'image',
       options: { hotspot: true },
+      description: 'Esta foto aparecerá de fondo en el banner principal de la página /equipo',
     },
     {
       name: 'components',

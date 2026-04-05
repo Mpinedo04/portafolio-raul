@@ -5,6 +5,7 @@ export default {
   groups: [
     { name: 'header', title: 'CABECERA (HEADER)' },
     { name: 'footer', title: 'PIE DE PÁGINA (FOOTER)' },
+    { name: 'pages', title: 'BANNERS DE PÁGINA' },
     { name: 'seo', title: 'SEO (GOOGLE / SOCIAL)' },
   ],
   fields: [
@@ -31,6 +32,30 @@ export default {
       type: 'string',
       group: 'header',
       initialValue: 'RAÚL GARCÍA',
+    },
+    {
+      name: 'portfolioBanner',
+      title: 'Banner Hub Proyectos',
+      type: 'image',
+      group: 'pages',
+      options: { hotspot: true },
+      description: 'Imagen de cabecera para la página principal de /portfolio',
+    },
+    {
+      name: 'propiosBanner',
+      title: 'Banner Proyectos Propios',
+      type: 'image',
+      group: 'pages',
+      options: { hotspot: true },
+      description: 'Imagen de cabecera para la página de /portfolio/propios',
+    },
+    {
+      name: 'externosBanner',
+      title: 'Banner Trabajos Externos',
+      type: 'image',
+      group: 'pages',
+      options: { hotspot: true },
+      description: 'Imagen de cabecera para la página de /portfolio/externos',
     },
     {
       name: 'contactEmail',

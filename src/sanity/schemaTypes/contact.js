@@ -25,6 +25,14 @@ export default {
       group: 'content',
     },
     {
+      name: 'bannerImage',
+      title: 'Imagen de Fondo del Banner',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'content',
+      description: 'Foto que aparecerá de fondo en la cabecera.',
+    },
+    {
       name: 'subtitle',
       title: 'Subtítulo',
       type: 'string',

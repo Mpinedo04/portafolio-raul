@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
 import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 import ContactForm from './ContactForm';
 import { draftMode } from 'next/headers';
 import PageBanner from '@/components/PageBanner';
@@ -32,6 +33,7 @@ export default async function ContactPage() {
   };
 
   const finalEmail = settings.contactEmail || "FCraulinho2004@gmail.com";
+  const bannerImg = contact.bannerImage?.asset ? urlFor(contact.bannerImage).url() : null;
 
   return (
     <>
@@ -40,6 +42,7 @@ export default async function ContactPage() {
       <PageBanner
         title={contact.title}
         subtitle={contact.subtitle}
+        backgroundImage={bannerImg}
       />
 
       <div className={styles.page}>
