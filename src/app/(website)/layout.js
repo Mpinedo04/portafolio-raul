@@ -18,16 +18,35 @@ export async function generateMetadata() {
 
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ headingFont, bodyFont }`, {}, { next: { tags: ['settings'] } }) || {};
+  
+  const headingFont = settings.headingFont || 'Poppins';
+  const bodyFont = settings.bodyFont || 'Montserrat';
+
+  // Build the dynamic Google Font URL
+  // We request weights 400, 500, 600, 700, 800, 900 to ensure headings look correct for any chosen font.
+  const uniqueFonts = Array.from(new Set([headingFont, bodyFont]));
+  let fontUrl = 'https://fonts.googleapis.com/css2?';
+  uniqueFonts.forEach((font, index) => {
+    fontUrl += `family=${font}:wght@400;500;600;700;800;900`;
+    if (index < uniqueFonts.length - 1) fontUrl += '&';
+  });
+  fontUrl += '&display=swap';
+
+  const fontStyles = `
+    :root {
+      --font-heading: '${headingFont.replace('+', ' ')}', sans-serif;
+      --font-body: '${bodyFont.replace('+', ' ')}', sans-serif;
+    }
+  `;
 
   return (
     <html lang="es">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Montserrat:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
+        <link href={fontUrl} rel="stylesheet" />
+        <style dangerouslySetInnerHTML={{ __html: fontStyles }} />
       </head>
       <body>
         <MouseEffect />

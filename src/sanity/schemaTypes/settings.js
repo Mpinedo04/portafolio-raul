@@ -6,6 +6,7 @@ export default {
     { name: 'header', title: 'CABECERA (HEADER)' },
     { name: 'footer', title: 'PIE DE PÁGINA (FOOTER)' },
     { name: 'pages', title: 'BANNERS DE PÁGINA' },
+    { name: 'typography', title: 'TIPOGRAFÍA Y ESTILO' },
     { name: 'seo', title: 'SEO (GOOGLE / SOCIAL)' },
   ],
   fields: [
@@ -109,6 +110,38 @@ export default {
           ],
         },
       ],
+    },
+    {
+      name: 'headingFont',
+      title: 'Tipografía para Títulos',
+      type: 'string',
+      group: 'typography',
+      options: {
+        list: [
+          { title: 'Poppins (Moderna y gruesa)', value: 'Poppins' },
+          { title: 'Montserrat (Limpia y elegante)', value: 'Montserrat' },
+          { title: 'Inter (Neutra y legible)', value: 'Inter' },
+          { title: 'Oswald (Estrecha e impactante)', value: 'Oswald' },
+          { title: 'Playfair Display (Con Serif, clásica)', value: 'Playfair+Display' },
+        ]
+      },
+      initialValue: 'Poppins',
+    },
+    {
+      name: 'bodyFont',
+      title: 'Tipografía para Textos',
+      type: 'string',
+      group: 'typography',
+      options: {
+        list: [
+          { title: 'Montserrat (Limpia y elegante)', value: 'Montserrat' },
+          { title: 'Inter (Neutra y muy legible)', value: 'Inter' },
+          { title: 'Roboto (Clásica de Google)', value: 'Roboto' },
+          { title: 'Lato (Amigable y redondeada)', value: 'Lato' },
+          { title: 'Open Sans (Tradicional)', value: 'Open+Sans' },
+        ]
+      },
+      initialValue: 'Montserrat',
     },
   ],
 };
