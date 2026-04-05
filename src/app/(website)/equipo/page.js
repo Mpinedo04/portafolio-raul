@@ -5,6 +5,7 @@ import { urlFor } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import EmptyState from '@/components/EmptyState';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -120,8 +121,11 @@ export default async function EquipmentPage() {
           <section className={styles.section}>
             <div className="container">
               <div className={styles.emptyState}>
-                <h2>Inventario en preparación</h2>
-                <p>Añade equipos desde el Centro de Mando.</p>
+                <EmptyState
+                  type="equipment"
+                  title="Inventario en preparación"
+                  subtitle="Añade equipos desde el Centro de Mando."
+                />
               </div>
             </div>
           </section>

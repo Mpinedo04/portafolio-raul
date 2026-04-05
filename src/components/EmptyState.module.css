@@ -1,0 +1,71 @@
+.emptyState {
+  text-align: center;
+  padding: 80px 40px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.emptyState::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+  animation: emptyPulse 8s ease-in-out infinite;
+}
+
+@keyframes emptyPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.iconWrapper {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  color: var(--color-accent-light);
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper svg {
+  opacity: 0.6;
+}
+
+.emptyState h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.emptyState p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  opacity: 0.7;
+  position: relative;
+  z-index: 1;
+}
+
+.decorLine {
+  width: 40px;
+  height: 2px;
+  background: var(--gradient-blue);
+  margin: 20px auto 0;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+}

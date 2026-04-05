@@ -1,22 +1,40 @@
 .intro {
-  background: var(--color-bg-secondary);
   color: var(--color-text-primary);
-  padding: 120px 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: 120px 0 100px;
+  background: rgba(20, 20, 20, 0.3);
+  backdrop-filter: blur(16px);
+}
+
+.introText {
+  max-width: 700px;
 }
 
 .introText h2 {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: var(--color-accent);
-  letter-spacing: 5px;
-  margin-bottom: 30px;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.introText h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--gradient-blue);
+  border-radius: 2px;
 }
 
 .introText p {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.85;
   color: var(--color-text-secondary);
   text-align: justify;
+  margin-bottom: 10px;
 }
 
 .link {
@@ -25,55 +43,85 @@
   gap: 10px;
   font-weight: 700;
   color: var(--color-accent-light);
-  margin-top: 20px;
+  margin-top: 24px;
+  padding: 10px 0;
+  border-bottom: 2px solid transparent;
   transition: all var(--transition);
 }
 
 .link:hover {
-  gap: 15px;
+  gap: 14px;
+  border-bottom-color: var(--color-accent-light);
 }
 
 /* Featured Section */
 .featured {
-  background: var(--color-bg-primary);
-  padding: 100px 0;
+  padding: 100px 0 110px;
+  background: rgba(10, 10, 10, 0.25);
+  backdrop-filter: blur(10px);
 }
 
 .featured .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 60px;
+  align-items: flex-end;
+  margin-bottom: 50px;
 }
 
 .featured .header h2 {
-  font-size: 2rem;
-  letter-spacing: -1px;
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  color: var(--color-accent);
 }
 
 .viewAll {
-  color: var(--color-accent);
-  font-weight: 700;
-  text-decoration: underline;
+  color: var(--color-accent-light);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.viewAll::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent-light);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.viewAll:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 28px;
 }
 
 .projectCard {
   position: relative;
   overflow: hidden;
   border-radius: var(--border-radius);
-  background: var(--color-bg-card);
-  transition: transform var(--transition);
+  background: var(--gradient-card);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--color-border);
 }
 
 .projectCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
+  border-color: var(--color-border-accent);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 40px rgba(37, 99, 235, 0.06);
 }
 
 .imageWrapper {
@@ -87,43 +135,65 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
 .projectCard:hover .imageWrapper img {
   transform: scale(1.05);
 }
 
+.imageWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
 .projectInfo {
-  padding: 30px;
+  padding: 22px 26px 26px;
 }
 
 .projectInfo h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
   color: var(--color-text-primary);
+  letter-spacing: 0.5px;
 }
 
 .projectInfo p {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
-  margin-bottom: 15px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  opacity: 0.85;
 }
 
 .role {
-  font-size: 0.8rem;
+  display: inline-block;
+  font-size: 0.68rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-accent-light);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  background: rgba(37, 99, 235, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(37, 99, 235, 0.12);
 }
 
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
-  
-  .introContent p {
-    font-size: 1.8rem;
+
+  .featured .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 }

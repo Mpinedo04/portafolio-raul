@@ -9,121 +9,185 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 80px;
 }
 
 .projectItem {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 50px;
   align-items: center;
-  background: var(--color-bg-card);
-  padding: 40px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  padding: 24px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.projectItem:hover {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
 }
 
 .mediaSide {
   width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .mainImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--border-radius);
+  border-radius: 12px;
+  display: block;
+  transition: transform 0.6s ease;
 }
 
-.textSide h3 {
-  font-size: 2.2rem;
-  margin: 10px 0 20px;
+.projectItem:hover .mainImage {
+  transform: scale(1.02);
+}
+
+.textSide {
+  padding: 10px 16px;
 }
 
 .category {
-  font-size: 0.8rem;
-  color: var(--color-accent);
+  font-size: 0.7rem;
+  color: var(--color-accent-light);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  padding: 4px 14px;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  display: inline-block;
+}
+
+.textSide h3 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  margin: 16px 0 14px;
+  color: var(--color-text-primary);
+  line-height: 1.15;
 }
 
 .description {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: var(--color-text-secondary);
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   text-align: justify;
 }
 
 .roleBlock {
   border-left: 3px solid var(--color-accent);
-  padding-left: 20px;
+  padding-left: 18px;
 }
 
 .roleBlock strong {
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.roleBlock {
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  font-weight: 500;
 }
 
 .emptyState {
   text-align: center;
-  padding: 100px 0;
+  padding: 80px 40px;
   width: 100%;
   border: 1px dashed var(--color-border);
   border-radius: var(--border-radius);
+  background: var(--gradient-card);
+}
+
+.emptyState h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--color-text-primary);
+}
+
+.emptyState p {
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 992px) {
   .projectItem {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
+  }
+
+  .list {
+    gap: 50px;
   }
 }
 
 /* Hub */
 .hubSection {
   padding: 100px 0;
-  background: var(--color-bg-primary);
   min-height: calc(100vh - 200px);
   display: flex;
   align-items: center;
+  background: rgba(10, 10, 10, 0.25);
+  backdrop-filter: blur(12px);
 }
 
 .hubGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 30px;
   width: 100%;
 }
 
 .hubCard {
-  height: 400px;
-  background: var(--color-bg-card);
+  height: 420px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--color-border);
-  border-radius: 30px;
+  border-radius: 24px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
+.hubCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.06), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hubCard:hover::before {
+  opacity: 1;
+}
+
 .hubCard:first-child:hover {
-  background: rgba(37, 99, 235, 0.08);
   border-color: var(--color-accent);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
 }
 
 .hubCard:last-child:hover {
-  background: rgba(240, 240, 240, 0.06);
-  border-color: var(--color-text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
 }
 
 .hubCard:hover {
   transform: scale(1.02);
-  box-shadow: var(--shadow-card);
 }
 
 .hubOverlay {
@@ -133,29 +197,31 @@
 }
 
 .hubOverlay h2 {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-  letter-spacing: -2px;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
   color: var(--color-text-primary);
+  line-height: 1.1;
 }
 
 .hubOverlay p {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: var(--color-text-secondary);
-  max-width: 300px;
+  max-width: 320px;
   margin: 0 auto;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
   .hubGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .hubCard {
-    height: 300px;
+    height: 320px;
   }
-  
+
   .hubOverlay h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }

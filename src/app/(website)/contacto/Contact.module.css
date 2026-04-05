@@ -8,38 +8,55 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 100px;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 80px;
+  align-items: start;
 }
 
 .infoCol {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 36px;
+  position: sticky;
+  top: 120px;
 }
 
 .infoBlock {
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition);
+}
+
+.infoBlock:hover {
+  border-color: var(--color-border-accent);
+  transform: translateX(4px);
 }
 
 .infoText h3 {
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  color: var(--color-text-secondary);
-  margin-bottom: 5px;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .infoText p {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--color-text-primary);
+  line-height: 1.5;
 }
 
 .formCol {
-  background: var(--color-bg-card);
-  padding: 60px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  padding: 48px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
 }
@@ -47,7 +64,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 28px;
 }
 
 .row {
@@ -59,62 +76,90 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .field label {
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
   font-weight: 700;
-  color: var(--color-text-primary);
-  opacity: 0.9;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
 }
 
 .field input, .field textarea {
-  background: rgba(240, 240, 240, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--color-border);
-  padding: 15px;
+  padding: 14px 18px;
   color: var(--color-text-primary);
-  border-radius: var(--border-radius);
+  border-radius: 10px;
   font-family: inherit;
-  transition: border-color var(--transition);
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.field input::placeholder, .field textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
 }
 
 .field input:focus, .field textarea:focus {
   outline: none;
   border-color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.04);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 140px;
 }
 
 .submitBtn {
   background: var(--gradient-blue);
   color: #ffffff;
   border: none;
-  padding: 18px;
+  padding: 16px;
   font-weight: 800;
-  letter-spacing: 1px;
-  border-radius: var(--border-radius);
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  border-radius: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
   transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
 }
 
 .submitBtn:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-blue);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
 }
 
 @media (max-width: 992px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 50px;
+  }
+
+  .infoCol {
+    position: static;
+  }
+
+  .formCol {
+    padding: 36px 28px;
   }
 }
 
 @media (max-width: 600px) {
   .row {
     grid-template-columns: 1fr;
+  }
+
+  .formCol {
+    padding: 28px 20px;
   }
 }

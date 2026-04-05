@@ -5,6 +5,7 @@ import VideoEmbed from '@/components/VideoEmbed';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import EmptyState from '@/components/EmptyState';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -58,10 +59,11 @@ export default async function PropiosPage() {
                   );
                 })
               ) : (
-                <div className={styles.emptyState}>
-                  <h2>Aún no hay proyectos propios publicados</h2>
-                  <p>Añade tus trabajos personales desde el Centro de Mando.</p>
-                </div>
+                <EmptyState
+                  type="propios"
+                  title="Aún no hay proyectos propios publicados"
+                  subtitle="Añade tus trabajos personales desde el Centro de Mando."
+                />
               )}
             </div>
           </div>

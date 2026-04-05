@@ -9,29 +9,45 @@
 
 .sectionAlt {
   padding: 80px 0;
-  background: var(--color-bg-secondary);
+  background: rgba(20, 20, 20, 0.3);
+  backdrop-filter: blur(16px);
 }
 
 .sectionTitle {
-  font-size: 1.4rem;
-  letter-spacing: 4px;
+  font-size: 0.8rem;
+  letter-spacing: 6px;
   color: var(--color-accent);
   margin-bottom: 50px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 36px;
+  height: 2px;
+  background: var(--gradient-blue);
+  border-radius: 2px;
 }
 
 /* Education */
 .educationList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .educationCard {
   display: flex;
   align-items: center;
-  gap: 30px;
-  background: var(--color-bg-card);
-  padding: 30px 40px;
+  gap: 28px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  padding: 28px 36px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
   transition: all var(--transition);
@@ -39,24 +55,29 @@
 
 .educationCard:hover {
   border-color: var(--color-border-accent);
-  transform: translateX(4px);
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .logoCol img {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 6px;
 }
 
 .eduInfo h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 6px;
+  color: var(--color-text-primary);
 }
 
 .institution {
   color: var(--color-text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .eduMeta {
@@ -66,7 +87,7 @@
 }
 
 .eduMeta span {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
   letter-spacing: 1px;
 }
@@ -79,52 +100,57 @@
 /* Courses */
 .coursesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .courseCard {
-  background: var(--color-bg-card);
-  padding: 30px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  padding: 28px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: all var(--transition);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .courseCard:hover {
   border-color: var(--color-border-accent);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .courseCard h4 {
-  font-size: 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
 }
 
 .courseCard p {
   color: var(--color-text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .year {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--color-text-muted);
   letter-spacing: 1px;
 }
 
 .certLink {
   display: inline-block;
-  margin-top: 8px;
-  color: var(--color-accent);
+  margin-top: 10px;
+  color: var(--color-accent-light);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   transition: all var(--transition);
+  letter-spacing: 0.5px;
 }
 
 .certLink:hover {
-  color: var(--color-accent-light);
+  color: var(--color-accent);
+  transform: translateX(4px);
 }
 
 /* Software */
@@ -135,25 +161,26 @@
 }
 
 .groupTitle {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .softwareGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 .softwareCard {
   display: flex;
   align-items: center;
-  gap: 18px;
-  background: var(--color-bg-card);
-  padding: 24px;
+  gap: 16px;
+  background: var(--gradient-card);
+  backdrop-filter: blur(8px);
+  padding: 20px 24px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
   transition: all var(--transition);
@@ -161,15 +188,18 @@
 
 .softwareCard:hover {
   border-color: var(--color-border-accent);
-  box-shadow: var(--shadow-blue);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .swIcon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   border-radius: 8px;
   flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px;
 }
 
 .swInfo {
@@ -177,13 +207,14 @@
 }
 
 .swInfo h4 {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin-bottom: 10px;
+  color: var(--color-text-primary);
 }
 
 .progressBar {
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 3px;
   overflow: hidden;
@@ -199,22 +230,28 @@
 /* Empty state */
 .emptyState {
   text-align: center;
-  padding: 100px 0;
+  padding: 80px 40px;
   border: 1px dashed var(--color-border);
   border-radius: var(--border-radius);
+  background: var(--gradient-card);
 }
 
 .emptyState h2 {
-  margin-bottom: 12px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: var(--color-text-primary);
 }
 
 .emptyState p {
   color: var(--color-text-secondary);
+  font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {
   .educationCard {
     flex-direction: column;
     text-align: center;
+    gap: 16px;
+    padding: 24px;
   }
 }

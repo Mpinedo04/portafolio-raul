@@ -17,15 +17,13 @@ export default function MouseEffect() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Optional: stop observing once revealed so it doesn't animate out and in endlessly
-          revealObserver.unobserve(entry.target); 
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     const applyReveal = () => {
-      // Find major elements we want to animate
-      const elements = document.querySelectorAll('section, h2, .card, [class*="projectCard"], [class*="equipmentCard"]');
+      const elements = document.querySelectorAll('section, h2, .card, [class*="projectCard"], [class*="equipmentCard"], [class*="projectItem"], [class*="hubCard"], [class*="educationCard"], [class*="courseCard"], [class*="softwareCard"], [class*="infoBlock"], [class*="formCol"], [class*="timelineItem"]');
       elements.forEach(el => {
         if (!el.classList.contains('reveal')) {
           el.classList.add('reveal');
@@ -34,10 +32,8 @@ export default function MouseEffect() {
       });
     };
 
-    // Apply initially
     applyReveal();
 
-    // Since Next.js uses client-side routing, watch the DOM for new elements
     const domObserver = new MutationObserver(() => {
       applyReveal();
     });

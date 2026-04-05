@@ -9,7 +9,7 @@
 
 .introGrid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.3fr;
   gap: 80px;
   align-items: center;
 }
@@ -20,24 +20,45 @@
 
 .profileBox {
   position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-border);
 }
 
 .profileBox img {
   width: 100%;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-card);
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.profileBox:hover img {
+  transform: scale(1.03);
 }
 
 .textCol h2 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--color-accent-light);
-  letter-spacing: 4px;
-  margin-bottom: 28px;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
   text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+
+.textCol h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 36px;
+  height: 2px;
+  background: var(--gradient-blue);
+  border-radius: 2px;
 }
 
 .textCol p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.85;
   color: var(--color-text-secondary);
   text-align: justify;
@@ -46,21 +67,34 @@
 /* Timeline */
 .timeline {
   padding: 80px 0;
-  background: var(--color-bg-secondary);
+  background: rgba(20, 20, 20, 0.3);
+  backdrop-filter: blur(16px);
 }
 
 .timelineTitle {
-  font-size: 1.2rem;
-  letter-spacing: 5px;
+  font-size: 0.8rem;
+  letter-spacing: 6px;
   color: var(--color-accent);
   text-align: center;
   margin-bottom: 70px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.timelineTitle::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: var(--gradient-blue);
+  margin: 12px auto 0;
+  border-radius: 2px;
 }
 
 .timelineList {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 100px;
   position: relative;
 }
 
@@ -79,7 +113,7 @@
 .timelineItem {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 120px;
+  gap: 100px;
   align-items: center;
   position: relative;
 }
@@ -89,19 +123,19 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background: var(--color-accent);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 15px var(--color-accent);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
   z-index: 2;
   transition: all 0.3s ease;
 }
 
 .timelineItem:hover::before {
-  transform: translate(-50%, -50%) scale(1.5);
-  box-shadow: 0 0 25px var(--color-accent-light);
+  transform: translate(-50%, -50%) scale(1.4);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
 }
 
 .timelineItem.reverse {
@@ -112,12 +146,23 @@
   direction: ltr;
 }
 
+.timelineImage {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-border);
+}
+
 .timelineImage img {
   width: 100%;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-card);
+  display: block;
   aspect-ratio: 4/3;
   object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.timelineImage:hover img {
+  transform: scale(1.03);
 }
 
 .imagePlaceholder {
@@ -129,13 +174,13 @@
 }
 
 .timelineText h3 {
-  font-size: 1.6rem;
-  margin-bottom: 18px;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
   color: var(--color-text-primary);
 }
 
 .timelineText p {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   line-height: 1.8;
   color: var(--color-text-secondary);
   text-align: justify;
@@ -147,17 +192,18 @@
 }
 
 .gallery h2 {
-  font-size: 0.9rem;
-  letter-spacing: 5px;
+  font-size: 0.8rem;
+  letter-spacing: 6px;
   margin-bottom: 40px;
-  opacity: 0.4;
+  opacity: 0.5;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .photoGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
 }
 
 .photoGrid img {
@@ -166,11 +212,14 @@
   object-fit: cover;
   border-radius: var(--border-radius);
   filter: grayscale(100%);
-  transition: filter var(--transition);
+  transition: all 0.5s ease;
+  border: 1px solid var(--color-border);
 }
 
 .photoGrid img:hover {
   filter: grayscale(0%);
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 992px) {
@@ -179,11 +228,16 @@
     gap: 50px;
   }
 
+  .profileBox {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
   .timelineItem,
   .timelineItem.reverse {
     grid-template-columns: 1fr;
     direction: ltr;
-    gap: 40px;
+    gap: 36px;
   }
 
   .timelineItem::before,
@@ -195,5 +249,6 @@
 @media (max-width: 768px) {
   .photoGrid {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 }

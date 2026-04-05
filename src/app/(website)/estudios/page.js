@@ -4,6 +4,7 @@ import { urlFor } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import EmptyState from '@/components/EmptyState';
 
 export const revalidate = 10;
 
@@ -140,8 +141,11 @@ export default async function StudiesPage() {
           <section className={styles.section}>
             <div className="container">
               <div className={styles.emptyState}>
-                <h2>Contenido en preparación</h2>
-                <p>Añade tus estudios, cursos y software desde el Centro de Mando.</p>
+                <EmptyState
+                  type="studies"
+                  title="Contenido en preparación"
+                  subtitle="Añade tus estudios, cursos y software desde el Centro de Mando."
+                />
               </div>
             </div>
           </section>
