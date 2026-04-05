@@ -34,8 +34,8 @@ export default async function Home() {
     headline: "Filmmaker & Editor de Vídeo",
     heroImage: null,
     heroButtons: {
-      primaryText: "Ver Proyectos",
-      primaryUrl: "/proyectos",
+      primaryText: "Todos mis proyectos",
+      primaryUrl: "/portfolio",
       secondaryText: "Trabajemos Juntos",
       secondaryUrl: "/contacto"
     },
@@ -81,8 +81,8 @@ export default async function Home() {
           <div className="container">
             <div className={styles.header}>
               <h2>TRABAJOS DESTACADOS</h2>
-              <Link href="/proyectos" className={styles.viewAll}>
-                Ver Portfolio Completo
+              <Link href="/portfolio" className={styles.viewAll}>
+                Todos mis proyectos
               </Link>
             </div>
               
