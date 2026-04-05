@@ -37,9 +37,17 @@ export default async function EquipmentPage() {
   // Group equipment by their top-level group
   const grouped = {};
   allEquipment.forEach(eq => {
-    const rawCategory = eq.category || '';
-    const safeCategory = rawCategory.toLowerCase().trim();
-    const config = CATEGORY_CONFIG[safeCategory] || { label: rawCategory || 'Otros', icon: Box, group: 'extras' };
+    const rawCategory = typeof eq.category === 'string' ? eq.category : JSON.stringify(eq.category);
+    const safeCategory = (rawCategory || '').toLowerCase().trim();
+    
+    // Explicitly check the object directly
+    let config = CATEGORY_CONFIG[safeCategory];
+    
+    // Fallback: If for ANY possible reason it doesn't match, show the exact string on screen so we know.
+    if (!config) {
+      config = { label: `DEBUG_v3: [${safeCategory}]`, icon: Box, group: 'extras' };
+    }
+    
     const groupKey = config.group;
     if (!grouped[groupKey]) grouped[groupKey] = [];
     grouped[groupKey].push({ ...eq, config });
