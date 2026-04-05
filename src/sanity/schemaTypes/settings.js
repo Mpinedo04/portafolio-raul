@@ -118,11 +118,9 @@ export default {
       group: 'typography',
       options: {
         list: [
-          { title: 'Poppins (Moderna y gruesa)', value: 'Poppins' },
-          { title: 'Montserrat (Limpia y elegante)', value: 'Montserrat' },
-          { title: 'Inter (Neutra y legible)', value: 'Inter' },
-          { title: 'Oswald (Estrecha e impactante)', value: 'Oswald' },
-          { title: 'Playfair Display (Con Serif, clásica)', value: 'Playfair+Display' },
+          { title: 'Helvetica (Clásica y neutra)', value: 'Helvetica' },
+          { title: 'Inter (Moderna y muy legible)', value: 'Inter' },
+          { title: 'Poppins (Llamativa y con cuerpo)', value: 'Poppins' },
         ]
       },
       initialValue: 'Poppins',
@@ -134,11 +132,10 @@ export default {
       group: 'typography',
       options: {
         list: [
-          { title: 'Montserrat (Limpia y elegante)', value: 'Montserrat' },
-          { title: 'Inter (Neutra y muy legible)', value: 'Inter' },
-          { title: 'Roboto (Clásica de Google)', value: 'Roboto' },
+          { title: 'Montserrat (Moderna y limpia)', value: 'Montserrat' },
           { title: 'Lato (Amigable y redondeada)', value: 'Lato' },
-          { title: 'Open Sans (Tradicional)', value: 'Open+Sans' },
+          { title: 'Open Sans (Tradicional y neutra)', value: 'Open+Sans' },
+          { title: 'Nunito (Fresca y actual)', value: 'Nunito' },
         ]
       },
       initialValue: 'Montserrat',

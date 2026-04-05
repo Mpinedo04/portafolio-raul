@@ -25,13 +25,19 @@ export default async function RootLayout({ children }) {
 
   // Build the dynamic Google Font URL
   // We request weights 400, 500, 600, 700, 800, 900 to ensure headings look correct for any chosen font.
-  const uniqueFonts = Array.from(new Set([headingFont, bodyFont]));
+  // Helvetica is a system font, so it doesn't need to be loaded from Google Fonts.
+  const uniqueFonts = Array.from(new Set([headingFont, bodyFont])).filter(f => f !== 'Helvetica');
   let fontUrl = 'https://fonts.googleapis.com/css2?';
-  uniqueFonts.forEach((font, index) => {
-    fontUrl += `family=${font}:wght@400;500;600;700;800;900`;
-    if (index < uniqueFonts.length - 1) fontUrl += '&';
-  });
-  fontUrl += '&display=swap';
+  
+  if (uniqueFonts.length > 0) {
+    uniqueFonts.forEach((font, index) => {
+      fontUrl += `family=${font}:wght@400;500;600;700;800;900`;
+      if (index < uniqueFonts.length - 1) fontUrl += '&';
+    });
+    fontUrl += '&display=swap';
+  } else {
+    fontUrl = null;
+  }
 
   const fontStyles = `
     :root {
@@ -45,7 +51,7 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href={fontUrl} rel="stylesheet" />
+        {fontUrl && <link href={fontUrl} rel="stylesheet" />}
         <style dangerouslySetInnerHTML={{ __html: fontStyles }} />
       </head>
       <body>
