@@ -1,7 +1,7 @@
 import styles from './About.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
-import { Download } from 'lucide-react';
+import { Download, FileText } from 'lucide-react';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -62,8 +62,9 @@ export default async function AboutPage() {
                     className={styles.cvButton}
                     download
                   >
-                    <Download size={18} />
-                    Descargar CV
+                    <FileText size={18} />
+                    <span>Descargar CV</span>
+                    <Download size={16} />
                   </a>
                 )}
               </div>
