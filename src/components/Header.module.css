@@ -168,6 +168,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .socials a .icon-fill {
@@ -180,6 +184,10 @@
   transition: opacity 0.3s ease;
 }
 
+.socials a .icon-bg {
+  display: none;
+}
+
 .socials a:hover .icon-fill {
   opacity: 1;
 }
@@ -189,19 +197,22 @@
 }
 
 .socials a:hover {
-  transform: scale(1.2) translateY(-2px);
+  transform: scale(1.15) translateY(-2px);
 }
 
 .socials a[data-platform="youtube"]:hover {
   color: #FF0000;
+  background: rgba(255, 0, 0, 0.1);
 }
 
 .socials a[data-platform="instagram"]:hover {
   color: #E1306C;
+  background: rgba(225, 48, 108, 0.1);
 }
 
 .socials a[data-platform="mail"]:hover {
   color: #EA4335;
+  background: rgba(234, 67, 53, 0.1);
 }
 
 .mobileToggle {

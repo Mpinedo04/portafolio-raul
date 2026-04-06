@@ -1,6 +1,7 @@
 import styles from './About.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
+import { Download } from 'lucide-react';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -17,7 +18,7 @@ export async function generateMetadata() {
 export default async function AboutPage() {
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio, title, subtitle, storyTitle, galleryTitle,
-    profileImage, actionPhotos, bannerImage, stages, seo
+    profileImage, actionPhotos, bannerImage, stages, cvFile, seo
   }`) || {};
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
@@ -53,6 +54,18 @@ export default async function AboutPage() {
                 <p className="text-justified" style={{ whiteSpace: 'pre-line' }}>
                   {about.bio || ""}
                 </p>
+                {about.cvFile?.asset?._ref && (
+                  <a
+                    href={`https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'xa9cwnu5'}/${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}/${about.cvFile.asset._ref.replace('file-', '').replace('-pdf', '.pdf')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.cvButton}
+                    download
+                  >
+                    <Download size={18} />
+                    Descargar CV
+                  </a>
+                )}
               </div>
             </div>
           </div>

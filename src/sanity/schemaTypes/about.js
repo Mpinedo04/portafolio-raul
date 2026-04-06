@@ -62,6 +62,16 @@ export default {
       group: 'content',
     },
     {
+      name: 'cvFile',
+      title: 'Archivo CV (PDF)',
+      type: 'file',
+      group: 'content',
+      description: 'Sube tu currículum en formato PDF para descarga.',
+      options: {
+        accept: '.pdf',
+      },
+    },
+    {
       name: 'galleryTitle',
       title: 'Título de Galería',
       type: 'string',
