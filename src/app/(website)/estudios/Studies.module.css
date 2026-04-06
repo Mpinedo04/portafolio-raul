@@ -235,6 +235,37 @@
   transition: width 1.2s cubic-bezier(0.1, 0.5, 0.1, 1);
 }
 
+.swLevel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.levelDots {
+  display: flex;
+  gap: 4px;
+}
+
+.levelDot {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.levelDotActive {
+  background: var(--gradient-blue);
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
 /* Empty state */
 .emptyState {
   text-align: center;

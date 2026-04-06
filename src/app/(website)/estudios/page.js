@@ -122,8 +122,17 @@ export default async function StudiesPage() {
                           <div className={styles.swInfo}>
                             <h4>{sw.softwareName}</h4>
                             {sw.level && (
-                              <div className={styles.progressBar}>
-                                <div className={styles.progress} style={{ width: `${(sw.level / 5) * 100}%` }}></div>
+                              <div className={styles.swLevel}>
+                                <div className={styles.progressBar}>
+                                  <div className={styles.progress} style={{ width: `${(sw.level / 5) * 100}%` }}></div>
+                                </div>
+                                <div className={styles.levelDots}>
+                                  {[1, 2, 3, 4, 5].map(n => (
+                                    <span key={n} className={`${styles.levelDot} ${n <= sw.level ? styles.levelDotActive : ''}`}>
+                                      {n}
+                                    </span>
+                                  ))}
+                                </div>
                               </div>
                             )}
                           </div>
