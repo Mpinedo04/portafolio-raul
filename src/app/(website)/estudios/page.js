@@ -108,6 +108,7 @@ export default async function StudiesPage() {
           <section className={styles.sectionAlt}>
             <div className="container">
               <h2 className={styles.sectionTitle}>SOFTWARE Y PROGRAMAS</h2>
+              <p className={styles.softwareLegend}>Nivel de dominio del 1 (Básico) al 5 (Experto)</p>
               <div className={styles.softwareGroups}>
                 {Object.entries(softwareByCategory).map(([cat, items]) => (
                   <div key={cat} className={styles.softwareGroup}>
@@ -116,7 +117,7 @@ export default async function StudiesPage() {
                       {items.map((sw, i) => (
                         <div key={i} className={styles.softwareCard}>
                           {sw.icon?.asset && (
-                            <img src={urlFor(sw.icon).width(48).url()} alt={sw.softwareName} className={styles.swIcon} />
+                            <img src={urlFor(sw.icon).width(64).url()} alt={sw.softwareName} className={styles.swIcon} />
                           )}
                           <div className={styles.swInfo}>
                             <h4>{sw.softwareName}</h4>

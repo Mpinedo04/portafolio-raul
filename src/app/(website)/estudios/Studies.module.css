@@ -34,6 +34,14 @@
   border-radius: 2px;
 }
 
+.softwareLegend {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 30px;
+  margin-top: -10px;
+  letter-spacing: 0.5px;
+}
+
 /* Education */
 .educationList {
   display: flex;
@@ -193,13 +201,13 @@
 }
 
 .swIcon {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 10px;
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.04);
-  padding: 4px;
+  padding: 6px;
 }
 
 .swInfo {
