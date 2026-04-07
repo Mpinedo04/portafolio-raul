@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
   const settings = await client.fetch(
     `*[_type == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
     {},
-    { next: { revalidate: 30, tags: ['settings'] } }
+    { next: { revalidate: 0, tags: ['settings'] } }
   ) || {};
   
   const headingFont = settings.headingFont || 'Poppins';
@@ -73,6 +73,8 @@ export default async function RootLayout({ children }) {
           '--font-body': `'${bodyFont.replace('+', ' ')}', sans-serif`,
           '--gradient-bg': gradientValue,
         }}
+        data-bg-key={backgroundGradient}
+        data-raw-bg={settings.backgroundGradient || "not-found"}
       >
         <ScrollProgress />
         <MouseEffect />
