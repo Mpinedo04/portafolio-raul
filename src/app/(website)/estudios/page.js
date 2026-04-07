@@ -119,7 +119,10 @@ export default async function StudiesPage() {
               <p className={styles.softwareLegend}>Nivel de dominio del 1 (Básico) al 5 (Experto)</p>
               <div className={styles.softwareGroups} data-debug-grouped="true">
                 {Object.entries(softwareByCategory)
-                  .sort(([a], [b]) => a.localeCompare(b))
+                  .sort(([a], [b]) => {
+                    const order = ['video', 'audio', 'vfx', 'design', 'other'];
+                    return order.indexOf(a) - order.indexOf(b);
+                  })
                   .map(([cat, items]) => (
                   <div key={cat} className={styles.softwareGroup}>
                     <h3 className={styles.groupTitle}>{categoryLabels[cat] || cat}</h3>
