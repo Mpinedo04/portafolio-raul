@@ -8,7 +8,7 @@ import ScrollProgress from '@/components/ScrollProgress';
 export const revalidate = 10;
 
 export async function generateMetadata() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]`, {}, { next: { tags: ['settings'] } });
+  const settings = await client.fetch(`*[_type == "settings"][0]`, {}, { next: { tags: ['settings'] } });
   const seo = settings?.seo || {};
 
   return {
@@ -20,14 +20,19 @@ export async function generateMetadata() {
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   const settings = await client.fetch(
-    `*[_type == "settings" && _id == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
+    `*[_type == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
     {},
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 30, tags: ['settings'] } }
   ) || {};
   
   const headingFont = settings.headingFont || 'Poppins';
   const bodyFont = settings.bodyFont || 'Montserrat';
-  const backgroundGradient = settings.backgroundGradient || 'gris-premium';
+  const rawGradient = settings.backgroundGradient || 'gris-premium';
+  // Robust dictionary lookup: Stega metadata includes invisible characters that break strict string equality.
+  // We look for our known keys within the string to bypass this.
+  const backgroundGradient = ['gris-premium', 'azul-oscuro', 'negro-puro', 'grafito'].find(
+    key => rawGradient.includes(key)
+  ) || 'gris-premium';
 
   const GRADIENTS = {
     'gris-premium': 'linear-gradient(180deg, #383838 0%, #1a1a1a 45%, #060606 100%)',
