@@ -29,8 +29,11 @@ export default async function StudiesPage() {
 
   // Group software by category
   const softwareByCategory = software.reduce((acc, sw) => {
-    // Basic normalization to ensure "Video", "VIDEO" and "video" group together
-    const cat = (sw.category || 'other').toLowerCase().trim();
+    const raw = (sw.category || 'other').toLowerCase();
+    // Sanity Stega metadata contains invisible characters that break object keys.
+    // We "snap" the raw string to our known keys to ensure proper grouping.
+    const cat = ['video', 'audio', 'design', 'vfx'].find(k => raw.includes(k)) || 'other';
+    
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(sw);
     return acc;
