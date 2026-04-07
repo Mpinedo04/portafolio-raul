@@ -178,92 +178,151 @@
 
 .softwareGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .softwareCard {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   background: var(--gradient-card);
   backdrop-filter: blur(8px);
-  padding: 20px 24px;
+  padding: 24px;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
-  transition: all var(--transition);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .softwareCard:hover {
   border-color: var(--color-border-accent);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+.expertCard {
+  border-color: rgba(48, 213, 200, 0.3);
+  box-shadow: 0 0 25px rgba(48, 213, 200, 0.08);
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.6) 0%, rgba(15, 15, 15, 0.8) 100%);
+}
+
+.expertCard:hover {
+  border-color: var(--color-accent-light);
+  box-shadow: 0 0 40px rgba(48, 213, 200, 0.15);
 }
 
 .swIcon {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 12px;
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.04);
-  padding: 6px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .swInfo {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.swInfo h4 {
-  font-size: 0.9rem;
-  margin-bottom: 10px;
+.swHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.swHeader h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--color-text-primary);
+  letter-spacing: 0.5px;
 }
 
-.progressBar {
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
+.expertBadge {
+  font-size: 0.6rem;
+  font-weight: 900;
   background: var(--gradient-blue);
-  border-radius: 3px;
-  transition: width 1.2s cubic-bezier(0.1, 0.5, 0.1, 1);
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
 }
 
-.swLevel {
+.swLevelContainer {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.levelDots {
-  display: flex;
-  gap: 4px;
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.levelDot {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 4px;
+.progress {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--color-accent-light);
+  transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+}
+
+.level5 { background: var(--gradient-blue); }
+.level4 { background: #30D5C8; opacity: 0.9; }
+.level3 { background: #30D5C8; opacity: 0.7; }
+.level2 { background: #30D5C8; opacity: 0.5; }
+.level1 { background: #30D5C8; opacity: 0.3; }
+
+.shimmerBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  30% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.levelText {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateY(4px);
   transition: all 0.3s ease;
 }
 
-.levelDotActive {
-  background: var(--gradient-blue);
-  color: #ffffff;
-  box-shadow: 0 0 8px rgba(48, 213, 200, 0.3);
+.softwareCard:hover .levelText,
+.expertCard .levelText {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.expertCard .levelText {
+  color: var(--color-accent);
 }
 
 /* Empty state */

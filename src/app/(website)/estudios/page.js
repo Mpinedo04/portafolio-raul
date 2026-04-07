@@ -128,24 +128,31 @@ export default async function StudiesPage() {
                     <h3 className={styles.groupTitle}>{categoryLabels[cat] || cat}</h3>
                     <div className={styles.softwareGrid}>
                       {items.map((sw, i) => (
-                        <div key={i} className={styles.softwareCard}>
+                        <div key={i} className={`${styles.softwareCard} ${sw.level === 5 ? styles.expertCard : ''}`}>
                           {sw.icon?.asset && (
                             <img src={urlFor(sw.icon).width(64).url()} alt={sw.softwareName} className={styles.swIcon} />
                           )}
                           <div className={styles.swInfo}>
-                            <h4>{sw.softwareName}</h4>
+                            <div className={styles.swHeader}>
+                              <h4>{sw.softwareName}</h4>
+                              {sw.level === 5 && <span className={styles.expertBadge}>EXPERTO</span>}
+                            </div>
                             {sw.level && (
-                              <div className={styles.swLevel}>
+                              <div className={styles.swLevelContainer}>
                                 <div className={styles.progressBar}>
-                                  <div className={styles.progress} style={{ width: `${(sw.level / 5) * 100}%` }}></div>
+                                  <div 
+                                    className={`${styles.progress} ${sw.level === 5 ? styles.shimmerBar : ''} ${styles[`level${sw.level}`]}`} 
+                                    style={{ width: `${(sw.level / 5) * 100}%` }}
+                                  ></div>
                                 </div>
-                                <div className={styles.levelDots}>
-                                  {[1, 2, 3, 4, 5].map(n => (
-                                    <span key={n} className={`${styles.levelDot} ${n <= sw.level ? styles.levelDotActive : ''}`}>
-                                      {n}
-                                    </span>
-                                  ))}
-                                </div>
+                                <span className={styles.levelText}>
+                                  {
+                                    sw.level === 5 ? 'Dominio Total' :
+                                    sw.level === 4 ? 'Avanzado' :
+                                    sw.level === 3 ? 'Intermedio' :
+                                    sw.level === 2 ? 'Básico' : 'Principiante'
+                                  }
+                                </span>
                               </div>
                             )}
                           </div>
