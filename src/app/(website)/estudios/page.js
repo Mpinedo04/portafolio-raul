@@ -17,7 +17,11 @@ export async function generateMetadata() {
 
 export default async function StudiesPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
-  const data = await client.fetch(`*[_type == "studies" && _id == "studies"][0]`) || {};
+  const data = await client.fetch(
+    `*[_type == "studies" && _id == "studies"][0]`,
+    {},
+    { next: { revalidate: 0, tags: ['studies'] } }
+  ) || {};
 
   const education = data.education || [];
   const courses = data.courses || [];
@@ -110,7 +114,7 @@ export default async function StudiesPage() {
             <div className="container">
               <h2 className={styles.sectionTitle}>SOFTWARE Y PROGRAMAS</h2>
               <p className={styles.softwareLegend}>Nivel de dominio del 1 (Básico) al 5 (Experto)</p>
-              <div className={styles.softwareGroups}>
+              <div className={styles.softwareGroups} data-debug-grouped="true">
                 {Object.entries(softwareByCategory)
                   .sort(([a], [b]) => a.localeCompare(b))
                   .map(([cat, items]) => (
