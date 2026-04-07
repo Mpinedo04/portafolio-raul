@@ -19,20 +19,25 @@ export async function generateMetadata() {
 
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`, {}, { next: { tags: ['settings'] } }) || {};
+  const settings = await client.fetch(
+    `*[_type == "settings" && _id == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
+    {},
+    { next: { revalidate: 60 } }
+  ) || {};
   
   const headingFont = settings.headingFont || 'Poppins';
   const bodyFont = settings.bodyFont || 'Montserrat';
   const backgroundGradient = settings.backgroundGradient || 'gris-premium';
 
-  const gradientMap = {
+  const GRADIENTS = {
     'gris-premium': 'linear-gradient(180deg, #383838 0%, #1a1a1a 45%, #060606 100%)',
-    'azul-oscuro': 'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 50%, #050505 100%)',
-    'negro-puro': 'linear-gradient(180deg, #111111 0%, #050505 50%, #000000 100%)',
-    'grafito': 'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+    'azul-oscuro':  'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 50%, #050505 100%)',
+    'negro-puro':   'linear-gradient(180deg, #111111 0%, #050505 50%, #000000 100%)',
+    'grafito':      'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%)',
   };
 
-  const gradientValue = gradientMap[backgroundGradient] || gradientMap['gris-premium'];
+  const DEFAULT_GRADIENT = GRADIENTS['gris-premium'];
+  const gradientValue = GRADIENTS[backgroundGradient] ?? DEFAULT_GRADIENT;
 
   // Build the dynamic Google Font URL
   // We request weights 400, 500, 600, 700, 800, 900 to ensure headings look correct for any chosen font.
