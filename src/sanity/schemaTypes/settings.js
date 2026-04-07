@@ -140,5 +140,21 @@ export default {
       },
       initialValue: 'Montserrat',
     },
+    {
+      name: 'backgroundGradient',
+      title: 'Fondo de la Web (Degradado)',
+      type: 'string',
+      group: 'typography',
+      options: {
+        list: [
+          { title: 'Gris Premium', value: 'gris-premium' },
+          { title: 'Azul Oscuro', value: 'azul-oscuro' },
+          { title: 'Negro Puro', value: 'negro-puro' },
+          { title: 'Grafito', value: 'grafito' },
+        ]
+      },
+      initialValue: 'gris-premium',
+      description: 'Elige el degradado de fondo para toda la web.',
+    },
   ],
 };
