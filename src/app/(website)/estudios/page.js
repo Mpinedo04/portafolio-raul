@@ -111,7 +111,9 @@ export default async function StudiesPage() {
               <h2 className={styles.sectionTitle}>SOFTWARE Y PROGRAMAS</h2>
               <p className={styles.softwareLegend}>Nivel de dominio del 1 (Básico) al 5 (Experto)</p>
               <div className={styles.softwareGroups}>
-                {Object.entries(softwareByCategory).map(([cat, items]) => (
+                {Object.entries(softwareByCategory)
+                  .sort(([a], [b]) => a.localeCompare(b))
+                  .map(([cat, items]) => (
                   <div key={cat} className={styles.softwareGroup}>
                     <h3 className={styles.groupTitle}>{categoryLabels[cat] || cat}</h3>
                     <div className={styles.softwareGrid}>
