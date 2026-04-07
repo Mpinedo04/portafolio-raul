@@ -20,9 +20,12 @@ export async function generateMetadata() {
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   const settings = await client.fetch(
-    `*[_type == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
+    `*[_id == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
     {},
-    { next: { revalidate: 0, tags: ['settings'] } }
+    { 
+      perspective: isDraftMode ? 'previewDrafts' : 'published',
+      next: { revalidate: 0, tags: ['settings'] } 
+    }
   ) || {};
   
   const headingFont = settings.headingFont || 'Poppins';
