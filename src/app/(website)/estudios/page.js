@@ -25,7 +25,8 @@ export default async function StudiesPage() {
 
   // Group software by category
   const softwareByCategory = software.reduce((acc, sw) => {
-    const cat = sw.category || 'other';
+    // Basic normalization to ensure "Video", "VIDEO" and "video" group together
+    const cat = (sw.category || 'other').toLowerCase().trim();
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(sw);
     return acc;
