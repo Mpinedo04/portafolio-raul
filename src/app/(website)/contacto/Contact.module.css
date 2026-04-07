@@ -40,7 +40,7 @@
 
 .infoText h3 {
   font-size: 0.65rem;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: var(--color-text-muted);
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -80,8 +80,8 @@
 }
 
 .field label {
-  font-size: 0.7rem;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
   font-weight: 700;
   color: var(--color-text-secondary);
   text-transform: uppercase;
@@ -106,8 +106,8 @@
 .field input:focus, .field textarea:focus {
   outline: none;
   border-color: var(--color-accent);
-  background: rgba(37, 99, 235, 0.04);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: rgba(48, 213, 200, 0.04);
+  box-shadow: 0 0 0 3px rgba(48, 213, 200, 0.1);
 }
 
 .field textarea {
@@ -131,12 +131,12 @@
   justify-content: center;
   gap: 12px;
   transition: all var(--transition);
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 20px rgba(48, 213, 200, 0.25);
 }
 
 .submitBtn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 30px rgba(48, 213, 200, 0.4);
 }
 
 @media (max-width: 992px) {

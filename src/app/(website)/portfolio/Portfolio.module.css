@@ -60,9 +60,9 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   padding: 4px 14px;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(48, 213, 200, 0.1);
   border-radius: 20px;
-  border: 1px solid rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(48, 213, 200, 0.15);
   display: inline-block;
 }
 
@@ -78,7 +78,9 @@
   line-height: 1.7;
   color: var(--color-text-secondary);
   margin-bottom: 24px;
-  text-align: justify;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .roleBlock {
@@ -167,7 +169,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.06), transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(48, 213, 200, 0.06), transparent 70%);
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -178,7 +180,7 @@
 
 .hubCard:first-child:hover {
   border-color: var(--color-accent);
-  box-shadow: 0 0 40px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 40px rgba(48, 213, 200, 0.15);
 }
 
 .hubCard:last-child:hover {

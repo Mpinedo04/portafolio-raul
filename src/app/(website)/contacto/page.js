@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
@@ -27,7 +27,6 @@ export default async function ContactPage() {
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
     title: "TRABAJEMOS JUNTOS",
     subtitle: "¿Tienes un proyecto en mente? Cuéntame los detalles y hagámoslo realidad.",
-    contactPhone: "+34 600 000 000",
     contactLocation: "Proyectos nacionales e internacionales.",
     formspreeId: "",
   };
@@ -55,13 +54,6 @@ export default async function ContactPage() {
                   <div className={styles.infoText}>
                     <h3>EMAIL</h3>
                     <p>{finalEmail}</p>
-                  </div>
-                </div>
-                <div className={styles.infoBlock}>
-                  <Phone size={24} color="var(--color-accent)" />
-                  <div className={styles.infoText}>
-                     <h3>TELÉFONO</h3>
-                    <p>{contact.contactPhone}</p>
                   </div>
                 </div>
                 <div className={styles.infoBlock}>

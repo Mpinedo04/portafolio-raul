@@ -14,8 +14,8 @@
 }
 
 .sectionTitle {
-  font-size: 0.8rem;
-  letter-spacing: 6px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   color: var(--color-accent);
   margin-bottom: 50px;
   text-transform: uppercase;
@@ -171,7 +171,7 @@
 .groupTitle {
   font-size: 0.75rem;
   color: var(--color-text-secondary);
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -263,7 +263,7 @@
 .levelDotActive {
   background: var(--gradient-blue);
   color: #ffffff;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 8px rgba(48, 213, 200, 0.3);
 }
 
 /* Empty state */

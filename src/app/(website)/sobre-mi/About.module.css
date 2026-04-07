@@ -37,9 +37,9 @@
 }
 
 .textCol h2 {
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: var(--color-accent-light);
-  letter-spacing: 6px;
+  letter-spacing: 2px;
   margin-bottom: 24px;
   text-transform: uppercase;
   position: relative;
@@ -78,13 +78,13 @@
   text-transform: uppercase;
   border-radius: 50px;
   transition: all var(--transition);
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 20px rgba(48, 213, 200, 0.3);
   width: fit-content;
 }
 
 .cvButton:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 8px 30px rgba(48, 213, 200, 0.45);
 }
 
 /* Timeline */
@@ -95,8 +95,8 @@
 }
 
 .timelineTitle {
-  font-size: 0.8rem;
-  letter-spacing: 6px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   color: var(--color-accent);
   text-align: center;
   margin-bottom: 70px;
@@ -148,17 +148,18 @@
   top: 50%;
   width: 14px;
   height: 14px;
-  background: var(--color-accent);
+  background: var(--color-accent-light);
+  border: 3px solid var(--color-accent-light);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 0 20px rgba(48, 213, 200, 0.4);
   z-index: 2;
   transition: all 0.3s ease;
 }
 
 .timelineItem:hover::before {
   transform: translate(-50%, -50%) scale(1.4);
-  box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 30px rgba(48, 213, 200, 0.6);
 }
 
 .timelineItem.reverse {
@@ -199,7 +200,7 @@
 .timelineText h3 {
   font-size: 1.4rem;
   margin-bottom: 16px;
-  color: var(--color-text-primary);
+  color: var(--color-accent-light);
 }
 
 .timelineText p {
@@ -215,8 +216,8 @@
 }
 
 .gallery h2 {
-  font-size: 0.8rem;
-  letter-spacing: 6px;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
   margin-bottom: 40px;
   opacity: 0.5;
   text-transform: uppercase;

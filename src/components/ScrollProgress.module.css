@@ -1,0 +1,18 @@
+.scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.scrollBar {
+  height: 100%;
+  background: linear-gradient(90deg, #008080, #30d5c8);
+  border-radius: 0 2px 2px 0;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(48, 213, 200, 0.4);
+}

@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client';
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import MouseEffect from '@/components/MouseEffect';
+import ScrollProgress from '@/components/ScrollProgress';
 
 export const revalidate = 10;
 
@@ -52,6 +53,7 @@ export default async function RootLayout({ children }) {
           '--font-body': `'${bodyFont.replace('+', ' ')}', sans-serif`
         }}
       >
+        <ScrollProgress />
         <MouseEffect />
         <main>{children}</main>
         {isDraftMode && <VisualEditing />}

@@ -135,7 +135,7 @@ export default async function EquipmentPage() {
         <section className={styles.pcSection}>
           <div className="container">
             <div className={styles.pcHeader}>
-              <Monitor size={40} color="var(--color-accent)" />
+              <Monitor size={64} color="var(--color-accent)" />
               <h2>ESTACIÓN DE EDICIÓN</h2>
             </div>
             <div className={styles.pcGrid}>

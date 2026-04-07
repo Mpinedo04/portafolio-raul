@@ -40,12 +40,6 @@ export default {
       group: 'content',
     },
     {
-      name: 'contactPhone',
-      title: 'Teléfono de Contacto',
-      type: 'string',
-      group: 'content',
-    },
-    {
       name: 'contactLocation',
       title: 'Disponibilidad / Ubicación',
       type: 'string',
