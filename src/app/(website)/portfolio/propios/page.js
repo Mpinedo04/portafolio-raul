@@ -13,8 +13,8 @@ export const revalidate = 0;
 export default async function PropiosPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, propiosBanner }`) || {};
   
-  const query = `*[_type == "project" && category == "propio"] | order(_createdAt desc) {
-    _id, title, description, role, category, videoUrl,
+  const query = `*[_type == "project" && category == "propio"] | order(orderRank asc, _createdAt desc) {
+    _id, title, subtitle, customLabel, description, role, category, videoUrl,
     "imageUrl": mainImage.asset->url
   }`;
   const allProjects = await client.fetch(query) || [];
@@ -48,8 +48,9 @@ export default async function PropiosPage() {
                         )}
                       </div>
                       <div className={styles.textSide}>
-                        <span className={styles.category}>PERSONAL</span>
+                        <span className={styles.category}>{p.customLabel || 'PERSONAL'}</span>
                         <h3 className="uppercase">{p.title}</h3>
+                        {p.subtitle && <p className={styles.subtitle}>{p.subtitle}</p>}
                         <p className={styles.description}>{p.description}</p>
                         <div className={styles.roleBlock}>
                           <strong>ROL:</strong> {p.role}

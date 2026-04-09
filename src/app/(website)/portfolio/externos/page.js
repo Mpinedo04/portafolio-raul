@@ -13,8 +13,8 @@ export const revalidate = 0;
 export default async function ExternosPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, externosBanner }`) || {};
   
-  const query = `*[_type == "project" && category == "externo"] | order(_createdAt desc) {
-    _id, title, description, role, category, videoUrl,
+  const query = `*[_type == "project" && category == "externo"] | order(orderRank asc, _createdAt desc) {
+    _id, title, subtitle, customLabel, description, role, category, videoUrl,
     "imageUrl": mainImage.asset->url
   }`;
   const allProjects = await client.fetch(query) || [];
@@ -48,8 +48,9 @@ export default async function ExternosPage() {
                         )}
                       </div>
                       <div className={styles.textSide}>
-                        <span className={styles.category}>PROFESIONAL</span>
+                        <span className={styles.category}>{p.customLabel || 'PROFESIONAL'}</span>
                         <h3 className="uppercase">{p.title}</h3>
+                        {p.subtitle && <p className={styles.subtitle}>{p.subtitle}</p>}
                         <p className={styles.description}>{p.description}</p>
                         <div className={styles.roleBlock}>
                           <strong>ROL:</strong> {p.role}

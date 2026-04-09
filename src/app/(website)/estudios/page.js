@@ -162,6 +162,9 @@ export default async function StudiesPage() {
                                 </span>
                               </div>
                             )}
+                            {sw.briefDescription && (
+                              <p className={styles.swBriefDescription}>{sw.briefDescription}</p>
+                            )}
                           </div>
                         </div>
                       ))}

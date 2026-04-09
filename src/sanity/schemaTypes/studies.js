@@ -86,6 +86,13 @@ export default {
               description: '1 = Básico, 5 = Experto',
             },
             { name: 'icon', title: 'Icono / Logo del Software', type: 'image' },
+            { 
+              name: 'briefDescription', 
+              title: 'Breve Descripción', 
+              type: 'text', 
+              rows: 2,
+              description: 'Ej: "Control total de montaje y corrección de color" o "Animaciones básicas y textos"',
+            },
           ],
           preview: {
             select: { title: 'softwareName', subtitle: 'category' },

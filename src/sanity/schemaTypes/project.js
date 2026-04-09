@@ -4,7 +4,21 @@ export default {
   type: 'document',
   // Icono visual en el panel
   icon: () => '🎬',
+  orderings: [
+    {
+      title: 'Orden Manual',
+      name: 'orderRankAsc',
+      by: [{ field: 'orderRank', direction: 'asc' }],
+    },
+  ],
   fields: [
+    {
+      name: 'orderRank',
+      title: '📌 Orden de Aparición',
+      type: 'number',
+      description: 'Número más bajo = aparece primero. Usa 10, 20, 30... para poder intercalar después.',
+      validation: (Rule) => Rule.min(0),
+    },
     {
       name: 'title',
       title: 'Título del Proyecto',
@@ -22,6 +36,12 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'subtitle',
+      title: 'Subtítulo / Frase Corta',
+      type: 'string',
+      description: 'Ej: "Parodia musical de Espresso", "Documental urbano"',
+    },
+    {
       name: 'category',
       title: 'Categoría',
       type: 'string',
@@ -32,6 +52,12 @@ export default {
         ],
       },
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'customLabel',
+      title: 'Etiqueta Visible (Badge)',
+      type: 'string',
+      description: 'Texto libre para el recuadrito. Ej: "YouTube", "Estudios", "Cliente", "Empresa"',
     },
     {
       name: 'mainImage',

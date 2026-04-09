@@ -28,11 +28,18 @@ export default async function RootLayout({ children }) {
     }
   ) || {};
   
-  const headingFont = settings.headingFont || 'Poppins';
-  const bodyFont = settings.bodyFont || 'Montserrat';
-  const rawGradient = settings.backgroundGradient || 'gris-premium';
   // Robust dictionary lookup: Stega metadata includes invisible characters that break strict string equality.
   // We look for our known keys within the string to bypass this.
+  const KNOWN_HEADING_FONTS = ['Helvetica', 'Inter', 'Poppins'];
+  const KNOWN_BODY_FONTS = ['Montserrat', 'Lato', 'Open+Sans', 'Nunito'];
+  
+  const rawHeading = settings.headingFont || 'Poppins';
+  const rawBody = settings.bodyFont || 'Montserrat';
+  
+  const headingFont = KNOWN_HEADING_FONTS.find(k => rawHeading.includes(k)) || 'Poppins';
+  const bodyFont = KNOWN_BODY_FONTS.find(k => rawBody.includes(k)) || 'Montserrat';
+  
+  const rawGradient = settings.backgroundGradient || 'gris-premium';
   const backgroundGradient = ['gris-premium', 'azul-oscuro', 'negro-puro', 'grafito'].find(
     key => rawGradient.includes(key)
   ) || 'gris-premium';

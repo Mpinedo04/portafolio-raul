@@ -383,6 +383,17 @@
   color: var(--color-accent);
 }
 
+.swBriefDescription {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+  font-style: italic;
+  opacity: 0.85;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 8px;
+}
+
 /* Empty state */
 .emptyState {
   text-align: center;

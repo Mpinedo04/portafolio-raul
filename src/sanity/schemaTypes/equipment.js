@@ -3,7 +3,21 @@ export default {
   title: 'Equipamiento Técnico',
   type: 'document',
   icon: () => '🎥',
+  orderings: [
+    {
+      title: 'Orden Manual',
+      name: 'orderRankAsc',
+      by: [{ field: 'orderRank', direction: 'asc' }],
+    },
+  ],
   fields: [
+    {
+      name: 'orderRank',
+      title: '📌 Orden de Aparición',
+      type: 'number',
+      description: 'Número más bajo = aparece primero. Usa 10, 20, 30... para poder intercalar después.',
+      validation: (Rule) => Rule.min(0),
+    },
     {
       name: 'name',
       title: 'Nombre del Equipo',

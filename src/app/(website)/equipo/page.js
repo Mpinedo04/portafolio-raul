@@ -32,7 +32,7 @@ const GROUP_LABELS = {
 
 export default async function EquipmentPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
-  const allEquipment = await client.fetch(`*[_type == "equipment"] | order(category asc)`) || [];
+  const allEquipment = await client.fetch(`*[_type == "equipment"] | order(orderRank asc, category asc)`) || [];
   const workstation = await client.fetch(`*[_type == "workstation" && _id == "workstation"][0]`) || {};
 
   // Group equipment by their top-level group
