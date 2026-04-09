@@ -29,6 +29,7 @@
 }
 
 .left h3 {
+  font-family: var(--font-logo);
   font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: 3px;

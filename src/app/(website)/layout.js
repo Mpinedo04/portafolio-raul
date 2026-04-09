@@ -20,7 +20,7 @@ export async function generateMetadata() {
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
   const settings = await client.fetch(
-    `*[_id == "settings"][0]{ headingFont, bodyFont, backgroundGradient }`,
+    `*[_id == "settings"][0]{ logoFont, headingFont, subtitleFont, bodyFont, backgroundGradient }`,
     {},
     { 
       perspective: isDraftMode ? 'previewDrafts' : 'published',
@@ -30,14 +30,15 @@ export default async function RootLayout({ children }) {
   
   // Robust dictionary lookup: Stega metadata includes invisible characters that break strict string equality.
   // We look for our known keys within the string to bypass this.
-  const KNOWN_HEADING_FONTS = ['Helvetica', 'Inter', 'Poppins'];
-  const KNOWN_BODY_FONTS = ['Montserrat', 'Lato', 'Open+Sans', 'Nunito'];
+  const KNOWN_LOGO_FONTS = ['Poppins', 'Bebas+Neue', 'Oswald', 'Playfair+Display', 'Raleway', 'Inter'];
+  const KNOWN_HEADING_FONTS = ['Poppins', 'Oswald', 'Raleway', 'Inter', 'Helvetica'];
+  const KNOWN_SUBTITLE_FONTS = ['Poppins', 'Inter', 'Montserrat', 'Raleway', 'Helvetica'];
+  const KNOWN_BODY_FONTS = ['Montserrat', 'Lato', 'Open+Sans', 'Nunito', 'Inter'];
   
-  const rawHeading = settings.headingFont || 'Poppins';
-  const rawBody = settings.bodyFont || 'Montserrat';
-  
-  const headingFont = KNOWN_HEADING_FONTS.find(k => rawHeading.includes(k)) || 'Poppins';
-  const bodyFont = KNOWN_BODY_FONTS.find(k => rawBody.includes(k)) || 'Montserrat';
+  const logoFont = KNOWN_LOGO_FONTS.find(k => (settings.logoFont || '').includes(k)) || 'Poppins';
+  const headingFont = KNOWN_HEADING_FONTS.find(k => (settings.headingFont || '').includes(k)) || 'Poppins';
+  const subtitleFont = KNOWN_SUBTITLE_FONTS.find(k => (settings.subtitleFont || '').includes(k)) || 'Poppins';
+  const bodyFont = KNOWN_BODY_FONTS.find(k => (settings.bodyFont || '').includes(k)) || 'Montserrat';
   
   const rawGradient = settings.backgroundGradient || 'gris-premium';
   const backgroundGradient = ['gris-premium', 'azul-oscuro', 'negro-puro', 'grafito'].find(
@@ -55,9 +56,9 @@ export default async function RootLayout({ children }) {
   const gradientValue = GRADIENTS[backgroundGradient] ?? DEFAULT_GRADIENT;
 
   // Build the dynamic Google Font URL
-  // We request weights 400, 500, 600, 700, 800, 900 to ensure headings look correct for any chosen font.
-  // Helvetica is a system font, so it doesn't need to be loaded from Google Fonts.
-  const uniqueFonts = Array.from(new Set([headingFont, bodyFont])).filter(f => f !== 'Helvetica');
+  // Helvetica is a system font — no need to load from Google Fonts.
+  const uniqueFonts = Array.from(new Set([logoFont, headingFont, subtitleFont, bodyFont]))
+    .filter(f => f !== 'Helvetica');
   let fontUrl = 'https://fonts.googleapis.com/css2?';
   
   if (uniqueFonts.length > 0) {
@@ -70,6 +71,9 @@ export default async function RootLayout({ children }) {
     fontUrl = null;
   }
 
+  // Helper to format font-family value (replace + with space for CSS)
+  const ff = (font) => `'${font.replace(/\+/g, ' ')}', sans-serif`;
+
   return (
     <html lang="es">
       <head>
@@ -79,12 +83,13 @@ export default async function RootLayout({ children }) {
       </head>
       <body 
         style={{
-          '--font-heading': `'${headingFont.replace('+', ' ')}', sans-serif`,
-          '--font-body': `'${bodyFont.replace('+', ' ')}', sans-serif`,
+          '--font-logo': ff(logoFont),
+          '--font-heading': ff(headingFont),
+          '--font-subtitle': ff(subtitleFont),
+          '--font-body': ff(bodyFont),
           '--gradient-bg': gradientValue,
         }}
         data-bg-key={backgroundGradient}
-        data-raw-bg={settings.backgroundGradient || "not-found"}
       >
         <ScrollProgress />
         <MouseEffect />

@@ -112,30 +112,70 @@ export default {
       ],
     },
     {
-      name: 'headingFont',
-      title: 'Tipografía para Títulos',
+      name: 'logoFont',
+      title: '✏️ Tipografía del LOGO / Marca',
       type: 'string',
       group: 'typography',
+      description: 'Fuente para "RAÚL GARCÍA" en la cabecera y el pie de página.',
       options: {
         list: [
-          { title: 'Helvetica (Clásica y neutra)', value: 'Helvetica' },
-          { title: 'Inter (Moderna y muy legible)', value: 'Inter' },
           { title: 'Poppins (Llamativa y con cuerpo)', value: 'Poppins' },
+          { title: 'Bebas Neue (Alta y cinematográfica)', value: 'Bebas+Neue' },
+          { title: 'Oswald (Condensada e impactante)', value: 'Oswald' },
+          { title: 'Playfair Display (Elegante, con serifa)', value: 'Playfair+Display' },
+          { title: 'Raleway (Fina y sofisticada)', value: 'Raleway' },
+          { title: 'Inter (Limpia y moderna)', value: 'Inter' },
+        ]
+      },
+      initialValue: 'Poppins',
+    },
+    {
+      name: 'headingFont',
+      title: '🔠 Tipografía TÍTULOS Principales',
+      type: 'string',
+      group: 'typography',
+      description: 'Para títulos grandes de sección: "EQUIPO TÉCNICO", "FORMACIÓN ACADÉMICA", banners...',
+      options: {
+        list: [
+          { title: 'Poppins (Llamativa y con cuerpo)', value: 'Poppins' },
+          { title: 'Oswald (Condensada e impactante)', value: 'Oswald' },
+          { title: 'Raleway (Fina y sofisticada)', value: 'Raleway' },
+          { title: 'Inter (Limpia y moderna)', value: 'Inter' },
+          { title: 'Helvetica (Clásica y neutra)', value: 'Helvetica' },
+        ]
+      },
+      initialValue: 'Poppins',
+    },
+    {
+      name: 'subtitleFont',
+      title: '🔡 Tipografía SUBTÍTULOS / Nombres',
+      type: 'string',
+      group: 'typography',
+      description: 'Para nombres de proyecto, software, equipos, subtítulos de tarjetas...',
+      options: {
+        list: [
+          { title: 'Poppins (Llamativa y con cuerpo)', value: 'Poppins' },
+          { title: 'Inter (Limpia y moderna)', value: 'Inter' },
+          { title: 'Montserrat (Moderna y limpia)', value: 'Montserrat' },
+          { title: 'Raleway (Fina y sofisticada)', value: 'Raleway' },
+          { title: 'Helvetica (Clásica y neutra)', value: 'Helvetica' },
         ]
       },
       initialValue: 'Poppins',
     },
     {
       name: 'bodyFont',
-      title: 'Tipografía para Textos',
+      title: '📝 Tipografía CUERPO de Texto',
       type: 'string',
       group: 'typography',
+      description: 'Para descripciones, bio, párrafos, badges, navegación y textos generales.',
       options: {
         list: [
           { title: 'Montserrat (Moderna y limpia)', value: 'Montserrat' },
           { title: 'Lato (Amigable y redondeada)', value: 'Lato' },
           { title: 'Open Sans (Tradicional y neutra)', value: 'Open+Sans' },
           { title: 'Nunito (Fresca y actual)', value: 'Nunito' },
+          { title: 'Inter (Limpia y moderna)', value: 'Inter' },
         ]
       },
       initialValue: 'Montserrat',
