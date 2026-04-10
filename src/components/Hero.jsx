@@ -1,6 +1,7 @@
 import styles from './Hero.module.css';
 
 export default function Hero({ 
+  nameLine1 = "PORTAFOLIO",
   name = "RAÚL GARCÍA", 
   subHeadline = "CREANDO HISTORIAS A TRAVÉS DEL VISOR",
   headline = "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
@@ -21,7 +22,10 @@ export default function Hero({
       <div className={styles.overlay}></div>
       <div className={`${styles.content} container`}>
         <h2 className="fade-in" data-sanity="home.subHeadline">{subHeadline}</h2>
-        <h1 className={`${styles.title} fade-in uppercase`} data-sanity="home.headline">{name}</h1>
+        <h1 className={`${styles.title} fade-in uppercase`} data-sanity="home.headline">
+          <span className={styles.line1}>{nameLine1}</span>
+          <span className={styles.line2}>{name}</span>
+        </h1>
         <p className="fade-in">{headline}</p>
         <div className={styles.actions}>
           <a 

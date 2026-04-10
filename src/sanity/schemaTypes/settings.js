@@ -195,6 +195,10 @@ export default {
           { title: 'Obsidiana', value: 'obsidiana' },
           { title: 'Humo Nocturno', value: 'humo' },
           { title: 'Medianoche', value: 'medianoche' },
+          { title: 'Carbón Profundo', value: 'carbon' },
+          { title: 'Obsidiana', value: 'obsidiana' },
+          { title: 'Humo Nocturno', value: 'humo' },
+          { title: 'Medianoche', value: 'medianoche' },
         ]
       },
       initialValue: 'gris-premium',

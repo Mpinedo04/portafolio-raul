@@ -25,11 +25,20 @@ export default {
       ],
     },
     {
+      name: 'nameLine1',
+      title: 'Línea 1 del Título (Arriba)',
+      type: 'string',
+      initialValue: 'PORTAFOLIO',
+      group: 'content',
+      description: 'Primera línea del título grande. Ej: "PORTAFOLIO"',
+    },
+    {
       name: 'name',
-      title: 'Nombre en Portada (Logo Central)',
+      title: 'Línea 2 del Título (Abajo)',
       type: 'string',
       initialValue: 'RAÚL GARCÍA',
       group: 'content',
+      description: 'Segunda línea del título grande. Ej: "RAÚL GARCÍA"',
     },
     {
       name: 'subHeadline',

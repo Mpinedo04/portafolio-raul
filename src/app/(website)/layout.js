@@ -50,10 +50,10 @@ export default async function RootLayout({ children }) {
     'azul-oscuro':  'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 50%, #050505 100%)',
     'negro-puro':   'linear-gradient(180deg, #111111 0%, #050505 50%, #000000 100%)',
     'grafito':      'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%)',
-    'carbon':       'linear-gradient(180deg, #1e1e1e 0%, #0e0e0e 50%, #030303 100%)',
-    'obsidiana':    'linear-gradient(180deg, #181818 0%, #0a0a0a 40%, #000000 100%)',
-    'humo':         'linear-gradient(180deg, #303030 0%, #151515 50%, #050505 100%)',
-    'medianoche':   'linear-gradient(180deg, #1a1a22 0%, #0d0d12 50%, #020204 100%)',
+    'carbon':       'linear-gradient(180deg, #1e1e1e 0%, #0a0a09 50%, #030303 100%)',
+    'obsidiana':    'linear-gradient(180deg, #151515 0%, #050505 50%, #000000 100%)',
+    'humo':         'linear-gradient(180deg, #2c2c2c 0%, #111111 60%, #050505 100%)',
+    'medianoche':   'linear-gradient(180deg, #121214 0%, #050506 50%, #000000 100%)',
   };
 
   const DEFAULT_GRADIENT = GRADIENTS['gris-premium'];

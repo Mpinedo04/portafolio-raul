@@ -107,9 +107,8 @@
 .specs {
   color: #d0d0d0;
   font-size: 0.88rem;
-  line-height: 1.65;
+  line-height: 1.5;
   white-space: pre-line;
-  text-wrap: balance;
 }
 
 /* PC / Workstation */
