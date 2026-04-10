@@ -46,7 +46,7 @@ export default async function Home() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(orderRank asc, _createdAt desc) {
-    _id, title, subtitle, customLabel, role, category, videoUrl,
+    _id, title, subtitle, customLabel, role, category, videoUrl, mainImage,
     "imageUrl": mainImage.asset->url
   }`) || [];
 
