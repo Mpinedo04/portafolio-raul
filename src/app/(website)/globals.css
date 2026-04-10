@@ -12,11 +12,11 @@
   --color-text-secondary: #a0a0a0;
   --color-text-muted: #c0c0c0;
 
-  /* Azul turquesa (único color de acento) */
-  --color-accent: #008080;
+  /* Azul turquesa (único color de acento — todo unificado a clarito) */
+  --color-accent: #30d5c8;
   --color-accent-light: #30d5c8;
   --color-accent-bright: #30d5c8;
-  --color-accent-dark: #006666;
+  --color-accent-dark: #1a9e94;
 
   /* Gradientes */
   --gradient-bg: linear-gradient(180deg, #383838 0%, #1a1a1a 45%, #060606 100%);

@@ -46,11 +46,12 @@
 }
 
 .content h1 {
-  font-size: 6rem;
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 800;
   margin: -10px 0;
   line-height: 1;
   letter-spacing: -2px;
+  word-break: break-word;
   background: linear-gradient(
     135deg,
     #ffffff 0%,

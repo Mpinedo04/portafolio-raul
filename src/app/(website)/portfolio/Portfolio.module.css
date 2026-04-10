@@ -217,9 +217,9 @@
 }
 
 .hubOverlay p {
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   color: var(--color-text-secondary);
-  max-width: 320px;
+  white-space: nowrap;
   margin: 0 auto;
   line-height: 1.6;
 }

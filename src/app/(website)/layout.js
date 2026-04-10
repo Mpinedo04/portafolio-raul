@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
   const bodyFont = KNOWN_BODY_FONTS.find(k => (settings.bodyFont || '').includes(k)) || 'Montserrat';
   
   const rawGradient = settings.backgroundGradient || 'gris-premium';
-  const backgroundGradient = ['gris-premium', 'azul-oscuro', 'negro-puro', 'grafito'].find(
+  const backgroundGradient = ['gris-premium', 'azul-oscuro', 'negro-puro', 'grafito', 'carbon', 'obsidiana', 'humo', 'medianoche'].find(
     key => rawGradient.includes(key)
   ) || 'gris-premium';
 
@@ -50,6 +50,10 @@ export default async function RootLayout({ children }) {
     'azul-oscuro':  'linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 50%, #050505 100%)',
     'negro-puro':   'linear-gradient(180deg, #111111 0%, #050505 50%, #000000 100%)',
     'grafito':      'linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+    'carbon':       'linear-gradient(180deg, #1e1e1e 0%, #0e0e0e 50%, #030303 100%)',
+    'obsidiana':    'linear-gradient(180deg, #181818 0%, #0a0a0a 40%, #000000 100%)',
+    'humo':         'linear-gradient(180deg, #303030 0%, #151515 50%, #050505 100%)',
+    'medianoche':   'linear-gradient(180deg, #1a1a22 0%, #0d0d12 50%, #020204 100%)',
   };
 
   const DEFAULT_GRADIENT = GRADIENTS['gris-premium'];

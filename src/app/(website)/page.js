@@ -43,7 +43,10 @@ export default async function Home() {
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
-  const projects = await client.fetch(`*[_type == "project" && featured == true] | order(_createdAt desc)`) || [];
+  const projects = await client.fetch(`*[_type == "project" && featured == true] | order(orderRank asc, _createdAt desc) {
+    _id, title, subtitle, customLabel, role, category, videoUrl,
+    "imageUrl": mainImage.asset->url
+  }`) || [];
 
   return (
     <>
@@ -105,8 +108,9 @@ export default async function Home() {
                       )}
                     </div>
                     <div className={styles.projectInfo}>
+                      {project.customLabel && <span className={styles.badge}>{project.customLabel}</span>}
                       <h3 className="uppercase">{project.title}</h3>
-                      <p>{(project.description || "").substring(0, 100)}...</p>
+                      {project.subtitle && <p className={styles.subtitle}>{project.subtitle}</p>}
                       <span className={styles.role}>Rol: {project.role}</span>
                     </div>
                   </div>
@@ -118,8 +122,9 @@ export default async function Home() {
                       <img src="https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop" alt="Proyecto destacado" />
                     </div>
                     <div className={styles.projectInfo}>
+                      <span className={styles.badge}>PROYECTO</span>
                       <h3>CATARSIS</h3>
-                      <p>Cortometraje de ficción. Drama psicológico.</p>
+                      <p className={styles.subtitle}>Cortometraje de ficción</p>
                       <span className={styles.role}>Rol: Director & Montador</span>
                     </div>
                   </div>
@@ -128,8 +133,9 @@ export default async function Home() {
                       <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop" alt="Proyecto destacado" />
                     </div>
                     <div className={styles.projectInfo}>
+                      <span className={styles.badge}>PROYECTO</span>
                       <h3>IMÁGENES OCULTAS</h3>
-                      <p>Documental experimental sobre la vida urbana.</p>
+                      <p className={styles.subtitle}>Documental experimental</p>
                       <span className={styles.role}>Rol: Director de Fotografía</span>
                     </div>
                   </div>
