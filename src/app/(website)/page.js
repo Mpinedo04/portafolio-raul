@@ -22,6 +22,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const home = await client.fetch(`*[_type == "home" && _id == "home"][0]{
+    nameLine1,
     name, 
     subHeadline,
     headline,
@@ -29,7 +30,8 @@ export default async function Home() {
     heroButtons,
     seo
   }`) || {
-    name: "PORTAFOLIO RAÚL GARCÍA",
+    nameLine1: "PORTAFOLIO",
+    name: "RAÚL GARCÍA",
     subHeadline: "CREANDO HISTORIAS A TRAVÉS DEL VISOR",
     headline: "Filmmaker & Editor de Vídeo",
     heroImage: null,
@@ -53,6 +55,7 @@ export default async function Home() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       <div className={styles.about}>
         <Hero 
+          nameLine1={home.nameLine1}
           name={home.name} 
           subHeadline={home.subHeadline}
           headline={home.headline} 
