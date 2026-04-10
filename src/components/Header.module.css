@@ -220,7 +220,7 @@
 }
 
 @media (max-width: 768px) {
-  .desktopNav, .socials {
+  .nav, .socials {
     display: none;
   }
 
