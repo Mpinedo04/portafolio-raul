@@ -216,6 +216,7 @@
   border: none;
   color: var(--color-text-primary);
   cursor: pointer;
+  z-index: 2000; /* Above the mobile menu overlay */
 }
 
 @media (max-width: 768px) {
@@ -229,25 +230,30 @@
 
   .mobileMenu {
     position: fixed;
-    top: 80px;
+    top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: 100vh;
     background: rgba(10, 10, 10, 0.98);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px) saturate(180%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 36px;
+    justify-content: flex-start;
+    padding: 120px 20px 60px; /* Space for the header logo/button at top */
+    gap: 28px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     animation: fadeIn 0.3s ease forwards;
+    z-index: 1500;
   }
 
   .mobileMenu a {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 3px;
+    transition: color 0.3s ease;
   }
 
   .mobileSection {
