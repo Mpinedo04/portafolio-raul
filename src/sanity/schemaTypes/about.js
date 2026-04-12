@@ -61,20 +61,7 @@ export default {
       options: { hotspot: true },
       group: 'content',
     },
-    {
-      name: 'galleryTitle',
-      title: 'Título de Galería',
-      type: 'string',
-      initialValue: 'EN ACCIÓN',
-      group: 'content',
-    },
-    {
-      name: 'actionPhotos',
-      title: 'Fotos en Acción / Rodaje',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      group: 'content',
-    },
+
     {
       name: 'cvFile',
       title: 'Archivo CV (PDF)',
@@ -104,6 +91,20 @@ export default {
           },
         },
       ],
+    },
+    {
+      name: 'galleryTitle',
+      title: 'Título de Galería',
+      type: 'string',
+      initialValue: 'EN ACCIÓN',
+      group: 'content',
+    },
+    {
+      name: 'actionPhotos',
+      title: 'Fotos en Acción / Rodaje',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      group: 'content',
     },
   ],
 };

@@ -102,7 +102,7 @@ export default async function AboutPage() {
         {/* Galería En Acción */}
         <section className={styles.gallery}>
           <div className="container">
-            <h2>{about.galleryTitle || "EN ACCIÓN"}</h2>
+            <h2 className={styles.timelineTitle}>{about.galleryTitle || "EN ACCIÓN"}</h2>
             
             <div className={styles.photoGrid}>
               {hasActionPhotos ? (
