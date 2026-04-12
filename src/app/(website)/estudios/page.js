@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react';
 import styles from './Studies.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
@@ -102,10 +103,12 @@ export default async function StudiesPage() {
               <div className={styles.coursesGrid}>
                 {courses.map((course, i) => (
                   <div key={i} className={styles.courseCard}>
-                    <h4>{course.courseName}</h4>
-                    <p>{course.institution}</p>
-                    {course.year && <span className={styles.year}>{course.year}</span>}
-                    {course.description && <p className={styles.courseDescription}>{course.description}</p>}
+                    <div className={styles.courseContent}>
+                      <h4>{course.courseName}</h4>
+                      <p className={styles.institution}>{course.institution}</p>
+                      {course.year && <span className={styles.year}>{course.year}</span>}
+                      {course.description && <p className={styles.courseDescription}>{course.description}</p>}
+                    </div>
                     
                     {(course.certificateFileUrl || course.certificate) && (
                       <a 
@@ -114,7 +117,8 @@ export default async function StudiesPage() {
                         rel="noopener noreferrer" 
                         className={styles.certLink}
                       >
-                        <span className={styles.pdfIcon}>📌</span> Ver Certificado (PDF)
+                        <FileText size={18} className={styles.pdfIcon} />
+                        <span>Ver Certificado (PDF)</span>
                       </a>
                     )}
                   </div>
