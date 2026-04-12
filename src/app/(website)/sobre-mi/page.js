@@ -18,12 +18,14 @@ export async function generateMetadata() {
 export default async function AboutPage() {
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio, title, subtitle, storyTitle,
-    profileImage, bannerImage, stages, cvFile, seo
+    profileImage, bannerImage, stages, cvFile, seo,
+    galleryTitle, actionPhotos
   }`) || {};
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const stages = about.stages || [];
   const bannerImg = about.bannerImage?.asset ? urlFor(about.bannerImage).url() : null;
+  const hasActionPhotos = Array.isArray(about.actionPhotos) && about.actionPhotos.length > 0;
 
   return (
     <>
@@ -96,6 +98,29 @@ export default async function AboutPage() {
             </div>
           </section>
         )}
+
+        {/* Galería En Acción */}
+        <section className={styles.gallery}>
+          <div className="container">
+            <h2>{about.galleryTitle || "EN ACCIÓN"}</h2>
+            
+            <div className={styles.photoGrid}>
+              {hasActionPhotos ? (
+                about.actionPhotos
+                  .filter(photo => photo?.asset)
+                  .map((photo, i) => (
+                    <img key={i} src={urlFor(photo).url()} alt={`Rodaje ${i + 1}`} />
+                  ))
+              ) : (
+                <>
+                  <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=2056&auto=format&fit=crop" alt="Rodaje Placeholder 1" />
+                  <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=2070&auto=format&fit=crop" alt="Rodaje Placeholder 2" />
+                  <img src="https://images.unsplash.com/photo-1540655037529-dec987208707?q=80&w=2070&auto=format&fit=crop" alt="Rodaje Placeholder 3" />
+                </>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer

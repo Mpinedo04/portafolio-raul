@@ -233,3 +233,48 @@
     display: none;
   }
 }
+
+/* Galería En Acción */
+.gallery {
+  padding: 80px 0;
+}
+
+.gallery h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  letter-spacing: -1px;
+  margin-bottom: 40px;
+  color: var(--color-text-primary);
+  opacity: 0.8;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.photoGrid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  filter: grayscale(100%);
+  transition: all 0.5s ease;
+  border: 1px solid var(--color-border);
+}
+
+.photoGrid img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .photoGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
