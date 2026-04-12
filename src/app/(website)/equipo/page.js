@@ -33,7 +33,7 @@ const GROUP_LABELS = {
 export default async function EquipmentPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const allEquipment = await client.fetch(`*[_type == "equipment"] | order(orderRank asc, category asc)`) || [];
-  const workstation = await client.fetch(`*[_type == "workstation" && _id == "workstation"][0]`) || {};
+  const workstation = await client.fetch(`*[_type == "workstation" && _id == "workstation"][0]{ title, subtitle, bannerImage, components }`) || {};
 
   // Group equipment by their top-level group
   const grouped = {};
@@ -72,8 +72,8 @@ export default async function EquipmentPage() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
 
       <PageBanner
-        title="EQUIPO TÉCNICO"
-        subtitle="Herramientas de alta gama para resultados cinematográficos."
+        title={workstation.title || "EQUIPO TÉCNICO"}
+        subtitle={workstation.subtitle || "Herramientas de alta gama para resultados cinematográficos."}
         backgroundImage={bannerImg}
       />
 

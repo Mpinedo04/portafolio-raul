@@ -146,6 +146,21 @@
   letter-spacing: 1px;
 }
 
+.courseDescription {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-top: 6px;
+  font-style: italic;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+}
+
+.pdfIcon {
+  margin-right: 4px;
+  font-size: 1rem;
+}
+
 .certLink {
   display: inline-block;
   margin-top: 10px;

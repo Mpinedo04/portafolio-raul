@@ -11,10 +11,16 @@ export default {
       options: { hotspot: true },
     },
     {
-      name: 'bannerTitle',
-      title: 'Título del Banner',
+      name: 'title',
+      title: 'Título de la Sección',
       type: 'string',
       initialValue: 'ESTUDIOS Y CONOCIMIENTOS',
+    },
+    {
+      name: 'subtitle',
+      title: 'Subtítulo',
+      type: 'string',
+      initialValue: 'Formación continua para perfeccionar el arte audiovisual.',
     },
     {
       name: 'education',
@@ -47,7 +53,8 @@ export default {
             { name: 'courseName', title: 'Nombre del Curso', type: 'string', validation: (Rule) => Rule.required() },
             { name: 'institution', title: 'Plataforma / Centro', type: 'string' },
             { name: 'year', title: 'Año', type: 'string' },
-            { name: 'certificate', title: 'Enlace al Certificado', type: 'url' },
+            { name: 'description', title: 'Descripción del Curso', type: 'text', rows: 2, description: 'Explica brevemente de qué trataba la formación.' },
+            { name: 'certificateFile', title: 'Archivo de Certificado (PDF)', type: 'file', options: { accept: '.pdf' } },
           ],
           preview: {
             select: { title: 'courseName', subtitle: 'institution' },

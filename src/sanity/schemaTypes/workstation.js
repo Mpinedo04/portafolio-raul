@@ -5,6 +5,18 @@ export default {
   icon: () => '🖥️',
   fields: [
     {
+      name: 'title',
+      title: 'Título de la Sección',
+      type: 'string',
+      initialValue: 'EQUIPO TÉCNICO',
+    },
+    {
+      name: 'subtitle',
+      title: 'Subtítulo',
+      type: 'string',
+      initialValue: 'Herramientas de alta gama para resultados cinematográficos.',
+    },
+    {
       name: 'bannerImage',
       title: 'Imagen de Fondo Cabecera (Página Equipo)',
       type: 'image',

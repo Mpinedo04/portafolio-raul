@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function PropiosPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, propiosBanner }`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, propiosBanner, propiosTitle, propiosSubtitle }`) || {};
   
   const query = `*[_type == "project" && category == "propio"] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, description, role, category, videoUrl,
@@ -26,8 +26,8 @@ export default async function PropiosPage() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
 
       <PageBanner
-        title="PROYECTOS PROPIOS"
-        subtitle="Explora mis cortometrajes, proyectos de estudio y producciones personales."
+        title={settings.propiosTitle || "PROYECTOS PROPIOS"}
+        subtitle={settings.propiosSubtitle || "Cortometrajes, estudios y experimentación personal."}
         backgroundImage={bannerImg}
       />
 

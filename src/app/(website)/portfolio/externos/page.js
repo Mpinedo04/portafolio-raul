@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function ExternosPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, externosBanner }`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, externosBanner, externosTitle, externosSubtitle }`) || {};
   
   const query = `*[_type == "project" && category == "externo"] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, description, role, category, videoUrl,
@@ -26,8 +26,8 @@ export default async function ExternosPage() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
 
       <PageBanner
-        title="TRABAJOS EXTERNOS"
-        subtitle="Explora mis trabajos profesionales para clientes, marcas y empresas."
+        title={settings.externosTitle || "TRABAJOS EXTERNOS"}
+        subtitle={settings.externosSubtitle || "Explora mis trabajos profesionales para clientes, marcas y empresas."}
         backgroundImage={bannerImg}
       />
 

@@ -18,7 +18,13 @@ export async function generateMetadata() {
 export default async function StudiesPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const data = await client.fetch(
-    `*[_type == "studies" && _id == "studies"][0]`,
+    `*[_type == "studies" && _id == "studies"][0]{
+      ...,
+      courses[]{
+        ...,
+        "certificateFileUrl": certificateFile.asset->url
+      }
+    }`,
     {},
     { next: { revalidate: 0, tags: ['studies'] } }
   ) || {};
@@ -54,8 +60,8 @@ export default async function StudiesPage() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
       
       <PageBanner 
-        title={data.bannerTitle || "ESTUDIOS Y CONOCIMIENTOS"} 
-        subtitle="Formación académica, certificaciones y herramientas profesionales."
+        title={data.title || "ESTUDIOS Y CONOCIMIENTOS"} 
+        subtitle={data.subtitle || "Formación académica, certificaciones y herramientas profesionales."}
         backgroundImage={bannerImg}
       />
 
@@ -99,9 +105,16 @@ export default async function StudiesPage() {
                     <h4>{course.courseName}</h4>
                     <p>{course.institution}</p>
                     {course.year && <span className={styles.year}>{course.year}</span>}
-                    {course.certificate && (
-                      <a href={course.certificate} target="_blank" rel="noopener noreferrer" className={styles.certLink}>
-                        Ver Certificado →
+                    {course.description && <p className={styles.courseDescription}>{course.description}</p>}
+                    
+                    {(course.certificateFileUrl || course.certificate) && (
+                      <a 
+                        href={course.certificateFileUrl || course.certificate} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={styles.certLink}
+                      >
+                        <span className={styles.pdfIcon}>📌</span> Ver Certificado (PDF)
                       </a>
                     )}
                   </div>

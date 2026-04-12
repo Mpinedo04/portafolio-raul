@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 export const revalidate = 10;
 
 export default async function PortfolioHub() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner }`) || {};
+  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner, portfolioTitle, portfolioSubtitle }`) || {};
   
   const bannerImg = settings.portfolioBanner?.asset ? urlFor(settings.portfolioBanner).url() : null;
 
@@ -18,8 +18,8 @@ export default async function PortfolioHub() {
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
 
       <PageBanner
-        title="PROYECTOS"
-        subtitle="Selecciona una categoría para explorar mi trayectoria creativa."
+        title={settings.portfolioTitle || "PROYECTOS"}
+        subtitle={settings.portfolioSubtitle || "Selecciona una categoría para explorar mi trayectoria creativa."}
         backgroundImage={bannerImg}
       />
 
