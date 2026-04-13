@@ -251,11 +251,11 @@
 
 .swiperContainer {
   position: relative;
-  padding: 0 60px; /* Espacio para flechas */
+  padding: 0 60px;
   max-width: 1100px;
   margin: 0 auto;
-  perspective: 2000px; /* Aumentado para un efecto 3D más profundo */
-  min-height: 400px; /* Altura mínima para que los efectos 3D no colapsen */
+  perspective: 2000px;
+  min-height: 480px; /* Rigid vertical space */
 }
 
 .mySwiper {
@@ -277,8 +277,8 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   width: 100%;
-  min-height: 450px; /* Altura constante para que el Cubo/Giro funcione matemáticamente */
-  align-content: start;
+  aspect-ratio: 16 / 10; /* Fixed geometry for 3D engine */
+  align-content: stretch;
 }
 
 .photoBox, .photoBoxEmpty {
@@ -312,7 +312,7 @@
 /* Custom Arrows */
 .navArrow {
   position: absolute;
-  top: calc(50% - 25px); /* Perfectly centered vertically, ignoring pagination padding */
+  top: calc(50% - 25px); /* Perfectly centered, ignoring pagination bottom area */
   transform: translateY(-50%);
   background: rgba(30, 30, 30, 0.6);
   border: 1px solid var(--color-border);

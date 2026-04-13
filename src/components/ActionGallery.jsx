@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { 
   EffectCube, 
@@ -9,24 +9,23 @@ import {
   Navigation, 
   Pagination 
 } from 'swiper/modules';
-import { ChevronLeft, ChevronRight, Maximize2, Layers, Box, RefreshCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/lib/image';
 
 const ALL_MODULES = [EffectCube, EffectFade, EffectFlip, EffectCreative, Navigation, Pagination];
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-cube';
-import 'swiper/css/effect-fade';
-import 'swiper/css/effect-flip';
-import 'swiper/css/effect-creative';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
+// CSS moved to layout.js for global scope stability
 import styles from '../app/(website)/sobre-mi/About.module.css';
 
 export default function ActionGallery({ photos = [], effect = 'cube' }) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   if (!photos || photos.length === 0) return null;
+  if (!isMounted) return <div style={{ minHeight: '480px' }} />; // Placeholder to avoid layout shift
 
   // Chunk photos into groups of 6
   const chunks = [];
@@ -55,10 +54,11 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
     <div className={styles.carouselWrapper}>
       <div className={styles.swiperContainer}>
         <Swiper
-          key={effect} // Forces re-initialization when effect changes in Sanity
+          key={effect}
           modules={ALL_MODULES}
           effect={effect || 'cube'}
           grabCursor={true}
+          loop={photos.length > 6}
           navigation={{
             prevEl: `.${styles.prevArrow}`,
             nextEl: `.${styles.nextArrow}`,
@@ -68,10 +68,10 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
             bulletClass: styles.paginationBullet,
             bulletActiveClass: styles.paginationBulletActive
           }}
-          cubeEffect={effect === 'cube' ? cubeConfig : undefined}
-          creativeEffect={effect === 'creative' ? creativeConfig : undefined}
+          cubeEffect={cubeConfig}
+          creativeEffect={creativeConfig}
           watchSlidesProgress={true}
-          speed={1000}
+          speed={1100}
           className={styles.mySwiper}
         >
           {chunks.map((group, index) => (
