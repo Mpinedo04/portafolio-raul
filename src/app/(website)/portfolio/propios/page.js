@@ -44,7 +44,7 @@ export default async function PropiosPage() {
                 allProjects.map((p) => {
                   const thumb = p.imageUrl || "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop";
                   return (
-                    <div key={p._id} className={styles.projectItem}>
+                    <div key={p._id} className={`${styles.projectItem} bts-card-trigger`}>
                       <div className={styles.mediaSide}>
                         {p.videoUrl ? (
                           <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />

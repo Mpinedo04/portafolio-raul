@@ -7,19 +7,44 @@
   border: none;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 4px 15px rgba(48, 213, 200, 0.3);
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.btnText {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+:global(.bts-card-trigger):hover .triggerBtn {
+  width: 154px;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px rgba(48, 213, 200, 0.45);
+}
+
+:global(.bts-card-trigger):hover .btnText {
+  opacity: 1;
+  max-width: 100px;
+  margin-left: 8px;
 }
 
 .triggerBtn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(48, 213, 200, 0.45);
+  transform: translateY(-2px);
 }
 
 .lightbox {

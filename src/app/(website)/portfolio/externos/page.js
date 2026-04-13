@@ -44,7 +44,7 @@ export default async function ExternosPage() {
                 allProjects.map((p) => {
                   const thumb = p.imageUrl || "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop";
                   return (
-                    <div key={p._id} className={styles.projectItem}>
+                    <div key={p._id} className={`${styles.projectItem} bts-card-trigger`}>
                       <div className={styles.mediaSide}>
                         {p.videoUrl ? (
                           <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />

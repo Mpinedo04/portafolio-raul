@@ -79,6 +79,7 @@ export default function BtsGallery({ items = [] }) {
         title="Galería Behind The Scenes"
       >
         <Camera size={20} />
+        <span className={styles.btnText}>VER GALERÍA</span>
       </button>
 
       {/* Lightbox Modal via Portal */}
