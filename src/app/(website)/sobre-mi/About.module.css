@@ -208,6 +208,9 @@
   line-height: 1.8;
   color: var(--color-text-secondary);
   text-align: justify;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 @media (max-width: 992px) {
