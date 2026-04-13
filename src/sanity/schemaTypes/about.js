@@ -100,6 +100,21 @@ export default {
       group: 'content',
     },
     {
+      name: 'galleryEffect',
+      title: 'Efecto de Transición',
+      type: 'string',
+      group: 'content',
+      options: {
+        list: [
+          { title: 'Cubo 3D', value: 'cube' },
+          { title: 'Desvanecer', value: 'fade' },
+          { title: 'Giro 3D', value: 'flip' },
+          { title: 'Creativo (Tarjetas)', value: 'creative' },
+        ],
+      },
+      initialValue: 'cube',
+    },
+    {
       name: 'actionPhotos',
       title: 'Fotos en Acción / Rodaje',
       type: 'array',

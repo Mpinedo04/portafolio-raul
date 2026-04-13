@@ -23,16 +23,7 @@ import 'swiper/css/pagination';
 
 import styles from '../app/(website)/sobre-mi/About.module.css';
 
-const effects = [
-  { id: 'cube', label: 'Cubo', icon: Box, module: EffectCube },
-  { id: 'fade', label: 'Desvanecer', icon: RefreshCcw, module: EffectFade },
-  { id: 'flip', label: 'Giro 3D', icon: Layers, module: EffectFlip },
-  { id: 'creative', label: 'Creativo', icon: Maximize2, module: EffectCreative },
-];
-
-export default function ActionGallery({ photos = [] }) {
-  const [activeEffect, setActiveEffect] = useState('cube');
-
+export default function ActionGallery({ photos = [], effect = 'cube' }) {
   if (!photos || photos.length === 0) return null;
 
   // Chunk photos into groups of 6
@@ -42,7 +33,7 @@ export default function ActionGallery({ photos = [] }) {
   }
 
   const getEffectModule = () => {
-    switch(activeEffect) {
+    switch(effect) {
       case 'cube': return [EffectCube, Navigation, Pagination];
       case 'fade': return [EffectFade, Navigation, Pagination];
       case 'flip': return [EffectFlip, Navigation, Pagination];
@@ -70,28 +61,10 @@ export default function ActionGallery({ photos = [] }) {
 
   return (
     <div className={styles.carouselWrapper}>
-      {/* Effect Switcher Label */}
-      <div className={styles.effectSwitcher}>
-        {effects.map((eff) => {
-          const Icon = eff.icon;
-          return (
-            <button
-              key={eff.id}
-              onClick={() => setActiveEffect(eff.id)}
-              className={`${styles.effectBtn} ${activeEffect === eff.id ? styles.activeEff : ''}`}
-              title={`Efecto: ${eff.label}`}
-            >
-              <Icon size={16} />
-              <span>{eff.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
       <div className={styles.swiperContainer}>
         <Swiper
           modules={getEffectModule()}
-          effect={activeEffect}
+          effect={effect}
           grabCursor={true}
           navigation={{
             prevEl: `.${styles.prevArrow}`,
@@ -102,8 +75,8 @@ export default function ActionGallery({ photos = [] }) {
             bulletClass: styles.paginationBullet,
             bulletActiveClass: styles.paginationBulletActive
           }}
-          cubeEffect={activeEffect === 'cube' ? cubeConfig : undefined}
-          creativeEffect={activeEffect === 'creative' ? creativeConfig : undefined}
+          cubeEffect={effect === 'cube' ? cubeConfig : undefined}
+          creativeEffect={effect === 'creative' ? creativeConfig : undefined}
           speed={800}
           className={styles.mySwiper}
         >

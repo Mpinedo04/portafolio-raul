@@ -20,7 +20,7 @@ export default async function AboutPage() {
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio, title, subtitle, storyTitle,
     profileImage, bannerImage, stages, cvFile, seo,
-    galleryTitle, actionPhotos
+    galleryTitle, galleryEffect, actionPhotos
   }`) || {};
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
@@ -105,7 +105,7 @@ export default async function AboutPage() {
           <div className="container">
             <h2 className={styles.timelineTitle}>{about.galleryTitle || "EN ACCIÓN"}</h2>
             
-            <ActionGallery photos={about.actionPhotos} />
+            <ActionGallery photos={about.actionPhotos} effect={about.galleryEffect} />
           </div>
         </section>
       </div>
