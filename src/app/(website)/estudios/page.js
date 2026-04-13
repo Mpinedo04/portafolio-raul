@@ -137,7 +137,7 @@ export default async function StudiesPage() {
               <div className={styles.softwareGroups} data-debug-grouped="true">
                 {Object.entries(softwareByCategory)
                   .sort(([a], [b]) => {
-                    const order = ['video', 'audio', 'vfx', 'design', 'other'];
+                    const order = ['video', 'audio', 'design', 'vfx', 'other'];
                     return order.indexOf(a) - order.indexOf(b);
                   })
                   .map(([cat, items]) => (
