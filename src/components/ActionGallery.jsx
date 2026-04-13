@@ -12,6 +12,8 @@ import {
 import { ChevronLeft, ChevronRight, Maximize2, Layers, Box, RefreshCcw } from 'lucide-react';
 import { urlFor } from '@/sanity/lib/image';
 
+const ALL_MODULES = [EffectCube, EffectFade, EffectFlip, EffectCreative, Navigation, Pagination];
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-cube';
@@ -31,16 +33,6 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   for (let i = 0; i < photos.length; i += 6) {
     chunks.push(photos.slice(i, i + 6));
   }
-
-  const getEffectModule = () => {
-    switch(effect) {
-      case 'cube': return [EffectCube, Navigation, Pagination];
-      case 'fade': return [EffectFade, Navigation, Pagination];
-      case 'flip': return [EffectFlip, Navigation, Pagination];
-      case 'creative': return [EffectCreative, Navigation, Pagination];
-      default: return [EffectCube, Navigation, Pagination];
-    }
-  };
 
   const creativeConfig = {
     prev: {
@@ -63,8 +55,9 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
     <div className={styles.carouselWrapper}>
       <div className={styles.swiperContainer}>
         <Swiper
-          modules={getEffectModule()}
-          effect={effect}
+          key={effect} // Forces re-initialization when effect changes in Sanity
+          modules={ALL_MODULES}
+          effect={effect || 'cube'}
           grabCursor={true}
           navigation={{
             prevEl: `.${styles.prevArrow}`,
