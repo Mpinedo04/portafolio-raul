@@ -74,10 +74,27 @@ export default {
       description: 'Enlace al vídeo para incrustar',
     },
     {
-      name: 'gallery',
-      title: 'Galería de Fotos',
+      name: 'behindTheScenes',
+      title: 'Making Of / BTS (Fotos y Vídeos)',
       type: 'array',
-      of: [{ type: 'image' }],
+      of: [
+        { type: 'image', options: { hotspot: true }, title: 'Imagen directa' },
+        {
+          type: 'object',
+          name: 'youtubeVideo',
+          title: 'Vídeo de YouTube / Vimeo',
+          fields: [
+            { name: 'url', title: 'Enlace del Video', type: 'url' }
+          ],
+          preview: {
+            select: { subtitle: 'url' },
+            prepare(selection) {
+              return { title: '🎥 Vídeo BTS', subtitle: selection.subtitle }
+            }
+          }
+        }
+      ],
+      description: 'Añade fotos o pega la URL a vídeos de tomas falsas u otros momentos.',
     },
     {
       name: 'audioUrl',

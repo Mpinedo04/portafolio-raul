@@ -4,6 +4,7 @@ import { urlFor } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
+import BtsGallery from '@/components/BtsGallery';
 import Footer from '@/components/Footer';
 import EmptyState from '@/components/EmptyState';
 
@@ -15,7 +16,11 @@ export default async function PropiosPage() {
   
   const query = `*[_type == "project" && category == "propio"] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, description, role, category, videoUrl,
-    "imageUrl": mainImage.asset->url
+    "imageUrl": mainImage.asset->url,
+    behindTheScenes[]{
+      _type,
+      "url": coalesce(asset->url, url)
+    }
   }`;
   const allProjects = await client.fetch(query) || [];
 
@@ -48,6 +53,9 @@ export default async function PropiosPage() {
                         )}
                       </div>
                       <div className={styles.textSide}>
+                        {p.behindTheScenes && p.behindTheScenes.length > 0 && (
+                          <BtsGallery items={p.behindTheScenes} />
+                        )}
                         <span className={styles.category}>{p.customLabel || 'PERSONAL'}</span>
                         <h3 className="uppercase">{p.title}</h3>
                         {p.subtitle && <p className={styles.subtitle}>{p.subtitle}</p>}
