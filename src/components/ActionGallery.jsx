@@ -70,7 +70,8 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           }}
           cubeEffect={effect === 'cube' ? cubeConfig : undefined}
           creativeEffect={effect === 'creative' ? creativeConfig : undefined}
-          speed={800}
+          watchSlidesProgress={true}
+          speed={1000}
           className={styles.mySwiper}
         >
           {chunks.map((group, index) => (
