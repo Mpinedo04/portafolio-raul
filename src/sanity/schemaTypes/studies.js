@@ -79,8 +79,8 @@ export default {
                 list: [
                   { title: 'Edición de Vídeo', value: 'video' },
                   { title: 'Audio / Sonido', value: 'audio' },
-                  { title: 'Diseño / Gráficos', value: 'design' },
-                  { title: 'Efectos Visuales', value: 'vfx' },
+                  { title: 'Edición Fotográfica / Diseño', value: 'design' },
+                  { title: 'Efectos Visuales / Animación', value: 'vfx' },
                   { title: 'Otros', value: 'other' },
                 ],
               },

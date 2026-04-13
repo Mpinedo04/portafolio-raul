@@ -49,8 +49,8 @@ export default async function StudiesPage() {
   const categoryLabels = {
     video: 'Edición de Vídeo',
     audio: 'Audio / Sonido',
-    design: 'Diseño / Gráficos',
-    vfx: 'Efectos Visuales',
+    design: 'Edición Fotográfica / Diseño',
+    vfx: 'Efectos Visuales / Animación',
     other: 'Otros',
   };
 
