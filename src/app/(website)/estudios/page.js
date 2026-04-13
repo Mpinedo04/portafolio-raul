@@ -162,21 +162,23 @@ export default async function StudiesPage() {
                                     style={{ width: `${(sw.level / 5) * 100}%` }}
                                   ></div>
                                 </div>
-                                <div className={styles.levelMetrics}>
-                                  {[1, 2, 3, 4, 5].map(n => (
-                                    <span key={n} className={`${styles.levelNum} ${n === sw.level ? styles.activeNum : ''}`}>
-                                      {n}
-                                    </span>
-                                  ))}
+                                <div className={styles.levelDetails}>
+                                  <div className={styles.levelMetrics}>
+                                    {[1, 2, 3, 4, 5].map(n => (
+                                      <span key={n} className={`${styles.levelNum} ${n === sw.level ? styles.activeNum : ''}`}>
+                                        {n}
+                                      </span>
+                                    ))}
+                                  </div>
+                                  <span className={styles.levelText}>
+                                    {
+                                      sw.level === 5 ? 'Dominio Total' :
+                                      sw.level === 4 ? 'Avanzado' :
+                                      sw.level === 3 ? 'Intermedio' :
+                                      sw.level === 2 ? 'Básico' : 'Principiante'
+                                    }
+                                  </span>
                                 </div>
-                                <span className={styles.levelText}>
-                                  {
-                                    sw.level === 5 ? 'Dominio Total' :
-                                    sw.level === 4 ? 'Avanzado' :
-                                    sw.level === 3 ? 'Intermedio' :
-                                    sw.level === 2 ? 'Básico' : 'Principiante'
-                                  }
-                                </span>
                               </div>
                             )}
                             {sw.briefDescription && (
