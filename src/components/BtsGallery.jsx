@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Camera, X, ChevronLeft, ChevronRight, PlayCircle, Grid } from 'lucide-react';
 import styles from './BtsGallery.module.css';
 import VideoEmbed from './VideoEmbed';
@@ -7,6 +8,9 @@ import VideoEmbed from './VideoEmbed';
 export default function BtsGallery({ items = [] }) {
   const [viewMode, setViewMode] = useState('hidden'); // 'hidden', 'grid', 'carousel'
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -56,9 +60,8 @@ export default function BtsGallery({ items = [] }) {
   const getThumbnail = (item) => {
     if (item._type === 'image') return item.url;
     if (item._type === 'youtubeVideo') {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-      const match = item.url.match(regExp);
-      const ytId = (match && match[2].length === 11) ? match[2] : null;
+      const match = item.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^#\&\?]*)/);
+      const ytId = match && match[1] ? match[1] : null;
       if (ytId) return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
     }
     return 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2025&auto=format&fit=crop';
@@ -78,8 +81,8 @@ export default function BtsGallery({ items = [] }) {
         <Camera size={20} />
       </button>
 
-      {/* Lightbox Modal */}
-      {viewMode !== 'hidden' && (
+      {/* Lightbox Modal via Portal */}
+      {viewMode !== 'hidden' && isMounted && createPortal(
         <div className={styles.lightbox} onClick={() => setViewMode('hidden')}>
           
           <div className={styles.topBar}>
@@ -166,7 +169,8 @@ export default function BtsGallery({ items = [] }) {
             </>
           )}
           
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
