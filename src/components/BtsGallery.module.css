@@ -26,8 +26,8 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(4, 4, 4, 0.98);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,4 +160,73 @@
     width: 95vw;
     height: 70vh;
   }
+}
+
+/* Grid View */
+.gridContainer {
+  width: 90vw;
+  max-width: 1200px;
+  height: 80vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+  align-content: start;
+}
+
+/* Custom scrollbar for grid */
+.gridContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.gridContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.gridContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.thumbnailBox {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.thumbnailBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(48, 213, 200, 0.25);
+  border-color: rgba(48, 213, 200, 0.5);
+  z-index: 2;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnailBox:hover .thumbImg {
+  opacity: 0.7;
+}
+
+.playIconOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+}
+
+.playIconOverlay > svg {
+  color: white;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
 }
