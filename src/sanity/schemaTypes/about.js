@@ -101,15 +101,16 @@ export default {
     },
     {
       name: 'galleryEffect',
-      title: 'Efecto de Transición',
+      title: 'Efecto de Transición de la Galería',
       type: 'string',
       group: 'content',
+      description: 'Elige cómo se animan las páginas de fotos al cambiar.',
       options: {
         list: [
-          { title: 'Cubo 3D', value: 'cube' },
-          { title: 'Desvanecer', value: 'fade' },
-          { title: 'Giro 3D', value: 'flip' },
-          { title: 'Creativo (Tarjetas)', value: 'creative' },
+          { title: '🧊 Cubo 3D', value: 'cube' },
+          { title: '🌊 Barrido Profundo', value: 'sweep' },
+          { title: '🃏 Tarjetas Apiladas', value: 'cards' },
+          { title: '✨ Desvanecer', value: 'fade' },
         ],
       },
       initialValue: 'cube',

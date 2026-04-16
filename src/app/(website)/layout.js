@@ -5,11 +5,9 @@ import { draftMode } from "next/headers";
 import MouseEffect from '@/components/MouseEffect';
 import ScrollProgress from '@/components/ScrollProgress';
 
-// Global Swiper Styles for 3D Gallery
+// Global Swiper Styles
 import 'swiper/css';
 import 'swiper/css/effect-cube';
-import 'swiper/css/effect-fade';
-import 'swiper/css/effect-flip';
 import 'swiper/css/effect-creative';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

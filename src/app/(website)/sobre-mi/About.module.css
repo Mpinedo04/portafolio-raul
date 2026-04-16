@@ -240,7 +240,7 @@
 /* Galería En Acción (Carousel Mode) */
 .gallery {
   padding: 80px 0;
-  overflow: hidden; /* Prevent 3D overflow */
+  overflow: visible; /* MUST be visible for 3D cube rotation */
 }
 
 .carouselWrapper {
@@ -269,6 +269,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  backface-visibility: hidden; /* Prevents flicker in 3D transforms */
 }
 
 .groupGrid {
