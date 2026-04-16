@@ -28,6 +28,10 @@ export default async function AboutPage() {
   const bannerImg = about.bannerImage?.asset ? urlFor(about.bannerImage).url() : null;
   const hasActionPhotos = Array.isArray(about.actionPhotos) && about.actionPhotos.length > 0;
 
+  const KNOWN_EFFECTS = ['cube', 'sweep', 'cards', 'fade'];
+  const rawEffect = about.galleryEffect || '';
+  const resolvedEffect = KNOWN_EFFECTS.find(k => rawEffect.includes(k)) || 'cube';
+
   return (
     <>
       <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
@@ -105,7 +109,7 @@ export default async function AboutPage() {
           <div className="container">
             <h2 className={styles.timelineTitle}>{about.galleryTitle || "EN ACCIÓN"}</h2>
             
-            <ActionGallery photos={about.actionPhotos} effect={about.galleryEffect} />
+            <ActionGallery photos={about.actionPhotos} effect={resolvedEffect} />
           </div>
         </section>
       </div>
