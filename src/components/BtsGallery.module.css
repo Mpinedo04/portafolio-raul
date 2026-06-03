@@ -255,3 +255,71 @@
   color: white;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
 }
+
+@media (max-width: 600px) {
+  .lightbox {
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .topBar {
+    height: 72px;
+    padding: 0 16px;
+  }
+
+  .counter {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .gridContainer {
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 88px 16px 24px;
+    align-content: start;
+  }
+
+  .thumbnailBox {
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+  }
+
+  .thumbnailBox:hover {
+    transform: none;
+  }
+
+  .contentArea {
+    width: 100vw;
+    height: 100dvh;
+    padding: 88px 16px 72px;
+    box-sizing: border-box;
+  }
+
+  .slideImage {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .videoWrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .navBtn {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .prevBtn {
+    left: 14px;
+  }
+
+  .nextBtn {
+    right: 14px;
+  }
+}
