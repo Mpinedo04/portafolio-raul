@@ -8,7 +8,7 @@ import {
   Pagination 
 } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 
 import styles from '../app/(website)/sobre-mi/About.module.css';
 
@@ -80,7 +80,8 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (!photos || photos.length === 0) return null;
@@ -125,9 +126,11 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
                 {group.map((photo, i) => (
                   <div key={i} className={styles.photoBox}>
                     <img 
-                      src={urlFor(photo).width(500).height(500).url()} 
+                      src={urlForOptimized(photo, { width: 500, height: 500, quality: 78, fit: 'crop' })}
                       alt={`Momentos ${index * 6 + i + 1}`} 
                       className={styles.actionPhoto}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ))}

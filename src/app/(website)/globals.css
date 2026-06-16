@@ -301,6 +301,65 @@ section + section::before {
   transform: translateY(0);
 }
 
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  body::before,
+  body::after,
+  body > main::before,
+  body > main::after {
+    display: none;
+  }
+
+  .reveal,
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .reveal img,
+  .reveal:not(.visible) img {
+    filter: none;
+    transition: none;
+  }
+
+  .timelineItem::before {
+    animation: none;
+  }
+
+  [class*="header"],
+  [class*="footer"],
+  [class*="section"],
+  [class*="Section"],
+  [class*="intro"],
+  [class*="Intro"],
+  [class*="featured"],
+  [class*="Featured"],
+  [class*="card"],
+  [class*="Card"],
+  [class*="hub"],
+  [class*="Hub"],
+  [class*="lightbox"],
+  [class*="Lightbox"],
+  [class*="navBtn"] {
+    backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Image reveal on scroll */
 .reveal img {
   transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.8s ease;

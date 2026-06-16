@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -46,8 +46,7 @@ export default async function Home() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(orderRank asc, _createdAt desc) {
-    _id, title, subtitle, customLabel, role, category, videoUrl, mainImage,
-    "imageUrl": mainImage.asset->url
+    _id, title, subtitle, customLabel, role, category, videoUrl, mainImage
   }`) || [];
 
   return (
@@ -59,7 +58,7 @@ export default async function Home() {
           name={home.name} 
           subHeadline={home.subHeadline}
           headline={home.headline} 
-          backgroundImage={(home.heroImage?.asset) ? urlFor(home.heroImage).url() : null}
+          backgroundImage={(home.heroImage?.asset) ? urlForOptimized(home.heroImage, { width: 2000, quality: 82 }) : null}
           heroButtons={home.heroButtons}
         />
 
@@ -101,11 +100,11 @@ export default async function Home() {
                         <VideoEmbed 
                           url={project.videoUrl} 
                           title={project.title} 
-                          thumbnail={(project.mainImage?.asset) ? urlFor(project.mainImage).url() : ""} 
+                          thumbnail={(project.mainImage?.asset) ? urlForOptimized(project.mainImage, { width: 900, quality: 82 }) : ""}
                         />
                       ) : (
                         <img 
-                          src={(project.mainImage?.asset) ? urlFor(project.mainImage).url() : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"} 
+                          src={(project.mainImage?.asset) ? urlForOptimized(project.mainImage, { width: 900, quality: 82 }) : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"}
                           alt={project.title} 
                         />
                       )}

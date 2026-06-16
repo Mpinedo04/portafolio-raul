@@ -1,7 +1,7 @@
 import { Camera, Layers, Lightbulb, Mic, Monitor, Wrench, Box, Headphones, Disc, Film } from 'lucide-react';
 import styles from './Equipment.module.css';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -65,7 +65,7 @@ export default async function EquipmentPage() {
     { componentName: 'MONITOR', value: 'ASUS ProArt 27"', specs: '4K Calibración Rec.709' },
   ];
 
-  const bannerImg = workstation.bannerImage?.asset ? urlFor(workstation.bannerImage).url() : null;
+  const bannerImg = workstation.bannerImage?.asset ? urlForOptimized(workstation.bannerImage, { width: 1600, quality: 82 }) : null;
 
   return (
     <>
@@ -94,7 +94,7 @@ export default async function EquipmentPage() {
                       <div key={eq._id || i} className={styles.card}>
                         {eq.image?.asset ? (
                           <div className={styles.cardImage}>
-                            <img src={urlFor(eq.image).width(400).url()} alt={eq.name} />
+                            <img src={urlForOptimized(eq.image, { width: 700, quality: 78 })} alt={eq.name} />
                           </div>
                         ) : (
                           <div className={styles.cardIconRow}>

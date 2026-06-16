@@ -57,6 +57,8 @@
 
 @media (max-width: 768px) {
   .banner {
+    min-height: clamp(360px, 52svh, 460px);
     background-attachment: scroll;
+    background-position: center center;
   }
 }

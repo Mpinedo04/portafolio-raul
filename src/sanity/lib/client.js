@@ -7,7 +7,7 @@ export const client = createClient({
   useCdn: false, // Set to false to ensure fresh data during editing phase
   perspective: 'published', // Show only published content by default (SAFER)
   stega: {
-    enabled: true,
+    enabled: process.env.NODE_ENV !== 'production' || process.env.NEXT_PUBLIC_SANITY_STEGA === 'true',
     studioUrl: '/admin',
   },
 });

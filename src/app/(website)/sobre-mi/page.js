@@ -1,6 +1,6 @@
 import styles from './About.module.css';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 import { Download, FileText } from 'lucide-react';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
@@ -25,7 +25,7 @@ export default async function AboutPage() {
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const stages = about.stages || [];
-  const bannerImg = about.bannerImage?.asset ? urlFor(about.bannerImage).url() : null;
+  const bannerImg = about.bannerImage?.asset ? urlForOptimized(about.bannerImage, { width: 1600, quality: 82 }) : null;
   const hasActionPhotos = Array.isArray(about.actionPhotos) && about.actionPhotos.length > 0;
 
   const KNOWN_EFFECTS = ['cube', 'sweep', 'cards', 'fade'];
@@ -50,8 +50,9 @@ export default async function AboutPage() {
               <div className={styles.imageCol}>
                 <div className={styles.profileBox}>
                   <img
-                    src={about.profileImage?.asset ? urlFor(about.profileImage).url() : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"}
+                    src={about.profileImage?.asset ? urlForOptimized(about.profileImage, { width: 900, quality: 82 }) : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"}
                     alt="Raúl García"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -88,7 +89,7 @@ export default async function AboutPage() {
                   <div key={i} className={`${styles.timelineItem} ${i % 2 !== 0 ? styles.reverse : ''}`}>
                     <div className={styles.timelineImage}>
                       {stage.stageImage?.asset ? (
-                        <img src={urlFor(stage.stageImage).width(600).url()} alt={stage.stageTitle || `Etapa ${i + 1}`} />
+                        <img src={urlForOptimized(stage.stageImage, { width: 900, quality: 82 })} alt={stage.stageTitle || `Etapa ${i + 1}`} loading="lazy" decoding="async" />
                       ) : (
                         <div className={styles.imagePlaceholder}></div>
                       )}

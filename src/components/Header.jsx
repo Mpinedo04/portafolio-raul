@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 import { getIcon } from '@/lib/icons';
 import styles from './Header.module.css';
 
@@ -105,10 +106,7 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
 
         {/* Mobile Toggle */}
         <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
-          {(() => {
-            const Icon = getIcon(isOpen ? 'X' : 'Menu');
-            return <Icon size={24} />;
-          })()}
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Mobile Menu Overlay */}

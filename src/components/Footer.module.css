@@ -83,6 +83,20 @@
   opacity: 0.6;
 }
 
+.credit {
+  opacity: 0.52;
+}
+
+.credit a {
+  color: var(--color-text-secondary);
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.credit a:hover {
+  color: var(--color-accent-light);
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
