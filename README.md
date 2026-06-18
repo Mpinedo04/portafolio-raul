@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio Raul
 
-## Getting Started
+Portfolio audiovisual desarrollado con **Next.js** y **Sanity CMS**.
 
-First, run the development server:
+El proyecto permite presentar el perfil profesional de Raul, sus proyectos, equipo tecnico, estudios y datos de contacto. El contenido se gestiona desde Sanity Studio y la web publica esta desplegada en Vercel.
+
+## Demo
+
+[https://portafolio-raul-sigma.vercel.app/](https://portafolio-raul-sigma.vercel.app/)
+
+## Tecnologias
+
+- Next.js
+- React
+- Sanity CMS
+- CSS Modules
+- Vercel
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estructura principal
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+.
++-- src/
+|   +-- app/
+|   |   +-- (website)/
+|   |   +-- (admin)/
+|   |   +-- api/
+|   +-- components/
+|   +-- sanity/
++-- public/
++-- package.json
++-- sanity.config.js
++-- next.config.mjs
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Rutas principales
 
-## Learn More
+- `/`: pagina principal.
+- `/sobre-mi`: perfil y biografia.
+- `/portfolio`: hub de portfolio.
+- `/portfolio/propios`: proyectos propios.
+- `/portfolio/externos`: proyectos externos.
+- `/equipo`: equipo tecnico.
+- `/estudios`: formacion y estudios.
+- `/contacto`: pagina de contacto.
+- `/admin`: Sanity Studio.
 
-To learn more about Next.js, take a look at the following resources:
+## Variables de entorno
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+El proyecto usa Sanity. Revisa estas variables si necesitas cambiar proyecto o dataset:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
+SANITY_API_READ_TOKEN=
+SANITY_REVALIDATE_SECRET=
+```
 
-## Deploy on Vercel
+## Notas de mantenimiento
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- El contenido editable vive en Sanity.
+- Los esquemas estan en `src/sanity/schemaTypes`.
+- La estructura del panel de Sanity esta en `src/sanity/lib/structure.js`.
+- Las paginas publicas estan bajo `src/app/(website)`.
+- El panel de administracion esta bajo `src/app/(admin)`.
