@@ -4,6 +4,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import MouseEffect from '@/components/MouseEffect';
 import ScrollProgress from '@/components/ScrollProgress';
+import { Analytics } from '@vercel/analytics/next';
 
 // Global Swiper Styles
 import 'swiper/css';
@@ -106,6 +107,7 @@ export default async function RootLayout({ children }) {
         <MouseEffect />
         <main>{children}</main>
         {isDraftMode && <VisualEditing />}
+        <Analytics />
       </body>
     </html>
   );
