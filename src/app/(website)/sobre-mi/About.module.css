@@ -365,16 +365,12 @@
 }
 
 @media (max-width: 992px) {
-  .groupGrid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-  }
   .swiperContainer {
     padding: 0 40px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .gallery {
     padding: 56px 0;
     overflow: hidden;
@@ -387,27 +383,28 @@
   .swiperContainer {
     padding: 0;
     min-height: auto;
-    perspective: none;
+    perspective: 1200px;
   }
 
   .mySwiper {
     padding-top: 0 !important;
     padding-bottom: 36px !important;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .swiperSlide {
-    align-items: flex-start;
+    align-items: center;
   }
 
-  .groupGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
+  .groupGrid,
+  .groupGridMobile {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 12px;
     width: 100%;
-    aspect-ratio: auto;
+    aspect-ratio: 1 / 1;
     height: auto;
-    align-content: initial;
+    align-content: stretch;
   }
 
   .photoBox,
@@ -416,13 +413,8 @@
     aspect-ratio: 1 / 1;
   }
 
-  .photoBox:nth-child(n+5),
-  .photoBoxEmpty {
-    display: none; /* Show fewer photos on very small mobile for performance */
-  }
-
   .navArrow {
-    display: none; /* rely on touch */
+    display: none; /* Swipe natural en móvil */
   }
 }
 

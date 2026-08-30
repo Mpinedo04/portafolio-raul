@@ -46,7 +46,7 @@ export default async function Home() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(orderRank asc, _createdAt desc) {
-    _id, title, subtitle, customLabel, role, category, videoUrl, mainImage
+    _id, title, subtitle, customLabel, year, role, category, videoUrl, mainImage
   }`) || [];
 
   return (
@@ -110,7 +110,10 @@ export default async function Home() {
                       )}
                     </div>
                     <div className={styles.projectInfo}>
-                      <span className={styles.badge}>{project.customLabel || project.category || "PROYECTO"}</span>
+                      <div className={styles.projectMeta}>
+                        <span className={styles.badge}>{project.customLabel || project.category || "PROYECTO"}</span>
+                        {Boolean(project.year) && <span className={styles.yearBadge}>{project.year}</span>}
+                      </div>
                       <h3 className="uppercase">{project.title}</h3>
                       {project.subtitle && <p className={styles.subtitle}>{project.subtitle}</p>}
                       <span className={styles.role}>Rol: {project.role}</span>
