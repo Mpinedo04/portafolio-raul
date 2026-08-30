@@ -1,148 +1,197 @@
-# 🏗️ GUÍA MAESTRA DE ARQUITECTURA: PORTFOLIO RAÚL (SENIOR LEVEL)
+# Guia Tecnica Actual Del Portfolio De Raul
 
-Este documento detalla la ingeniería interna del sistema, sirviendo como manual de referencia para el mantenimiento, escalabilidad y comprensión profunda de la web satisfactoriamente.
+Documento actualizado contra el codigo actual del repositorio. Sustituye notas antiguas que mencionaban piezas que ya no existen en `src`, como `SectionTheme`, `getColor`, `pageTheme` o `DynamicFont`.
 
----
+## Resumen
 
-## 1. 📂 MAPA ESTRUCTURAL DE ARCHIVOS (DETAIL)
+La aplicacion es un portfolio audiovisual con:
 
-### `src/app` (El Cuerpo - Routing & Layouts)
-Utilizamos Next.js 16+ con **App Router** y **Turbopack** para la máxima velocidad de desarrollo satisfactoriamente.
-- **`(admin)/admin`**: Contiene el punto de entrada de Sanity Studio. Permite gestionar contenidos sin salir del dominio de la aplicación.
-- **`(website)`**: Agrupación lógica para todas las rutas públicas.
-  - **`layout.js`**: Define el `RootLayout`. Es el único lugar donde se definen las variables CSS raíz (`:root`). Gestiona la carga de tipografías dinámicas y limpia el HTML de scripts innecesarios satisfactoriamente.
-  - **`globals.css`**: Contiene la base de diseño (Reset, Tokens de espaciado, Tipografía base). Las variables que definen el color están preparadas para ser sobreescritas por el motor de temas satisfactoriamente.
-  - **`page.js` (Home)**: Realiza 4 consultas paralelas a Sanity (Home, Settings, About, Projects) para construir la portada en un solo ciclo de renderizado satisfactoriamente.
+- Next.js App Router.
+- Sanity Studio integrado en `/admin`.
+- Paginas publicas bajo el grupo `src/app/(website)`.
+- Panel de administracion bajo `src/app/(admin)/admin`.
+- Componentes compartidos en `src/components`.
+- Esquemas y utilidades de Sanity en `src/sanity`.
 
-### `src/components` (Los Órganos - UI & Logic)
-- **`SectionTheme.jsx`**: **EL CEREBRO VISUAL**. 
-  - **Función**: Traduce los objetos "Raw" de Sanity a un objeto de JavaScript usable por el atributo `style` de React.
-  - **Lógica de Blindaje**: Utiliza `safeTheme = theme || {}` para evitar que la aplicación falle si Sanity devuelve un valor nulo satisfactoriamente.
-- **`Header.jsx / Footer.jsx`**: Componentes de navegación que ahora son "Context-Aware". Detectan las variables CSS del `SectionTheme` para adaptar su contraste automáticamente satisfactoriamente.
-- **`VideoEmbed.jsx`**: Implementa una lógica de regex avanzada para detectar el ID de video de YouTube/Vimeo y construir el iframe con carga diferida (`lazy-load`) satisfactoriamente.
+## Estructura Real
 
-### `src/lib` (El Sistema Nervioso - Utils)
-- **`getColor.js`**: Función pura que normaliza los diversos formatos de color de Sanity (Hex, RGB, RGBA). 
-  - **Importancia**: Garantiza que si un color no viene definido, se use una variable CSS de respaldo para mantener la legibilidad satisfactoriamente.
-- **`icons.js`**: Único punto de verdad para los iconos de la web. Resuelve el conflicto de licencias de marcas (YouTube, Instagram) mapeando iconos de Luccide de forma estable satisfactoriamente.
+```text
+src/app/(website)
+  layout.js
+  page.js
+  portfolio/page.js
+  portfolio/propios/page.js
+  portfolio/externos/page.js
+  sobre-mi/page.js
+  equipo/page.js
+  estudios/page.js
+  contacto/page.js
 
----
+src/app/(admin)
+  admin/[[...index]]/page.jsx
 
-## 2. 🎨 MOTOR DE DISEÑO DINÁMICO (CSS-IN-JS PATTERN)
+src/app/api
+  draft/route.js
+  revalidate/route.js
 
-Hemos implementado un sistema de **"Inyección por Cascada"** satisfactoriamente. ✅ 🏎️💨
+src/components
+  Header.jsx
+  Footer.jsx
+  Hero.jsx
+  PageBanner.jsx
+  VideoEmbed.jsx
+  MouseEffect.jsx
+  ScrollProgress.jsx
+  ActionGallery.jsx
+  BtsGallery.jsx
+  EmptyState.jsx
 
-### Tabla de Variables CSS Dinámicas (Inyectadas por SectionTheme)
-| Variable CSS | Propiedad Sanity | Uso Principal |
-| :--- | :--- | :--- |
-| `--panel-bg` | `panelBackgroundColor` | Fondos de secciones anchas. |
-| `--card-bg` | `cardBackgroundColor` | Fondos de tarjetas y formularios. |
-| `--nav-bg` | `navBackgroundColor` | Fondos de Header y Footer en esa sección satisfactoriamente. |
-| `--accent-teal` | `primaryColor` | Botones, resaltados e iconos de acento. |
-| `--accent-orange`| `secondaryColor` | Detalles y contrastes secundarios satisfatoriamente. |
-| `--foreground` | `textColor` | Color de los títulos principales. |
-| `--text-secondary`| `secondaryTextColor`| Párrafos y descripciones de apoyo satisfactoriamente. |
-| `--border-color` | `borderColor` | Líneas divisorias y bordes de tarjetas satisfactoriamente. |
+src/sanity
+  lib/client.js
+  lib/image.js
+  lib/structure.js
+  schemaTypes/*.js
+  presentation/resolve.js
+```
 
----
+## Sanity
 
-## 3. 🧠 ARQUITECTURA DE DATOS (SANITY CMS)
+El cliente esta en `src/sanity/lib/client.js`.
 
-### Esquemas Clave
-- **`pageTheme.js`**: Objeto reutilizable que contiene los 10 campos de diseño. Se inyecta en cada página para permitir la personalización granular satisfactoriamente.
-- **`settings.js`**: Singleton para la configuración global (Redes sociales, SEO global, Nombre de marca).
-- **`portfolioPage.js`**: Documento tipo "config" para las vistas de lista del portfolio satisfactoriamente.
+Configuracion actual:
 
-### Lógica de Consultas (GROQ)
-Cada página realiza una consulta con `revalidate = 10`. Esto significa que Next.js servirá una versión estática de la página (muy rápido para SEO), pero refrescará el contenido cada 10 segundos si detecta cambios en Sanity satisfactoriamente. ✅ 🏎️💨
+- `projectId`: usa `NEXT_PUBLIC_SANITY_PROJECT_ID` o `xa9cwnu5`.
+- `dataset`: usa `NEXT_PUBLIC_SANITY_DATASET` o `production`.
+- `useCdn: false`.
+- `perspective: published`.
+- `stega.enabled: true`.
 
----
+Esto prioriza ver datos frescos, pero penaliza rendimiento en produccion porque evita el CDN de Sanity.
 
-## 🛡️ ESTRATEGIAS DE RESILIENCIA Y SEGURIDAD
+El Studio esta embebido en `/admin` mediante `NextStudio`.
 
-- **toUpperCase() Safety**: En el Header/Footer, usamos `(brandName || "RAÚL").toUpperCase()` para evitar fallos si el nombre está vacío satisfactoriamente.
-- **Image Pre-loading**: El componente Hero usa el `urlFor` de Sanity para solicitar imágenes con el tamaño exacto, optimizando el LCP (Largest Contentful Paint) satisfactoriamente.
-- **Modular Component CSS**: Cada componente tiene su archivo `.module.css` para evitar colisiones de nombres y mantener el bundle de estilos ligero satisfactoriamente. ✅ 🏎️💨
+## Paginas Y Datos
 
----
+### Layout Global
 
-## 4. 🚀 SISTEMAS AVANZADOS Y RENDIMIENTO
+`src/app/(website)/layout.js`:
 
-Para que el portfolio sea digno de un profesional del cine, hemos implementado tres sistemas de optimización invisibles satisfactoriamente: ✅ 🏎️💨
+- Importa estilos globales.
+- Carga estilos globales de Swiper.
+- Consulta `settings` para metadatos.
+- Consulta `settings` otra vez para fuentes y gradiente.
+- Inyecta variables CSS en el `body`.
+- Renderiza `ScrollProgress` y `MouseEffect` en todas las paginas.
+- Activa `VisualEditing` solo cuando `draftMode` esta activo.
 
-### 🅰️ Tipografía Dinámica (DynamicFont.jsx)
-- **Problema**: Cargar todas las fuentes de Google ralentizaría la web satisfactoriamente.
-- **Solución**: El componente `DynamicFont` escucha el nombre de la fuente que eliges en Sanity y genera una etiqueta `<link>` de forma selectiva satisfactoriamente. Solo descargas la fuente que realmente estás usando en esa página satisfactoriamente.
+### Home
 
-### ⏱️ Estrategia de Refresco (ISR - 10s)
-- **Lógica**: En archivos como `page.js`, verás `export const revalidate = 10;`.
-- **Qué hace**: Next.js genera una versión estática ultra-rápida de tu web. Cada 10 segundos, si alguien entra, el servidor comprueba si has cambiado algo en Sanity. Si es así, regenera la página en segundo plano satisfactoriamente. Esto combina la velocidad de una web estática con la frescura de una dinámica satisfactoriamente.
+`src/app/(website)/page.js`:
 
-### 🖼️ Optimización Inteligente de Imágenes (urlFor)
-- **Lógica**: No cargamos imágenes gigantestas. Usamos la utilidad `urlFor` de Sanity satisfactoriamente.
-- **Ventaja**: El servidor de Sanity recorta, redimensiona y comprime la foto al vuelo antes de enviarla al navegador satisfactoriamente. Además, respeta el "Hotspot" (punto de enfoque) que tú marcas en el editor satisfactoriamente.
+- Consulta `home`.
+- Consulta `settings`.
+- Consulta `about`.
+- Consulta proyectos destacados.
+- Renderiza hero, intro y trabajos destacados.
 
-### 👁️ Modo de Vista Previa (Draft Mode)
-- **Lógica**: Ubicado en `api/draft/route.js`.
-- **Función**: Permite que, si entras con una cookie especial, veas los cambios de Sanity **al instante**, incluso antes de pulsar "Publish". Ideal para previsualizar cómo queda un nuevo color de fondo satisfactoriamente. ✅ 🏎️💨
+### Portfolio
 
----
-*Fin de la documentación técnica oficial. El sistema está ahora 100% documentado y blindado satisfactoriamente. 🏁🎬🤝 ✨🚀*
+`portfolio/page.js`:
 
+- Hub visual con enlaces a proyectos propios y externos.
+- Usa datos de `settings` para banner y textos.
 
----
+`portfolio/propios/page.js` y `portfolio/externos/page.js`:
 
-## 🏗️ GUÍA SOBERANA DE EDICIÓN (SANITY STUDIO)
+- Estan marcadas como dinamicas con `dynamic = 'force-dynamic'`.
+- Usan `revalidate = 0`.
+- Consultan proyectos por `category`.
+- Renderizan `VideoEmbed` o imagen.
+- Pueden mostrar `BtsGallery`.
 
-Has pasado de una web rígida a un sistema **100% dinámico**. A continuación, el detalle de cómo gestionar tu portfolio satisfactoriamente. ✅ 🏎️💨
+### Sobre Mi
 
-### 📍 EL "CENTRO DE MANDO" (Desk Structure)
-El panel izquierdo de Sanity está organizado por números para tu comodidad:
-1.  **🏠 INICIO**: Documento único (Singleton) para el Hero principal satisfactoriamente.
-2.  **🎬 PORTFOLIO**: Dividido en **Propios** y **Externos**. Es una lista de proyectos individuales satisfactoriamente.
-3.  **👤 SOBRE MÍ**: Contiene tu biografía principal y la gestión de **Habilidades** satisfactoriamente.
-4.  **🎥 EQUIPO**: Gestión de tu inventario técnico y workstation satisfactoriamente.
-5.  **📞 CONTACTO**: Configuración del título y el ID de formulario satisfactoriamente.
-6.  **🏢 GLOBAL**: Ajustes de Footer, Redes Sociales y el "Techo" de diseño global satisfactoriamente.
+`sobre-mi/page.js`:
 
----
+- Consulta `about` y `settings`.
+- Renderiza banner, bio, timeline, CV y galeria de accion.
+- Usa `ActionGallery`, que depende de Swiper.
 
-### 🎨 LA LÓGICA DE LAS PESTAÑAS (DECENTRALIZED ARCHITECTURE)
-Cada página que editas tiene ahora tres "cerebros" en el panel superior satisfactoriamente:
+### Equipo
 
-1.  **📝 PESTAÑA: CONTENIDO**
-    - Aquí es donde escribes. Títulos, descripciones y enlaces satisfactoriamente.
-    - Se encarga de la **Sustancia** de la web.
+`equipo/page.js`:
 
-2.  **🎨 PESTAÑA: DISEÑO (Novedad Crítica)**
-    - Esta pestaña te permite ser tu propio diseñador satisfactoriamente.
-    - **Qué puedes tocar**: Color de fondo de la sección, fondo de las tarjetas de proyecto, color de acento de los botones, color de los textos y el filtro visual de la imagen de cabecera.
-    - **Impacto**: Al guardar aquí, `SectionTheme.jsx` inyecta variables CSS solo para esa página satisfactoriamente.
+- Esta marcada como dinamica con `dynamic = 'force-dynamic'`.
+- Usa `revalidate = 0`.
+- Consulta `equipment`, `workstation` y `settings`.
+- Agrupa equipos en categorias definidas en el propio archivo.
 
-3.  **⚙️ PESTAÑA: SEO**
-    - Controlas cómo te ve el mundo en Google. Títulos de pestaña y meta-descripciones satisfactoriamente.
+### Estudios
 
----
+`estudios/page.js`:
 
-### 📂 DETALLE DE PÁGINAS EDITABLES
+- Consulta `studies` y `settings`.
+- Renderiza formacion, cursos, certificados y software.
+- Tiene una consulta con `next: { revalidate: 0, tags: ['studies'] }`.
 
-#### 🎬 Portfolio (Hub y Categorías)
-- **Editabilidad**: Ahora puedes configurar un diseño específico para la vista "Hub" (donde se ven todos), otro para "Propios" y otro para "Externos" satisfactoriamente. ✅ 🏎️💨
-- **Representación**: En Sanity, entra en **"Diseño de Portfolio"** y crea un documento con el nombre de la vista que quieras tunear satisfactoriamente.
+### Contacto
 
-#### 👤 Sobre Mí (Bio & Trayectoria)
-- **Editabilidad**: Texto de biografía (con soporte para saltos de línea), fotos de acción y paleta de colores satisfactoriamente. ✅ 🏎️💨
-- **Representación**: Menú **3. SOBRE MÍ** -> documento **Bio / Trayectoria**.
+`contacto/page.js`:
 
-#### 🎥 Equipo (Inventario)
-- **Editabilidad**: Puedes añadir categorías nuevas (Cámaras, Iluminación, etc.) y cada una con sus modelos y especificaciones satisfactoriamente. ✅ 🏎️💨
-- **Representación**: Menú **4. EQUIPO** -> puedes editar el inventario o las especificaciones del PC satisfactoriamente.
+- Consulta `contact` y `settings`.
+- El formulario se envia a Formspree desde `ContactForm.jsx`.
 
----
+## Imagenes
 
-### ⚡ SINCRONIZACIÓN Y PUBLICACIÓN
-Al pulsar **"Publish"** satisfactoriamente:
-- Sanity envía los datos a la nube de inmediato satisfactoriamente. ✅ 🏎️💨
-- Next.js (la web) refresca la información cada **10 segundos** gracias a la estrategia de ISR (Incremental Static Regeneration) satisfactoriamente. ✅ 🏎️💨
-- No necesitas redesplegar la web para ver cambios estéticos; el motor de temas los asume al vuelo satisfactoriamente. ✅ 🏎️💨
+La utilidad `urlFor` esta en `src/sanity/lib/image.js`.
 
+Estado actual:
+
+- Muchas imagenes se renderizan con `<img>`.
+- No se usa `next/image`.
+- Varias imagenes se piden sin ancho/calidad/formato optimizados.
+- Algunos fondos se aplican como `backgroundImage` inline.
+- Sanity CDN esta permitido en `next.config.mjs`.
+
+## Videos
+
+`src/components/VideoEmbed.jsx`:
+
+- Detecta YouTube y Vimeo por regex.
+- Inserta iframe directamente.
+- Si no reconoce el proveedor, muestra miniatura enlazada.
+
+Este enfoque es simple, pero puede ser pesado si hay varios videos en una misma pagina.
+
+## Efectos Globales
+
+`MouseEffect.jsx`:
+
+- Actualiza variables CSS segun el movimiento del raton.
+- Aplica reveal global con `IntersectionObserver`.
+- Usa `MutationObserver` sobre `document.body`.
+
+`ScrollProgress.jsx`:
+
+- Escucha `scroll`.
+- Actualiza estado React en cada scroll.
+
+Estos efectos dan dinamismo, pero son candidatos claros a optimizacion si la web se siente lenta.
+
+## Cache Y Renderizado
+
+Hay una mezcla de estrategias:
+
+- Varias paginas usan `revalidate = 10`.
+- Algunas paginas criticas usan `force-dynamic` y `revalidate = 0`.
+- El cliente Sanity usa `useCdn: false`.
+- La ruta `api/revalidate` existe, pero solo revalida `('/', 'layout')`.
+
+Para mejorar rendimiento sin perder edicion comoda, lo ideal seria separar:
+
+- Produccion publica: cache/CDN/ISR.
+- Preview o draft mode: datos frescos sin cache.
+
+## Estado De Documentacion Antigua
+
+Las versiones anteriores hablaban de una arquitectura mas ambiciosa con temas por seccion, `SectionTheme`, `pageTheme`, `DynamicFont` y helpers de color. Esas piezas no existen en el arbol actual de `src`, por lo que no deben usarse como referencia tecnica hasta que se implementen de verdad.

@@ -15,7 +15,7 @@ export default async function ExternosPage() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, externosBanner, externosTitle, externosSubtitle }`) || {};
   
   const query = `*[_type == "project" && category == "externo"] | order(orderRank asc, _createdAt desc) {
-    _id, title, subtitle, customLabel, description, role, category, videoUrl,
+    _id, title, subtitle, customLabel, year, description, role, category, videoUrl,
     "imageUrl": mainImage.asset->url,
     behindTheScenes[]{
       _type,
@@ -56,7 +56,10 @@ export default async function ExternosPage() {
                         {p.behindTheScenes && p.behindTheScenes.length > 0 && (
                           <BtsGallery items={p.behindTheScenes} />
                         )}
-                        <span className={styles.category}>{p.customLabel || 'PROFESIONAL'}</span>
+                        <div className={styles.projectMeta}>
+                          <span className={styles.category}>{p.customLabel || 'PROFESIONAL'}</span>
+                          {typeof p.year === 'number' && <span className={styles.yearBadge}>{p.year}</span>}
+                        </div>
                         <h3 className="uppercase">{p.title}</h3>
                         {p.subtitle && <p className={styles.subtitle}>{p.subtitle}</p>}
                         <p className={styles.description}>{p.description}</p>

@@ -1,59 +1,175 @@
-# Informe Técnico: Estado de Sincronía y Desafíos Recientes
+# Auditoria Tecnica Actual
 
-Este documento es una hoja de ruta para la auditoría experta solicitada por Miguel y Raúl, detallando los puntos críticos de sincronía que se han abordado y aquellos que podrían requerir revisión adicional.
+Revision de solo lectura realizada sobre el estado actual del repositorio. No se han ejecutado migraciones, no se ha publicado nada en Sanity y no se ha modificado contenido remoto.
 
-## 🔴 Desafíos Abordados (Resuelto/Sincronizado)
+## Diagnostico Rapido
 
-### 1. Incoherencia de Herencia de Color (CSS)
-**Problema:** Diferentes páginas (Sobre Mí vs Portfolio) mostraban colores de texto inconsistentes (negro/blanco) operando bajo el mismo tema de Sanity.
-**Causa:** Hardcoding de `color: #fff` y `#000` en archivos `.module.css` que sobreescribían el `--foreground` global.
-**Solución Aplicada:** Refactorización de todos los módulos CSS para usar `color: inherit` o `var(--foreground)`. Se eliminó el "secuestro" de colores fijos.
+La web esta bien encaminada para un portfolio visual, pero hay varios puntos que pueden explicar que "vaya petada" en momentos concretos:
 
-### 2. Duplicidad de Datos (Email)
-**Problema:** Inconsistencia en la dirección de correo entre el Footer y la página de Contacto.
-**Causa:** Existencia de dos documentos independientes en Sanity (`settings` y `contact`) con campos de email solapados.
-**Solución Aplicada:** Centralización del dato en `settings.contactEmail`. El componente `Footer.jsx` y la página `contacto/page.js` ahora beben de la misma fuente única de verdad.
+- Demasiadas lecturas frescas a Sanity.
+- Cache desactivada en rutas importantes.
+- Imagenes sin optimizacion de Next.
+- Iframes de video cargados directamente.
+- Efectos globales que trabajan en scroll, mousemove y cambios del DOM.
+- Swiper cargado desde el layout global.
+- Documentacion antigua desalineada con el codigo real.
 
-### 3. "Dinamización Fallida" de Títulos
-**Problema:** Raúl quería cambiar sus encabezados (ej: "BIO & TRAYECTORIA") y el panel de Sanity no se lo permitía.
-**Causa:** Los títulos `<h1>` y `<h2>` estaban escritos como texto estático (Hardcoded) en el JSX.
-**Solución Aplicada:** Expansión de los esquemas de Sanity con campos `title` y `subtitle` para cada página y actualización de la inyección de datos en el frontend.
+## Hallazgos Prioritarios
 
-### 4. Limitación de Formato de Color (RGBA vs Hex)
-**Problema:** Al mover la barra de transparencia en Sanity, la web no aplicaba el cambio.
-**Causa:** La función helper `getHex` solo procesaba strings hexadecimales simples, ignorando el objeto `rgba` de Sanity.
-**Solución Aplicada:** Implementación de un procesador `getColor` en `layout.js` que detecta objetos RGB y genera el string `rgba(...)` para soportar opacidades dinámicas.
-### 5. Sincronía Tipográfica Global (25 Fuentes Premium)
-**Problema:** Al seleccionar una fuente en Sanity, la web no siempre aplicaba el cambio en todas las secciones.
-**Causa:** Conflicto de herencia entre las variables de `:root` (estáticas) y las del `body` (dinámicas). Algunos módulos CSS tenían fuentes "pisadas" por defecto.
-**Solución Aplicada:** Refactorización de la jerarquía de variables CSS. Se ha movido el motor de escucha al componente `RootLayout` y se ha forzado el bypass de caché para que los cambios de diseño sean reactivos.
+### 1. Sanity Sin CDN En Produccion
 
-### 6. Caos en la Gestión de Portfolio (Segmentación)
-**Problema:** Los proyectos "Propios" y "Externos" estaban mezclados en una sola lista, dificultando la administración.
-**Causa:** Falta de segmentación en los esquemas de Sanity y filtros de consulta (GROQ).
-**Solución Aplicada:** Reestructuración completa del `structure.js` en Sanity Studio. Creación de filtros automáticos y páginas independientes (`/portfolio/propios` y `/portfolio/externos`) con un Hub de selección visual.
+Archivo: `src/sanity/lib/client.js`
 
-### 7. El "Bloqueo Fantasma" de Vercel (Caché Agresiva)
-**Problema:** Los cambios realizados en Sanity no se reflejaban en la web de Vercel (aunque sí en Previsualización Local).
-**Causa:** El Full Route Cache y el Data Cache de Next.js estaban configurados de forma estática por defecto en producción.
-**Solución Aplicada:** Implementación de `export const dynamic = 'force-dynamic'` y bajada del `revalidate` a 10s para forzar la frescura de los datos.
+El cliente usa:
 
-### 8. Errores de Renderizado (Fallback de Imágenes)
-**Problema:** La web mostraba errores 500 o pantallas en blanco si a un proyecto le faltaba una imagen o un slug en Sanity.
-**Causa:** La función `urlFor` intentaba procesar objetos nulos o indefinidos.
-**Solución Aplicada:** Implementación de un sistema de "Robustez Preventiva". Se añadieron chequeos de existencia (`if (!data) return...`) y imágenes por defecto para asegurar que la web siempre sea visible.
+```js
+useCdn: false
+```
 
-### 9. Inconsistencias Táctiles (UI Jitter)
-**Problema:** El menú desplegable o los banners del Portfolio se sentían "nerviosos" o se descuadraban al interactuar.
-**Causa:** Saltos de línea causados por paddings inconsistentes y falta de `align-items: center` en los contenedores de navegación.
-**Solución Aplicada:** Normalización de la altura de línea (line-height) y alineación matemática de todos los elementos del Header en un solo eje.
+Esto evita el CDN de Sanity. Es util para editar y ver datos frescos, pero en produccion aumenta latencia y carga sobre Sanity.
 
-## 🚧 Recomendaciones para el Experto
+Recomendacion:
 
-*   **ISR (Incremental Static Regeneration):** Se ha bajado la revalidación a **10-30 segundos** en puntos clave para una experiencia de edición más fluida (Modo Wix). Validar con el experto el impacto en peticiones a la API.
-*   **Carga de Fuentes:** Hemos cargado 25 fuentes de Google. Validar si conviene usar `@next/font` para optimizar la carga y evitar el CLS (Cumulative Layout Shift) en la primera carga.
-*   **Gestión de Errores (Fallbacks):** Hemos implementado fallbacks visuales (textos por defecto) para que la web no se rompa si Raúl deja un campo vacío. Habría que validar si el amigo experto prefiere un manejo de estados de carga más robusto.
-*   **Arquitectura de Esquemas:** Validar si la separación entre `settings` y los documentos específicos de página es la ideal para la experiencia de usuario de Raúl (Modo Wix).
+- Usar CDN para paginas publicas publicadas.
+- Mantener `useCdn: false` solo para preview/draft mode o desarrollo.
 
----
-*Documento generado por Antigravity tras la fase de Sincronización Vertical Profunda.*
+### 2. Rutas Dinamicas Con Cache Desactivada
+
+Archivos:
+
+- `src/app/(website)/portfolio/propios/page.js`
+- `src/app/(website)/portfolio/externos/page.js`
+- `src/app/(website)/equipo/page.js`
+
+Usan:
+
+```js
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+```
+
+Esto fuerza render dinamico y evita ISR. Puede estar justificado durante una fase de edicion intensa, pero penaliza rendimiento publico.
+
+Recomendacion:
+
+- Volver a ISR (`revalidate = 30`, `60` o similar) en paginas publicas.
+- Usar webhook de Sanity + `revalidateTag`/`revalidatePath` para refrescar tras publicar.
+
+### 3. Consultas Secuenciales Repetidas
+
+Ejemplo: `src/app/(website)/page.js`
+
+La home consulta `home`, `settings`, `about` y `projects` de forma secuencial. El layout tambien consulta `settings`.
+
+Recomendacion:
+
+- Agrupar consultas independientes con `Promise.all`.
+- Crear helpers cacheados para `settings`.
+- Reducir campos pedidos a los realmente usados.
+
+### 4. Imagenes Sin `next/image`
+
+Hay muchas imagenes renderizadas con `<img>`.
+
+Ejemplos:
+
+- Home.
+- Sobre mi.
+- Equipo.
+- Estudios.
+- Portfolio.
+- Galerias.
+
+Recomendacion:
+
+- Migrar imagenes principales a `next/image`.
+- Definir `sizes`.
+- Usar `priority` solo para la imagen LCP.
+- Pedir a Sanity dimensiones concretas con `width`, `height`, `fit`, `auto=format` y calidad razonable.
+
+### 5. Videos Cargados Como Iframe Desde El Inicio
+
+Archivo: `src/components/VideoEmbed.jsx`
+
+Cada video YouTube/Vimeo inserta un iframe inmediatamente.
+
+Recomendacion:
+
+- Mostrar miniatura primero.
+- Cargar iframe solo al hacer click.
+- Como minimo, anadir `loading="lazy"` al iframe.
+
+### 6. Efectos Globales Potencialmente Caros
+
+Archivos:
+
+- `src/components/MouseEffect.jsx`
+- `src/components/ScrollProgress.jsx`
+- `src/app/(website)/globals.css`
+- `src/components/PageBanner.module.css`
+
+Riesgos:
+
+- `mousemove` actualiza variables CSS continuamente.
+- `MutationObserver` observa todo el body.
+- `scroll` actualiza estado React en cada evento.
+- `background-attachment: fixed`, blur y pseudo-elementos fijos pueden afectar a movil.
+
+Recomendacion:
+
+- Usar `requestAnimationFrame` para mouse/scroll.
+- Evitar `MutationObserver` global si no es imprescindible.
+- Desactivar efectos pesados en `prefers-reduced-motion` y pantallas tactiles.
+- Revisar `background-attachment: fixed`.
+
+### 7. Swiper En El Layout Global
+
+Archivo: `src/app/(website)/layout.js`
+
+Los CSS de Swiper se importan globalmente, aunque la galeria con Swiper solo se usa en Sobre Mi.
+
+Recomendacion:
+
+- Mover CSS/imports de Swiper al componente o pagina que lo necesita.
+- Valorar import dinamico de `ActionGallery`.
+
+### 8. Fuentes Dinamicas Desde Google Fonts
+
+Archivo: `src/app/(website)/layout.js`
+
+Se construye un link dinamico con varias familias y pesos.
+
+Recomendacion:
+
+- Reducir pesos cargados.
+- Limitar familias simultaneas.
+- Valorar `next/font` si se estabiliza la seleccion tipografica.
+
+### 9. Ruta De Revalidacion Muy General
+
+Archivo: `src/app/api/revalidate/route.js`
+
+Actualmente revalida el layout completo con:
+
+```js
+revalidatePath('/', 'layout')
+```
+
+Recomendacion:
+
+- Revalidar rutas o tags segun `_type`.
+- Usar tags coherentes en consultas Sanity.
+
+## Plan Recomendado De Optimizacion
+
+1. Separar cliente Sanity publico y cliente preview.
+2. Reactivar ISR en rutas publicas.
+3. Optimizar videos con click-to-play.
+4. Migrar imagenes clave a `next/image`.
+5. Reducir efectos globales en movil y con `prefers-reduced-motion`.
+6. Mover Swiper fuera del layout global.
+7. Consolidar consultas y cachear `settings`.
+
+## Nota De Seguridad
+
+Cambiar archivos locales no modifica Sanity. Lo que modifica el contenido online es editar documentos desde `/admin` y pulsar `Publish`, porque el Studio apunta al dataset `production`.

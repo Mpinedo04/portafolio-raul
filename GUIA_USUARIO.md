@@ -1,64 +1,142 @@
-# 🎬 Manual de Usuario: Panel de Control del Portfolio (Sanity CMS)
+# Guia De Usuario: Panel Sanity Del Portfolio
 
-¡Bienvenido al panel de control de tu nuevo portfolio audiovisual! 
-Esta web está construida con la última tecnología: **Next.js** para el diseño rapidísimo y **Sanity Studio** para que puedas cambiar tus vídeos y fotos sin ser programador.
+Esta guia explica que se puede cambiar desde Sanity y que pertenece al codigo del proyecto.
 
----
+## Aviso Importante
 
-## 🛑 1. CONCEPTOS MUY IMPORTANTES: ¿Qué puedo cambiar y qué no?
+El panel `/admin` trabaja contra Sanity. En este proyecto, si no se configuran otras variables, apunta a:
 
-Sanity es un gestor de **CONTENIDOS**, no un constructor visual (no es Wix ni Wordpress tradicional).
+- Proyecto: `xa9cwnu5`
+- Dataset: `production`
 
-- **❌ LO QUE NO PUEDES CAMBIAR DESDE AQUÍ (El Diseño):**
-  No puedes cambiar el fondo oscuro, no puedes hacer la letra más grande ni cambiar la posición de los botones. Eso está programado a medida en el *código puro* (`CSS` y `React`) para que la web sea cien veces más rápiday profesional que una plantilla normal. Solo un programador modificando el código fuente puede alterar el diseño o los colores.
+Eso significa que si editas un documento y pulsas `Publish`, el cambio se guarda en la base de datos online y puede verse en la web publica.
 
-- **✅ LO QUE SÍ PUEDES CAMBIAR (El Contenido):**
-  Puedes cambiar absolutamente todos los textos, títulos, todas las fotos de perfil, los propios vídeos y portadas de tus cortos, subir o borrar los elementos de tu equipo (cámaras, micros), cambiar tus habilidades y el email donde quieres recibir los contactos. 
+Editar archivos del repositorio en local no cambia Sanity. Publicar desde el Studio si cambia Sanity.
 
----
+## Como Entrar
 
-## 🔑 2. ¿Cómo Acceder y Empezar a Editar?
+1. Abre la web.
+2. Anade `/admin` al final de la URL.
+3. Inicia sesion con la cuenta autorizada.
+4. Edita documentos desde el panel.
+5. Pulsa `Publish` solo cuando quieras guardar el cambio real.
 
-1. Ve a tu web oficial y añádele la coletilla `/admin` al final. 
-   *(Ejemplo: `https://portafolio-raul.vercel.app/admin`)*
-2. Inicia sesión con la cuenta de Google autorizada.
-3. Te encontrarás con una interfaz oscura dividida en 3 grandes columnas.
+## Que Puedes Cambiar Desde Sanity
 
-### El Funcionamiento Básico de las Columnas:
-- **Columna Izquierda (Secciones):** Elige qué parte de la web quieres tocar (Proyectos, Equipo, Biografía...).
-- **Columna Central (Lista):** Verás la lista de las cosas que has creado dentro de esa categoría. Para crear algo nuevo **desde cero**, haz clic en el diminuto icono del **`+`** (crear documento) arriba de esta barra.
-- **Columna Derecha (Editor):** Es tu mesa de trabajo. Aquí rellenas los formularios, subes las fotos y escribes la información.
+### Global
 
----
+Documento `settings`:
 
-## 📝 3. Las Secciones Principales
+- Nombre de marca.
+- Redes sociales.
+- Email de contacto.
+- Texto del footer.
+- SEO global.
+- Fuentes seleccionadas.
+- Gradiente de fondo.
+- Banners y textos de algunas paginas de portfolio.
 
-### 📸 Proyectos (Tus Cortos o Trabajos)
-Para añadir un nuevo proyecto a la página principal:
-1. Haz clic en **"Proyecto"** (izquierda) -> **Icono `+`** (centro).
-2. Rellena el **Título** (ej: *"Catarsis - Cortometraje"*).
-3. Introduce el enlace al vídeo en Youtube/Vimeo si lo tienes.
-4. Sube una foto de portada potente en "Imagen Principal" (esta será la que vea todo el mundo en la galería).
-5. **MUY IMPORTANTE:** Arriba a la derecha del todo del editor, debes de pulsar siempre el botón verde de **"Publish"** (Publicar) para que los cambios se suban a la web pública.
+### Inicio
 
-### 🎥 Equipo Técnico (Tus Cámaras, Luces y Sets)
-Para fardar de arsenal técnico:
-1. Pestaña **"Equipo Técnico"** -> **Icono `+`**.
-2. Dale un título al bloque (ej: "Mis Cámaras Gafas").
-3. Para poner un pequeño icono bonito al lado en la web, en el campo **Lucide Icon Name** tienes que usar nombres en inglés de esta inmensa librería: [lucide.dev/icons](https://lucide.dev/icons).
-   *Ejemplos que funcionan perfectos para ti (recuerda la mayúscula inicial): `Camera`, `Video`, `Film`, `Mic`, `Monitor`, `Aperture`, `Play`, `Headphones`, `Settings`.*
+Documento `home`:
 
-### 🛠️ Configuración Global (Tu Contacto)
-Aquí abajo del todo podrás establecer:
-- El correo electrónico donde quieres recibir los mensajes.
-- Tus links de Instagram, Linkedin, etc.
+- Lineas del hero.
+- Subtitulo.
+- Texto principal.
+- Imagen de fondo.
+- Botones del hero.
+- SEO.
 
----
+### Sobre Mi
 
-## 🚀 4. "He dado a Publish pero la web aún no se actualiza"
+Documento `about`:
 
-La tecnología moderna funciona con **Cachés (Memoria ultra rápida)**. 
-Cuando das a *Publish*, Sanity guarda los datos al instante, pero **Vercel** (donde está alojada tu web) puede tardar un poco en darse cuenta de que la base de datos ha recibido fotos nuevas porque sirve la página desde la memoria para que cargue en 0.05 segundos a los visitantes. 
-*A veces tarda un par de minutos, o requiere que fuerces a refrescar la memoria del navegador de forma profunda (`Ctrl + Shift + R`).*
+- Titulo y subtitulo.
+- Bio.
+- Imagen de perfil.
+- Imagen de banner.
+- Etapas de trayectoria.
+- CV.
+- Galeria de accion.
+- Efecto de galeria.
+- SEO.
 
-¡Empieza rellenando lo básico de "Sobre Mí" y añadiendo tu primera gran película a "Proyectos"!
+### Portfolio
+
+Documentos `project`:
+
+- Titulo.
+- Subtitulo.
+- Etiqueta personalizada.
+- Descripcion.
+- Rol.
+- Categoria: propio o externo.
+- Video.
+- Imagen principal.
+- Material behind the scenes.
+- Orden.
+- Si aparece como destacado en la home.
+
+### Equipo
+
+Documentos `equipment`:
+
+- Nombre.
+- Modelo.
+- Especificaciones.
+- Categoria.
+- Imagen.
+- Orden.
+
+Documento `workstation`:
+
+- Titulo de la pagina.
+- Subtitulo.
+- Banner.
+- Componentes de la estacion de edicion.
+
+### Estudios
+
+Documento `studies`:
+
+- Banner.
+- Titulos.
+- Formacion.
+- Cursos.
+- Certificados.
+- Software y nivel.
+
+### Contacto
+
+Documento `contact`:
+
+- Titulo.
+- Subtitulo.
+- Banner.
+- Ubicacion/disponibilidad.
+- ID de Formspree.
+- SEO.
+
+El email principal se toma desde `settings.contactEmail`.
+
+## Que No Conviene Cambiar Desde Sanity Sin Revisar
+
+- No cambies categorias a valores inventados si la pagina espera valores concretos.
+- No borres campos esenciales si una seccion depende de ellos.
+- No publiques pruebas en `production` si solo quieres experimentar.
+- No cambies el ID de Formspree si no sabes cual es el formulario correcto.
+
+## Por Que A Veces No Se Ve Al Instante
+
+La web mezcla paginas cacheadas con paginas dinamicas. Algunas partes pueden refrescar al momento y otras pueden tardar unos segundos o depender de la cache de Vercel/navegador.
+
+Si has publicado y no ves el cambio:
+
+1. Espera unos segundos.
+2. Prueba `Ctrl + Shift + R`.
+3. Comprueba que publicaste el documento correcto.
+4. Comprueba que la pagina usa ese campo realmente.
+
+## Regla De Oro
+
+Si solo estas revisando rendimiento o codigo, no hace falta entrar en `/admin`. Para evitar sustos, trata `/admin` como el panel real de produccion.

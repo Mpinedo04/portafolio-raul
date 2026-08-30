@@ -1,10 +1,9 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useRef, useState, useSyncExternalStore } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { 
   EffectCube, 
   EffectCreative, 
-  Navigation, 
   Pagination 
 } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -74,14 +73,19 @@ const EFFECT_CONFIGS = {
   },
 };
 
-const ALL_MODULES = [EffectCube, EffectCreative, Navigation, Pagination];
+const ALL_MODULES = [EffectCube, EffectCreative, Pagination];
+const subscribeToMount = () => () => {};
+const getClientMountState = () => true;
+const getServerMountState = () => false;
 
 export default function ActionGallery({ photos = [], effect = 'cube' }) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useSyncExternalStore(
+    subscribeToMount,
+    getClientMountState,
+    getServerMountState,
+  );
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const swiperRef = useRef(null);
 
   if (!photos || photos.length === 0) return null;
   if (!isMounted) return <div style={{ minHeight: '480px' }} />;
@@ -95,6 +99,15 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   // Resolve effect config — fallback to cube if unknown
   const validEffect = EFFECT_CONFIGS[effect] ? effect : 'cube';
   const config = EFFECT_CONFIGS[validEffect];
+  const hasMultipleSlides = chunks.length > 1;
+
+  const moveSlide = (direction) => {
+    const swiper = swiperRef.current;
+    if (!hasMultipleSlides || !swiper || swiper.destroyed || swiper.animating) return;
+
+    if (direction === 'prev') swiper.slidePrev();
+    else swiper.slideNext();
+  };
 
   return (
     <div className={styles.carouselWrapper}>
@@ -104,11 +117,12 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           modules={ALL_MODULES}
           effect={config.type}
           grabCursor={true}
-          loop={chunks.length > 1}
-          navigation={{
-            prevEl: `.${styles.prevArrow}`,
-            nextEl: `.${styles.nextArrow}`,
+          loop={hasMultipleSlides}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
           }}
+          onTransitionStart={() => setIsTransitioning(true)}
+          onTransitionEnd={() => setIsTransitioning(false)}
           pagination={{ 
             clickable: true,
             bulletClass: styles.paginationBullet,
@@ -139,10 +153,22 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           ))}
         </Swiper>
 
-        <button className={`${styles.navArrow} ${styles.prevArrow}`}>
+        <button
+          type="button"
+          className={`${styles.navArrow} ${styles.prevArrow}`}
+          aria-label="Foto anterior"
+          disabled={!hasMultipleSlides || isTransitioning}
+          onClick={() => moveSlide('prev')}
+        >
           <ChevronLeft size={24} />
         </button>
-        <button className={`${styles.navArrow} ${styles.nextArrow}`}>
+        <button
+          type="button"
+          className={`${styles.navArrow} ${styles.nextArrow}`}
+          aria-label="Foto siguiente"
+          disabled={!hasMultipleSlides || isTransitioning}
+          onClick={() => moveSlide('next')}
+        >
           <ChevronRight size={24} />
         </button>
       </div>

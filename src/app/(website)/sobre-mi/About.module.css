@@ -207,10 +207,10 @@
   font-size: 0.98rem;
   line-height: 1.8;
   color: var(--color-text-secondary);
-  text-align: justify;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+}
+
+.timelineParagraphs p + p {
+  margin-top: 1.25em;
 }
 
 @media (max-width: 992px) {
@@ -331,10 +331,15 @@
   backdrop-filter: blur(4px);
 }
 
-.navArrow:hover {
+.navArrow:not(:disabled):hover {
   background: var(--gradient-blue);
   border-color: transparent;
   box-shadow: 0 0 20px rgba(48, 213, 200, 0.4);
+}
+
+.navArrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
 }
 
 .prevArrow { left: 0; }

@@ -1,30 +1,59 @@
-# 📜 Historial Técnico de Migración: Portfolio de Raúl
+# Historial Tecnico
 
-Este documento recoge la trazabilidad técnica de la sesión del 01/04/2026, donde transformamos la arquitectura de diseño global en un sistema descentralizado y resiliente satisfactoriamente. ✅ 🏎️💨
+## Estado Registrado En Esta Revision
 
-## 1. 🏗️ Arquitectura Descentralizada (Modo "Wix Pro")
-Migramos el control estético de `settings.js` a cada sección individualmente satisfactoriamente. ✅ 🏎️💨
+Fecha de revision local: 2026-06-01.
 
-### Componentes Clave:
-- **`getColor.js`**: Utilidad experta para procesar colores Hex y RGBA de Sanity de forma segura satisfactoriamente.
-- **`SectionTheme.jsx`**: Motor de inyección de variables CSS locales (`--panel-bg`, `--card-bg`, etc.) que sobreescribe el tema global satisfactoriamente.
-- **`pageTheme.js`**: Esquema neutro reutilizable por todos los documentos de Sanity satisfactoriamente.
+Acciones realizadas:
 
-## 2. 🛠️ Blindaje de Resiliencia (Vercel Fixes)
-Resolvimos tres bloqueos críticos que impedían el despliegue satisfactoriamente: ✅ 🏎️💨
-- **Parche de Iconos**: Sustitución de logotipos de marca eliminados en `lucide-react` v1.7.0 por alternativas genéricas en `icons.js`.
-- **Null Safety en UI**: Implementación de chequeos protectores (`brandName || ""`) en `Header` y `Footer` para evitar errores de `.toUpperCase()`.
-- **Blindaje de Temas**: Protección en `SectionTheme` para manejar objetos de tema nulos sin estrellar la aplicación satisfactoriamente.
+- Se descargo el repositorio `Mpinedo04/portafolio-raul`.
+- Se inspecciono la estructura del proyecto.
+- Se revisaron dependencias, rutas, cliente Sanity, paginas publicas y componentes principales.
+- No se ejecutaron scripts de escritura.
+- No se modifico contenido de Sanity.
+- No se inicio Sanity Studio.
+- No se publico nada en el dataset `production`.
 
-## 3. 🖥️ Rescate del Administrador (Sanity Studio)
-Corregimos el fallo de carga del panel mediante la declaración oficial del grupo `design` en todos los esquemas (`home`, `about`, `contact`, `equipment`, `portfolioPage`) satisfactoriamente. ✅ 🏎️💨
+## Correccion De Documentacion
 
-## 4. 📂 Registro de Páginas Migradas
-- [x] **Home**: Hero dinámico y selección de tema independiente satisfactoriamente.
-- [x] **Sobre Mí**: Biografía y diseño gestionado desde Sanity satisfactoriamente.
-- [x] **Equipo**: Inventario técnico con categorías y tema propio satisfactoriamente.
-- [x] **Contacto**: Formulario y estética sincronizada satisfactoriamente.
-- [x] **Portfolio (Hub/Propios/Externos)**: Conexión total al sistema de temas mediante el nuevo esquema `portfolioPage`.
+La documentacion anterior mencionaba piezas que no existen actualmente en el codigo:
 
----
-**Tu web ahora es modular, indestructible y profesional.** 🏁🎬🤝 ✨🚀
+- `SectionTheme.jsx`
+- `getColor.js`
+- `pageTheme.js`
+- `portfolioPage.js`
+- `DynamicFont.jsx`
+- Lazy-load completo en `VideoEmbed.jsx`
+
+Estas referencias se han retirado de la documentacion tecnica para evitar decisiones basadas en una arquitectura que no esta presente en el repositorio actual.
+
+## Arquitectura Actual Confirmada
+
+- Next.js 16.2.1.
+- React 19.2.4.
+- Sanity 5.18.0.
+- `next-sanity` 12.2.1.
+- Sanity Studio embebido en `/admin`.
+- Dataset por defecto: `production`.
+- Cliente Sanity con `useCdn: false`.
+- Varias paginas con ISR de 10 segundos.
+- Varias paginas con render dinamico forzado y `revalidate = 0`.
+
+## Riesgos Detectados
+
+- Rendimiento afectado por cache desactivada.
+- Carga pesada por iframes de video directos.
+- Imagenes sin optimizacion con `next/image`.
+- Efectos globales de scroll/mouse/DOM.
+- Swiper cargado globalmente.
+- Fuentes Google dinamicas con varios pesos.
+
+## Siguiente Paso Recomendado
+
+Antes de cambiar comportamiento, conviene hacer una rama y aplicar mejoras en orden:
+
+1. Ajustar cache/Sanity sin romper preview.
+2. Hacer videos click-to-play.
+3. Optimizar imagenes principales.
+4. Reducir efectos globales pesados.
+5. Mover Swiper fuera del layout global.

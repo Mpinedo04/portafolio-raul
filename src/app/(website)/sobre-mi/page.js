@@ -16,6 +16,15 @@ export async function generateMetadata() {
   return { title: seo.metaTitle, description: seo.metaDescription };
 }
 
+function splitParagraphs(text) {
+  if (typeof text !== 'string') return [];
+
+  return text
+    .split(/\r?\n\s*\r?\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
+
 export default async function AboutPage() {
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{
     bio, title, subtitle, storyTitle,
@@ -95,7 +104,11 @@ export default async function AboutPage() {
                     </div>
                     <div className={styles.timelineText}>
                       <h3>{stage.stageTitle}</h3>
-                      <p className="text-justified">{stage.stageText}</p>
+                      <div className={`${styles.timelineParagraphs} text-justified`}>
+                        {splitParagraphs(stage.stageText).map((paragraph, paragraphIndex) => (
+                          <p key={paragraphIndex}>{paragraph}</p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
