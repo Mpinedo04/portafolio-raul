@@ -8,8 +8,7 @@
   text-align: center;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment: fixed;
   padding-top: 80px;
 }
 
@@ -54,4 +53,12 @@
   margin: 0 auto;
   line-height: 1.6;
   opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    min-height: clamp(360px, 52svh, 460px);
+    background-attachment: scroll;
+    background-position: center center;
+  }
 }

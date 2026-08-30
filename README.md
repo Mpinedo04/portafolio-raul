@@ -1,36 +1,22 @@
-# Portfolio Raul
+# Portafolio Raul
 
-Portfolio audiovisual construido con Next.js App Router y Sanity Studio.
+Portfolio audiovisual desarrollado con **Next.js** y **Sanity CMS**.
 
-## Estado Actual
+El proyecto permite presentar el perfil profesional de Raul, sus proyectos, equipo tecnico, estudios y datos de contacto. El contenido se gestiona desde Sanity Studio y la web publica esta desplegada en Vercel.
 
-- Framework: Next.js 16.2.1 con React 19.
-- CMS: Sanity 5 integrado en la ruta `/admin`.
-- Contenido publico: se lee desde el dataset `production` de Sanity.
-- Rutas publicas principales:
-  - `/`
-  - `/portfolio`
-  - `/portfolio/propios`
-  - `/portfolio/externos`
-  - `/sobre-mi`
-  - `/equipo`
-  - `/estudios`
-  - `/contacto`
-- Ruta de administracion:
-  - `/admin`
+## Demo
 
-## Aviso Sobre Sanity
+[https://portafolio-raul-sigma.vercel.app/](https://portafolio-raul-sigma.vercel.app/)
 
-Editar archivos del proyecto en local no modifica la base de datos online.
+## Tecnologias
 
-Lo que si puede cambiar el contenido online es entrar en Sanity Studio, editar documentos y pulsar `Publish`, porque el proyecto apunta por defecto a:
+- Next.js
+- React
+- Sanity CMS
+- CSS Modules
+- Vercel
 
-- `projectId`: `xa9cwnu5`
-- `dataset`: `production`
-
-Antes de hacer pruebas peligrosas conviene usar otro dataset o un proyecto Sanity de pruebas.
-
-## Comandos
+## Scripts
 
 ```bash
 npm run dev
@@ -39,19 +25,50 @@ npm run start
 npm run lint
 ```
 
-## Variables De Entorno
+## Estructura principal
 
-El codigo tiene valores por defecto, pero en produccion conviene definir:
-
-```bash
-NEXT_PUBLIC_SANITY_PROJECT_ID=xa9cwnu5
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_REVALIDATE_SECRET=...
+```text
+.
++-- src/
+|   +-- app/
+|   |   +-- (website)/
+|   |   +-- (admin)/
+|   |   +-- api/
+|   +-- components/
+|   +-- sanity/
++-- public/
++-- package.json
++-- sanity.config.js
++-- next.config.mjs
 ```
 
-## Documentacion Del Proyecto
+## Rutas principales
 
-- `GUIA_ARQUITECTURA_TECNICA.md`: mapa tecnico real del codigo actual.
-- `GUIA_USUARIO.md`: guia para editar contenido desde Sanity sin tocar codigo.
-- `AUDITORIA_EXPERTA.md`: auditoria de rendimiento y riesgos.
-- `HISTORIAL_TECNICO_MIGRACION.md`: registro de estado y decisiones.
+- `/`: pagina principal.
+- `/sobre-mi`: perfil y biografia.
+- `/portfolio`: hub de portfolio.
+- `/portfolio/propios`: proyectos propios.
+- `/portfolio/externos`: proyectos externos.
+- `/equipo`: equipo tecnico.
+- `/estudios`: formacion y estudios.
+- `/contacto`: pagina de contacto.
+- `/admin`: Sanity Studio.
+
+## Variables de entorno
+
+El proyecto usa Sanity. Revisa estas variables si necesitas cambiar proyecto o dataset:
+
+```bash
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
+SANITY_API_READ_TOKEN=
+SANITY_REVALIDATE_SECRET=
+```
+
+## Notas de mantenimiento
+
+- El contenido editable vive en Sanity.
+- Los esquemas estan en `src/sanity/schemaTypes`.
+- La estructura del panel de Sanity esta en `src/sanity/lib/structure.js`.
+- Las paginas publicas estan bajo `src/app/(website)`.
+- El panel de administracion esta bajo `src/app/(admin)`.

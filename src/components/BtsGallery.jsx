@@ -4,13 +4,17 @@ import { createPortal } from 'react-dom';
 import { Camera, X, ChevronLeft, ChevronRight, PlayCircle, Grid } from 'lucide-react';
 import styles from './BtsGallery.module.css';
 import VideoEmbed from './VideoEmbed';
+import { urlForOptimized } from '@/sanity/lib/image';
 
 export default function BtsGallery({ items = [] }) {
   const [viewMode, setViewMode] = useState('hidden'); // 'hidden', 'grid', 'carousel'
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => setIsMounted(true), []);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -24,6 +28,16 @@ export default function BtsGallery({ items = [] }) {
     };
   }, [viewMode]);
 
+  const showNext = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % items.length);
+  }, [items.length]);
+
+  const showPrev = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+  }, [items.length]);
+
   const handleKeyDown = useCallback((e) => {
     if (viewMode === 'hidden') return;
     if (e.key === 'Escape') {
@@ -34,7 +48,7 @@ export default function BtsGallery({ items = [] }) {
       if (e.key === 'ArrowLeft') showPrev();
       if (e.key === 'ArrowRight') showNext();
     }
-  }, [viewMode, currentIndex, items]);
+  }, [viewMode, showPrev, showNext]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -43,22 +57,17 @@ export default function BtsGallery({ items = [] }) {
 
   if (!items || items.length === 0) return null;
 
-  const showNext = (e) => {
-    if (e) e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % items.length);
-  };
-
-  const showPrev = (e) => {
-    if (e) e.stopPropagation();
-    setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
-  };
-
   const openGallery = () => {
     setViewMode('grid');
   };
 
+  const getImageUrl = (item, options) => {
+    if (item._type === 'image' && item.asset) return urlForOptimized(item, options);
+    return item.url;
+  };
+
   const getThumbnail = (item) => {
-    if (item._type === 'image') return item.url;
+    if (item._type === 'image') return getImageUrl(item, { width: 600, height: 600, quality: 78, fit: 'crop' });
     if (item._type === 'youtubeVideo') {
       const match = item.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^#\&\?]*)/);
       const ytId = match && match[1] ? match[1] : null;
@@ -68,6 +77,9 @@ export default function BtsGallery({ items = [] }) {
   };
 
   const currentItem = items[currentIndex];
+  const currentImageUrl = currentItem?._type === 'image'
+    ? getImageUrl(currentItem, { width: 1600, quality: 84 })
+    : currentItem?.url;
 
   return (
     <>
@@ -122,7 +134,7 @@ export default function BtsGallery({ items = [] }) {
                     setViewMode('carousel');
                   }}
                 >
-                  <img src={getThumbnail(item)} alt={`BTS Thumbnail ${idx + 1}`} className={styles.thumbImg} />
+                  <img src={getThumbnail(item)} alt={`BTS Thumbnail ${idx + 1}`} className={styles.thumbImg} loading="lazy" decoding="async" />
                   {item._type === 'youtubeVideo' && (
                     <div className={styles.playIconOverlay}>
                       <PlayCircle size={48} />
@@ -153,9 +165,10 @@ export default function BtsGallery({ items = [] }) {
                   </div>
                 ) : (
                   <img 
-                    src={currentItem.url} 
+                    src={currentImageUrl}
                     alt={`Behind The Scenes ${currentIndex + 1}`} 
                     className={styles.slideImage} 
+                    decoding="async"
                   />
                 )}
               </div>

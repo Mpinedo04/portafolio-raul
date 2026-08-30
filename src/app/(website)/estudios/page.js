@@ -1,7 +1,7 @@
 import { FileText } from 'lucide-react';
 import styles from './Studies.module.css';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -54,7 +54,7 @@ export default async function StudiesPage() {
     other: 'Otros',
   };
 
-  const bannerImg = data.bannerImage?.asset ? urlFor(data.bannerImage).url() : null;
+  const bannerImg = data.bannerImage?.asset ? urlForOptimized(data.bannerImage, { width: 1600, quality: 82 }) : null;
 
   return (
     <>
@@ -77,7 +77,7 @@ export default async function StudiesPage() {
                   <div key={i} className={styles.educationCard}>
                     {item.logo?.asset && (
                       <div className={styles.logoCol}>
-                        <img src={urlFor(item.logo).width(80).url()} alt={item.institution} />
+                        <img src={urlForOptimized(item.logo, { width: 160, quality: 80 })} alt={item.institution} />
                       </div>
                     )}
                     <div className={styles.eduInfo}>
@@ -147,7 +147,7 @@ export default async function StudiesPage() {
                       {items.map((sw, i) => (
                         <div key={i} className={`${styles.softwareCard} ${sw.level === 5 ? styles.expertCard : ''}`}>
                           {sw.icon?.asset && (
-                            <img src={urlFor(sw.icon).width(64).url()} alt={sw.softwareName} className={styles.swIcon} />
+                            <img src={urlForOptimized(sw.icon, { width: 128, quality: 80 })} alt={sw.softwareName} className={styles.swIcon} />
                           )}
                           <div className={styles.swInfo}>
                             <div className={styles.swHeader}>

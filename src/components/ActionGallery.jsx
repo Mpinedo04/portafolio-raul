@@ -1,13 +1,14 @@
 'use client';
-import { useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { 
   EffectCube, 
   EffectCreative, 
+  Navigation, 
   Pagination 
 } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 
 import styles from '../app/(website)/sobre-mi/About.module.css';
 
@@ -73,19 +74,15 @@ const EFFECT_CONFIGS = {
   },
 };
 
-const ALL_MODULES = [EffectCube, EffectCreative, Pagination];
-const subscribeToMount = () => () => {};
-const getClientMountState = () => true;
-const getServerMountState = () => false;
+const ALL_MODULES = [EffectCube, EffectCreative, Navigation, Pagination];
 
 export default function ActionGallery({ photos = [], effect = 'cube' }) {
-  const isMounted = useSyncExternalStore(
-    subscribeToMount,
-    getClientMountState,
-    getServerMountState,
-  );
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const swiperRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   if (!photos || photos.length === 0) return null;
   if (!isMounted) return <div style={{ minHeight: '480px' }} />;
@@ -99,15 +96,6 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   // Resolve effect config — fallback to cube if unknown
   const validEffect = EFFECT_CONFIGS[effect] ? effect : 'cube';
   const config = EFFECT_CONFIGS[validEffect];
-  const hasMultipleSlides = chunks.length > 1;
-
-  const moveSlide = (direction) => {
-    const swiper = swiperRef.current;
-    if (!hasMultipleSlides || !swiper || swiper.destroyed || swiper.animating) return;
-
-    if (direction === 'prev') swiper.slidePrev();
-    else swiper.slideNext();
-  };
 
   return (
     <div className={styles.carouselWrapper}>
@@ -117,12 +105,11 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           modules={ALL_MODULES}
           effect={config.type}
           grabCursor={true}
-          loop={hasMultipleSlides}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
+          loop={chunks.length > 1}
+          navigation={{
+            prevEl: `.${styles.prevArrow}`,
+            nextEl: `.${styles.nextArrow}`,
           }}
-          onTransitionStart={() => setIsTransitioning(true)}
-          onTransitionEnd={() => setIsTransitioning(false)}
           pagination={{ 
             clickable: true,
             bulletClass: styles.paginationBullet,
@@ -139,9 +126,11 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
                 {group.map((photo, i) => (
                   <div key={i} className={styles.photoBox}>
                     <img 
-                      src={urlFor(photo).width(500).height(500).url()} 
+                      src={urlForOptimized(photo, { width: 500, height: 500, quality: 78, fit: 'crop' })}
                       alt={`Momentos ${index * 6 + i + 1}`} 
                       className={styles.actionPhoto}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -153,22 +142,10 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           ))}
         </Swiper>
 
-        <button
-          type="button"
-          className={`${styles.navArrow} ${styles.prevArrow}`}
-          aria-label="Foto anterior"
-          disabled={!hasMultipleSlides || isTransitioning}
-          onClick={() => moveSlide('prev')}
-        >
+        <button className={`${styles.navArrow} ${styles.prevArrow}`}>
           <ChevronLeft size={24} />
         </button>
-        <button
-          type="button"
-          className={`${styles.navArrow} ${styles.nextArrow}`}
-          aria-label="Foto siguiente"
-          disabled={!hasMultipleSlides || isTransitioning}
-          onClick={() => moveSlide('next')}
-        >
+        <button className={`${styles.navArrow} ${styles.nextArrow}`}>
           <ChevronRight size={24} />
         </button>
       </div>

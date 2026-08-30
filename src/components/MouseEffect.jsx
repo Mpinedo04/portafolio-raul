@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 
 export default function MouseEffect() {
   useEffect(() => {
-    // 1. Mouse Tracking Effect
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const shouldReveal = canHover && !reduceMotion;
+
+    if (!shouldReveal) return;
+
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
@@ -12,7 +17,6 @@ export default function MouseEffect() {
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // 2. Global Scroll Reveal Effect
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

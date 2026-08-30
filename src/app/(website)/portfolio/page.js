@@ -1,7 +1,7 @@
 import styles from './Portfolio.module.css';
 import Link from 'next/link';
 import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
+import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,7 +11,7 @@ export const revalidate = 10;
 export default async function PortfolioHub() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner, portfolioTitle, portfolioSubtitle }`) || {};
   
-  const bannerImg = settings.portfolioBanner?.asset ? urlFor(settings.portfolioBanner).url() : null;
+  const bannerImg = settings.portfolioBanner?.asset ? urlForOptimized(settings.portfolioBanner, { width: 1600, quality: 82 }) : null;
 
   return (
     <>
