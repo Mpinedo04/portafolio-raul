@@ -58,7 +58,8 @@ export default async function Home() {
           name={home.name} 
           subHeadline={home.subHeadline}
           headline={home.headline} 
-          backgroundImage={(home.heroImage?.asset) ? urlForOptimized(home.heroImage, { width: 2000, quality: 82 }) : null}
+          backgroundImage={(home.heroImage?.asset) ? urlForOptimized(home.heroImage, { width: 2400, quality: 90 }) : null}
+          focalPoint={home.heroImage?.hotspot || null}
           heroButtons={home.heroButtons}
         />
 

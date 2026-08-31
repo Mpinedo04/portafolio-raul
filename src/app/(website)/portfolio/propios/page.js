@@ -24,7 +24,8 @@ export default async function PropiosPage() {
   }`;
   const allProjects = await client.fetch(query) || [];
 
-  const bannerImg = settings.propiosBanner?.asset ? urlForOptimized(settings.propiosBanner, { width: 1600, quality: 82 }) : null;
+  const bannerImg = settings.propiosBanner?.asset ? urlForOptimized(settings.propiosBanner, { width: 2400, quality: 90 }) : null;
+  const bannerFocalPoint = settings.propiosBanner?.hotspot || null;
 
   return (
     <>
@@ -34,6 +35,7 @@ export default async function PropiosPage() {
         title={settings.propiosTitle || "PROYECTOS PROPIOS"}
         subtitle={settings.propiosSubtitle || "Cortometrajes, estudios y experimentación personal."}
         backgroundImage={bannerImg}
+        focalPoint={bannerFocalPoint}
       />
 
       <div className={styles.portfolio}>

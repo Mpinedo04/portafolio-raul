@@ -54,7 +54,8 @@ export default async function StudiesPage() {
     other: 'Otros',
   };
 
-  const bannerImg = data.bannerImage?.asset ? urlForOptimized(data.bannerImage, { width: 1600, quality: 82 }) : null;
+  const bannerImg = data.bannerImage?.asset ? urlForOptimized(data.bannerImage, { width: 2400, quality: 90 }) : null;
+  const bannerFocalPoint = data.bannerImage?.hotspot || null;
 
   return (
     <>
@@ -64,6 +65,7 @@ export default async function StudiesPage() {
         title={data.title || "ESTUDIOS Y CONOCIMIENTOS"} 
         subtitle={data.subtitle || "Formación académica, certificaciones y herramientas profesionales."}
         backgroundImage={bannerImg}
+        focalPoint={bannerFocalPoint}
       />
 
       <div className={styles.page}>

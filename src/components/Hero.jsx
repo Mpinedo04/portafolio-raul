@@ -6,9 +6,18 @@ export default function Hero({
   subHeadline = "CREANDO HISTORIAS A TRAVÉS DEL VISOR",
   headline = "Filmmaker & Editor de Vídeo. Documentando lo ordinario para hacerlo extraordinario.",
   backgroundImage = null,
+  focalPoint = null,
   heroButtons = {}
 }) {
-  const heroStyle = backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : {};
+  const heroStyle = {};
+
+  if (backgroundImage) {
+    heroStyle.backgroundImage = `url(${backgroundImage})`;
+  }
+
+  if (focalPoint && typeof focalPoint.x === 'number' && typeof focalPoint.y === 'number') {
+    heroStyle.backgroundPosition = `${(focalPoint.x * 100).toFixed(1)}% ${(focalPoint.y * 100).toFixed(1)}%`;
+  }
   
   const { 
     primaryText = "Ver Proyectos", 

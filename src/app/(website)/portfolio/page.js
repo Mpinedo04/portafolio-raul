@@ -11,7 +11,8 @@ export const revalidate = 10;
 export default async function PortfolioHub() {
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner, portfolioTitle, portfolioSubtitle }`) || {};
   
-  const bannerImg = settings.portfolioBanner?.asset ? urlForOptimized(settings.portfolioBanner, { width: 1600, quality: 82 }) : null;
+  const bannerImg = settings.portfolioBanner?.asset ? urlForOptimized(settings.portfolioBanner, { width: 2400, quality: 90 }) : null;
+  const bannerFocalPoint = settings.portfolioBanner?.hotspot || null;
 
   return (
     <>
@@ -21,6 +22,7 @@ export default async function PortfolioHub() {
         title={settings.portfolioTitle || "PROYECTOS"}
         subtitle={settings.portfolioSubtitle || "Selecciona una categoría para explorar mi trayectoria creativa."}
         backgroundImage={bannerImg}
+        focalPoint={bannerFocalPoint}
       />
 
       <div className={styles.portfolio}>

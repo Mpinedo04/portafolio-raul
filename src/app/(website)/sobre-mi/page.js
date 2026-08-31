@@ -34,7 +34,8 @@ export default async function AboutPage() {
 
   const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const stages = about.stages || [];
-  const bannerImg = about.bannerImage?.asset ? urlForOptimized(about.bannerImage, { width: 1600, quality: 82 }) : null;
+  const bannerImg = about.bannerImage?.asset ? urlForOptimized(about.bannerImage, { width: 2400, quality: 90 }) : null;
+  const bannerFocalPoint = about.bannerImage?.hotspot || null;
   const hasActionPhotos = Array.isArray(about.actionPhotos) && about.actionPhotos.length > 0;
 
   const KNOWN_EFFECTS = ['cube', 'sweep', 'cards', 'fade'];
@@ -49,6 +50,7 @@ export default async function AboutPage() {
         title={about.title || "BIO & TRAYECTORIA"}
         subtitle={about.subtitle || "La evolución de un apasionado por el séptimo arte."}
         backgroundImage={bannerImg}
+        focalPoint={bannerFocalPoint}
       />
 
       <div className={styles.page}>

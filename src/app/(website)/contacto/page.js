@@ -32,7 +32,8 @@ export default async function ContactPage() {
   };
 
   const finalEmail = settings.contactEmail || "FCraulinho2004@gmail.com";
-  const bannerImg = contact.bannerImage?.asset ? urlForOptimized(contact.bannerImage, { width: 1600, quality: 82 }) : null;
+  const bannerImg = contact.bannerImage?.asset ? urlForOptimized(contact.bannerImage, { width: 2400, quality: 90 }) : null;
+  const bannerFocalPoint = contact.bannerImage?.hotspot || null;
 
   return (
     <>
@@ -42,6 +43,7 @@ export default async function ContactPage() {
         title={contact.title}
         subtitle={contact.subtitle}
         backgroundImage={bannerImg}
+        focalPoint={bannerFocalPoint}
       />
 
       <div className={styles.page}>
