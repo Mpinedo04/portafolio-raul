@@ -100,6 +100,7 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   const isMobile = useIsMobile();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const swiperRef = useRef(null);
+  const transitionTimeoutRef = useRef(null);
 
   if (!photos || photos.length === 0) return null;
   if (!isMounted) return <div style={{ minHeight: '480px' }} />;
@@ -115,6 +116,20 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
   const validEffect = EFFECT_CONFIGS[effect] ? effect : 'cube';
   const config = EFFECT_CONFIGS[validEffect];
   const hasMultipleSlides = chunks.length > 1;
+
+  const handleTransitionStart = () => {
+    setIsTransitioning(true);
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+    // Watchdog: force-clear isTransitioning in case transitionend never fires (e.g. reduced motion)
+    transitionTimeoutRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 950);
+  };
+
+  const handleTransitionEnd = () => {
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+    setIsTransitioning(false);
+  };
 
   const moveSlide = (direction) => {
     const swiper = swiperRef.current;
@@ -136,8 +151,8 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          onTransitionStart={() => setIsTransitioning(true)}
-          onTransitionEnd={() => setIsTransitioning(false)}
+          onTransitionStart={handleTransitionStart}
+          onTransitionEnd={handleTransitionEnd}
           pagination={{ 
             clickable: true,
             bulletClass: styles.paginationBullet,
@@ -174,7 +189,7 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           type="button"
           className={`${styles.navArrow} ${styles.prevArrow}`}
           aria-label="Foto anterior"
-          disabled={!hasMultipleSlides || isTransitioning}
+          disabled={!hasMultipleSlides}
           onClick={() => moveSlide('prev')}
         >
           <ChevronLeft size={24} />
@@ -183,7 +198,7 @@ export default function ActionGallery({ photos = [], effect = 'cube' }) {
           type="button"
           className={`${styles.navArrow} ${styles.nextArrow}`}
           aria-label="Foto siguiente"
-          disabled={!hasMultipleSlides || isTransitioning}
+          disabled={!hasMultipleSlides}
           onClick={() => moveSlide('next')}
         >
           <ChevronRight size={24} />
