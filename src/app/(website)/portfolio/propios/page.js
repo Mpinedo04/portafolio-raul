@@ -3,16 +3,22 @@ import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
 import BtsGallery from '@/components/BtsGallery';
-import Footer from '@/components/Footer';
 import EmptyState from '@/components/EmptyState';
+import { getSiteSettings } from '@/sanity/lib/settings';
+import { buildMetadata } from '@/lib/seo';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export async function generateMetadata() {
+  return buildMetadata({
+    title: 'Proyectos propios | Raúl García',
+    description:
+      'Cortometrajes, documentales y piezas de autor creadas por Raúl García, con material de detrás de cámaras.',
+    path: '/portfolio/propios',
+  });
+}
 
 export default async function PropiosPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, propiosBanner, propiosTitle, propiosSubtitle }`) || {};
+  const settings = await getSiteSettings();
   
   const query = `*[_type == "project" && category == "propio"] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, year, description, role, category, videoUrl, mainImage,
@@ -29,8 +35,6 @@ export default async function PropiosPage() {
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={settings.propiosTitle || "PROYECTOS PROPIOS"}
         subtitle={settings.propiosSubtitle || "Cortometrajes, estudios y experimentación personal."}
@@ -83,12 +87,6 @@ export default async function PropiosPage() {
           </div>
         </section>
       </div>
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
     </>
   );
 }

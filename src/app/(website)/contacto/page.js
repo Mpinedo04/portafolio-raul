@@ -3,27 +3,21 @@ import styles from './Contact.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import ContactForm from './ContactForm';
-import { draftMode } from 'next/headers';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
-export const revalidate = 10;
+import { getSiteSettings } from '@/sanity/lib/settings';
+import { buildMetadata } from '@/lib/seo';
 
 export async function generateMetadata() {
-  const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]{ seo }`);
-  const seo = contact?.seo || {};
-  if (!seo.metaTitle) return {};
-  return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-  };
+  return buildMetadata({
+    title: 'Contacto | Raúl García',
+    description:
+      '¿Tienes un proyecto audiovisual en mente? Escríbeme y hablemos de tu cortometraje, documental o vídeo de marca.',
+    path: '/contacto',
+  });
 }
 
 export default async function ContactPage() {
-  const isDraftMode = (await draftMode()).isEnabled;
-  
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
+  const settings = await getSiteSettings();
   const contact = await client.fetch(`*[_type == "contact" && _id == "contact"][0]`) || {
     title: "TRABAJEMOS JUNTOS",
     subtitle: "¿Tienes un proyecto en mente? Cuéntame los detalles y hagámoslo realidad.",
@@ -31,14 +25,12 @@ export default async function ContactPage() {
     formspreeId: "",
   };
 
-  const finalEmail = settings.contactEmail || "FCraulinho2004@gmail.com";
+  const finalEmail = settings.contactEmail || "raulgarciafernandez2004@gmail.com";
   const bannerImg = contact.bannerImage?.asset ? urlForOptimized(contact.bannerImage, { width: 2400, quality: 90 }) : null;
   const bannerFocalPoint = contact.bannerImage?.hotspot || null;
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={contact.title}
         subtitle={contact.subtitle}
@@ -74,12 +66,6 @@ export default async function ContactPage() {
           </div>
         </section>
       </div>
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
     </>
   );
 }

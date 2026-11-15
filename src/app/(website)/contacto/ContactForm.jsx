@@ -13,11 +13,7 @@ export default function ContactForm({ initialStatus = '', formId: propFormId }) 
     const formId = propFormId || process.env.NEXT_PUBLIC_FORMSPREE_ID;
     
     if (!formId || formId === 'tu_id_aquí' || formId.includes('tu_id')) {
-      setTimeout(() => {
-        setStatus('MENSAJE ENVIADO (Modo Prueba)');
-        e.target.reset();
-        setTimeout(() => setStatus(''), 3000);
-      }, 1500);
+      setStatus('FORMULARIO NO CONFIGURADO. ESCRÍBEME POR EMAIL.');
       return;
     }
 
@@ -54,25 +50,26 @@ export default function ContactForm({ initialStatus = '', formId: propFormId }) 
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <div className={styles.field}>
-          <label>NOMBRE COMPLETO *</label>
-          <input type="text" name="nombre" placeholder="Escribe tu nombre" required />
+          <label htmlFor="contacto-nombre">NOMBRE COMPLETO *</label>
+          <input id="contacto-nombre" type="text" name="nombre" placeholder="Escribe tu nombre" autoComplete="name" required />
         </div>
         <div className={styles.field}>
-          <label>CORREO ELECTRÓNICO *</label>
-          <input type="email" name="email" placeholder="tu@email.com" required />
+          <label htmlFor="contacto-email">CORREO ELECTRÓNICO *</label>
+          <input id="contacto-email" type="email" name="email" placeholder="tu@email.com" autoComplete="email" required />
         </div>
       </div>
       <div className={styles.field}>
-        <label>NÚMERO DE TELÉFONO *</label>
-        <input type="tel" name="telefono" placeholder="Tu número de contacto" required />
+        <label htmlFor="contacto-telefono">NÚMERO DE TELÉFONO *</label>
+        <input id="contacto-telefono" type="tel" name="telefono" placeholder="Tu número de contacto" autoComplete="tel" required />
       </div>
       <div className={styles.field}>
-        <label>MENSAJE / DETALLES DEL PROYECTO *</label>
-        <textarea name="mensaje" rows="6" placeholder="Cuéntame sobre tu idea..." required></textarea>
+        <label htmlFor="contacto-mensaje">MENSAJE / DETALLES DEL PROYECTO *</label>
+        <textarea id="contacto-mensaje" name="mensaje" rows="6" placeholder="Cuéntame sobre tu idea..." required></textarea>
       </div>
       <button type="submit" className={styles.submitBtn}>
         {status || 'ENVIAR MENSAJE'} <Send size={18} />
       </button>
+      <p role="status" aria-live="polite" className={styles.srOnly}>{status}</p>
     </form>
   );
 }

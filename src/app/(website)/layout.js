@@ -1,9 +1,13 @@
 import './globals.css';
-import { client } from '@/sanity/lib/client';
-import { VisualEditing } from "next-sanity/visual-editing";
-import { draftMode } from "next/headers";
+import { VisualEditing } from 'next-sanity/visual-editing';
+import { draftMode } from 'next/headers';
 import MouseEffect from '@/components/MouseEffect';
 import ScrollProgress from '@/components/ScrollProgress';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { getSiteSettings } from '@/sanity/lib/settings';
+import { buildMetadata } from '@/lib/seo';
+import { SITE_URL } from '@/lib/site';
 
 // Global Swiper Styles
 import 'swiper/css';
@@ -11,29 +15,20 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/effect-creative';
 import 'swiper/css/pagination';
 
-export const revalidate = 10;
+// Contenido cacheado 5 minutos; el webhook de Sanity puede revalidarlo antes.
+export const revalidate = 300;
 
 export async function generateMetadata() {
-  const settings = await client.fetch(`*[_type == "settings"][0]`, {}, { next: { tags: ['settings'] } });
-  const seo = settings?.seo || {};
-
   return {
-    title: seo.metaTitle || 'Raúl García | Filmmaker & Audiovisual Portfolio',
-    description: seo.metaDescription || 'Portfolio profesional de Raúl García, un creador audiovisual especializado en cortometrajes, documentales y edición de vídeo.',
+    metadataBase: new URL(SITE_URL),
+    ...(await buildMetadata({ path: '/' })),
   };
 }
 
 export default async function RootLayout({ children }) {
   const isDraftMode = (await draftMode()).isEnabled;
-  const settings = await client.fetch(
-    `*[_id == "settings"][0]{ logoFont, headingFont, subtitleFont, bodyFont, backgroundGradient }`,
-    {},
-    { 
-      perspective: isDraftMode ? 'previewDrafts' : 'published',
-      next: { revalidate: 0, tags: ['settings'] } 
-    }
-  ) || {};
-  
+  const settings = await getSiteSettings();
+
   // Robust dictionary lookup: Stega metadata includes invisible characters that break strict string equality.
   // We look for our known keys within the string to bypass this.
   const KNOWN_LOGO_FONTS = ['Poppins', 'Bebas+Neue', 'Oswald', 'Playfair+Display', 'Raleway', 'Inter'];
@@ -103,7 +98,13 @@ export default async function RootLayout({ children }) {
       >
         <ScrollProgress />
         <MouseEffect />
+        <Header brandName={settings.brandName} socialLinks={settings.socialLinks} />
         <main>{children}</main>
+        <Footer
+          brandName={settings.brandName}
+          contactEmail={settings.contactEmail}
+          footerDescription={settings.footerDescription}
+        />
         {isDraftMode && <VisualEditing />}
       </body>
     </html>

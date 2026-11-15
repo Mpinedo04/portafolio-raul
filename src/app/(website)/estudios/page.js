@@ -3,21 +3,19 @@ import styles from './Studies.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import EmptyState from '@/components/EmptyState';
-
-export const revalidate = 10;
+import { buildMetadata } from '@/lib/seo';
 
 export async function generateMetadata() {
-  return {
-    title: 'Estudios y Conocimientos | Raúl García',
-    description: 'Formación académica, cursos y dominio de software profesional audiovisual.',
-  };
+  return buildMetadata({
+    title: 'Estudios y formación | Raúl García',
+    description:
+      'Formación académica, cursos, certificaciones y nivel de dominio del software audiovisual que utiliza Raúl García.',
+    path: '/estudios',
+  });
 }
 
 export default async function StudiesPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const data = await client.fetch(
     `*[_type == "studies" && _id == "studies"][0]{
       ...,
@@ -27,7 +25,7 @@ export default async function StudiesPage() {
       }
     }`,
     {},
-    { next: { revalidate: 0, tags: ['studies'] } }
+    { next: { tags: ['studies'] } }
   ) || {};
 
   const education = data.education || [];
@@ -59,8 +57,6 @@ export default async function StudiesPage() {
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      
       <PageBanner 
         title={data.title || "ESTUDIOS Y CONOCIMIENTOS"} 
         subtitle={data.subtitle || "Formación académica, certificaciones y herramientas profesionales."}
@@ -79,7 +75,7 @@ export default async function StudiesPage() {
                   <div key={i} className={styles.educationCard}>
                     {item.logo?.asset && (
                       <div className={styles.logoCol}>
-                        <img src={urlForOptimized(item.logo, { width: 160, quality: 80 })} alt={item.institution} />
+                        <img src={urlForOptimized(item.logo, { width: 160, quality: 80 })} alt={item.institution} loading="lazy" decoding="async" />
                       </div>
                     )}
                     <div className={styles.eduInfo}>
@@ -149,7 +145,7 @@ export default async function StudiesPage() {
                       {items.map((sw, i) => (
                         <div key={i} className={`${styles.softwareCard} ${sw.level === 5 ? styles.expertCard : ''}`}>
                           {sw.icon?.asset && (
-                            <img src={urlForOptimized(sw.icon, { width: 128, quality: 80 })} alt={sw.softwareName} className={styles.swIcon} />
+                            <img src={urlForOptimized(sw.icon, { width: 128, quality: 80 })} alt={sw.softwareName} className={styles.swIcon} loading="lazy" decoding="async" />
                           )}
                           <div className={styles.swInfo}>
                             <div className={styles.swHeader}>
@@ -212,13 +208,6 @@ export default async function StudiesPage() {
           </section>
         )}
       </div>
-
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
     </>
   );
 }

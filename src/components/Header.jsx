@@ -32,6 +32,12 @@ const SocialIcons = {
   ),
 };
 
+const SOCIAL_LABELS = {
+  Youtube: 'YouTube',
+  Instagram: 'Instagram',
+  Mail: 'Correo electrónico',
+};
+
 export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -42,9 +48,18 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
 
   const renderIcon = (name) => {
     const Icon = SocialIcons[name];
@@ -67,11 +82,18 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
         </Link>
 
         {/* Desktop Nav */}
-        <nav className={styles.nav}>
+        <nav className={styles.nav} aria-label="Navegación principal">
           <div 
             className={styles.dropdown}
             onMouseEnter={() => !isOpen && setIsOpenDropdown(true)}
             onMouseLeave={() => setIsOpenDropdown(false)}
+            onFocus={() => setIsOpenDropdown(true)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setIsOpenDropdown(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') setIsOpenDropdown(false);
+            }}
           >
             <Link href="/portfolio" className={`${styles.navLink} ${pathname?.startsWith('/portfolio') ? styles.active : ''}`}>
               PROYECTOS
@@ -98,6 +120,8 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
               rel="noopener noreferrer" 
               className={styles.iconLink}
               data-platform={item.platform.toLowerCase()}
+              aria-label={SOCIAL_LABELS[item.platform] || item.platform}
+              title={SOCIAL_LABELS[item.platform] || item.platform}
             >
               {renderIcon(item.platform)}
             </a>
@@ -105,13 +129,20 @@ export default function Header({ brandName = "RAÚL GARCÍA", socialLinks = [] }
         </div>
 
         {/* Mobile Toggle */}
-        <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
+        <button
+          type="button"
+          className={styles.mobileToggle}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Mobile Menu Overlay */}
         {isOpen && (
-          <div className={styles.mobileMenu}>
+          <div id="mobile-navigation" className={styles.mobileMenu}>
             <div className={styles.mobileSection}>
               <span>Proyectos</span>
               <Link href="/portfolio/propios" className={pathname === '/portfolio/propios' ? styles.active : ''} onClick={() => setIsOpen(false)}>Proyectos Propios</Link>

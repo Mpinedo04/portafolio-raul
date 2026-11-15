@@ -1,23 +1,27 @@
 import styles from './Portfolio.module.css';
 import Link from 'next/link';
-import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { getSiteSettings } from '@/sanity/lib/settings';
+import { buildMetadata } from '@/lib/seo';
 
-export const revalidate = 10;
+export async function generateMetadata() {
+  return buildMetadata({
+    title: 'Proyectos | Raúl García',
+    description:
+      'Selección de cortometrajes, documentales, spots y trabajos audiovisuales de Raúl García: proyectos propios y encargos para clientes.',
+    path: '/portfolio',
+  });
+}
 
 export default async function PortfolioHub() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, portfolioBanner, portfolioTitle, portfolioSubtitle }`) || {};
+  const settings = await getSiteSettings();
   
   const bannerImg = settings.portfolioBanner?.asset ? urlForOptimized(settings.portfolioBanner, { width: 2400, quality: 90 }) : null;
   const bannerFocalPoint = settings.portfolioBanner?.hotspot || null;
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={settings.portfolioTitle || "PROYECTOS"}
         subtitle={settings.portfolioSubtitle || "Selecciona una categoría para explorar mi trayectoria creativa."}
@@ -45,12 +49,6 @@ export default async function PortfolioHub() {
           </div>
         </section>
       </div>
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
     </>
   );
 }

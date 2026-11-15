@@ -1,6 +1,11 @@
 export const metadata = {
   title: 'CENTRO DE MANDO 🎬 | Raúl García',
   description: 'Panel de control exclusivo para la gestión del portfolio.',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
 };
 
 export default function AdminLayout({ children }) {

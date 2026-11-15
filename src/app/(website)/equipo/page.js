@@ -3,12 +3,17 @@ import styles from './Equipment.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import EmptyState from '@/components/EmptyState';
+import { buildMetadata } from '@/lib/seo';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export async function generateMetadata() {
+  return buildMetadata({
+    title: 'Equipo técnico | Raúl García',
+    description:
+      'Cámaras, ópticas, sonido, iluminación y estación de edición: el equipo técnico con el que Raúl García produce sus proyectos.',
+    path: '/equipo',
+  });
+}
 
 const CATEGORY_CONFIG = {
   video_camaras:        { label: 'Cámaras',               icon: Camera,     group: 'video' },
@@ -31,7 +36,6 @@ const GROUP_LABELS = {
 };
 
 export default async function EquipmentPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const allEquipment = await client.fetch(`*[_type == "equipment"] | order(orderRank asc, category asc)`) || [];
   const workstation = await client.fetch(`*[_type == "workstation" && _id == "workstation"][0]{ title, subtitle, bannerImage, components }`) || {};
 
@@ -70,8 +74,6 @@ export default async function EquipmentPage() {
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={workstation.title || "EQUIPO TÉCNICO"}
         subtitle={workstation.subtitle || "Herramientas de alta gama para resultados cinematográficos."}
@@ -96,7 +98,7 @@ export default async function EquipmentPage() {
                       <div key={eq._id || i} className={styles.card}>
                         {eq.image?.asset ? (
                           <div className={styles.cardImage}>
-                            <img src={urlForOptimized(eq.image, { width: 700, quality: 78 })} alt={eq.name} />
+                            <img src={urlForOptimized(eq.image, { width: 700, quality: 78 })} alt={eq.name} loading="lazy" decoding="async" />
                           </div>
                         ) : (
                           <div className={styles.cardIconRow}>
@@ -152,13 +154,6 @@ export default async function EquipmentPage() {
           </div>
         </section>
       </div>
-
-      <Footer
-        brandName={settings?.brandName}
-        contactEmail={settings?.contactEmail}
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks}
-      />
     </>
   );
 }

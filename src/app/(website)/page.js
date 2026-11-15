@@ -5,19 +5,10 @@ import styles from './page.module.css';
 import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
-export const revalidate = 10;
+import { buildMetadata } from '@/lib/seo';
 
 export async function generateMetadata() {
-  const home = await client.fetch(`*[_type == "home" && _id == "home"][0]{ seo }`);
-  const seo = home?.seo || {};
-  if (!seo.metaTitle) return {};
-  return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-  };
+  return buildMetadata({ path: '/' });
 }
 
 export default async function Home() {
@@ -43,16 +34,13 @@ export default async function Home() {
     },
   };
 
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ bio }`) || { bio: "" };
   const projects = await client.fetch(`*[_type == "project" && featured == true] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, year, role, category, videoUrl, mainImage
   }`) || [];
 
   return (
-    <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-      <div className={styles.about}>
+    <div className={styles.about}>
         <Hero 
           nameLine1={home.nameLine1}
           name={home.name} 
@@ -107,6 +95,8 @@ export default async function Home() {
                         <img 
                           src={(project.mainImage?.asset) ? urlForOptimized(project.mainImage, { width: 900, quality: 82 }) : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop"}
                           alt={project.title} 
+                          loading="lazy"
+                          decoding="async"
                         />
                       )}
                     </div>
@@ -125,7 +115,7 @@ export default async function Home() {
                 <>
                   <div className={styles.projectCard}>
                     <div className={styles.imageWrapper}>
-                      <img src="https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop" alt="Proyecto destacado" />
+                      <img src="https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop" alt="Proyecto destacado" loading="lazy" decoding="async" />
                     </div>
                     <div className={styles.projectInfo}>
                       <span className={styles.badge}>PROYECTO</span>
@@ -136,7 +126,7 @@ export default async function Home() {
                   </div>
                   <div className={styles.projectCard}>
                     <div className={styles.imageWrapper}>
-                      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop" alt="Proyecto destacado" />
+                      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop" alt="Proyecto destacado" loading="lazy" decoding="async" />
                     </div>
                     <div className={styles.projectInfo}>
                       <span className={styles.badge}>PROYECTO</span>
@@ -150,13 +140,6 @@ export default async function Home() {
             </div>
           </div>
         </section>
-      </div>
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
-    </>
+    </div>
   );
 }

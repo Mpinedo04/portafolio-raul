@@ -3,17 +3,16 @@ import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import { Download, FileText } from 'lucide-react';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ActionGallery from '@/components/ActionGallery';
-
-export const revalidate = 10;
+import { buildMetadata } from '@/lib/seo';
 
 export async function generateMetadata() {
-  const about = await client.fetch(`*[_type == "about" && _id == "about"][0]{ seo }`);
-  const seo = about?.seo || {};
-  if (!seo.metaTitle) return {};
-  return { title: seo.metaTitle, description: seo.metaDescription };
+  return buildMetadata({
+    title: 'Sobre mí | Raúl García',
+    description:
+      'Trayectoria, formación y proceso creativo de Raúl García, filmmaker y editor de vídeo especializado en cine y documental.',
+    path: '/sobre-mi',
+  });
 }
 
 function splitParagraphs(text) {
@@ -32,7 +31,6 @@ export default async function AboutPage() {
     galleryTitle, galleryEffect, actionPhotos
   }`) || {};
 
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription }`) || {};
   const stages = about.stages || [];
   const bannerImg = about.bannerImage?.asset ? urlForOptimized(about.bannerImage, { width: 2400, quality: 90 }) : null;
   const bannerFocalPoint = about.bannerImage?.hotspot || null;
@@ -44,8 +42,6 @@ export default async function AboutPage() {
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={about.title || "BIO & TRAYECTORIA"}
         subtitle={about.subtitle || "La evolución de un apasionado por el séptimo arte."}
@@ -129,13 +125,6 @@ export default async function AboutPage() {
           </div>
         </section>
       </div>
-
-      <Footer
-        brandName={settings?.brandName}
-        contactEmail={settings?.contactEmail}
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks}
-      />
     </>
   );
 }

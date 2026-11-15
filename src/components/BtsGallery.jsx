@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Camera, X, ChevronLeft, ChevronRight, PlayCircle, Grid } from 'lucide-react';
 import styles from './BtsGallery.module.css';
@@ -10,6 +10,8 @@ export default function BtsGallery({ items = [] }) {
   const [viewMode, setViewMode] = useState('hidden'); // 'hidden', 'grid', 'carousel'
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+  const closeButtonRef = useRef(null);
+  const triggerRef = useRef(null);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => setIsMounted(true));
@@ -26,6 +28,18 @@ export default function BtsGallery({ items = [] }) {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [viewMode]);
+
+  // Al abrir el lightbox, el foco entra en el diálogo; al cerrarlo, vuelve al botón.
+  const wasOpenRef = useRef(false);
+  useEffect(() => {
+    if (viewMode === 'hidden') {
+      if (wasOpenRef.current) triggerRef.current?.focus();
+      wasOpenRef.current = false;
+    } else {
+      wasOpenRef.current = true;
+      closeButtonRef.current?.focus();
+    }
   }, [viewMode]);
 
   const showNext = useCallback((e) => {
@@ -85,6 +99,7 @@ export default function BtsGallery({ items = [] }) {
     <>
       {/* Trigger Button */}
       <button 
+        ref={triggerRef}
         className={styles.triggerBtn} 
         onClick={openGallery}
         aria-label="Ver Galería Behind The Scenes"
@@ -96,7 +111,13 @@ export default function BtsGallery({ items = [] }) {
 
       {/* Lightbox Modal via Portal */}
       {viewMode !== 'hidden' && isMounted && createPortal(
-        <div className={styles.lightbox} onClick={() => setViewMode('hidden')}>
+        <div
+          className={styles.lightbox}
+          onClick={() => setViewMode('hidden')}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Galería detrás de cámaras"
+        >
           
           <div className={styles.topBar}>
             {viewMode === 'carousel' ? (
@@ -113,11 +134,13 @@ export default function BtsGallery({ items = [] }) {
               <span className={styles.counter}>GALERÍA BTS</span>
             )}
             <button 
+              ref={closeButtonRef}
               className={styles.closeBtn} 
               onClick={(e) => {
                 e.stopPropagation();
                 setViewMode('hidden');
               }}
+              aria-label="Cerrar galería"
             >
               <X size={28} />
             </button>
@@ -126,21 +149,23 @@ export default function BtsGallery({ items = [] }) {
           {viewMode === 'grid' && (
             <div className={styles.gridContainer} onClick={(e) => e.stopPropagation()}>
               {items.map((item, idx) => (
-                <div 
+                <button
+                  type="button"
                   key={idx} 
                   className={styles.thumbnailBox}
+                  aria-label={`Abrir elemento ${idx + 1} de la galería`}
                   onClick={() => {
                     setCurrentIndex(idx);
                     setViewMode('carousel');
                   }}
                 >
-                  <img src={getThumbnail(item)} alt={`BTS Thumbnail ${idx + 1}`} className={styles.thumbImg} loading="lazy" decoding="async" />
+                  <img src={getThumbnail(item)} alt="" className={styles.thumbImg} loading="lazy" decoding="async" />
                   {item._type === 'youtubeVideo' && (
-                    <div className={styles.playIconOverlay}>
+                    <span className={styles.playIconOverlay}>
                       <PlayCircle size={48} />
-                    </div>
+                    </span>
                   )}
-                </div>
+                </button>
               ))}
             </div>
           )}
@@ -151,6 +176,7 @@ export default function BtsGallery({ items = [] }) {
                 className={`${styles.navBtn} ${styles.prevBtn}`} 
                 onClick={showPrev}
                 disabled={items.length <= 1}
+                aria-label="Elemento anterior"
               >
                 <ChevronLeft size={36} />
               </button>
@@ -177,6 +203,7 @@ export default function BtsGallery({ items = [] }) {
                 className={`${styles.navBtn} ${styles.nextBtn}`} 
                 onClick={showNext}
                 disabled={items.length <= 1}
+                aria-label="Elemento siguiente"
               >
                 <ChevronRight size={36} />
               </button>

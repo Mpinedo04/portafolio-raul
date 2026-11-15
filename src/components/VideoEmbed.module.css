@@ -26,12 +26,51 @@
   border-radius: 12px;
 }
 
+.posterFallback {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-blue);
+  opacity: 0.35;
+  border-radius: 12px;
+}
+
+/* Fachada del reproductor: miniatura + botón de play */
+.facade {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.facade .thumbnail {
+  position: absolute;
+  inset: 0;
+}
+
+.facade:hover .thumbnail,
+.facade:focus-visible .thumbnail {
+  transform: scale(1.03);
+}
+
+.facade:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
 .fallbackLink {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
   text-decoration: none;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .playBtn {
@@ -51,8 +90,11 @@
   opacity: 0.85;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(48, 213, 200, 0.4);
+  pointer-events: none;
 }
 
+.facade:hover .playBtn,
+.facade:focus-visible .playBtn,
 .fallbackLink:hover .playBtn {
   transform: translate(-50%, -50%) scale(1.15);
   opacity: 1;

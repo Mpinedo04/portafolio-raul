@@ -222,6 +222,15 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0;
+}
+
+.thumbnailBox:focus-visible,
+.closeBtn:focus-visible,
+.navBtn:focus-visible,
+.triggerBtn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .thumbnailBox:hover {

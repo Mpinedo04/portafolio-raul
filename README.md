@@ -19,14 +19,14 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 ### 1. Gestión de Contenido Headless (Sanity Studio v5)
 - **Centro de mando integrado (`/admin`):** Acceso al CMS embebido dentro de la propia aplicación Next.js mediante `sanity/structure`.
 - **Visual Editing & Draft Mode (`/api/draft`):** Integración con Sanity Presentation Tool para previsualizar cambios en vivo sobre el diseño en tiempo real antes de publicar.
-- **Revalidación instantánea bajo demanda (`/api/revalidate`):** Webhook seguro de revalidación para actualizar el contenido en Vercel al instante sin reconstruir el proyecto completo.
+- **Revalidación bajo demanda (`/api/revalidate`):** Webhook para refrescar el contenido cacheado sin reconstruir el proyecto completo.
 - **Documentos Singleton protegidos:** Esquemas únicos (`home`, `about`, `contact`, `studies`, `workstation`, `settings`) blindados contra duplicaciones accidentales.
 
 ### 2. Portafolio Audiovisual Especializado
 - **Hub de proyectos segmentado:**
   - `/portfolio/propios`: Obras de autor, cortometrajes y piezas personales.
   - `/portfolio/externos`: Trabajos comerciales, corporativos y colaboraciones.
-- **Reproductor de vídeo integrado (`VideoEmbed`):** Integración fluida para visualización de piezas audiovisuales (Vimeo / YouTube / CDN).
+- **Reproductor de vídeo integrado (`VideoEmbed`):** Fachada *click-to-play* para YouTube y Vimeo: el reproductor y las cookies de terceros solo se cargan cuando el usuario pulsa play.
 - **Metadatos cinematográficos:** Badges dinámicos de año de producción, rol técnico, sinopsis y ficha técnica.
 
 ### 3. Experiencia Interactiva y Componentes Visuales
@@ -42,7 +42,8 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 ### 4. Personalización Global desde el CMS (`settings`)
 - **Configurador de estética:** Selector de tipografías y 4 temas de degradados de fondo gestionados desde el propio Sanity.
 - **Control de banners y textos:** Personalización independiente de titulares, subtítulos y mensajes por página.
-- **SEO Global y Social:** Títulos meta, descripciones y Open Graph configurables por el usuario.
+- **SEO técnico:** Títulos y descripciones por página, canonical, Open Graph/Twitter con imagen 1200×630, `sitemap.xml`, `robots.txt` y `noindex` en `/admin`.
+- **Rendimiento:** Páginas públicas estáticas con ISR de 5 minutos, consultas a Sanity por CDN y ajustes de carga diferida en imágenes y vídeos.
 
 ---
 
@@ -79,23 +80,25 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
     │   │   │   ├── globals.css                 # Estilos globales y variables de tema
     │   │   │   ├── layout.js                   # Layout principal de la web pública
     │   │   │   └── page.js                     # Portada (Hero, destacados y presentación)
-    │   │   └── api/
-    │   │       ├── draft/                      # Endpoint para activar el modo borrador / live preview
-    │   │       └── revalidate/                 # Webhook para revalidación bajo demanda (ISR)
+    │   │   ├── api/
+    │   │   │   ├── draft/                      # Endpoint para activar el modo borrador / live preview
+    │   │   │   └── revalidate/                 # Webhook para revalidación bajo demanda (ISR)
+    │   │   ├── robots.js                       # Genera /robots.txt
+    │   │   └── sitemap.js                      # Genera /sitemap.xml
     │   ├── components/                         # Componentes reutilizables de UI
     │   │   ├── ActionGallery.jsx               # Galería de fotogramas de acción
     │   │   ├── BtsGallery.jsx                  # Lightbox "Detrás de cámaras"
     │   │   ├── EmptyState.jsx                  # Estado vacío para colecciones sin datos
-    │   │   ├── Footer.jsx                      # Pie de página y enlaces sociales
+    │   │   ├── Footer.jsx                      # Pie de página con datos de contacto
     │   │   ├── Header.jsx                      # Cabecera, navegación y menú móvil
     │   │   ├── Hero.jsx                        # Portada con título adaptable y CTA
     │   │   ├── MouseEffect.jsx                 # Efecto interactivo de cursor/luz
     │   │   ├── PageBanner.jsx                  # Banner unificado de títulos por página
     │   │   ├── ScrollProgress.jsx              # Barra de progreso de lectura
     │   │   └── VideoEmbed.jsx                  # Embed accesible para reproductores de vídeo
-    │   ├── lib/                                # Utilidades y mapa de iconos
+    │   ├── lib/                                # Utilidades, mapa de iconos y SEO
     │   └── sanity/
-    │       ├── lib/                            # Clientes Sanity, generador de URLs y estructura
+    │       ├── lib/                            # Clientes Sanity, ajustes cacheados, imágenes y estructura
     │       ├── presentation/                   # Configuración del Visual Editing
     │       └── schemaTypes/                    # Esquemas de datos de Sanity
     │           ├── about.js                    # Esquema de biografía, CV y timeline
@@ -106,7 +109,9 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
     │           ├── settings.js                 # Esquema de estilos, banners y SEO
     │           ├── studies.js                  # Esquema de estudios y software
     │           └── workstation.js              # Esquema de estación de trabajo/setup
-    ├── next.config.mjs                         # Configuración de Next.js (imágenes remotas de Sanity CDN)
+    ├── docs/
+    │   └── INFORME-CAMBIOS.md                  # Informe de los commits de limpieza y rendimiento/SEO
+    ├── next.config.mjs                         # Configuración de Next.js
     ├── sanity.config.js                        # Configuración principal de Sanity Studio
     └── package.json                            # Scripts y dependencias
 

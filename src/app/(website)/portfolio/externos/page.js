@@ -3,16 +3,22 @@ import { client } from '@/sanity/lib/client';
 import { urlForOptimized } from '@/sanity/lib/image';
 import VideoEmbed from '@/components/VideoEmbed';
 import PageBanner from '@/components/PageBanner';
-import Header from '@/components/Header';
 import BtsGallery from '@/components/BtsGallery';
-import Footer from '@/components/Footer';
 import EmptyState from '@/components/EmptyState';
+import { getSiteSettings } from '@/sanity/lib/settings';
+import { buildMetadata } from '@/lib/seo';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export async function generateMetadata() {
+  return buildMetadata({
+    title: 'Trabajos externos | Raúl García',
+    description:
+      'Encargos, spots y proyectos audiovisuales realizados por Raúl García para clientes, marcas y empresas.',
+    path: '/portfolio/externos',
+  });
+}
 
 export default async function ExternosPage() {
-  const settings = await client.fetch(`*[_type == "settings" && _id == "settings"][0]{ brandName, socialLinks, contactEmail, footerDescription, externosBanner, externosTitle, externosSubtitle }`) || {};
+  const settings = await getSiteSettings();
   
   const query = `*[_type == "project" && category == "externo"] | order(orderRank asc, _createdAt desc) {
     _id, title, subtitle, customLabel, year, description, role, category, videoUrl, mainImage,
@@ -29,8 +35,6 @@ export default async function ExternosPage() {
 
   return (
     <>
-      <Header brandName={settings?.brandName} socialLinks={settings?.socialLinks} />
-
       <PageBanner
         title={settings.externosTitle || "TRABAJOS EXTERNOS"}
         subtitle={settings.externosSubtitle || "Explora mis trabajos profesionales para clientes, marcas y empresas."}
@@ -83,12 +87,6 @@ export default async function ExternosPage() {
           </div>
         </section>
       </div>
-      <Footer 
-        brandName={settings?.brandName} 
-        contactEmail={settings?.contactEmail} 
-        footerDescription={settings?.footerDescription}
-        socialLinks={settings?.socialLinks} 
-      />
     </>
   );
 }

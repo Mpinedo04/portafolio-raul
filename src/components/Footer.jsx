@@ -1,17 +1,10 @@
-import { getIcon } from '@/lib/icons';
 import styles from './Footer.module.css';
 
 export default function Footer({ 
   brandName = "RAÚL GARCÍA", 
-  contactEmail = "FCraulinho2004@gmail.com",
-  footerDescription = "Filmmaker & Editor de Vídeo especializado en proyectos cinematográficos y documentales.",
-  socialLinks = [] 
+  contactEmail = "raulgarciafernandez2004@gmail.com",
+  footerDescription = "Filmmaker & Editor de Vídeo especializado en proyectos cinematográficos y documentales."
 }) {
-  const renderIcon = (name) => {
-    const IconComponent = getIcon(name);
-    return <IconComponent size={24} />;
-  };
-
   return (
     <footer className={styles.footer}>
       <div className={`${styles.container} container`}>

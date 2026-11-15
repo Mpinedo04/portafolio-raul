@@ -9,13 +9,19 @@ export default function MouseEffect() {
 
     if (!shouldReveal) return;
 
+    // El brillo que sigue al cursor se actualiza como mucho una vez por frame.
+    let frame = null;
     const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
-      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+        document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+      });
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -26,27 +32,19 @@ export default function MouseEffect() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    const applyReveal = () => {
-      const elements = document.querySelectorAll('section, h2, .card, [class*="projectCard"], [class*="equipmentCard"], [class*="projectItem"], [class*="hubCard"], [class*="educationCard"], [class*="courseCard"], [class*="softwareCard"], [class*="infoBlock"], [class*="formCol"], [class*="timelineItem"]');
-      elements.forEach(el => {
-        if (!el.classList.contains('reveal')) {
-          el.classList.add('reveal');
-          revealObserver.observe(el);
-        }
-      });
-    };
-
-    applyReveal();
-
-    const domObserver = new MutationObserver(() => {
-      applyReveal();
+    // El HTML llega renderizado desde el servidor: basta con una pasada.
+    const elements = document.querySelectorAll('section, h2, .card, [class*="projectCard"], [class*="equipmentCard"], [class*="projectItem"], [class*="hubCard"], [class*="educationCard"], [class*="courseCard"], [class*="softwareCard"], [class*="infoBlock"], [class*="formCol"], [class*="timelineItem"]');
+    elements.forEach(el => {
+      if (!el.classList.contains('reveal')) {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+      }
     });
-    domObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (frame) cancelAnimationFrame(frame);
       revealObserver.disconnect();
-      domObserver.disconnect();
     };
   }, []);
 
