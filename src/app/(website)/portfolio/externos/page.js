@@ -48,14 +48,15 @@ export default async function ExternosPage() {
             <div className={styles.list}>
               {allProjects.length > 0 ? (
                 allProjects.map((p) => {
-                  const thumb = p.mainImage?.asset ? urlForOptimized(p.mainImage, { width: 900, quality: 82 }) : "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop";
+                  const thumb = p.mainImage?.asset ? urlForOptimized(p.mainImage, { width: 900, quality: 82 }) : null;
+                  const fallbackThumb = thumb || "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop";
                   return (
                     <div key={p._id} className={`${styles.projectItem} bts-card-trigger`}>
                       <div className={styles.mediaSide}>
                         {p.videoUrl ? (
                           <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />
                         ) : (
-                          <img src={thumb} alt={p.title} className={styles.mainImage} loading="lazy" decoding="async" />
+                          <img src={fallbackThumb} alt={p.title} className={styles.mainImage} loading="lazy" decoding="async" />
                         )}
                       </div>
                       <div className={styles.textSide}>

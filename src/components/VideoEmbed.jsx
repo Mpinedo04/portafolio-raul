@@ -59,11 +59,12 @@ export default function VideoEmbed({ url, title, thumbnail }) {
   }
 
   if (vimeoId) {
+    const showPlayer = isPlaying || !poster;
     return (
       <div className={styles.wrapper}>
-        {isPlaying ? (
+        {showPlayer ? (
           <iframe
-            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&title=0&byline=0&portrait=0`}
+            src={`https://player.vimeo.com/video/${vimeoId}?${isPlaying ? 'autoplay=1&' : ''}title=0&byline=0&portrait=0`}
             title={title}
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"

@@ -48,14 +48,15 @@ export default async function PropiosPage() {
             <div className={styles.list}>
               {allProjects.length > 0 ? (
                 allProjects.map((p) => {
-                  const thumb = p.mainImage?.asset ? urlForOptimized(p.mainImage, { width: 900, quality: 82 }) : "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop";
+                  const thumb = p.mainImage?.asset ? urlForOptimized(p.mainImage, { width: 900, quality: 82 }) : null;
+                  const fallbackThumb = thumb || "https://images.unsplash.com/photo-1485846234645-a62644ef7467?q=80&w=2069&auto=format&fit=crop";
                   return (
                     <div key={p._id} className={`${styles.projectItem} bts-card-trigger`}>
                       <div className={styles.mediaSide}>
                         {p.videoUrl ? (
                           <VideoEmbed url={p.videoUrl} title={p.title} thumbnail={thumb} />
                         ) : (
-                          <img src={thumb} alt={p.title} className={styles.mainImage} loading="lazy" decoding="async" />
+                          <img src={fallbackThumb} alt={p.title} className={styles.mainImage} loading="lazy" decoding="async" />
                         )}
                       </div>
                       <div className={styles.textSide}>
