@@ -12,15 +12,15 @@ El panel de Sanity está integrado dentro de Next.js. No es una página independ
 
 ```mermaid
 flowchart TD
-    A[Visita /admin] --> B[src/app/(admin)/admin/[[...index]]/page.jsx]
-    B --> C[NextStudio]
-    C --> D[sanity.config.js]
-    D --> E[structureTool: menú personalizado]
-    D --> F[presentationTool: vista previa]
-    D --> G[src/sanity/schemaTypes/index.js]
-    E --> H[src/sanity/lib/structure.js]
-    F --> I[src/sanity/presentation/resolve.js]
-    G --> J[Esquemas y campos de documentos]
+    A["Visita /admin"] --> B["Ruta admin de Next.js"]
+    B --> C["NextStudio"]
+    C --> D["sanity.config.js"]
+    D --> E["structureTool: menú personalizado"]
+    D --> F["presentationTool: vista previa"]
+    D --> G["schemaTypes/index.js"]
+    E --> H["lib/structure.js"]
+    F --> I["presentation/resolve.js"]
+    G --> J["Esquemas y campos de documentos"]
 ```
 
 ### Piezas principales
@@ -54,10 +54,10 @@ En [`sanity.config.js`](../sanity.config.js), `schema.templates` impide crear do
 
 ```mermaid
 flowchart LR
-    A[Campos editados en /admin] --> B[Documento publicado en Sanity]
-    B --> C[Cliente de src/sanity/lib/client.js]
-    C --> D[Consultas GROQ de cada ruta]
-    D --> E[Componentes de la web]
+    A["Campos editados en /admin"] --> B["Documento publicado en Sanity"]
+    B --> C["Cliente de Sanity"]
+    C --> D["Consultas GROQ de cada ruta"]
+    D --> E["Componentes de la web"]
 ```
 
 La web lee el dataset configurado en `client.js`. El cliente actual usa `perspective: 'published'` y `useCdn: true`. Los ajustes globales se agrupan en [`src/sanity/lib/settings.js`](../src/sanity/lib/settings.js); las páginas consultan los documentos de su sección.
