@@ -20,7 +20,7 @@ export default function Footer({
           <p>© {new Date().getFullYear()} {brandName}. Todos los derechos reservados.</p>
           <p className={styles.credit}>
             Hecho por Miguel ·{' '}
-            <a href="mailto:pinedofacimiguel@gmail.com">pinedofacimiguel@gmail.com</a>
+            <a href="mailto:mpinedofaci@gmail.com">mpinedofaci@gmail.com</a>
           </p>
         </div>
       </div>
