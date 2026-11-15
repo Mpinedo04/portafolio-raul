@@ -49,7 +49,7 @@ export default async function EquipmentPage() {
     let config = CATEGORY_CONFIG[safeCategory];
     
     if (!config) {
-      config = { label: `DEBUG_v4: [${safeCategory}]`, icon: Box, group: 'extras' };
+      config = { label: safeCategory || 'Otros', icon: Box, group: 'extras' };
     }
     
     const groupKey = config.group;

@@ -136,7 +136,7 @@ export default async function StudiesPage() {
             <div className="container">
               <h2 className={styles.sectionTitle}>SOFTWARE Y PROGRAMAS</h2>
               <p className={styles.softwareLegend}>Nivel de dominio del 1 (Básico) al 5 (Experto)</p>
-              <div className={styles.softwareGroups} data-debug-grouped="true">
+              <div className={styles.softwareGroups}>
                 {Object.entries(softwareByCategory)
                   .sort(([a], [b]) => {
                     const order = ['video', 'audio', 'design', 'vfx', 'other'];

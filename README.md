@@ -30,7 +30,7 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 - **Metadatos cinematográficos:** Badges dinámicos de año de producción, rol técnico, sinopsis y ficha técnica.
 
 ### 3. Experiencia Interactiva y Componentes Visuales
-- **Galería interactiva Behind The Scenes (`BtsGallery`):** Carrusel fotográfico potenciado por **Swiper** con soporte gestual en móviles, transiciones fluidas y posicionamiento focal (*hotspot*) de Sanity en alta resolución (2400px Q90).
+- **Galería interactiva Behind The Scenes (`BtsGallery`):** Lightbox propio con rejilla de miniaturas, navegación por teclado y posicionamiento focal (*hotspot*) de Sanity en alta resolución (2400px Q90).
 - **Matriz de dominio de software (`/estudios`):** Indicadores visuales de nivel (escala segmentada 1 a 5) ordenados por áreas técnicas (Vídeo, Audio, VFX, Diseño) con etiquetas emergentes en hover.
 - **Catálogo de equipo técnico (`/equipo`):** Desglose categorizado y normalizado del inventario de cámaras, iluminación, ópticas y sonido.
 - **Línea de tiempo profesional (`/sobre-mi`):** Hitos y trayectoria profesional, junto con botón para descarga directa del CV editable desde el panel.
@@ -53,7 +53,7 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 | **Framework Web** | [Next.js](https://nextjs.org/) (App Router, Server & Client Components) |
 | **Biblioteca UI** | [React](https://react.dev/) |
 | **CMS Headless** | [Sanity](https://www.sanity.io/) Studio v5 & `@sanity/presentation` (Visual Editing) |
-| **Integración CMS** | `next-sanity`, `@sanity/image-url`, `@sanity/color-input` |
+| **Integración CMS** | `next-sanity`, `@sanity/image-url` |
 | **Estilos** | CSS Modules modernos, CSS Custom Properties y Glassmorphism |
 | **Componentes e Iconos** | [Lucide React](https://lucide.dev/) |
 | **Carruseles y Sliders** | [Swiper](https://swiperjs.com/) |
@@ -64,7 +64,6 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 ## 📁 Estructura del Proyecto
 
     portafolio-raul/
-    ├── public/                                 # Recursos estáticos públicos y favicon
     ├── src/
     │   ├── app/
     │   │   ├── (admin)/                        # Ruta aislada para el panel de administración
@@ -85,7 +84,7 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
     │   │       └── revalidate/                 # Webhook para revalidación bajo demanda (ISR)
     │   ├── components/                         # Componentes reutilizables de UI
     │   │   ├── ActionGallery.jsx               # Galería de fotogramas de acción
-    │   │   ├── BtsGallery.jsx                  # Carrusel Swiper "Detrás de cámaras"
+    │   │   ├── BtsGallery.jsx                  # Lightbox "Detrás de cámaras"
     │   │   ├── EmptyState.jsx                  # Estado vacío para colecciones sin datos
     │   │   ├── Footer.jsx                      # Pie de página y enlaces sociales
     │   │   ├── Header.jsx                      # Cabecera, navegación y menú móvil
@@ -96,7 +95,6 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
     │   │   └── VideoEmbed.jsx                  # Embed accesible para reproductores de vídeo
     │   ├── lib/                                # Utilidades y mapa de iconos
     │   └── sanity/
-    │       ├── components/                     # Componentes personalizados del Studio (ej. FontSelector)
     │       ├── lib/                            # Clientes Sanity, generador de URLs y estructura
     │       ├── presentation/                   # Configuración del Visual Editing
     │       └── schemaTypes/                    # Esquemas de datos de Sanity
@@ -134,7 +132,7 @@ El proyecto permite gestionar de forma centralizada proyectos audiovisuales, inv
 
 ## 🔐 Variables de Entorno
 
-Crea un archivo `.env.local` en la raíz del proyecto para conectar la aplicación con tu proyecto de Sanity:
+Crea un archivo `.env.local` en la raíz del proyecto (hay una plantilla en `.env.example`):
 
     # ID del proyecto en Sanity (requerido)
     NEXT_PUBLIC_SANITY_PROJECT_ID=tu_project_id
@@ -142,11 +140,14 @@ Crea un archivo `.env.local` en la raíz del proyecto para conectar la aplicaci�
     # Dataset de Sanity (generalmente "production")
     NEXT_PUBLIC_SANITY_DATASET=production
 
-    # Token con permisos de lectura para previsualizaciones en vivo y Draft Mode
-    SANITY_API_READ_TOKEN=tu_read_token
-
     # Secreto para autenticar las peticiones del webhook de revalidación bajo demanda
     SANITY_REVALIDATE_SECRET=tu_secreto_de_revalidacion
+
+    # URL pública del sitio (sitemap, robots y metadatos)
+    NEXT_PUBLIC_SITE_URL=https://portafolio-raul-sigma.vercel.app
+
+    # Fallback del formulario si no se configura formspreeId en Sanity
+    NEXT_PUBLIC_FORMSPREE_ID=
 
 ---
 

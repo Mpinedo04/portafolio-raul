@@ -30,8 +30,8 @@ export default function Hero({
     <section className={styles.hero} style={heroStyle}>
       <div className={styles.overlay}></div>
       <div className={`${styles.content} container`}>
-        <h2 className="fade-in" data-sanity="home.subHeadline">{subHeadline}</h2>
-        <h1 className={`${styles.title} fade-in uppercase`} data-sanity="home.headline">
+        <h2 className="fade-in">{subHeadline}</h2>
+        <h1 className={`${styles.title} fade-in uppercase`}>
           <span className={styles.line1}>{nameLine1}</span>
           <span className={styles.line2}>{name}</span>
         </h1>
@@ -40,14 +40,12 @@ export default function Hero({
           <a 
             href={primaryUrl} 
             className={styles.primaryBtn}
-            data-sanity="home.heroButtons.primaryText"
           >
             {primaryText}
           </a>
           <a 
             href={secondaryUrl} 
             className={styles.secondaryBtn}
-            data-sanity="home.heroButtons.secondaryText"
           >
             {secondaryText}
           </a>

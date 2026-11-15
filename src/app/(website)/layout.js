@@ -9,7 +9,6 @@ import ScrollProgress from '@/components/ScrollProgress';
 import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/effect-creative';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export const revalidate = 10;
