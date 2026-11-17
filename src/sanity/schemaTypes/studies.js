@@ -3,29 +3,39 @@ export default {
   title: 'Estudios y Conocimientos',
   type: 'document',
   icon: () => '🎓',
+  groups: [
+    { name: 'header', title: '🖼️ Cabecera', default: true },
+    { name: 'academic', title: '🎓 Formación' },
+    { name: 'certifications', title: '📜 Cursos' },
+    { name: 'tools', title: '💻 Software' },
+  ],
   fields: [
     {
       name: 'bannerImage',
       title: 'Imagen de Fondo del Banner',
       type: 'image',
+      group: 'header',
       options: { hotspot: true },
     },
     {
       name: 'title',
       title: 'Título de la Sección',
       type: 'string',
+      group: 'header',
       initialValue: 'ESTUDIOS Y CONOCIMIENTOS',
     },
     {
       name: 'subtitle',
       title: 'Subtítulo',
       type: 'string',
+      group: 'header',
       initialValue: 'Formación continua para perfeccionar el arte audiovisual.',
     },
     {
       name: 'education',
       title: 'Formación Académica',
       type: 'array',
+      group: 'academic',
       of: [
         {
           type: 'object',
@@ -46,6 +56,7 @@ export default {
       name: 'courses',
       title: 'Cursos y Certificaciones',
       type: 'array',
+      group: 'certifications',
       of: [
         {
           type: 'object',
@@ -66,14 +77,15 @@ export default {
       name: 'software',
       title: 'Software y Programas',
       type: 'array',
+      group: 'tools',
       of: [
         {
           type: 'object',
           fields: [
             { name: 'softwareName', title: 'Nombre del Software', type: 'string', validation: (Rule) => Rule.required() },
-            { 
-              name: 'category', 
-              title: 'Categoría', 
+            {
+              name: 'category',
+              title: 'Categoría',
               type: 'string',
               options: {
                 list: [
@@ -85,18 +97,18 @@ export default {
                 ],
               },
             },
-            { 
-              name: 'level', 
-              title: 'Nivel de Dominio (1-5)', 
+            {
+              name: 'level',
+              title: 'Nivel de Dominio (1-5)',
               type: 'number',
               validation: (Rule) => Rule.min(1).max(5),
               description: '1 = Básico, 5 = Experto',
             },
             { name: 'icon', title: 'Icono / Logo del Software', type: 'image' },
-            { 
-              name: 'briefDescription', 
-              title: 'Breve Descripción', 
-              type: 'text', 
+            {
+              name: 'briefDescription',
+              title: 'Breve Descripción',
+              type: 'text',
               rows: 2,
               description: 'Ej: "Control total de montaje y corrección de color" o "Animaciones básicas y textos"',
             },

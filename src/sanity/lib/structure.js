@@ -1,13 +1,43 @@
-import { 
-  Home, 
-  Briefcase, 
-  Camera, 
+import {
+  Home,
+  Briefcase,
+  Camera,
   Monitor,
-  GraduationCap, 
-  Layout, 
+  GraduationCap,
   User,
-  Mail
+  Mail,
+  Cog,
 } from 'lucide-react';
+
+const API_VERSION = '2024-06-01';
+const PROJECT_ORDER = [{ field: 'orderRank', direction: 'asc' }];
+const EQUIPMENT_ORDER = [{ field: 'orderRank', direction: 'asc' }];
+
+const projectListItem = (S, title, filter) =>
+  S.listItem()
+    .title(title)
+    .icon(Briefcase)
+    .child(
+      S.documentList()
+        .title(title)
+        .apiVersion(API_VERSION)
+        .schemaType('project')
+        .filter(filter)
+        .defaultOrdering(PROJECT_ORDER)
+    );
+
+const equipmentListItem = (S, title, filter = '_type == "equipment"') =>
+  S.listItem()
+    .title(title)
+    .icon(Briefcase)
+    .child(
+      S.documentList()
+        .title(title)
+        .apiVersion(API_VERSION)
+        .schemaType('equipment')
+        .filter(filter)
+        .defaultOrdering(EQUIPMENT_ORDER)
+    );
 
 export const myStructure = (S) =>
   S.list()
@@ -15,32 +45,45 @@ export const myStructure = (S) =>
     .items([
       // 1. INICIO
       S.listItem()
-      .title('1. INICIO')
-      .icon(Home)
-      .child(
-        S.document()
-          .schemaType('home')
-          .documentId('home')
-          .title('Configuración de Portada')
-      ),
+        .title('1. INICIO')
+        .icon(Home)
+        .child(
+          S.document()
+            .schemaType('home')
+            .documentId('home')
+            .title('Configuración de Portada')
+        ),
 
       // 2. PROYECTOS
       S.listItem()
-        .title('2. PROYECTOS (Propios)')
+        .title('2. PROYECTOS')
         .icon(Briefcase)
         .child(
-          S.documentTypeList('project')
-            .title('Proyectos Propios')
-            .filter('_type == "project" && category == "propio"')
-        ),
-
-      S.listItem()
-        .title('2. PROYECTOS (Externos)')
-        .icon(Briefcase)
-        .child(
-          S.documentTypeList('project')
-            .title('Trabajos Externos')
-            .filter('_type == "project" && category == "externo"')
+          S.list()
+            .title('2. PROYECTOS')
+            .items([
+              projectListItem(
+                S,
+                'Todos los proyectos',
+                '_type == "project"'
+              ),
+              projectListItem(
+                S,
+                'Proyectos propios',
+                '_type == "project" && category == "propio"'
+              ),
+              projectListItem(
+                S,
+                'Trabajos externos',
+                '_type == "project" && category == "externo"'
+              ),
+              S.divider(),
+              projectListItem(
+                S,
+                'Destacados en Inicio',
+                '_type == "project" && featured == true'
+              ),
+            ])
         ),
 
       // 3. SOBRE MÍ
@@ -60,25 +103,22 @@ export const myStructure = (S) =>
         .icon(Camera)
         .child(
           S.list()
-            .title('Gestión de EQUIPO')
+            .title('4. EQUIPO')
             .items([
+              equipmentListItem(S, 'Inventario completo'),
               S.listItem()
-                .title('Inventario Completo')
-                .icon(Briefcase)
-                .child(S.documentTypeList('equipment').title('Todos los Equipos')),
-              S.listItem()
-                .title('Estación de Edición (PC)')
+                .title('Estación de edición')
                 .icon(Monitor)
                 .child(
                   S.document()
                     .schemaType('workstation')
                     .documentId('workstation')
-                    .title('Especificaciones del PC')
+                    .title('Estación de edición y cabecera de /equipo')
                 ),
             ])
         ),
 
-      // 5. ESTUDIOS
+      // 5. ESTUDIOS Y CONOCIMIENTOS
       S.listItem()
         .title('5. ESTUDIOS Y CONOCIMIENTOS')
         .icon(GraduationCap)
@@ -92,7 +132,7 @@ export const myStructure = (S) =>
       // 6. CONTACTO
       S.listItem()
         .title('6. CONTACTO')
-        .icon(Mail) 
+        .icon(Mail)
         .child(
           S.document()
             .schemaType('contact')
@@ -102,14 +142,14 @@ export const myStructure = (S) =>
 
       S.divider(),
 
-      // 7. GLOBAL
+      // 7. CONFIGURACIÓN GLOBAL
       S.listItem()
-        .title('7. GLOBAL (HEADER / FOOTER / SEO)')
-        .icon(Layout)
+        .title('7. CONFIGURACIÓN GLOBAL')
+        .icon(Cog)
         .child(
           S.document()
             .schemaType('settings')
             .documentId('settings')
-            .title('Ajustes Globales')
+            .title('Configuración global y banners de Proyectos')
         ),
     ]);
